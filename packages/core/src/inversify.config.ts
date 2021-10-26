@@ -1,0 +1,44 @@
+import 'reflect-metadata';
+import { Container } from 'inversify';
+import { TYPES } from './types';
+import type { ISceneService } from './services/scene/ISceneService';
+import type { ILayerService } from './services/layer/ILayerService';
+import type { IConfigService } from './services/config/IConfigService';
+import type { IControlService } from './/services/control/IControlService';
+import SceneService from './services/scene/SceneService';
+import LayerService from './services/layer/LayerService';
+import ConfigService from './services/config/ConfigService';
+import ControlService from './services/control/ControlService';
+import type { ISideBarService } from './services/siderbar/ISidebarService';
+import SidebarService from './services/siderbar/SidebarService';
+
+export default function createContainer() {
+  const container = new Container();
+
+  container
+    .bind<ISceneService>(TYPES.SCENE_SYMBOL)
+    .to(SceneService)
+    .inSingletonScope();
+
+  container
+    .bind<ILayerService>(TYPES.LAYER_SYMBOL)
+    .to(LayerService)
+    .inSingletonScope();
+
+  container
+    .bind<IConfigService<any>>(TYPES.CONFIG_SYMBOL)
+    .to(ConfigService)
+    .inSingletonScope();
+
+  container
+    .bind<IControlService>(TYPES.CONTROL_SYMBOL)
+    .to(ControlService)
+    .inSingletonScope();
+
+  container
+    .bind<ISideBarService>(TYPES.SIDEBAR_SYMBOL)
+    .to(SidebarService)
+    .inSingletonScope();
+
+  return container;
+}
