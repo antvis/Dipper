@@ -50,6 +50,9 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "gitHead": "8e816a06af40f4d04895996ce2ab29e1ff3da932"
 }
