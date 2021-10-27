@@ -28,7 +28,7 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-core": "^1.0.0",
+    "@antv/dipper-core": "^0.0.2",
     "classnames": "^2.3.1",
     "inversify": "^6.0.1",
     "inversify-react": "^1.0.0"
