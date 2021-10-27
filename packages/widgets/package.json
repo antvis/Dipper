@@ -28,7 +28,13 @@
   },
   "dependencies": {
     "@antv/dipper-component": "^0.0.2",
-    "@antv/dipper-core": "^0.0.2"
+    "@antv/dipper-core": "^0.0.2",
+    "classnames": "^2.3.1"
+  },
+  "peerDependencies": {
+    "antd": "^4.16.13",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@umijs/test": "^3.0.5",

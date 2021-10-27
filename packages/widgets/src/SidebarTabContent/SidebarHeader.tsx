@@ -1,10 +1,8 @@
-import React, { useCallback, useMemo } from '@alipay/bigfish/react';
+import React, { useMemo } from 'react';
 import styles from './index.less';
 
-import { Tooltip, Typography } from '@alipay/bigfish/antd';
-import { useConfigService, useLayerGroup } from '@/core';
-import { featureOperate } from '@/services/mapstudio/MapController';
-import { message } from '@alipay/bigfish/antd';
+import { Tooltip, Typography } from 'antd';
+import { useConfigService, useLayerGroup } from '@antv/dipper-component';
 
 const { Paragraph } = Typography;
 
@@ -13,45 +11,21 @@ interface IProps {
 }
 
 function SidebarHeader({ title }: IProps) {
-  const { globalConfig } = useConfigService();
+  const { globalConfig } = useConfigService<any>();
   const { sceneCode, areaCode } = globalConfig.initData;
   const { selectFeatures, updateProperties } = useLayerGroup('grid');
   const titles = useMemo(() => {
     if (selectFeatures?.length === 1) {
-      return selectFeatures[0].feature.properties.name;
+      // @ts-ignore
+      return selectFeatures[0]?.feature?.properties.name;
     }
     if (selectFeatures?.length > 1) {
       return selectFeatures
-        ?.map((item) => item.feature.properties.name)
+        ?.map((item: any) => item?.feature.properties.name)
         .join(',');
     }
     return title;
   }, [title, selectFeatures]);
-
-  const onNameChange = useCallback(
-    async (name: string) => {
-      const [feature] = selectFeatures;
-      const { id } = feature.feature.properties ?? {};
-      if (name === titles && !feature && !id) {
-        return;
-      }
-      const res = await featureOperate({
-        action: 'update',
-        actionType: 'feature',
-        sceneCode,
-        areaCode,
-        feature: JSON.stringify({
-          id,
-          name,
-        }),
-      });
-      if (res.success) {
-        message.success('修改成功');
-        updateProperties(feature.feature, { name });
-      }
-    },
-    [selectFeatures, titles, sceneCode, areaCode, updateProperties],
-  );
 
   return (
     <div className={styles.appSidebarHeader}>
@@ -61,7 +35,9 @@ function SidebarHeader({ title }: IProps) {
           editable={
             selectFeatures?.length === 1
               ? {
-                  onChange: onNameChange,
+                  onChange: () => {
+                    console.log('change');
+                  },
                 }
               : false
           }

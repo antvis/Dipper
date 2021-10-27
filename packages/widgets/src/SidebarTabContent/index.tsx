@@ -6,7 +6,8 @@ import type { IWidgetProps } from '@antv/dipper-core';
 import { useConfigService } from '@antv/dipper-component';
 
 export function SiderBar(props: IWidgetProps<string>) {
-  const { globalConfig } = useConfigService();
+  const { globalConfig } = useConfigService<any>();
+
   const canvasId = globalConfig?.initData?.mapId;
   return canvasId ? (
     <>
