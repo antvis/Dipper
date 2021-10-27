@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.less';
 import { RightOutlined } from '@ant-design/icons';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 interface IProps {
   isFold: boolean;
   setIsFold: (newIsFold: boolean) => void;
@@ -15,11 +15,11 @@ export default function ToggleButton({ isFold, setIsFold, position }: IProps) {
       onClick={() => setIsFold(isFold)}
     >
       <RightOutlined
-      // className={classNames({
-      //   [styles.toggleButtonIcon]: true,
-      //   transform: true,
-      //   'rotate-180': !isFold,
-      // })}
+        className={classNames({
+          [styles.toggleButtonIcon]: true,
+          transform: true,
+          'rotate-180': !isFold,
+        })}
       />
     </div>
   );

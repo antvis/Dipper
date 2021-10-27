@@ -1,9 +1,8 @@
 {
-  "name": "@antv/dipper-core",
+  "name": "@antv/dipper-widgets",
   "version": "1.0.0",
   "scripts": {
     "start": "dumi dev",
-    "clean": "rimraf dist",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "build": "father-build",
@@ -28,27 +27,17 @@
     ]
   },
   "dependencies": {
-    "@antv/l7": "^2.5.40",
-    "@turf/turf": "^6.5.0",
-    "eventemitter3": "^4.0.7",
-    "inversify": "^5.1.1",
-    "inversify-react": "^1.0.0",
-    "lodash": "^4.17.21",
-    "reflect-metadata": "^0.1.13"
+    "@antv/dipper-core":"^1.0.0",
+    "@antv/dipper-component":"^1.0.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.176",
     "@umijs/test": "^3.0.5",
     "dumi": "^1.0.17",
     "father-build": "^1.17.2",
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.1",
-    "yorkie": "^2.0.0"
-  },
-  "peerDependencies": {
-    "@antv/l7": "^2.5.38",
-    "react": "^16.12.0 || ^17.0.0"
-  },
-  "license": "MIT"
+    "yorkie": "^2.0.0",
+    "react": "^16.12.0"
+  }
 }

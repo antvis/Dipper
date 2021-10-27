@@ -1,4 +1,4 @@
-# dipper
+# widgets
 
 ## Getting Started
 
@@ -25,9 +25,3 @@ Build library via `father-build`,
 ```bash
 $ npm run build
 ```
-
-### 新增加 LIB
-
-packages 目录下新建目录名,在新建目录下执行创建项目
-
-`bash yarn create @umijs/dumi-lib `

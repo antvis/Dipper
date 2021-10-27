@@ -27,7 +27,7 @@ export default function HomeMap() {
           },
         },
         title: {
-          value: '区代指挥地图',
+          value: '数字化指挥地图',
           display: true,
         },
         children: [],
