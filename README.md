@@ -30,4 +30,4 @@ $ npm run build
 
 packages 目录下新建目录名,在新建目录下执行创建项目
 
-`bash yarn create @umijs/dumi-lib `
+`yarn create @umijs/dumi-lib`

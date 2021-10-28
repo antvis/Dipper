@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { SceneContainer } from '@antv/dipper-component';
-import { IConfig } from '@antv/dipper-core';
+
+import { DipperContainer, IConfig } from '@antv/dipper';
 
 interface IInitData {
   areaVOList: any[];
@@ -75,7 +75,7 @@ export default function HomeMap() {
 
   return (
     <div style={{ height: '500px' }}>
-      <SceneContainer<IInitData> cfg={mapConfig!} />
+      <DipperContainer<IInitData> cfg={mapConfig!} />
     </div>
   );
 }
