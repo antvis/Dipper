@@ -1,6 +1,6 @@
 export { default as DipperContainer } from './AppContainer';
 export { default as AppToolbar } from './AppToolbar';
-export { default as SiderBar } from './AppSidebar';
+export { default as AppSiderBar } from './AppSidebar';
 export { default as AppMap } from './AppMap';
 export { default as AppControl } from './AppControl';
 export { default as AppHeader } from './AppHeader';
