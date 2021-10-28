@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-widgets",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -27,8 +27,8 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-component": "^0.0.2",
-    "@antv/dipper-core": "^0.0.2",
+    "@antv/dipper-component": "^0.0.3",
+    "@antv/dipper-core": "^0.0.3",
     "classnames": "^2.3.1"
   },
   "peerDependencies": {
