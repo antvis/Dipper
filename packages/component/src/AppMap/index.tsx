@@ -12,6 +12,7 @@ export default function AppMap({ children }: IProps) {
   const { sceneService } = useSceneService();
   const { globalConfig } = useConfigService();
   const { map, popup } = globalConfig;
+  console.log("children",children)
   return (
     <AMapScene
       className={styles.appMap}

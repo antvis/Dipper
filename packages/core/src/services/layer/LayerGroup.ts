@@ -25,7 +25,6 @@ export default abstract class LayerGroup
   public source!: ISource;
   public visible: boolean = true;
   public name!: string;
-
   //   @inject(TYPES.LAYER_SYMBOL)
   //   protected layerService!: ILayerService;
 
