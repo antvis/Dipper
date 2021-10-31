@@ -11,6 +11,7 @@
     "release": "npm run build && npm publish",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
+    "sync": "tnpm sync",
     "test:coverage": "umi-test --coverage"
   },
   "main": "dist/index.js",

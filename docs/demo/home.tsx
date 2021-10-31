@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { DipperContainer, IConfig } from '@antv/dipper';
+import {
+  DipperContainer,
+  IConfig,
+  registerWidget,
+  SiderBar,
+} from '@antv/dipper';
+registerWidget('siderbartabcontent', SiderBar);
 
 interface IInitData {
   areaVOList: any[];
@@ -39,7 +45,13 @@ export default function HomeMap() {
         opened: true,
         width: 360,
         position: 'right',
-        children: [],
+        children: [
+          {
+            type: 'siderbartabcontent',
+            title: '所有网格',
+            children: [],
+          },
+        ],
       },
       toolbar: {
         display: false,

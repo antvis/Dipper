@@ -5,6 +5,15 @@ import type { ISideBar } from '../siderbar/ISidebarService';
 
 export interface IConfig<IInitData = any> {
   initData: IInitData;
+  viewData: {
+    global: Record<string, any>;
+    widgets: {
+      [key: string]: {
+        options: Record<string, any>; // 初始化数据
+        value: Record<string, any>; // 结果数据
+      };
+    };
+  };
   headerbar: {
     display?: boolean;
     headerstyle?: React.CSSProperties;

@@ -15,6 +15,7 @@
     "deploy": "npm run docs:build && npm run docs:deploy",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
+    "sync": "lerna run sync",
     "test:coverage": "umi-test --coverage"
   },
   "main": "dist/index.js",
