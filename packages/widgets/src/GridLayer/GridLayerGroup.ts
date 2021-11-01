@@ -57,15 +57,17 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
           };
         });
     }
+    console.log('legend',legend)
     return legend;
   }
   addFillLayer() {
     const fillLayer = new PolygonLayer({
+      name:'fill',
       autoFit: false,
     })
       .source(this.source)
       .shape('fill')
-      .color('red')
+      .color('label',ScatterColorScale)
       .style({ opacity: 0.8 });
 
     fillLayer.once('inited', () => {
