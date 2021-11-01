@@ -1,10 +1,9 @@
 import type { ILayerGroup } from '@antv/dipper-core';
 import { LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
 import type { ILayer } from '@antv/l7';
-import { LineLayer, PolygonLayer, Source } from '@antv/l7';
+import { LineLayer, PolygonLayer } from '@antv/l7';
 import type { IFeature, IGridLayerProps, ILayerGroupOption } from './common';
 import { blankData, uniqFeatures, fromPairs } from './common';
-import { ScatterColorScale } from '../../util/const';
 
 export type IGridLayerGroup = ILayerGroup & {
   getLegendItem: () => any;
@@ -36,7 +35,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
 
   initSource() {
-    this.source = new Source(this.geodata);
+    // this.source = new Source(this.geodata);
   }
   getLegendItem() {
     // @ts-ignore
@@ -62,7 +61,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
   addFillLayer() {
     const fillLayer = new PolygonLayer({
-      name: 'fill',
       autoFit: false,
       name: this.name,
     })
@@ -82,6 +80,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     });
     fillLayer.on('unmousemove', this.hoverHandler.bind(this));
     this.addLayer(fillLayer);
+    this.source = fillLayer.getSource();
   }
 
   addLineLayer() {
