@@ -59,4 +59,23 @@ export default class ConfigService<T>
   getConfig(key: string) {
     return get(this.config, key, undefined);
   }
+
+  // 设置组件结果值
+  setWidgetsOptions(key: string, options: Record<string, any>) {
+    this.setConfig(`viewData.widgets.${key}.options`, options);
+  }
+
+  // 设置组件结果值
+  setWidgetsValue(key: string, value: Record<string, any>) {
+    this.setConfig(`viewData.widgets.${key}.value`, value);
+  }
+  // 获取组件结果值
+  getWidgetsValue(key: string) {
+    return this.getConfig(`viewData.widgets.${key}.value`);
+  }
+
+  // 获取组件结果值
+  getWidgetsOptions(key: string) {
+    return this.getConfig(`viewData.widgets.${key}.options`);
+  }
 }

@@ -5,7 +5,7 @@ import { useConfigService, findItem } from '@antv/dipper';
 
 export function NavBar() {
   const { globalConfig } = useConfigService();
-  const { headerbar, initData } = globalConfig;
+  const { headerbar, viewData } = globalConfig;
 
   const options = useMemo(() => {
     if (headerbar) {
@@ -18,7 +18,7 @@ export function NavBar() {
     <Menu
       theme="light"
       mode="horizontal"
-      defaultSelectedKeys={[initData.view]}
+      defaultSelectedKeys={[viewData.view]}
       style={{ width: '400px' }}
       onClick={(e) => {
         // console.info('您点击了', e);

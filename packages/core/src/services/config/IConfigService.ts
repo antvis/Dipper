@@ -9,8 +9,8 @@ export interface IConfig<IInitData = any> {
     global: Record<string, any>;
     widgets: {
       [key: string]: {
-        options: Record<string, any>; // 初始化数据
-        value: Record<string, any>; // 结果数据
+        options?: Record<string, any> | Record<string, any>[]; // 初始化数据
+        value?: Record<string, any> | Record<string, any>[]; // 结果数据
       };
     };
   };
@@ -84,4 +84,8 @@ export interface IConfigService<T> extends EventEmitter {
   getConfig: (key: string) => any;
   updateLegend: (id: string, value: any) => void;
   updateControl: (type: string, value: any) => void;
+  setWidgetsOptions: (key: string, options: Record<string, any>) => void;
+  getWidgetsValue: (key: string) => Record<string, any>;
+  setWidgetsValue: (key: string, options: Record<string, any>) => void;
+  getWidgetsOptions: (key: string) => Record<string, any>;
 }

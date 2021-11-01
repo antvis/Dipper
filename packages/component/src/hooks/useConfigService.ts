@@ -31,11 +31,31 @@ export function useConfigService<T>() {
     return configService.updateControl(type, value);
   };
 
+  const setWidgetsOptions = (key: string, options: Record<string, any>) => {
+    return configService.setWidgetsOptions(key, options);
+  };
+
+  const setWidgetsValue = (key: string, options: Record<string, any>) => {
+    return configService.setWidgetsValue(key, options);
+  };
+
+  const getWidgetsOptions = (key: string) => {
+    return configService.getWidgetsOptions(key);
+  };
+
+  const getWidgetsValue = (key: string) => {
+    return configService.getWidgetsValue(key);
+  };
+
   return {
     globalConfig,
     setConfig,
     updateLegend,
     updateControl,
+    setWidgetsOptions,
+    getWidgetsOptions,
+    setWidgetsValue,
+    getWidgetsValue,
     configService,
   };
 }

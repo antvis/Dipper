@@ -30,6 +30,8 @@ export function GridLayer() {
     });
   };
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     const layer = new GridLayerGroup({
       name: 'grid',

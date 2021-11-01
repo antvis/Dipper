@@ -29,7 +29,6 @@
     ]
   },
   "dependencies": {
-    "@antv/l7": "^2.5.40",
     "@turf/turf": "^6.5.0",
     "eventemitter3": "^4.0.7",
     "inversify": "^5.1.1",

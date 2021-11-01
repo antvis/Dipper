@@ -33,12 +33,12 @@
     "classnames": "^2.3.1"
   },
   "peerDependencies": {
+    "@antv/l7": "^2.5.38",
     "antd": "^4.16.13",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "11.0.2",
     "@umijs/test": "^3.0.5",
     "dumi": "^1.0.17",
     "father-build": "^1.17.2",

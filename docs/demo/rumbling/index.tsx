@@ -12,6 +12,8 @@ interface IInitData {
 
 export default function RumbMap() {
   const [mapConfig, setMapConfig] = useState<IConfig<IInitData>>();
+  // 初始化相关数据
+
   useEffect(() => {
     initWidgets();
     setMapConfig(config);

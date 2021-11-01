@@ -1,43 +1,19 @@
-export const config = {
-  initData: {
-    filterData: [],
-    areaVOList: [
-      {
-        value: '330000',
-        areaLevel: 'province',
-        label: '浙江省',
-        children: [
-          {
-            value: '330100',
-            areaLevel: 'province',
-            label: '杭州市',
-            children: [],
-          },
-        ],
+import { IConfig } from '@antv/dipper';
+import { CityList } from './mock';
+export const config: Partial<IConfig> = {
+  viewData: {
+    global: {
+      filterData: [],
+      sceneCode: 'iot_terminal_dominant',
+      areaCode: '330100',
+      view: 'task',
+    },
+    widgets: {
+      citySelect: {
+        options: CityList,
+        value: {},
       },
-      {
-        value: '130000',
-        areaLevel: 'province',
-        label: '河北省',
-        children: [
-          {
-            value: '130100',
-            areaLevel: 'province',
-            label: '石家庄市',
-            children: [],
-          },
-          {
-            value: '130200',
-            areaLevel: 'province',
-            label: '唐山市',
-            children: [],
-          },
-        ],
-      },
-    ],
-    sceneCode: 'iot_terminal_dominant',
-    areaCode: '330100',
-    view: 'task',
+    },
   },
   headerbar: {
     display: true,
@@ -49,19 +25,17 @@ export const config = {
         height: '24px',
         width: '24px',
       },
-      type: 'img',
     },
     title: {
       value: '区代指挥中心',
       display: true,
-      type: 'text',
     },
     children: [
       {
         display: true,
         position: 'left',
         title: '选择城市',
-        type: 'cityselect',
+        type: 'citySelect',
         event: {
           actionType: 'map',
           action: 'queryArea',
