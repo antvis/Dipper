@@ -13,7 +13,6 @@ type Items = Array<{ label: string; color: string }>
 
 export const ClassifyColor = () => {
   const { globalConfig } = useConfigService();
-  console.log('globalConfig', globalConfig)
   const { legends } = globalConfig
 
   const legend: ILegendControlProps<Items> = useMemo(() => {

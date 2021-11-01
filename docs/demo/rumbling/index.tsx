@@ -19,7 +19,7 @@ export default function RumbMap() {
   },[])
 
   return (
-    <div style={{ height:'60pc'}}>
+    <div style={{ height:'1000px'}}>
       <DipperContainer<IInitData> cfg={mapConfig!} />
     </div>
   )

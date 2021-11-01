@@ -57,7 +57,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
           };
         });
     }
-    console.log('legend',legend)
     return legend;
   }
   addFillLayer() {
