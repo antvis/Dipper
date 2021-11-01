@@ -62,6 +62,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
   addFillLayer() {
     const fillLayer = new PolygonLayer({
+      name: 'fill',
       autoFit: false,
       name: this.name,
     })

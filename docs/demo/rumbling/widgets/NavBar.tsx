@@ -21,7 +21,7 @@ export function NavBar() {
       defaultSelectedKeys={[initData.view]}
       style={{ width: '400px' }}
       onClick={(e) => {
-        console.info('您点击了', e);
+        // console.info('您点击了', e);
       }}
     >
       {options.map((c: any) => {

@@ -4,7 +4,7 @@ import {
   useLayerService,
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
-import { geojson } from '../demo/configs/mock';
+import { geojson } from '../configs/mock';
 import { GridLayerGroup } from '@antv/dipper';
 
 export function GridLayer() {
@@ -41,11 +41,12 @@ export function GridLayer() {
     });
 
     layerService.addLayer(layer);
-    // layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
-    //   updateLayerLegend(layer.getLegendItem());
-    // });
-    // // 更新图例
-    // updateLayerLegend(layer.getLegendItem());
+    layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
+      updateLayerLegend(layer.getLegendItem());
+    });
+
+    // 更新图例
+    updateLayerLegend(layer.getLegendItem());
 
     setGridLayer(layers);
   }, [geojson]);
