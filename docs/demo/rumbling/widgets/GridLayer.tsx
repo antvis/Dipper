@@ -41,14 +41,15 @@ export function GridLayer() {
       },
       options: layerProps.options,
     });
-
+    console.log(geojson);
     layerService.addLayer(layer);
+
     layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
       updateLayerLegend(layer.getLegendItem());
     });
 
     // 更新图例
-    updateLayerLegend(layer.getLegendItem());
+    // updateLayerLegend(layer.getLegendItem());
 
     setGridLayer(layers);
   }, [geojson]);

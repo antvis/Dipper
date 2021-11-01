@@ -1,4 +1,4 @@
-import { IConfig } from '@antv/dipper';
+import { IConfig, ScatterColorScale } from '@antv/dipper';
 import { CityList } from './mock';
 export const config: Partial<IConfig> = {
   viewData: {
@@ -80,55 +80,11 @@ export const config: Partial<IConfig> = {
         title: '所有网格',
         children: [
           {
-            level: 'feature',
-            children: [
-              {
-                children: [
-                  {
-                    display: true,
-                    type: 'indicator',
-                    title: '区域详情',
-                    event: {
-                      actionType: 'indicator',
-                      action: 'indicator',
-                    },
-                  },
-                  {
-                    display: true,
-                    type: 'terminal_task_detail',
-                    title: '任务详情',
-                    event: {
-                      actionType: 'task',
-                      action: 'queryTaskDetail',
-                    },
-                  },
-                  {
-                    display: true,
-                    type: 'trend_distribution',
-                    title: '趋势分布',
-                    event: {
-                      actionType: 'indicator',
-                      action: 'queryDensityTrend',
-                    },
-                  },
-                  {
-                    display: true,
-                    type: 'job_detail',
-                    title: '作业明细',
-                    event: {
-                      actionType: 'indicator',
-                      action: 'queryJobDetails',
-                    },
-                  },
-                ],
-                title_display: 'false',
-                display: true,
-                type: 'mesh_indicator',
-                title: '数据查看',
-              },
-            ],
-            level_key:
-              'iot_terminal_dominant$task$2021102300077947$2021102300073562',
+            display: true,
+            type: 'mesh_indicator',
+            title: '数据查看',
+          },
+          {
             type: 'total_data_panel',
             title: '地图面板',
           },
@@ -167,12 +123,13 @@ export const config: Partial<IConfig> = {
       type: 'gridLayer',
       options: {
         label: {
-          field: 'name',
+          field: 'label',
           size: 12,
           color: '#000',
         },
         fill: {
-          field: 'value',
+          field: 'label',
+          color: ScatterColorScale,
           unknownName: '无类型',
         },
       },

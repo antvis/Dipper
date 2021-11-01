@@ -1,7 +1,7 @@
 import type { ILayerGroup } from '@antv/dipper-core';
 import { LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
 import type { ILayer } from '@antv/l7';
-import { LineLayer, PolygonLayer } from '@antv/l7';
+import { LineLayer, PolygonLayer, Source } from '@antv/l7';
 import type { IFeature, IGridLayerProps, ILayerGroupOption } from './common';
 import { blankData, uniqFeatures, fromPairs } from './common';
 
@@ -35,7 +35,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
 
   initSource() {
-    // this.source = new Source(this.geodata);
+    this.source = new Source(this.geodata);
   }
   getLegendItem() {
     // @ts-ignore
@@ -45,7 +45,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
         'color',
       );
     let legend = [];
-    if (scale.domain) {
+    if (scale?.domain) {
       legend = scale
         .domain()
         .filter((item: any) => item !== 'label')
@@ -60,6 +60,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     return legend;
   }
   addFillLayer() {
+    console.log(this.options);
     const fillLayer = new PolygonLayer({
       autoFit: false,
       name: this.name,
@@ -98,7 +99,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     const textlayer = new PolygonLayer({
       zIndex: 20,
     })
-      .source(this.geodata)
+      .source(this.source)
       .shape(this.options?.label?.field || 'name', 'text')
       .size(12)
       .color('#000')
