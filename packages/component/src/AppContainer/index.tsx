@@ -59,10 +59,6 @@ export default function SceneContainer<T>({
   children,
 }: IContainerProps<T>) {
   const { sceneContainer } = useSceneContainer<T>(cfg);
-  if (sceneContainer) {
-    const a = sceneContainer?.getContainer().get(TYPES.CONFIG_SYMBOL);
-    console.log(a);
-  }
   return sceneContainer ? (
     <>
       {/* 

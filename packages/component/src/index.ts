@@ -9,3 +9,4 @@ export { default as AppIcon } from './AppIcon';
 
 export * from './AppTemplate';
 export * from './hooks';
+export * from './utils';
