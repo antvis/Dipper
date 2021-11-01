@@ -61,11 +61,12 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
   addFillLayer() {
     const fillLayer = new PolygonLayer({
+      name:'fill',
       autoFit: false,
     })
       .source(this.source)
       .shape('fill')
-      .color('red')
+      .color('label',ScatterColorScale)
       .style({ opacity: 0.8 });
 
     fillLayer.once('inited', () => {
