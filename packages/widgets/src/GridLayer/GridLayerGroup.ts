@@ -41,9 +41,10 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   getLegendItem() {
     // @ts-ignore
     const scale =
-      this.getLayer('fill').styleAttributeService.getLayerAttributeScale(
+      // @ts-ignore
+      this.getLayer(this.name)?.styleAttributeService?.getLayerAttributeScale(
         'color',
-      ); // TODO 动态获取layernane
+      );
     let legend = [];
     if (scale.domain) {
       legend = scale
@@ -62,11 +63,12 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   addFillLayer() {
     const fillLayer = new PolygonLayer({
       autoFit: false,
+      name: this.name,
     })
       .source(this.source)
       .shape('fill')
-      .color('red')
-      .style({ opacity: 0.8 });
+      .color(this.options.fill!.field, this.options.fill?.color)
+      .style({ opacity: this.options.fill?.opacity || 0.8 });
 
     fillLayer.once('inited', () => {
       fillLayer.fitBounds();

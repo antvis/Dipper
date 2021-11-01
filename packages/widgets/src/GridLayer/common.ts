@@ -6,6 +6,8 @@ export interface ILayerGroupOption {
   };
   fill: {
     field: string;
+    color: string | string[];
+    opacity: number;
     unkownName: string;
   };
 }
