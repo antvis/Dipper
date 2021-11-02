@@ -7,16 +7,12 @@ import { useConfigService } from '@antv/dipper-component';
 
 export function SiderBar(props: IWidgetProps<string>) {
   const { globalConfig } = useConfigService<any>();
-
-  const canvasId = globalConfig?.initData?.mapId;
-  return canvasId ? (
+  return (
     <>
       {/** 头部表头 */}
-      <SidebarHeader title={config.title} />
+      {/* <SidebarHeader title={config.title} /> */}
       {/** 内容区域 */}
       <SidebarContent {...props} />
     </>
-  ) : (
-    <></>
   );
 }

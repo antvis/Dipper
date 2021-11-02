@@ -6,6 +6,8 @@ export interface ILayerGroupOption {
   };
   fill: {
     field: string;
+    color: string | string[];
+    opacity: number;
     unkownName: string;
   };
 }
@@ -65,7 +67,7 @@ export function joinData(
   propertiesData: any[],
   joinBy: [string, string],
 ) {
-  const joinObj = {};
+  const joinObj: Record<string, any> = {};
   propertiesData.forEach((item: any) => {
     joinObj[item[joinBy[1]]] = item;
   });
@@ -85,7 +87,7 @@ export function joinData(
 }
 
 export function fromPairs(pairs: any[]) {
-  const result = {};
+  const result: Record<string, any> = {};
   if (pairs == null) {
     return result;
   }

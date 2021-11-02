@@ -4,7 +4,6 @@ import type { ILayer } from '@antv/l7';
 import { LineLayer, PolygonLayer, Source } from '@antv/l7';
 import type { IFeature, IGridLayerProps, ILayerGroupOption } from './common';
 import { blankData, uniqFeatures, fromPairs } from './common';
-import { ScatterColorScale } from '../../util/const';
 
 export type IGridLayerGroup = ILayerGroup & {
   getLegendItem: () => any;
@@ -41,11 +40,12 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   getLegendItem() {
     // @ts-ignore
     const scale =
-      this.getLayer('fill').styleAttributeService.getLayerAttributeScale(
+      // @ts-ignore
+      this.getLayer(this.name)?.styleAttributeService?.getLayerAttributeScale(
         'color',
-      ); // TODO 动态获取layernane
+      );
     let legend = [];
-    if (scale.domain) {
+    if (scale?.domain) {
       legend = scale
         .domain()
         .filter((item: any) => item !== 'label')
@@ -60,14 +60,15 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     return legend;
   }
   addFillLayer() {
+    console.log(this.options);
     const fillLayer = new PolygonLayer({
-      name:'fill',
       autoFit: false,
+      name: this.name,
     })
       .source(this.source)
       .shape('fill')
-      .color('label',ScatterColorScale)
-      .style({ opacity: 0.8 });
+      .color(this.options.fill!.field, this.options.fill?.color)
+      .style({ opacity: this.options.fill?.opacity || 0.8 });
 
     fillLayer.once('inited', () => {
       fillLayer.fitBounds();
@@ -80,6 +81,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     });
     fillLayer.on('unmousemove', this.hoverHandler.bind(this));
     this.addLayer(fillLayer);
+    this.source = fillLayer.getSource();
   }
 
   addLineLayer() {
@@ -97,7 +99,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     const textlayer = new PolygonLayer({
       zIndex: 20,
     })
-      .source(this.geodata)
+      .source(this.source)
       .shape(this.options?.label?.field || 'name', 'text')
       .size(12)
       .color('#000')

@@ -4,14 +4,14 @@ import { useConfigService,ClassifyColor } from "@antv/dipper"
 
 export interface ILegendControlProps<T> {
   targetName: string;
-  items: T
+  items: T;
 }
 
-type Items = Array<{ label: string; color: string }>
+type Items = Array<{ label: string; color: string }>;
 
 export const Legends = () => {
   const { globalConfig } = useConfigService();
-  const { legends } = globalConfig
+  const { legends } = globalConfig;
 
   const legend: ILegendControlProps<Items> = useMemo(() => {
     if (legends) {
@@ -19,6 +19,8 @@ export const Legends = () => {
     }
 
   }, [legends]);
+
+  console.log('legend',legend)
 
   return <ClassifyColor options={legend}/>
 }

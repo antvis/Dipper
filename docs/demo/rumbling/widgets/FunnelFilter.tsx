@@ -1,7 +1,5 @@
-import React from "react"
+import React from 'react';
 
-export const FunnelFilter = () =>{
-  return(
-    <div>12121</div>
-  )
-}
+export const FunnelFilter = () => {
+  return <div>FunnelFilter</div>;
+};

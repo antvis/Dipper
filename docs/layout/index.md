@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 ## 配置项
 
 ## headerbar
@@ -15,8 +13,6 @@
 ## legends
 
 ## layer
-
-=======
 
 ## 布局
 
@@ -43,5 +39,3 @@ const { Content } = Layout;
 ```
 
 ####
-
-> > > > > > > 18388c7b72ab374b0c099653d8f271daf99ddd94

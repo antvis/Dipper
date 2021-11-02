@@ -4,27 +4,17 @@ export const isDisplay = (display?: any) => display !== false;
 
 type Position = 'left' | 'right' | 'center';
 
-type Child<T> = IConfig<T>;
-
 // 获取AppContent children
 export const getAppContentItem = (
-  child: Child<any>,
+  items: IWidgetProps<any>,
   position: Position,
-): IWidgetProps[] => {
-  return (
-    child?.children?.filter(
-      (bar: { position: string }) => bar.position === position,
-    ) || []
-  );
+): IWidgetProps<any>[] => {
+  return items.children?.filter((bar) => bar.position === position) || [];
 };
 
 export const findItem = (
-  child: Child<any>,
+  items: IWidgetProps<any>,
   position: Position,
-): IWidgetProps => {
-  return (
-    child?.children?.find(
-      (bar: { position: string }) => bar.position === position,
-    ) || {}
-  );
+): IWidgetProps<any> | undefined => {
+  return items.children?.find((bar) => bar.position === position);
 };

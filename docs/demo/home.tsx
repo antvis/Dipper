@@ -14,7 +14,6 @@ interface IInitData {
 export default function HomeMap() {
   const [mapConfig, setMapConfig] = useState<IConfig<IInitData>>();
   useEffect(() => {
-
     setMapConfig(config);
   }, []);
 

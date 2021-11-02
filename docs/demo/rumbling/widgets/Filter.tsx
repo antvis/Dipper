@@ -5,13 +5,14 @@ import { useConfigService } from '@antv/dipper';
 
 export function AppFilter() {
   const { globalConfig } = useConfigService();
-  const { initData } = globalConfig;
+  const { viewData } = globalConfig;
   return (
     <>
       <Cascader
-        defaultValue={['130000', '130200']}
+        defaultValue={['330000', '330100']}
         style={{ width: 180 }}
-        options={initData.areaVOList}
+        bordered={false}
+        options={viewData.areaVOList}
         allowClear={false}
         onChange={(e) => {
           console.log(e);

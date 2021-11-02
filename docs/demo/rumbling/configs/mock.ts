@@ -340,8 +340,8 @@ export const geojson = [
     },
   },
   {
-    "type": "Feature",
-    "properties": {
+    type: 'Feature',
+    properties: {
       label: 'B类区域',
       value: 'B',
       featureId: '2021102300040027',
@@ -360,33 +360,21 @@ export const geojson = [
         area_centroid: '[120.200270,30.137812]',
       },
     },
-    "geometry": {
-      "type": "Polygon",
-      "coordinates": [
+    geometry: {
+      type: 'Polygon',
+      coordinates: [
         [
-          [
-            120.1636505126953,
-            30.24631485403797
-          ],
-          [
-            120.17704010009766,
-            30.22970466206658
-          ],
-          [
-            120.19214630126953,
-            30.243942141326617
-          ],
-          [
-            120.1636505126953,
-            30.24631485403797
-          ]
-        ]
-      ]
-    }
+          [120.1636505126953, 30.24631485403797],
+          [120.17704010009766, 30.22970466206658],
+          [120.19214630126953, 30.243942141326617],
+          [120.1636505126953, 30.24631485403797],
+        ],
+      ],
+    },
   },
   {
-    "type": "Feature",
-    "properties": {
+    type: 'Feature',
+    properties: {
       label: 'C类区域',
       value: 'C',
       featureId: '2021102300040027',
@@ -405,32 +393,140 @@ export const geojson = [
         area_centroid: '[120.200270,30.137812]',
       },
     },
-    "geometry": {
-      "type": "Polygon",
-      "coordinates": [
+    geometry: {
+      type: 'Polygon',
+      coordinates: [
         [
-          [
-            120.09017944335938,
-            30.224958377428475
-          ],
-          [
-            120.08949279785156,
-            30.18994745521063
-          ],
-          [
-            120.14751434326172,
-            30.189353942421295
-          ],
-          [
-            120.14854431152342,
-            30.22466172703242
-          ],
-          [
-            120.09017944335938,
-            30.224958377428475
-          ]
-        ]
-      ]
-    }
-  }
+          [120.09017944335938, 30.224958377428475],
+          [120.08949279785156, 30.18994745521063],
+          [120.14751434326172, 30.189353942421295],
+          [120.14854431152342, 30.22466172703242],
+          [120.09017944335938, 30.224958377428475],
+        ],
+      ],
+    },
+  },
+];
+
+export const CityList = [
+  {
+    value: '330000',
+    areaLevel: 'province',
+    label: '浙江省',
+    children: [
+      {
+        value: '330100',
+        areaLevel: 'city',
+        label: '杭州市',
+        children: [],
+      },
+    ],
+  },
+  {
+    value: '110000',
+    areaLevel: 'province',
+    label: '北京市',
+    children: [
+      {
+        value: '110000',
+        areaLevel: 'city',
+        label: '北京市',
+        children: [],
+      },
+    ],
+  },
+  {
+    value: '120000',
+    areaLevel: 'province',
+    label: '天津市',
+    children: [
+      {
+        value: '120000',
+        areaLevel: 'city',
+        label: '天津市',
+        children: [],
+      },
+    ],
+  },
+  {
+    value: '310000',
+    areaLevel: 'province',
+    label: '上海市',
+    children: [
+      {
+        value: '310000',
+        areaLevel: 'province',
+        label: '上海市',
+        children: [],
+      },
+    ],
+  },
+  {
+    value: '440000',
+    areaLevel: 'province',
+    label: '广东省',
+    children: [
+      {
+        value: '440100',
+        areaLevel: 'city',
+        label: '广州市',
+        children: [],
+      },
+      {
+        value: '440300',
+        areaLevel: 'city',
+        label: '深圳市',
+        children: [],
+      },
+      {
+        value: '440400',
+        areaLevel: 'city',
+        label: '珠海市',
+        children: [],
+      },
+      {
+        value: '440600',
+        areaLevel: 'city',
+        label: '佛山市',
+        children: [],
+      },
+      {
+        value: '441300',
+        areaLevel: 'city',
+        label: '惠州市',
+        children: [],
+      },
+      {
+        value: '441900',
+        areaLevel: 'city',
+        label: '东莞市',
+        children: [],
+      },
+      {
+        value: '442000',
+        areaLevel: 'city',
+        label: '中山市',
+        children: [],
+      },
+    ],
+  },
+  {
+    value: '130000',
+    areaLevel: 'province',
+    label: '河北省',
+    children: [
+      {
+        value: '130100',
+        areaLevel: 'city',
+        label: '石家庄市',
+        children: [],
+      },
+      {
+        value: '131000',
+        areaLevel: 'city',
+        label: '廊坊市',
+        children: [],
+      },
+    ],
+  },
 ];

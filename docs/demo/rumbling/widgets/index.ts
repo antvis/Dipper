@@ -1,5 +1,5 @@
 import { registerWidget } from '@antv/dipper-core';
-import { AppFilter } from './Filter';
+import { CitySelect, SiderBar } from '@antv/dipper-widgets';
 import { NavBar } from './NavBar';
 import { GridLayer } from './GridLayer';
 import { Legends } from './Classifycolor';
@@ -7,7 +7,8 @@ import { FunnelFilter } from './FunnelFilter';
 import { MapStyle } from '@antv/dipper';
 
 export function initWidgets() {
-  registerWidget('cityselect', AppFilter);
+  registerWidget('citySelect', CitySelect);
+  registerWidget('siderbartabcontent', SiderBar);
   registerWidget('navibar', NavBar);
   registerWidget('gridLayer', GridLayer);
   registerWidget('classifycolor',Legends)
