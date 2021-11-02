@@ -12,6 +12,7 @@ export interface ILegendControlProps {
 }
 
 export function ClassifyColor({ options }: IWidgetProps<string>) {
+
   const { targetName, items } = options as ILegendControlProps;
   return (
     <>

@@ -170,9 +170,26 @@ export const config = {
     zoom: 10,
     center: [120.153576, 30.287459],
     pitch: 0,
-    style: 'normal',
+    style: 'amap://styles/08539321a17cd7c322f76950f2c68b3f?isPublic=true',
   },
-  controls: [],
+  controls: [
+    {
+      "display": true,
+      "position": "topleft",
+      "type": "mapStyle",
+      "event": {
+        "actionType": "render",
+        "action": "changeStyle"
+      },
+      options: [
+        { label: 'normal', value: 'normal' },
+        { label: '白天', value: 'light' },
+        { label: '黑夜', value: 'dark' },
+        { label:' 无底图',value:'blank'}
+      ],
+      "title": "地图样式",
+    }
+  ],
   defaultcontrols: [
     {
       type: 'zoom',
