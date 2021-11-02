@@ -11,7 +11,7 @@ export function initWidgets() {
   registerWidget('siderbartabcontent', SiderBar);
   registerWidget('navibar', NavBar);
   registerWidget('gridLayer', GridLayer);
-  registerWidget('classifycolor',Legends)
-  registerWidget('funnelFilter',FunnelFilter)
-  registerWidget('mapStyle',MapStyle)
+  registerWidget('classifycolor', Legends);
+  registerWidget('funnelFilter', FunnelFilter);
+  registerWidget('mapStyle', MapStyle);
 }

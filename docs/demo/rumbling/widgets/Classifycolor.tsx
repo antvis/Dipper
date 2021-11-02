@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
-import { useConfigService,ClassifyColor } from "@antv/dipper"
+import { useConfigService, ClassifyColor } from '@antv/dipper';
 
 export interface ILegendControlProps<T> {
   targetName: string;
@@ -15,12 +15,9 @@ export const Legends = () => {
 
   const legend: ILegendControlProps<Items> = useMemo(() => {
     if (legends) {
-      return legends.find((item) => item.type === "classifycolor").options;
+      return legends.find((item) => item.type === 'classifycolor').options;
     }
-
   }, [legends]);
 
-  console.log('legend',legend)
-
-  return <ClassifyColor options={legend}/>
-}
+  return <ClassifyColor options={legend} />;
+};

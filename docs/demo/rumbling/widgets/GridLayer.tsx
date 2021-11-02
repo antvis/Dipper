@@ -11,7 +11,6 @@ export function GridLayer() {
   const { layerService } = useLayerService();
   const { globalConfig, updateLegend } = useConfigService();
   const { layers } = globalConfig;
-  const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
 
   const layerProps = useMemo(() => {
     return layers.find((item: any) => item.type === 'gridLayer');
@@ -50,8 +49,6 @@ export function GridLayer() {
 
     // 更新图例
     updateLayerLegend(layer.getLegendItem());
-
-    setGridLayer(layers);
   }, [geojson]);
 
   return <></>;
