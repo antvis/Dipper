@@ -1,4 +1,5 @@
-import { IConfig, ScatterColorScale } from '@antv/dipper';
+import { IConfig, SingleSequentialColorScale } from '@antv/dipper';
+console.log(SingleSequentialColorScale);
 import { CityList } from './mock';
 export const config: Partial<IConfig> = {
   viewData: {
@@ -11,7 +12,7 @@ export const config: Partial<IConfig> = {
     widgets: {
       citySelect: {
         options: CityList,
-        value: {},
+        value: [330000, 330100],
       },
     },
   },
@@ -123,13 +124,13 @@ export const config: Partial<IConfig> = {
       type: 'gridLayer',
       options: {
         label: {
-          field: 'label',
+          field: 'name',
           size: 12,
           color: '#000',
         },
         fill: {
-          field: 'label',
-          color: ScatterColorScale,
+          field: 'unit_price',
+          color: SingleSequentialColorScale.Blue,
           unknownName: '无类型',
         },
       },

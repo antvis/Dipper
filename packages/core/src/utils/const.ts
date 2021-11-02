@@ -12,7 +12,7 @@ export const ScatterColorScale = [
 ];
 
 export const SingleSequentialColorScale: { [key: string]: string[] } = {
-  blue: [
+  Blue: [
     '#D6EAFF',
     '#B3D9FF',
     '#80BFFF',
