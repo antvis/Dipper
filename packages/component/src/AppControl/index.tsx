@@ -36,7 +36,6 @@ export default function AppControl() {
             </CustomControl>
           );
         })}
-
       {/* 添加图例 */}
       <AppMapControlContent items={legends} />
     </>
