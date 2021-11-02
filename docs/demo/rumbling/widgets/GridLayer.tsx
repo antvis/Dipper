@@ -63,7 +63,6 @@ export function GridLayer() {
       geodata: geoData,
       options: layerProps.options,
     });
-    console.log(geojson);
     layerService.addLayer(layer);
 
     layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
