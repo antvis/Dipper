@@ -1,5 +1,4 @@
 import { IConfig, SingleSequentialColorScale } from '@antv/dipper';
-console.log(SingleSequentialColorScale);
 import { CityList } from './mock';
 export const config: Partial<IConfig> = {
   viewData: {

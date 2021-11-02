@@ -4,3 +4,4 @@ export * from './SidebarTabContent';
 export * from './GridLayer/GridLayerGroup';
 export * from './Filter/CitySelect';
 export * from './SidebarTabContent';
+export * from './NavBar';
