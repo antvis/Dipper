@@ -170,7 +170,7 @@ export const config = {
     zoom: 10,
     center: [120.153576, 30.287459],
     pitch: 0,
-    style: 'amap://styles/08539321a17cd7c322f76950f2c68b3f?isPublic=true',
+    style: 'normal',
   },
   controls: [
     {
