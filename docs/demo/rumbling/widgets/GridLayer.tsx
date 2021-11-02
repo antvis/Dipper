@@ -5,7 +5,6 @@ import {
   useLayerService,
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
-import { geojson } from '../configs/mock';
 import { GridLayerGroup } from '@antv/dipper';
 
 export function GridLayer() {
@@ -53,7 +52,6 @@ export function GridLayer() {
       return;
     }
     if (gridLayer) {
-      console.log(gridLayer);
       gridLayer.setData(geoData);
       return;
     }

@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
-import { useConfigService } from '@antv/dipper';
-import styles from '../styles/classifycolor.less';
+import { useConfigService, ClassifyColor } from '@antv/dipper';
 
 export interface ILegendControlProps<T> {
   targetName: string;
@@ -10,29 +9,15 @@ export interface ILegendControlProps<T> {
 
 type Items = Array<{ label: string; color: string }>;
 
-export const ClassifyColor = () => {
+export const Legends = () => {
   const { globalConfig } = useConfigService();
   const { legends } = globalConfig;
 
   const legend: ILegendControlProps<Items> = useMemo(() => {
-    return legends.find((item) => item.type === 'classifycolor').options;
+    if (legends) {
+      return legends.find((item) => item.type === 'classifycolor').options;
+    }
   }, [legends]);
 
-  return (
-    <div className={styles.legendControl}>
-      <div>{legend.targetName}</div>
-      {legend.items &&
-        legend.items.map((item) => {
-          return (
-            <div key={item.label} className={styles.legendContainer}>
-              <div
-                className={styles.legendColorBlock}
-                style={{ backgroundColor: item.color }}
-              />
-              <div>{item.label}</div>
-            </div>
-          );
-        })}
-    </div>
-  );
+  return <ClassifyColor options={legend} />;
 };

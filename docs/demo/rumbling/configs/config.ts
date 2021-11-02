@@ -102,7 +102,24 @@ export const config: Partial<IConfig> = {
     pitch: 0,
     style: 'normal',
   },
-  controls: [],
+  controls: [
+    {
+      display: true,
+      position: 'topleft',
+      type: 'mapStyle',
+      event: {
+        actionType: 'render',
+        action: 'changeStyle',
+      },
+      options: [
+        { label: 'normal', value: 'normal' },
+        { label: '白天', value: 'light' },
+        { label: '黑夜', value: 'dark' },
+        { label: ' 无底图', value: 'blank' },
+      ],
+      title: '地图样式',
+    },
+  ],
   defaultcontrols: [
     {
       type: 'zoom',
