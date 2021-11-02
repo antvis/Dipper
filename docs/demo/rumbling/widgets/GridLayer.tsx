@@ -49,7 +49,7 @@ export function GridLayer() {
     });
 
     // 更新图例
-    // updateLayerLegend(layer.getLegendItem());
+    updateLayerLegend(layer.getLegendItem());
 
     setGridLayer(layers);
   }, [geojson]);
