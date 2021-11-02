@@ -1,7 +1,8 @@
 import { Menu } from 'antd';
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
-import { useConfigService, findItem } from '@antv/dipper';
+import { useConfigService, findItem } from '@antv/dipper-component';
+import { IWidgetProps } from '../../core/dist';
 
 export function NavBar() {
   const { globalConfig } = useConfigService();
@@ -9,7 +10,8 @@ export function NavBar() {
 
   const options = useMemo(() => {
     if (headerbar) {
-      return findItem(headerbar, 'center').options;
+      //@ts-ignore
+      return findItem(headerbar, 'center')?.options;
     }
     return [];
   }, [headerbar]);

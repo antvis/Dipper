@@ -33,7 +33,8 @@
     ],
     "*.ts?(x)": [
       "prettier --parser=typescript --write"
-    ]
+    ],
+    "packages/*":"yarn run build"
   },
   "dependencies": {
     "@antv/l7-react": "^2.3.4",
