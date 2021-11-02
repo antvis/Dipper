@@ -1,16 +1,20 @@
 import {
+  useSceneService,
   useConfigService,
   LayerGroupEventEnum,
   useLayerService,
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
-import { geojson } from '../configs/mock';
 import { GridLayerGroup } from '@antv/dipper';
 
 export function GridLayer() {
   const { layerService } = useLayerService();
-  const { globalConfig, updateLegend } = useConfigService();
+  const { sceneService } = useSceneService();
+  const { globalConfig, updateLegend, getWidgetsValue } = useConfigService();
   const { layers } = globalConfig;
+  const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
+  const cityValue = getWidgetsValue('citySelect');
+  const [geoData, setGeoData] = useState();
 
   const layerProps = useMemo(() => {
     return layers.find((item: any) => item.type === 'gridLayer');
@@ -29,18 +33,34 @@ export function GridLayer() {
     });
   };
 
-  useEffect(() => {}, []);
+  // 根据筛选器条件请求数据
+  useEffect(() => {
+    // 可以根据业务需求配置接口
+    fetch(
+      `https://gw.alipayobjects.com/os/antvdemo/assets/dipper-city/${cityValue[1]}.json`,
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setGeoData(data);
+      });
+    // 切换城市 高德地图方法
+    sceneService.getScene().map?.setCity(cityValue[1]);
+  }, [JSON.stringify(cityValue)]);
 
   useEffect(() => {
+    if (!geoData) {
+      return;
+    }
+    if (gridLayer) {
+      gridLayer.setData(geoData);
+      return;
+    }
+
     const layer = new GridLayerGroup({
       name: 'grid',
-      geodata: {
-        type: 'FeatureCollection',
-        features: geojson,
-      },
+      geodata: geoData,
       options: layerProps.options,
     });
-    console.log(geojson);
     layerService.addLayer(layer);
 
     layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
@@ -49,7 +69,9 @@ export function GridLayer() {
 
     // 更新图例
     updateLayerLegend(layer.getLegendItem());
-  }, [geojson]);
+
+    setGridLayer(layer);
+  }, [geoData]);
 
   return <></>;
 }

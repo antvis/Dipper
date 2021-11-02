@@ -5,7 +5,8 @@ import 'antd/dist/antd.css';
 import { useConfigService } from '@antv/dipper-component';
 
 export function CitySelect() {
-  const { globalConfig, getWidgetsOptions } = useConfigService();
+  const { globalConfig, getWidgetsOptions, setWidgetsValue } =
+    useConfigService();
   const { viewData } = globalConfig;
   return (
     <>
@@ -16,7 +17,7 @@ export function CitySelect() {
         options={getWidgetsOptions('citySelect') as CascaderOptionType[]}
         allowClear={false}
         onChange={(e) => {
-          console.log(e);
+          setWidgetsValue('citySelect', e);
         }}
         placeholder="选择城市"
       />
