@@ -8,6 +8,8 @@ export interface ILayerGroupOption {
     field: string;
     color: string | string[];
     opacity: number;
+    bandNum: number;
+    scale: string;
     unkownName: string;
   };
 }

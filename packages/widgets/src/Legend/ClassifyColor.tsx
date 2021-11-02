@@ -3,32 +3,42 @@ import classnames from 'classnames';
 import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
 
-export interface ILegendControlProps {
-  targetName: string;
-  items: {
-    label: string;
-    color: string;
-  }[];
+interface ILegendItem {
+  color: string;
+  value: number | number[];
+}
+
+export interface IRangeControlProps {
+  items: ILegendItem[];
+  targetName?: string;
+  labelWidth?: string | number;
 }
 
 export function ClassifyColor({ options }: IWidgetProps<string>) {
-  const { targetName, items } = options as ILegendControlProps;
+  const { items, labelWidth = 100, targetName } = options as IRangeControlProps;
+
   return (
-    <>
-      {items.length && (
-        <div className={classnames(['l7-bar', styles.legendControl])}>
-          <div className={styles.legendControlTitle}>{targetName}</div>
-          {items.map((item) => (
-            <div className={styles.legendControlItem} key={item.label}>
-              <div
-                className={styles.legendControlColor}
-                style={{ backgroundColor: item.color }}
-              />
-              <div className={styles.legendControlName}>{item.label}</div>
-            </div>
-          ))}
+    <div className={styles.legendClassifyControl}>
+      <h4>{targetName}</h4>
+      <div className={styles.colorBar}>
+        {items.map((item, colorIndex) => (
+          <div key={colorIndex} className={styles.item}>
+            <span
+              className={styles.color}
+              style={{ backgroundColor: item.color }}
+            />
+            <span>
+              {Math.floor(
+                Array.isArray(item.value) ? item.value[0] : item.value,
+              )}
+            </span>
+          </div>
+        ))}
+        <div className={styles.item}>
+          <span className={styles.color} />
+          <span>{(items[items.length - 1].value as number[])[1]}</span>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }

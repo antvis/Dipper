@@ -1,23 +1,14 @@
 import React, { useMemo } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
-import { MenuOutlined } from '@ant-design/icons';
 import { Dropdown, Menu, Radio, Space } from 'antd';
 import { useConfigService } from '@antv/dipper-component';
+import { Config } from './config';
 
-type Items = Array<{ label: string; value: string }>;
+export interface IMapStyleOption {}
 
 export const MapStyle = () => {
-  const { globalConfig, setConfig } = useConfigService();
-  const { controls = [] } = globalConfig;
-
-  const styleOption: IWidgetProps<Items> = useMemo(() => {
-    if (controls) {
-      return controls.find(
-        (item: IWidgetProps<any>) => item.type === 'mapStyle',
-      )?.options;
-    }
-  }, [controls]);
+  const { setConfig } = useConfigService();
 
   // 切换地图样式
   const clickStype = (e: any) => {
@@ -27,10 +18,13 @@ export const MapStyle = () => {
   const menu = (
     <Menu>
       <Menu.Item key="1">
-        <Radio.Group onChange={clickStype}>
+        <Radio.Group
+          onChange={clickStype}
+          defaultValue={Config.options[0]?.value}
+        >
           <Space direction="vertical">
-            {styleOption &&
-              styleOption.map((item: any) => {
+            {Config.options &&
+              Config.options.map((item: any) => {
                 return (
                   <Radio value={item.value} key={item.value}>
                     {item.label}
@@ -46,7 +40,7 @@ export const MapStyle = () => {
   return (
     <>
       <Dropdown overlay={menu} className={styles.mapStyleButton}>
-        <MenuOutlined />
+        <img src={Config.icon} title={Config.title}></img>
       </Dropdown>
     </>
   );

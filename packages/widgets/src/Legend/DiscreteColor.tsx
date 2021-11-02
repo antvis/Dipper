@@ -1,91 +1,38 @@
 import React from 'react';
 import classnames from 'classnames';
+import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
 
-interface ILegendItem {
-  colors: string[];
-  name: string;
+export interface ILegendControlProps {
+  targetName: string;
+  items: {
+    value: string;
+    color: string;
+  }[];
 }
 
-interface IRangeGroup {
-  type: 'range';
-  items: ILegendItem[];
-  valueList: number[];
-}
-
-export interface IRangeControlProps {
-  group: IRangeGroup[];
-  targetName?: string;
-  labelWidth?: string | number;
-}
-
-export function DiscreteColor({
-  group = [],
-  targetName,
-  labelWidth = 78,
-}: IRangeControlProps) {
+export function DiscreteColor({ options }: IWidgetProps<string>) {
+  const { targetName, items } = options as ILegendControlProps;
   return (
-    <div className={classnames(['l7-control', 'l7-bar', styles.rangeControl])}>
-      {group?.map((groupItem, groupIndex) => (
-        <div className={styles.rangeControlGroup} key={groupIndex}>
-          {groupItem.items.map((item, index) => (
-            <div
-              key={`${item.name}${index}`}
-              className={styles.rangeControlItem}
-            >
+    <>
+      {items.length && (
+        <div className={classnames([styles.legendControl])}>
+          <div className={styles.legendControlTitle}>{targetName}</div>
+          {items.map((item) => (
+            <div className={styles.legendControlItem} key={item.value}>
               <div
-                className={styles.rangeControlLabel}
-                style={{ width: labelWidth }}
-              >
-                {item.name}
-              </div>
-              <div className={styles.rangeControlBar}>
-                {item.colors.map((color, colorIndex) => (
-                  <div
-                    className={styles.rangeControlBarItem}
-                    style={{ backgroundColor: color }}
-                    key={colorIndex}
-                  />
-                ))}
+                className={styles.legendControlColor}
+                style={{ backgroundColor: item.color }}
+              />
+              <div className={styles.legendControlName}>
+                {Array.isArray(item.value)
+                  ? item.value.join(' - ')
+                  : item.value}
               </div>
             </div>
           ))}
-          <div className={styles.rangeControlItem}>
-            <div
-              className={styles.rangeControlLabel}
-              style={{ width: labelWidth }}
-            >
-              {targetName ?? ''}
-            </div>
-            <div className={styles.rangeControlvalueList}>
-              {groupItem.valueList.map((number, numberIndex) => {
-                const style: React.CSSProperties = {
-                  width: `${100 / groupItem.valueList.length}%`,
-                  textAlign: 'center',
-                };
-                if (!numberIndex) {
-                  style.textAlign = 'left';
-                  style.width = `${
-                    100 / (groupItem.valueList.length - 1) / 2
-                  }%`;
-                }
-                if (numberIndex === groupItem.valueList.length - 1) {
-                  style.textAlign = 'right';
-                  style.width = `${
-                    100 / (groupItem.valueList.length - 1) / 2
-                  }%`;
-                }
-                return (
-                  // @ts-ignore
-                  <div style={style} key={`${numberIndex}${number}`}>
-                    {number}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 }

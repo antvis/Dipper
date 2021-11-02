@@ -1,5 +1,5 @@
 import type { ILayerGroup } from '@antv/dipper-core';
-import { LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
+import { LayerGroup, LayerGroupEventEnum, getColor } from '@antv/dipper-core';
 import type { ILayer } from '@antv/l7';
 import { LineLayer, PolygonLayer, Source } from '@antv/l7';
 import type { IFeature, IGridLayerProps, ILayerGroupOption } from './common';
@@ -38,13 +38,19 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     this.source = new Source(this.geodata);
   }
   getLegendItem() {
+    // 先取默认图例
+    let legend = this.getLayer(this.name)?.getLegendItems('color') || [];
+    if (legend.length !== 0) {
+      return legend;
+    }
+
     // @ts-ignore
     const scale =
       // @ts-ignore
       this.getLayer(this.name)?.styleAttributeService?.getLayerAttributeScale(
         'color',
       );
-    let legend = [];
+
     if (scale?.domain) {
       legend = scale
         .domain()
@@ -52,7 +58,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
         .map((item: string | number) => {
           return {
             // @ts-ignore
-            label: item || this.options.fill.unkownName || '无',
+            value: item || this.options.fill.unkownName || '无',
             color: scale(item),
           };
         });
@@ -60,13 +66,25 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     return legend;
   }
   addFillLayer() {
+    let color = this.options.fill?.color;
+    if (Array.isArray(this.options.fill?.color)) {
+      color = getColor(
+        this.options.fill?.color || [], // TODO 数据为空判断
+        this.options.fill?.bandNum || 5,
+      );
+    }
     const fillLayer = new PolygonLayer({
       autoFit: false,
       name: this.name,
     })
       .source(this.source)
       .shape('fill')
-      .color(this.options.fill!.field, this.options.fill?.color)
+      .scale({
+        [this.options.fill!.field]: {
+          type: 'quantile',
+        },
+      })
+      .color(this.options.fill!.field, color)
       .style({ opacity: this.options.fill?.opacity || 0.8 });
 
     fillLayer.once('inited', () => {

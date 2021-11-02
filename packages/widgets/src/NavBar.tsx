@@ -15,7 +15,6 @@ export function NavBar() {
     }
     return [];
   }, [headerbar]);
-  console.log(viewData?.global.view);
   return (
     <Menu
       theme="light"
