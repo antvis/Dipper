@@ -1,18 +1,17 @@
-.appSidebar {
+.appPanel {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  height: 90%;
   background-color: white;
 }
 
-.appSidebarHeader {
+.appPanelHeader {
   //display: flex;
   flex-shrink: 1;
   margin: 24px;
   line-height: 24px;
-  .appSidebarHeaderTitle {
+  .appPanelHeaderTitle {
     flex-shrink: 1;
     margin-bottom: 0;
     overflow: hidden;
@@ -22,13 +21,13 @@
     white-space: normal;
     text-overflow: ellipsis;
   }
-  .appSidebarHeaderEditIcon {
+  .appPanelHeaderEditIcon {
     margin-left: 9px;
     color: #8c8c8c;
   }
 }
 
-.appSidebarContent {
+.appPanelContent {
   flex-grow: 1;
   flex-shrink: 1;
   overflow: auto;
@@ -48,27 +47,13 @@
       height: 100%;
     }
 
-    .ant-collapse-header,
-    .ant-collapse-content {
-      padding-right: 0 !important;
-      padding-left: 0 !important;
-    }
-
-    .ant-collapse-content-box {
-      padding: 0 !important;
-    }
-
-    .ant-tabs-content {
-      padding: 0 24px !important;
-    }
-
-    .ant-collapse-arrow svg {
-      margin-left: 0 !important;
+    form {
+      padding: 0 24px;
     }
   }
 }
 
-.appSidebarContentWithoutTabs {
+.appPanelContentWithoutTabs {
   :global {
     .ant-tabs-nav {
       display: none !important;

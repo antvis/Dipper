@@ -10,7 +10,7 @@ interface IProps {
   title: string;
 }
 
-function SidebarHeader({ title }: IProps) {
+function PanelHeader({ title }: IProps) {
   const { globalConfig } = useConfigService<any>();
   const { sceneCode, areaCode } = globalConfig.initData;
   const { selectFeatures, updateProperties } = useLayerGroup('grid');
@@ -28,8 +28,8 @@ function SidebarHeader({ title }: IProps) {
   }, [title, selectFeatures]);
 
   return (
-    <div className={styles.appSidebarHeader}>
-      <Tooltip overlay={titles} className={styles.appSidebarHeaderTitle}>
+    <div className={styles.appPanelHeader}>
+      <Tooltip overlay={titles} className={styles.appPanelHeaderTitle}>
         <Paragraph
           ellipsis={{ rows: selectFeatures?.length > 1 ? 2 : 1 }}
           editable={
@@ -49,4 +49,4 @@ function SidebarHeader({ title }: IProps) {
   );
 }
 
-export default SidebarHeader;
+export default PanelHeader;

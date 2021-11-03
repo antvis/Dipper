@@ -4,7 +4,7 @@ export const config = {
     {
       type: 'assignform',
       title: '区划分配',
-      operateType: 'sidebar',
+      operateType: 'panel',
       callbackType: 'custom',
       enableWhen: ['single_select', 'multi_select'],
     },

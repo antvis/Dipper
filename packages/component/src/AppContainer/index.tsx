@@ -4,7 +4,7 @@ import styles from './index.less';
 import AppHeader from '../AppHeader';
 import AppToolbar from '../AppToolbar';
 import AppControl from '../AppControl';
-import AppSidebar from '../AppSidebar';
+import AppPanel from '../AppPanel';
 import AppLayerControl from '../AppLayer';
 import AppMap from '../AppMap';
 import { Provider } from 'inversify-react';
@@ -27,12 +27,12 @@ export function ContainerContent<T>({
   children?: React.ReactNode;
 }) {
   const { globalConfig } = useConfigService<T>();
-  const { sidebar } = globalConfig;
+  const { panel } = globalConfig;
   return (
     <Content
       style={{
         flexDirection:
-          sidebar?.position === 'bottom' || sidebar?.position === 'top'
+          panel?.position === 'bottom' || panel?.position === 'top'
             ? 'column'
             : 'row',
       }}
@@ -49,7 +49,7 @@ export function ContainerContent<T>({
         </>
       </AppMap>
       {/* 地图信息栏 */}
-      <AppSidebar />
+      <AppPanel />
     </Content>
   );
 }

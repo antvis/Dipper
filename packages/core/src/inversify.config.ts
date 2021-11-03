@@ -9,8 +9,8 @@ import SceneService from './services/scene/SceneService';
 import LayerService from './services/layer/LayerService';
 import ConfigService from './services/config/ConfigService';
 import ControlService from './services/control/ControlService';
-import type { ISideBarService } from './services/siderbar/ISidebarService';
-import SidebarService from './services/siderbar/SidebarService';
+import type { IPanelService } from './services/panel/IPanelService';
+import PanelService from './services/panel/PanelService';
 
 export default function createContainer() {
   const container = new Container();
@@ -36,8 +36,8 @@ export default function createContainer() {
     .inSingletonScope();
 
   container
-    .bind<ISideBarService>(TYPES.SIDEBAR_SYMBOL)
-    .to(SidebarService)
+    .bind<IPanelService>(TYPES.PANEL_SYMBOL)
+    .to(PanelService)
     .inSingletonScope();
 
   return container;

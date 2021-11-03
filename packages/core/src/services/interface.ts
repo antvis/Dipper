@@ -8,7 +8,7 @@ export interface IWidgetProps<T> {
   [key: string]: any;
 }
 
-export type SidebarPostions = 'left' | 'right' | 'top' | 'bottom';
+export type PanelPostions = 'left' | 'right' | 'top' | 'bottom';
 export type ControlPostions =
   | 'bottomleft'
   | 'bottomright'

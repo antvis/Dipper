@@ -1,7 +1,7 @@
 import type EventEmitter from 'eventemitter3';
 import type { IWidgetProps } from '../interface';
 
-export interface ISideBar {
+export interface IPanel {
   display: boolean;
   enableToggle: boolean;
   defaultTitle?: string;
@@ -12,8 +12,9 @@ export interface ISideBar {
   children?: IWidgetProps<string>[];
 }
 
-export interface ISideBarService extends EventEmitter {
-  init: (config: Partial<ISideBar>) => void;
+export interface IPanelService extends EventEmitter {
+  init: (config: Partial<IPanel>) => void;
+  setDispay: (visble: boolean) => void;
   show: () => void;
   hide: () => void;
   toggleOpen: () => void;
