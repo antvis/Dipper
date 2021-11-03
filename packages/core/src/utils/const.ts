@@ -140,3 +140,18 @@ export const PartialSpectraColorScale = {
     '#330C00',
   ],
 };
+
+export function getColor(color: Array<string>, bandNum: number) {
+  if (color.length <= bandNum || bandNum < 1 || !Array.isArray(color)) {
+    return color;
+  }
+
+  const step = (color.length - 2) / (bandNum - 1);
+  const result: Array<string> = [];
+  result[0] = color[0];
+  for (let i = 1; i < bandNum - 1; i += 1) {
+    result[i] = color[Math.round(i * step)];
+  }
+  result[bandNum - 1] = color[color.length - 1];
+  return result;
+}

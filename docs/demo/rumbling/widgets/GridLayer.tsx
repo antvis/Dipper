@@ -22,7 +22,7 @@ export function GridLayer() {
 
   const updateLayerLegend = (items: any[]) => {
     updateLegend('gridLayerLegend', {
-      type: 'classifycolor',
+      type: 'discreteColor',
       display: true,
       position: 'bottomleft',
       options: {

@@ -4,6 +4,7 @@ import {
   SiderBar,
   NavBar,
   ClassifyColor,
+  DiscreteColor,
 } from '@antv/dipper-widgets';
 import { GridLayer } from './GridLayer';
 import { FunnelFilter } from './FunnelFilter';
@@ -14,7 +15,8 @@ export function initWidgets() {
   registerWidget('siderbartabcontent', SiderBar);
   registerWidget('navibar', NavBar);
   registerWidget('gridLayer', GridLayer);
-  registerWidget('classifycolor', ClassifyColor);
+  registerWidget('classifyColor', ClassifyColor);
+  registerWidget('discreteColor', DiscreteColor);
   registerWidget('funnelFilter', FunnelFilter);
   registerWidget('mapStyle', MapStyle);
 }
