@@ -4,10 +4,10 @@ import {
   SiderBar,
   NavBar,
   ClassifyColor,
+  MapStyle
 } from '@antv/dipper-widgets';
 import { GridLayer } from './GridLayer';
 import { FunnelFilter } from './FunnelFilter';
-import { MapStyle } from '@antv/dipper-widgets';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
