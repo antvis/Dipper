@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { DipperContainer, IConfig } from '@antv/dipper';
-import { config } from './configs/config';
-import { initWidgets } from '../widgets';
+import { config } from '../demo/rumbling/configs/config';
 
 interface IInitData {
   areaVOList: any[];
@@ -15,9 +14,6 @@ interface IInitData {
 export default function HomeMap() {
   const [mapConfig, setMapConfig] = useState<IConfig<IInitData>>();
   useEffect(() => {
-    // 初始化组件
-    initWidgets()
-
     setMapConfig(config);
   }, []);
 

@@ -10,9 +10,7 @@ import { AppContent } from '../AppTemplate';
 const { Header } = Layout;
 
 export default function AppHeader() {
-  console.log('--->');
   const { globalConfig } = useConfigService();
-  console.log(globalConfig);
   const { headerstyle, display, logo, title, children } =
     globalConfig.headerbar || {};
 

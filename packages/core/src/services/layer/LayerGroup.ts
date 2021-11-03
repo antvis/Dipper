@@ -59,6 +59,7 @@ export default abstract class LayerGroup
   public setData(data: any) {
     this.geodata = data;
     this.source.setData(data);
+
     // 重置选中数据
     this.emit(LayerGroupEventEnum.HOVERFEATURECHANGE, []);
     this.emit(LayerGroupEventEnum.SELECTFEATURECHANGE, []);

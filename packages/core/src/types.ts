@@ -4,7 +4,7 @@ const TYPES = {
   LAYER_SYMBOL: Symbol.for('layerService'),
   LAYER_GROUP_SYMBOL: Symbol.for('layerGroup'),
   CONTROL_SYMBOL: Symbol.for('controlService'),
-  SIDEBAR_SYMBOL: Symbol.for('sidebarService'),
+  PANEL_SYMBOL: Symbol.for('panelService'),
 };
 
 export { TYPES };

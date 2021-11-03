@@ -9,8 +9,9 @@
     "build": "father-build",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "release": "npm run build && npm publish",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
+    "sync": "tnpm sync",
     "test:coverage": "umi-test --coverage"
   },
   "main": "dist/index.js",
@@ -47,7 +48,7 @@
     "@antv/l7": "^2.5.40",
     "@antv/l7-maps": "^2.5.40",
     "antd": "^4.16.13",
-    "react": "^16.8.6",
+    "react": "^16.14.0",
     "react-dom": "^16.8.6"
   },
   "publishConfig": {

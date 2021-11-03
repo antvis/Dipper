@@ -1,19 +1,19 @@
-import React from "react";
-import { Layout } from "antd";
-import 'antd/dist/antd.css'
+import React from 'react';
+import { Layout } from 'antd';
+import 'antd/dist/antd.css';
 
-const { Header, Content, Sider } = Layout
+const { Header, Content, Sider } = Layout;
 
 export default function Layouts() {
   return (
-    <div >
+    <div>
       <Layout style={{ height: 300 }}>
-        <Header style={{ color: "#fff" }}>Header</Header>
+        <Header style={{ color: '#fff' }}>Header</Header>
         <Layout>
           <Content>Content</Content>
           <Sider theme="light">Sider</Sider>
         </Layout>
       </Layout>
     </div>
-  )
+  );
 }

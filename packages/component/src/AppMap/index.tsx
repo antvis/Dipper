@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AMapScene, Popup } from '@antv/l7-react';
 import type {} from '@antv/l7-react';
 import styles from './index.less';
@@ -11,8 +11,8 @@ interface IProps {
 export default function AppMap({ children }: IProps) {
   const { sceneService } = useSceneService();
   const { globalConfig } = useConfigService();
+  const [isLoaded, setLoaded] = useState(false);
   const { map, popup } = globalConfig;
-  console.log("children",children)
   return (
     <AMapScene
       className={styles.appMap}
@@ -23,6 +23,7 @@ export default function AppMap({ children }: IProps) {
       onSceneLoaded={(newScene) => {
         setTimeout(() => {
           sceneService.setScene(newScene);
+          setLoaded(true);
         }, 0);
       }}
     >
@@ -32,7 +33,7 @@ export default function AppMap({ children }: IProps) {
           {popup.children}
         </Popup>
       )}
-      {children}
+      {isLoaded && children}
     </AMapScene>
   );
 }

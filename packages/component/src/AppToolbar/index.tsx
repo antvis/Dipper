@@ -3,7 +3,7 @@ import styles from './index.less';
 import { useConfigService } from '../hooks';
 import { AppContent } from '../AppTemplate';
 import { getAppContentItem, isDisplay } from '../utils/ui';
-
+import { IWidgetProps } from '../../../core/dist';
 
 export default function AppToolbar() {
   const { globalConfig } = useConfigService();
@@ -14,11 +14,15 @@ export default function AppToolbar() {
     <div className={styles.appToolbar}>
       {/* 左侧组件 */}
       <div>
-        <AppContent items={getAppContentItem(toolbar, "left")} />
+        <AppContent
+          items={getAppContentItem(toolbar as IWidgetProps<any>, 'left')}
+        />
       </div>
       {/* 右侧组件 */}
       <div>
-        <AppContent items={getAppContentItem(toolbar, "right")} />
+        <AppContent
+          items={getAppContentItem(toolbar as IWidgetProps<any>, 'right')}
+        />
       </div>
     </div>
   ) : (

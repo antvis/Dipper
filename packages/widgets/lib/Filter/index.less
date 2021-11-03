@@ -1,0 +1,57 @@
+.citySelect {
+  display: inline-flex;
+  :global {
+    input {
+      color: black !important;
+    }
+    .ant-select-selection-placeholder,
+    input::-webkit-input-placeholder {
+      color: rgba(0, 0, 0, 0.65) !important;
+    }
+  }
+}
+
+.funnelSelect {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+
+  .funnelSelectTitle {
+    margin-right: 10px;
+  }
+}
+
+.downIcon {
+  font-size: 10px;
+}
+
+.downIconRotate {
+  transform: rotate(180deg);
+}
+
+.funnelSelectActive {
+  color: #0091ff;
+}
+
+.funnelSelectContent {
+  padding: 16px;
+  font-size: 14px;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08);
+  .conditionItem {
+    padding-bottom: 16px;
+  }
+  .conditionName {
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .btnGroup {
+    text-align: right;
+  }
+}

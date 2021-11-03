@@ -1,10 +1,19 @@
 import type EventEmitter from 'eventemitter3';
 import type { IMapConfig, IPopupOption } from '@antv/l7';
 import type { IWidgetProps, ControlPostions } from '../interface';
-import type { ISideBar } from '../siderbar/ISidebarService';
+import type { IPanel } from '../panel/IPanelService';
 
 export interface IConfig<IInitData = any> {
   initData: IInitData;
+  viewData: {
+    global: Record<string, any>;
+    widgets: {
+      [key: string]: {
+        options?: Record<string, any> | Record<string, any>[]; // 初始化数据
+        value?: Record<string, any> | Record<string, any>[]; // 结果数据
+      };
+    };
+  };
   headerbar: {
     display?: boolean;
     headerstyle?: React.CSSProperties;
@@ -38,7 +47,7 @@ export interface IConfig<IInitData = any> {
     display: boolean;
     style: React.CSSProperties;
   }>;
-  sidebar: Partial<ISideBar>;
+  panel: Partial<IPanel>;
   toolbar: {
     display: boolean;
     children: IWidgetProps<'left' | 'right'>[];
@@ -75,4 +84,8 @@ export interface IConfigService<T> extends EventEmitter {
   getConfig: (key: string) => any;
   updateLegend: (id: string, value: any) => void;
   updateControl: (type: string, value: any) => void;
+  setWidgetsOptions: (key: string, options: Record<string, any>) => void;
+  getWidgetsValue: (key: string) => Record<string, any>;
+  setWidgetsValue: (key: string, options: Record<string, any>) => void;
+  getWidgetsOptions: (key: string) => Record<string, any>;
 }

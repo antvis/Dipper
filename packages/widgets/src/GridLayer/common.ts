@@ -6,6 +6,10 @@ export interface ILayerGroupOption {
   };
   fill: {
     field: string;
+    color: string | string[];
+    opacity: number;
+    bandNum: number;
+    scale: string;
     unkownName: string;
   };
 }
@@ -60,8 +64,12 @@ export function formatGeoData(group: any) {
   return features;
 }
 
-export function joinData(geoData: any[], propertiesData: any[], joinBy: [string, string]) {
-  const joinObj = {};
+export function joinData(
+  geoData: any[],
+  propertiesData: any[],
+  joinBy: [string, string],
+) {
+  const joinObj: Record<string, any> = {};
   propertiesData.forEach((item: any) => {
     joinObj[item[joinBy[1]]] = item;
   });
@@ -71,19 +79,22 @@ export function joinData(geoData: any[], propertiesData: any[], joinBy: [string,
       properties: {
         ...joinObj[feature.properties[joinBy[0]]],
         ...feature.properties,
-        label: joinObj[feature.properties[joinBy[0]]]?.label || feature.properties.label || '',
+        label:
+          joinObj[feature.properties[joinBy[0]]]?.label ||
+          feature.properties.label ||
+          '',
       },
     };
   });
 }
 
 export function fromPairs(pairs: any[]) {
-  const result = {}
+  const result: Record<string, any> = {};
   if (pairs == null) {
-    return result
+    return result;
   }
   for (const pair of pairs) {
-    result[pair[0]] = pair[1]
+    result[pair[0]] = pair[1];
   }
-  return result
+  return result;
 }

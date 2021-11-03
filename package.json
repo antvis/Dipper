@@ -15,13 +15,14 @@
     "deploy": "npm run docs:build && npm run docs:deploy",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
+    "sync": "lerna run sync",
     "test:coverage": "umi-test --coverage"
   },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
   "gitHooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged && yarn run build"
   },
   "workspaces": [
     "packages/*"
@@ -35,23 +36,29 @@
     ]
   },
   "dependencies": {
+    "@antv/l7": "^2.5.40",
     "@antv/l7-react": "^2.3.4",
     "antd": "^4.16.13",
-    "classnames": "^2.3.1",
-    "react": "^16.12.0 || ^17.0.0"
+    "classnames": "^2.3.1"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@antv/l7": "^2.5.40",
+    "@antv/l7-maps": "^2.5.40",
+    "@types/jest": "^27.0.2",
     "@types/react": "^16.14.2",
     "@umijs/test": "^3.0.5",
+    "antd": "^4.16.13",
     "dumi": "^1.0.17",
     "father-build": "^1.17.2",
     "gh-pages": "^3.0.0",
+    "jest": "^27.3.1",
     "lerna": "^4.0.0",
     "lerna-ci": "^0.0.8",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.1",
-    "react-dom": "^16.14.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.8.6",
     "rimraf": "^3.0.2",
     "yorkie": "^2.0.0"
   }
