@@ -7,7 +7,6 @@ import {
   DiscreteColor,
 } from '@antv/dipper-widgets';
 import { GridLayer } from './GridLayer';
-import { FunnelFilter } from './FunnelFilter';
 import { MapStyle } from '@antv/dipper-widgets';
 
 export function initWidgets() {
@@ -17,6 +16,5 @@ export function initWidgets() {
   registerWidget('gridLayer', GridLayer);
   registerWidget('classifyColor', ClassifyColor);
   registerWidget('discreteColor', DiscreteColor);
-  registerWidget('funnelFilter', FunnelFilter);
   registerWidget('mapStyle', MapStyle);
 }

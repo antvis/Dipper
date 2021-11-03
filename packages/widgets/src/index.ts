@@ -4,5 +4,4 @@ export * from './PanelTabContent';
 export * from './GridLayer/GridLayerGroup';
 export * from './MapStyle';
 export * from './Filter/CitySelect';
-export * from './PanelTabContent';
 export * from './NavBar';

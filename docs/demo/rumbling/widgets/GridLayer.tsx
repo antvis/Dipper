@@ -6,7 +6,21 @@ import {
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
-
+const formatLegend = (data: any[]) => {
+  return data.map((item) => {
+    if (Array.isArray(item.value)) {
+      return {
+        ...item,
+        value: item.value.map((v) => v.toFixed(2)),
+      };
+    } else {
+      return {
+        ...item,
+        value: item.value.toFixed(2),
+      };
+    }
+  });
+};
 export function GridLayer() {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
@@ -64,11 +78,24 @@ export function GridLayer() {
     layerService.addLayer(layer);
 
     layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
-      updateLayerLegend(layer.getLegendItem());
+      layer.getLegendItem().map((item) => {
+        if (Array.isArray(item.value)) {
+          return {
+            ...item,
+            value: item.value.map((v) => v.toFixed(2)),
+          };
+        } else {
+          return {
+            ...item,
+            value: item.value.toFixed(2),
+          };
+        }
+      });
+      updateLayerLegend(formatLegend(layer.getLegendItem()));
     });
 
     // 更新图例
-    updateLayerLegend(layer.getLegendItem());
+    updateLayerLegend(formatLegend(layer.getLegendItem()));
 
     setGridLayer(layer);
   }, [geoData]);
