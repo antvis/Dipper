@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-component",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -29,7 +29,7 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-core": "^0.0.3",
+    "@antv/dipper-core": "^0.0.4",
     "classnames": "^2.3.1",
     "inversify": "^6.0.1",
     "inversify-react": "^1.0.0"
