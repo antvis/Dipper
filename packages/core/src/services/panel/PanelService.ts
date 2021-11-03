@@ -9,7 +9,8 @@ import EventEmitter from 'eventemitter3';
 @injectable()
 export default class PanelService
   extends EventEmitter
-  implements IPanelService {
+  implements IPanelService
+{
   private config: Partial<IPanel> = {};
   public scene: Scene | undefined;
   public container: Container | undefined = undefined;
@@ -36,10 +37,7 @@ export default class PanelService
     );
   }
   setDispay(visble: boolean) {
-    this.configService.setConfig(
-      'panel.opened',
-      !this.configService.getConfig('panel.opened'),
-    );
+    this.configService.setConfig('panel.display', visble);
   }
   changeTab() {}
 
