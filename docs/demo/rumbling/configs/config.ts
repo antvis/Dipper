@@ -109,6 +109,12 @@ export const config: Partial<IConfig> = {
       type: 'mapStyle',
       title: '地图样式',
     },
+    {
+      display: true,
+      position: 'bottomright',
+      type: 'location',
+      title: '定位',
+    },
   ],
   defaultcontrols: [
     {
