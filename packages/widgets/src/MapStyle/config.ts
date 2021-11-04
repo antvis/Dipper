@@ -8,6 +8,9 @@ export const Config = {
     { label: '深色', value: 'dark' },
     { label: '马卡龙', value: 'amap://styles/macaron' },
     { label: '靛青蓝', value: 'amap://styles/blue' },
-    { label: ' 无底图', value: 'blank' },
+    { label: '涂鸦', value: 'amap://styles/graffiti' },
+    { label: '极夜蓝', value: 'amap://styles/darkblue' },
+    { label: '草色青', value: 'amap://styles/fresh' },
+    { label: '无底图', value: 'blank' },
   ],
 };

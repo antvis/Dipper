@@ -13,6 +13,8 @@ export function useConfigService<T>() {
     configService.config,
   );
 
+  const [loading,setLoading] = useState(false)
+
   useEffect(() => {
     configService.on(ConfigEventEnum.CONFIG_CHANGE, (cfg: any) => {
       setCfg(cfg);
@@ -57,5 +59,7 @@ export function useConfigService<T>() {
     setWidgetsValue,
     getWidgetsValue,
     configService,
+    loading,
+    setLoading
   };
 }

@@ -6,3 +6,4 @@ export * from './MapStyle';
 export * from './Filter/CitySelect';
 export * from './SidebarTabContent';
 export * from './NavBar';
+export * from './Location'
