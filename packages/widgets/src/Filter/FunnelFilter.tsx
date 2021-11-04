@@ -4,7 +4,7 @@ import { DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Input } from 'antd';
 import classnames from 'classnames';
 import { cloneDeep } from 'lodash';
-import { useConfigService } from '@antv/dipper-component';
+import { useConfigService } from '@antv/dipper-layout';
 
 function FunnelFilter({ title, data }: any) {
   const { globalConfig, setConfig } = useConfigService();

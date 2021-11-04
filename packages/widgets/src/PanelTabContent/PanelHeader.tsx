@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styles from './index.less';
 
 import { Tooltip, Typography } from 'antd';
-import { useConfigService, useLayerGroup } from '@antv/dipper-component';
+import { useConfigService, useLayerGroup } from '@antv/dipper-layout';
 
 const { Paragraph } = Typography;
 

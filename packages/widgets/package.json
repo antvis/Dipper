@@ -28,8 +28,14 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "README.md"
+  ],
   "dependencies": {
-    "@antv/dipper-component": "^0.0.4",
+    "@antv/dipper-layout": "^0.0.4",
     "@antv/dipper-core": "^0.0.4",
     "@types/d3-format": "^3.0.1",
     "classnames": "^2.3.1",

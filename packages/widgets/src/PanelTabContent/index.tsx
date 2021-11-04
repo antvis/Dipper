@@ -3,7 +3,7 @@ import PanelHeader from './PanelHeader';
 import PanelContent from './Content';
 import { config } from './config';
 import type { IWidgetProps } from '@antv/dipper-core';
-import { useConfigService } from '@antv/dipper-component';
+import { useConfigService } from '@antv/dipper-layout';
 
 export function SiderBar(props: IWidgetProps<string>) {
   const { globalConfig } = useConfigService<any>();

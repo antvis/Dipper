@@ -1,7 +1,7 @@
 import { Menu } from 'antd';
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
-import { useConfigService, findItem } from '@antv/dipper-component';
+import { useConfigService, findItem } from '@antv/dipper-layout';
 import { IWidgetProps } from '../../core/dist';
 
 export function NavBar() {

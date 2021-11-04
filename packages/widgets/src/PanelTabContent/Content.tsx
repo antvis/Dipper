@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import styles from './index.less';
-import { AppTabsContent } from '@antv/dipper-component';
+import { AppTabsContent } from '@antv/dipper-layout';
 import type { IWidgetProps } from '@antv/dipper-core';
 
 function PanelTabContent(props: IWidgetProps<string>) {

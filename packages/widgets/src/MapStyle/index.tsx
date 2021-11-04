@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
 import { Dropdown, Menu, Radio, Space } from 'antd';
-import { useConfigService } from '@antv/dipper-component';
+import { useConfigService } from '@antv/dipper-layout';
 import { Config } from './config';
 
 export interface IMapStyleOption {}

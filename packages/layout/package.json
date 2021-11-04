@@ -1,5 +1,5 @@
 {
-  "name": "@antv/dipper-component",
+  "name": "@antv/dipper-layout",
   "version": "0.0.4",
   "scripts": {
     "clean": "rimraf dist",
@@ -28,11 +28,18 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "README.md"
+  ],
   "dependencies": {
     "@antv/dipper-core": "^0.0.4",
     "classnames": "^2.3.1",
     "inversify": "^6.0.1",
-    "inversify-react": "^1.0.0"
+    "inversify-react": "^1.0.0",
+    "@turf/turf": "^6.5.0"
   },
   "devDependencies": {
     "@umijs/test": "^3.0.5",

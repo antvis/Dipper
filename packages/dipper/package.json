@@ -14,6 +14,12 @@
     "sync": "tnpm sync",
     "test:coverage": "umi-test --coverage"
   },
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "README.md"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
@@ -33,7 +39,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@antv/dipper-component": "^0.0.4",
+    "@antv/dipper-layout": "^0.0.4",
     "@antv/dipper-core": "^0.0.4",
     "@antv/dipper-widgets": "^0.0.4"
   },
