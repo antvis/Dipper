@@ -26,7 +26,7 @@ export const config: Partial<IConfig> = {
       },
     },
     title: {
-      value: '区域房价可视化',
+      value: '网格划分',
       display: true,
     },
     children: [
@@ -39,21 +39,6 @@ export const config: Partial<IConfig> = {
           actionType: 'map',
           action: 'queryArea',
         },
-      },
-      {
-        display: true,
-        options: [
-          {
-            label: '热区分析',
-            value: 'hotspot',
-          },
-          {
-            label: '任务管理',
-            value: 'task',
-          },
-        ],
-        position: 'center',
-        type: 'navibar',
       },
       {
         display: false,
@@ -73,23 +58,7 @@ export const config: Partial<IConfig> = {
     opened: true,
     width: 360,
     position: 'right',
-    children: [
-      {
-        type: 'siderbartabcontent',
-        title: '所有网格',
-        children: [
-          {
-            display: true,
-            type: 'mesh_indicator',
-            title: '数据查看',
-          },
-          {
-            type: 'total_data_panel',
-            title: '地图面板',
-          },
-        ],
-      },
-    ],
+    children: [],
   },
   toolbar: {
     display: false,
