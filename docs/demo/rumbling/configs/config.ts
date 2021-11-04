@@ -67,7 +67,7 @@ export const config: Partial<IConfig> = {
       },
     ],
   },
-  sidebar: {
+  panel: {
     display: true,
     enableToggle: true,
     defaultTitle: '所有网格',

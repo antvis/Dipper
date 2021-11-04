@@ -2,7 +2,7 @@ import { Cascader } from 'antd';
 import type { CascaderOptionType } from 'antd/es/cascader/index';
 import React from 'react';
 import 'antd/dist/antd.css';
-import { useConfigService } from '@antv/dipper-component';
+import { useConfigService } from '@antv/dipper-layout';
 
 export function CitySelect() {
   const { globalConfig, getWidgetsOptions, setWidgetsValue } =

@@ -9,7 +9,6 @@ import {
   Location,
 } from '@antv/dipper-widgets';
 import { GridLayer } from './GridLayer';
-import { FunnelFilter } from './FunnelFilter';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
@@ -18,7 +17,8 @@ export function initWidgets() {
   registerWidget('gridLayer', GridLayer);
   registerWidget('classifycolor', ClassifyColor);
   registerWidget('discretecolor',DiscreteColor)
-  registerWidget('funnelFilter', FunnelFilter);
+  registerWidget('classifyColor', ClassifyColor);
+  registerWidget('discreteColor', DiscreteColor);
   registerWidget('mapStyle', MapStyle);
   registerWidget('location', Location);
 }

@@ -34,10 +34,13 @@ export function ClassifyColor({ options }: IWidgetProps<string>) {
             </span>
           </div>
         ))}
-        <div className={styles.item}>
-          <span className={styles.color} />
-          <span>{(items[items.length - 1].value as number[])[1]}</span>
-        </div>
+        {/* 分段图例标注 */}
+        {Array.isArray(items[items.length - 1]) && (
+          <div className={styles.item}>
+            <span className={styles.color} />
+            <span>{(items[items.length - 1].value as number[])[1]}</span>
+          </div>
+        )}
       </div>
     </div>
   );

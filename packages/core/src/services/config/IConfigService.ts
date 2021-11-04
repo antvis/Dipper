@@ -1,7 +1,7 @@
 import type EventEmitter from 'eventemitter3';
 import type { IMapConfig, IPopupOption } from '@antv/l7';
 import type { IWidgetProps, ControlPostions } from '../interface';
-import type { ISideBar } from '../siderbar/ISidebarService';
+import type { IPanel } from '../panel/IPanelService';
 
 export interface IConfig<IInitData = any> {
   initData: IInitData;
@@ -47,7 +47,7 @@ export interface IConfig<IInitData = any> {
     display: boolean;
     style: React.CSSProperties;
   }>;
-  sidebar: Partial<ISideBar>;
+  panel: Partial<IPanel>;
   toolbar: {
     display: boolean;
     children: IWidgetProps<'left' | 'right'>[];

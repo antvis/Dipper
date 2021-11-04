@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useConfigService } from '@antv/dipper-component'
+import { useConfigService } from '@antv/dipper-layout'
 import { Button, message } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 import styles from './index.less'
@@ -124,7 +124,7 @@ export function Location() {
           strokeWidth: 4,
           stroke:'#e2e2e2'
         }}
-      /> : null}
+      /> : null }
     </>
   )
 }
