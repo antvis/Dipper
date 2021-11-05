@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import styles from './index.less';
+import './index.less';
 import { isDisplay } from '../utils';
 import ToggleButton from './ToggleButton';
 import { useConfigService, usePanelService } from '../hooks';
@@ -42,7 +42,7 @@ export default function AppPanel<T>() {
         ),
         ...panel?.style,
       }}
-      className={styles.appPanel}
+      className="appPanel"
     >
       {panel?.enableToggle && (
         <ToggleButton

@@ -1,7 +1,6 @@
 import React from 'react';
-import classnames from 'classnames';
 import type { IWidgetProps } from '@antv/dipper-core';
-import styles from './index.less';
+import './index.less';
 
 interface ILegendItem {
   color: string;
@@ -18,15 +17,12 @@ export function ClassifyColor({ options }: IWidgetProps<string>) {
   const { items, labelWidth = 100, targetName } = options as IRangeControlProps;
 
   return (
-    <div className={styles.legendClassifyControl}>
+    <div className="legendClassifyControl">
       <h4>{targetName}</h4>
-      <div className={styles.colorBar}>
+      <div className="colorBar">
         {items.map((item, colorIndex) => (
-          <div key={colorIndex} className={styles.item}>
-            <span
-              className={styles.color}
-              style={{ backgroundColor: item.color }}
-            />
+          <div key={colorIndex} className="item">
+            <span className="color" style={{ backgroundColor: item.color }} />
             <span>
               {Math.floor(
                 Array.isArray(item.value) ? item.value[0] : item.value,
@@ -36,8 +32,8 @@ export function ClassifyColor({ options }: IWidgetProps<string>) {
         ))}
         {/* 分段图例标注 */}
         {Array.isArray(items[items.length - 1]) && (
-          <div className={styles.item}>
-            <span className={styles.color} />
+          <div className="item">
+            <span className="color" />
             <span>{(items[items.length - 1].value as number[])[1]}</span>
           </div>
         )}

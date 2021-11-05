@@ -6,7 +6,7 @@ import { Tabs } from 'antd';
 import { getWidget } from '@antv/dipper-core';
 import { useEffect } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
-import style from './style.less';
+import './style.less';
 
 const { TabPane } = Tabs;
 
@@ -44,14 +44,14 @@ export function AppTabsContent({ items }: ContentProps) {
       activeKey={currentOperate}
       onChange={setCurrentOperate}
       type="card"
-      className={style.titleTop}
+      className="titleTop"
     >
       {items.map((tab: any) => {
         return (
           <TabPane
             tab={tab?.title}
             key={tab.type + tab?.title}
-            className={style.tabPanel}
+            className="tabPanel"
           >
             {getWidget(tab.type)({ ...tab.options, children: tab.children })}
           </TabPane>

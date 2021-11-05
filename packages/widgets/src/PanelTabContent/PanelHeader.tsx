@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import styles from './index.less';
+import './index.less';
 
 import { Tooltip, Typography } from 'antd';
 import { useConfigService, useLayerGroup } from '@antv/dipper-layout';
@@ -28,8 +28,8 @@ function PanelHeader({ title }: IProps) {
   }, [title, selectFeatures]);
 
   return (
-    <div className={styles.appPanelHeader}>
-      <Tooltip overlay={titles} className={styles.appPanelHeaderTitle}>
+    <div className="appPanelHeader">
+      <Tooltip overlay={titles} className="appPanelHeaderTitle">
         <Paragraph
           ellipsis={{ rows: selectFeatures?.length > 1 ? 2 : 1 }}
           editable={

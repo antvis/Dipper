@@ -2,7 +2,7 @@
 import { Layout } from 'antd';
 import { useMemo } from 'react';
 import React from 'react';
-import styles from './index.less';
+import './index.less';
 import { isDisplay } from '../utils/ui';
 import { useConfigService } from '../hooks';
 import { AppContent } from '../AppTemplate';
@@ -31,7 +31,7 @@ export default function AppHeader() {
 
   const titleDom = useMemo(() => {
     return (
-      <span style={title?.style} className={styles.appTitle}>
+      <span style={title?.style} className="appTitle">
         {title?.value}
       </span>
     );
@@ -39,7 +39,7 @@ export default function AppHeader() {
 
   return isDisplay(display) ? (
     <Header
-      className={styles.appHeader}
+      className="appHeader"
       style={{
         backgroundColor: '#fff',
         padding: '0 24px',
@@ -48,21 +48,21 @@ export default function AppHeader() {
         ...headerstyle,
       }}
     >
-      <div className={styles.appHeaderLeft}>
+      <div className="appHeaderLeft">
         {isDisplay(logo?.display) && logoDom}
         {isDisplay(title?.display) && titleDom}
 
-        {/* 
+        {/*
         // @ts-ignore */}
         <AppContent items={children?.filter((c) => c.position === 'left')} />
       </div>
       <div>
-        {/* 
+        {/*
           // @ts-ignore */}
         <AppContent items={children?.filter((c) => c.position === 'center')} />
       </div>
-      <div className={styles.appHeaderRight}>
-        {/* 
+      <div className="appHeaderRight">
+        {/*
         // @ts-ignore */}
         <AppContent items={children?.filter((c) => c.position === 'right')} />
       </div>

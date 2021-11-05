@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import styles from './index.less';
+import './index.less';
 import AppHeader from '../AppHeader';
 import AppToolbar from '../AppToolbar';
 import AppControl from '../AppControl';
@@ -61,10 +61,10 @@ export default function SceneContainer<T>({
   const { sceneContainer } = useSceneContainer<T>(cfg);
   return sceneContainer ? (
     <>
-      {/* 
+      {/*
         // @ts-ignore */}
       <Provider container={sceneContainer?.getContainer() as Container}>
-        <Layout className={styles.pageMap}>
+        <Layout className="pageMap">
           {/* 导航栏 */}
           <AppHeader />
           {/* 导航栏工具条 */}

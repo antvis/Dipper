@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
-import styles from './index.less';
+import './index.less';
 import { Dropdown, Menu, Radio, Space } from 'antd';
 import { useConfigService } from '@antv/dipper-layout';
 import { Config } from './config';
@@ -39,7 +39,7 @@ export const MapStyle = () => {
 
   return (
     <>
-      <Dropdown overlay={menu} className={styles.mapStyleButton}>
+      <Dropdown overlay={menu} className="mapStyleButton">
         <img src={Config.icon} title={Config.title}></img>
       </Dropdown>
     </>

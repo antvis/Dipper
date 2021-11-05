@@ -1,7 +1,6 @@
 import React from 'react';
-import classnames from 'classnames';
 import type { IWidgetProps } from '@antv/dipper-core';
-import styles from './index.less';
+import './index.less';
 
 export interface ILegendControlProps {
   targetName: string;
@@ -16,15 +15,15 @@ export function DiscreteColor({ options }: IWidgetProps<string>) {
   return (
     <>
       {items.length && (
-        <div className={classnames([styles.legendControl])}>
-          <div className={styles.legendControlTitle}>{targetName}</div>
+        <div className="legendControl">
+          <div className="legendControlTitle">{targetName}</div>
           {items.map((item) => (
-            <div className={styles.legendControlItem} key={item.value}>
+            <div className="legendControlItem" key={item.value}>
               <div
-                className={styles.legendControlColor}
+                className="legendControlColor"
                 style={{ backgroundColor: item.color }}
               />
-              <div className={styles.legendControlName}>
+              <div className="legendControlName">
                 {Array.isArray(item.value)
                   ? item.value.join(' - ')
                   : item.value}

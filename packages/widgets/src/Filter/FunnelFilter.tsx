@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import styles from './index.less';
+import './index.less';
 import { DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Input } from 'antd';
 import classnames from 'classnames';
@@ -51,17 +51,17 @@ function FunnelFilter({ title, data }: any) {
   }, [conditionList, onSubmit]);
 
   const content = (
-    <div className={styles.funnelSelectContent}>
+    <div className="funnelSelectContent">
       <div onClick={(e) => e.stopPropagation()}>
         {conditionList.map((item, index) => (
           <div
-            className={styles.conditionItem}
+            className="conditionItem"
             key={item.code}
             onClick={(e) => {
               e.stopPropagation();
             }}
           >
-            <div className={styles.conditionName}>{item.name}</div>
+            <div className="conditionName">{item.name}</div>
             <Input
               value={item.value}
               addonBefore={item.prefix ? <span>{item.prefix}</span> : undefined}
@@ -72,7 +72,7 @@ function FunnelFilter({ title, data }: any) {
           </div>
         ))}
       </div>
-      <div className={styles.btnGroup}>
+      <div className="btnGroup">
         <Button type="link" onClick={onReset}>
           一键清空
         </Button>
@@ -87,17 +87,12 @@ function FunnelFilter({ title, data }: any) {
     <Dropdown overlay={content}>
       <div
         className={classnames({
-          [styles.funnelSelect]: true,
-          [styles.funnelSelectActive]: hasFilterValue,
+          funnelSelect: true,
+          funnelSelectActive: hasFilterValue,
         })}
       >
-        <span className={styles.funnelSelectTitle}>{title}</span>
-        <DownOutlined
-          className={classnames({
-            [styles.downIcon]: true,
-            // [styles.downIconRotate]: isOpen,
-          })}
-        />
+        <span className="funnelSelectTitle">{title}</span>
+        <DownOutlined className="downIcon" />
       </div>
     </Dropdown>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AMapScene, Popup } from '@antv/l7-react';
 import type {} from '@antv/l7-react';
-import styles from './index.less';
+import './index.less';
 import { useSceneService, useConfigService } from '../hooks';
 
 interface IProps {
@@ -15,7 +15,7 @@ export default function AppMap({ children }: IProps) {
   const { map, popup } = globalConfig;
   return (
     <AMapScene
-      className={styles.appMap}
+      className="appMap"
       map={map!}
       option={{
         logoPosition: 'bottomright',

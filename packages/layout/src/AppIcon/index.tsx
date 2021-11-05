@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-nocheck
 import * as antdIcon from '@ant-design/icons';
 import classNames from 'classnames';
-import styles from './index.less';
+import './index.less';
 
 export interface IIcon {
   type: 'ICON' | 'ANTD' | 'IMG' | 'HTML';
@@ -25,7 +25,7 @@ export default function AppIcon({ config, className }: IProps) {
       return (
         <TargetIcon
           style={style}
-          className={classNames([className, styles.appIcon])}
+          className={classNames([className, 'appIcon'])}
         />
       );
     }
@@ -33,7 +33,7 @@ export default function AppIcon({ config, className }: IProps) {
   if (type === 'ICON') {
     return (
       <i
-        className={classNames([content, className, styles.appIcon])}
+        className={classNames([content, className, 'appIcon'])}
         style={style}
       />
     );
@@ -43,7 +43,7 @@ export default function AppIcon({ config, className }: IProps) {
       <img
         src={content}
         style={style}
-        className={classNames([className, styles.appIcon])}
+        className={classNames([className, 'appIcon'])}
       />
     );
   }
@@ -52,7 +52,7 @@ export default function AppIcon({ config, className }: IProps) {
       <span
         dangerouslySetInnerHTML={{ __html: content }}
         style={style}
-        className={classNames([className, styles.appIcon])}
+        className={classNames([className, 'appIcon'])}
       />
     );
   }
