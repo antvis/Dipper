@@ -5,6 +5,7 @@ import {
   NavBar,
   ClassifyColor,
   DiscreteColor,
+  Draw,
 } from '@antv/dipper-widgets';
 import { GridLayer } from './GridLayer';
 import { MapStyle } from '@antv/dipper-widgets';
@@ -17,4 +18,5 @@ export function initWidgets() {
   registerWidget('classifyColor', ClassifyColor);
   registerWidget('discreteColor', DiscreteColor);
   registerWidget('mapStyle', MapStyle);
+  registerWidget('draw', Draw);
 }

@@ -31,16 +31,6 @@ export const config: Partial<IConfig> = {
     },
     children: [
       {
-        display: true,
-        position: 'left',
-        title: '选择城市',
-        type: 'citySelect',
-        event: {
-          actionType: 'map',
-          action: 'queryArea',
-        },
-      },
-      {
         display: false,
         position: 'right',
         type: 'publishbar',
@@ -55,14 +45,25 @@ export const config: Partial<IConfig> = {
     display: true,
     enableToggle: true,
     defaultTitle: '所有网格',
-    opened: true,
+    opened: false,
     width: 360,
     position: 'right',
     children: [],
   },
   toolbar: {
-    display: false,
-    children: [],
+    display: true,
+    children: [
+      {
+        display: true,
+        position: 'left',
+        title: '选择城市',
+        type: 'citySelect',
+        event: {
+          actionType: 'map',
+          action: 'queryArea',
+        },
+      },
+    ],
   },
   map: {
     zoom: 10,

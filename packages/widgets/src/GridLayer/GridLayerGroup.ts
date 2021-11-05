@@ -16,6 +16,8 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   private selectFeatures: any[] = [];
   private hoverFeature: any;
   private options: Partial<ILayerGroupOption> = {};
+  private currentActiveFeatureId: number = -1;
+  private currentSelectFeatureId: number = -1;
 
   constructor({ name, geodata, options }: IGridLayerProps) {
     super();
@@ -96,7 +98,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       this.selectFeatures = [];
       this.updateSelectLayer();
     });
-    fillLayer.on('unmousemove', this.hoverHandler.bind(this));
+    fillLayer.on('mouseout', this.hoverHandler.bind(this));
     this.addLayer(fillLayer);
     this.source = fillLayer.getSource();
   }
@@ -194,14 +196,16 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     this.updateSelectLayer();
   }
 
-  hoverHandler(e: any) {
+  hoverHandler(e: IFeature) {
     this.hoverFeature = e.feature ? e : null;
     this.emit(LayerGroupEventEnum.HOVERFEATURECHANGE, this.hoverFeature);
-
-    this.hoverLayer?.setData({
-      type: 'FeatureCollection',
-      features: e.feature ? [e.feature] : [],
-    });
+    if (this.currentActiveFeatureId !== e.featureId) {
+      this.hoverLayer?.setData({
+        type: 'FeatureCollection',
+        features: e.feature ? [e.feature] : [],
+      });
+    }
+    this.currentActiveFeatureId = e.featureId || -1;
   }
 
   updateSelectLayer() {

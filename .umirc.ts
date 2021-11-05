@@ -5,5 +5,7 @@ export default defineConfig({
   favicon: logo,
   logo,
   outputPath: 'docs-dist',
+  publicPath: '/Dipper/',
+  base: '/Dipper/',
   // more config: https://d.umijs.org/config
 });

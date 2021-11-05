@@ -5,3 +5,4 @@ export * from './GridLayer/GridLayerGroup';
 export * from './MapStyle';
 export * from './Filter/CitySelect';
 export * from './NavBar';
+export * from './Draw';
