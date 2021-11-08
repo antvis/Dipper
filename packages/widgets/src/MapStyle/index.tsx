@@ -1,38 +1,38 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
 import { Dropdown, Menu, Radio, Space } from 'antd';
 import { useConfigService } from '@antv/dipper-layout';
 import { Config } from './config';
 
-export interface IMapStyleOption {}
+export interface IMapStyleOption { }
 
 export const MapStyle = () => {
   const { setConfig } = useConfigService();
+  const [current, setCurrent] = useState(Config.options[0]?.value)
 
   // 切换地图样式
-  const clickStype = (e: any) => {
-    setConfig('map.style', e.target.value);
+  const clickStype = (value: string) => {
+    setCurrent(value)
+    setConfig('map.style', value);
   };
 
   const menu = (
     <Menu>
       <Menu.Item key="1">
-        <Radio.Group
-          onChange={clickStype}
-          defaultValue={Config.options[0]?.value}
-        >
-          <Space direction="vertical">
-            {Config.options &&
-              Config.options.map((item: any) => {
-                return (
-                  <Radio value={item.value} key={item.value}>
-                    {item.label}
-                  </Radio>
-                );
-              })}
-          </Space>
-        </Radio.Group>
+        <div className={styles.mapStyle}>
+          {Config.options && Config.options.map((item: any) => {
+            return (
+              <div key={item.value} className={styles.mapStyleCard}
+                onClick={() => clickStype(item.value)}
+                style={{ border: item.value === current ? '3px solid #1890ff' : 'none' }}
+              >
+                <img src={item.img} className={styles.mapImg} />
+                <span>{item.label}</span>
+              </div>
+            )
+          })}
+        </div>
       </Menu.Item>
     </Menu>
   );
