@@ -75,13 +75,18 @@ export const config: Partial<IConfig> = {
     position: 'right',
     children: [
       {
+        display: true,
+        type:'meshName',
+        title:'网格名称'
+      },
+      {
         type: 'siderbartabcontent',
         title: '所有网格',
         children: [
           {
             display: true,
             type: 'mesh_indicator',
-            title: '数据查看',
+            title: '数据查看'
           },
           {
             type: 'total_data_panel',
@@ -107,6 +112,18 @@ export const config: Partial<IConfig> = {
       position: 'topleft',
       type: 'mapStyle',
       title: '地图样式',
+    },
+    {
+      display: true,
+      position: 'topleft',
+      type: 'searchPlaces',
+      title: '地区搜索',
+    },
+    {
+      display: true,
+      position: 'bottomright',
+      type: 'location',
+      title: '定位',
     },
   ],
   defaultcontrols: [
