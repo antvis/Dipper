@@ -1,4 +1,4 @@
-## 配置项
+## 布局
 
 ## headerbar
 
@@ -19,8 +19,6 @@
 #### 布局方式
 
 Dipper 布局方式采用的是 ant design [layout](https://ant.design/components/layout-cn/),大致结构 可分为 上 Header，中左 Content，中右折叠 Sider
-
-<code src="./layout.tsx"></code>
 
 在最外层用[Provider](https://github.com/Kukkimonsuta/inversify-react) 通过容器注入实列 container 把整个 Layout 嵌套在其内
 

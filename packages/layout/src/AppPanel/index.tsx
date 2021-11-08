@@ -46,13 +46,10 @@ export default function AppPanel<T>() {
     >
       {panel?.enableToggle && (
         <ToggleButton
-          isFold={!!panel.opened}
+          opened={!!panel.opened}
           position={panel?.position || 'left'}
           setIsFold={() => {
             siderBarService.toggleOpen();
-            // setConfig('panel', {
-            //   open: !panel.opened,
-            // })
           }}
         />
       )}

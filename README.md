@@ -1,4 +1,8 @@
-# dipper
+# Dipper
+
+地理分析应用开发框架
+
+L7-Powered Geospatial analysis application development framework
 
 ## Getting Started
 

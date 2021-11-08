@@ -39,6 +39,7 @@ export function AppTabsContent({ items }: ContentProps) {
       setCurrentOperate(items[0].type + items[0]?.title);
     }
   }, [JSON.stringify(items)]);
+  console.log('items',items)
   return (
     <Tabs
       activeKey={currentOperate}

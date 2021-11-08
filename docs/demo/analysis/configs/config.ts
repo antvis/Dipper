@@ -26,35 +26,10 @@ export const config: Partial<IConfig> = {
       },
     },
     title: {
-      value: '区域房价可视化',
+      value: '网格划分',
       display: true,
     },
     children: [
-      {
-        display: true,
-        position: 'left',
-        title: '选择城市',
-        type: 'citySelect',
-        event: {
-          actionType: 'map',
-          action: 'queryArea',
-        },
-      },
-      {
-        display: true,
-        options: [
-          {
-            label: '热区分析',
-            value: 'hotspot',
-          },
-          {
-            label: '任务管理',
-            value: 'task',
-          },
-        ],
-        position: 'center',
-        type: 'navibar',
-      },
       {
         display: false,
         position: 'right',
@@ -70,35 +45,25 @@ export const config: Partial<IConfig> = {
     display: true,
     enableToggle: true,
     defaultTitle: '所有网格',
-    opened: true,
+    opened: false,
     width: 360,
     position: 'right',
+    children: [],
+  },
+  toolbar: {
+    display: true,
     children: [
       {
         display: true,
-        type:'meshName',
-        title:'网格名称'
-      },
-      {
-        type: 'siderbartabcontent',
-        title: '所有网格',
-        children: [
-          {
-            display: true,
-            type: 'mesh_indicator',
-            title: '数据查看'
-          },
-          {
-            type: 'total_data_panel',
-            title: '地图面板',
-          },
-        ],
+        position: 'left',
+        title: '选择城市',
+        type: 'citySelect',
+        event: {
+          actionType: 'map',
+          action: 'queryArea',
+        },
       },
     ],
-  },
-  toolbar: {
-    display: false,
-    children: [],
   },
   map: {
     zoom: 10,
@@ -112,18 +77,6 @@ export const config: Partial<IConfig> = {
       position: 'topleft',
       type: 'mapStyle',
       title: '地图样式',
-    },
-    {
-      display: true,
-      position: 'topleft',
-      type: 'searchPlaces',
-      title: '地区搜索',
-    },
-    {
-      display: true,
-      position: 'bottomright',
-      type: 'location',
-      title: '定位',
     },
   ],
   defaultcontrols: [

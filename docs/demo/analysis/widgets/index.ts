@@ -5,13 +5,10 @@ import {
   NavBar,
   ClassifyColor,
   DiscreteColor,
-  Location,
-  SearchPlace,
-  MapStyle
+  Draw,
 } from '@antv/dipper-widgets';
 import { GridLayer } from './GridLayer';
-import { MeshIndicator } from './MeshIndicator'
-import { MeshName } from './MeshName/index'
+import { MapStyle } from '@antv/dipper-widgets';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
@@ -21,8 +18,5 @@ export function initWidgets() {
   registerWidget('classifyColor', ClassifyColor);
   registerWidget('discreteColor', DiscreteColor);
   registerWidget('mapStyle', MapStyle);
-  registerWidget('location', Location);
-  registerWidget('searchPlaces', SearchPlace)
-  registerWidget('mesh_indicator',MeshIndicator)
-  registerWidget('meshName',MeshName)
+  registerWidget('draw', Draw);
 }
