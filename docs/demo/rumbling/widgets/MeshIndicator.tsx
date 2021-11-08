@@ -26,12 +26,8 @@ export function MeshIndicator() {
 
       bar.render();
       setBarplot(bar)
-
-
     }
   },[])
-
-  console.log('id.curren',id.current)
 
   return(
     <div id={id.current} />

@@ -13,11 +13,7 @@ export function MeshName() {
   const [edit, setEdit] = useState(false)
   const ref = useRef()
 
-
-  console.log('selectFeatures',selectFeatures)
-
   const editMeshName = () =>{
-    console.log('4444',ref.current?.props?.value)
     setEdit(false)
   }
 
