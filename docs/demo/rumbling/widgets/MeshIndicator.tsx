@@ -1,9 +1,9 @@
-import React,{ useEffect,useRef,useState } from 'react'
-import { Bar } from '@antv/g2plot'
+import React, { useEffect, useRef, useState } from 'react';
+import { Bar } from '@antv/g2plot';
 
 export function MeshIndicator() {
-  const id = useRef(`bar-container-${Math.random()}`);
-  const [barplot,setBarplot] = useState<Bar>()
+  const id = useRef();
+  const [barplot, setBarplot] = useState<Bar>();
   const data = [
     { year: '金融保险', value: 38 },
     { year: '医疗卫生', value: 52 },
@@ -12,11 +12,11 @@ export function MeshIndicator() {
     { year: '教育', value: 48 },
   ];
 
-  useEffect(()=>{
-    if (!barplot) {
+  useEffect(() => {
+    if (!barplot && id.current) {
       const bar = new Bar(id.current, {
         data,
-        autoFit:true,
+        autoFit: true,
         xField: 'value',
         yField: 'year',
         legend: {
@@ -25,11 +25,9 @@ export function MeshIndicator() {
       });
 
       bar.render();
-      setBarplot(bar)
+      setBarplot(bar);
     }
-  },[])
+  }, []);
 
-  return(
-    <div id={id.current} />
-  )
+  return <div ref={id} />;
 }
