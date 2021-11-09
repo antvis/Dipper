@@ -1,8 +1,9 @@
 import { injectable } from 'inversify';
 import EventEmitter from 'eventemitter3';
 import type { IConfigService, IConfig } from './IConfigService';
-import { get } from 'lodash';
+import { get, merge } from 'lodash';
 import { updateConfigsField } from '../../utils/';
+import { defaultConfig } from './defaultConfig';
 
 export enum ConfigEventEnum {
   'CONFIG_CHANGE' = 'configchange',
@@ -18,7 +19,7 @@ export default class ConfigService<T>
   private isInited: boolean = false;
   init(config: Partial<IConfig<T>> | undefined) {
     if (!this.isInited) {
-      this.config = config!;
+      this.config = merge(defaultConfig, config);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
     }
     this.isInited = true;

@@ -6,8 +6,8 @@ import type { IPanel } from '../panel/IPanelService';
 export interface IConfig<IInitData = any> {
   initData: IInitData;
   viewData: {
-    global: Record<string, any>;
-    widgets: {
+    global?: Record<string, any>;
+    widgets?: {
       [key: string]: {
         options?: Record<string, any> | Record<string, any>[]; // 初始化数据
         value?: Record<string, any> | Record<string, any>[]; // 结果数据
