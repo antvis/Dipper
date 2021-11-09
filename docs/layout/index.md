@@ -5,22 +5,6 @@ order: 4
 
 ## 布局
 
-## headerbar
-
-## map
-
-## popup
-
-## control
-
-## defaultcontrols
-
-## legends
-
-## layer
-
-## 布局
-
 #### 布局方式
 
 Dipper 布局方式采用的是 ant design [layout](https://ant.design/components/layout-cn/),大致结构 可分为 上 Header，中左 Content，中右折叠 Sider
