@@ -26,7 +26,6 @@ export function MeshIndicator() {
 
       bar.render();
       setBarplot(bar);
-      å;
     }
   }, [id.current]);
 
