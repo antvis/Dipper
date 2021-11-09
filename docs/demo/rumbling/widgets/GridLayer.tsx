@@ -72,7 +72,7 @@ export function GridLayer() {
 
     const layer = new GridLayerGroup({
       name: 'grid',
-      geodata: geoData,
+      data: geoData,
       options: layerProps.options,
     });
     layerService.addLayer(layer);
