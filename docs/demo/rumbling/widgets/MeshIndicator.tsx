@@ -27,7 +27,7 @@ export function MeshIndicator() {
       bar.render();
       setBarplot(bar);
     }
-  }, []);
+  }, [id.current]);
 
   return <div ref={id} />;
 }

@@ -26,7 +26,7 @@ export const config: Partial<IConfig> = {
       },
     },
     title: {
-      value: '网格划分',
+      value: '数据分析',
       display: true,
     },
     children: [
@@ -62,6 +62,12 @@ export const config: Partial<IConfig> = {
           actionType: 'map',
           action: 'queryArea',
         },
+      },
+      {
+        display: true,
+        position: 'left',
+        type: 'searchPlaces',
+        title: '地区搜索',
       },
     ],
   },
