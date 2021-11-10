@@ -1,35 +1,42 @@
-import React,{ useEffect,useRef,useState } from 'react'
-import { Bar } from '@antv/g2plot'
+import React from 'react';
+import { BarCahrt } from '../components/Bar';
+import { PieCahrt } from '../components/Pie';
+import { useState, useEffect } from 'react';
+import { randomData, chartList } from '../configs/mock'
+
 
 export function MeshIndicator() {
-  const id = useRef(`bar-container-${Math.random()}`);
-  const [barplot,setBarplot] = useState<Bar>()
-  const data = [
-    { year: '金融保险', value: 38 },
-    { year: '医疗卫生', value: 52 },
-    { year: '社会公共管理', value: 61 },
-    { year: 'IT 通讯电子', value: 145 },
-    { year: '教育', value: 48 },
-  ];
 
-  useEffect(()=>{
-    if (!barplot) {
-      const bar = new Bar(id.current, {
-        data,
-        autoFit:true,
-        xField: 'value',
-        yField: 'year',
-        legend: {
-          position: 'top-left',
-        },
-      });
+  const [chartData, setCahrtData] = useState([])
 
-      bar.render();
-      setBarplot(bar)
-    }
-  },[])
+  // mockjs 不支持fetch 所以就不mock 网络请求了
+  useEffect(() => {
+    (async () => {
+      const allfetch = ['bar', 'pie'].map(() => {
+        return randomData(chartList)
+      })
+      const res = await Promise.all(allfetch)
+      const title = ['行业分布', '行业市场份额']
+      const list = res.map((item, index) => {
+        return {
+          title: title[index],
+          data: item.data.list
+        }
+      })
+      setCahrtData(list)
+    })()
+  }, [])
 
-  return(
-    <div id={id.current} />
-  )
+  return (
+    <>
+      {chartData.length && chartData.map((item) => {
+        return (
+          <div key={Math.random()} style={{marginBottom:20}}>
+            <h4>{item.title}</h4>
+            {item.title === '行业分布' ? <BarCahrt data={item.data} /> : <PieCahrt data={item.data} />}
+          </div>
+        )
+      })}
+    </>
+  );
 }

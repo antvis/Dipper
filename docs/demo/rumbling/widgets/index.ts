@@ -12,6 +12,7 @@ import {
 import { GridLayer } from './GridLayer';
 import { MeshIndicator } from './MeshIndicator'
 import { MeshName } from './MeshName/index'
+import { TotalPanel } from './TotalPanel'
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
@@ -24,5 +25,6 @@ export function initWidgets() {
   registerWidget('location', Location);
   registerWidget('searchPlaces', SearchPlace)
   registerWidget('mesh_indicator',MeshIndicator)
-  registerWidget('meshName',MeshName)
+  registerWidget('meshName',MeshName),
+  registerWidget('total_data_panel',TotalPanel)
 }

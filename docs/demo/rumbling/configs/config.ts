@@ -150,12 +150,15 @@ export const config: Partial<IConfig> = {
           size: 12,
           color: '#000',
         },
+
         fill: {
           field: 'unit_price',
           color: SingleSequentialColorScale.Blue,
-          bandNum: 5,
-          scale: 'quantile',
           unknownName: '无类型',
+          scale: {
+            type: 'cat',
+            domain: ['C', 'B', 'A'],
+          },
         },
       },
     },

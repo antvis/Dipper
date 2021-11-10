@@ -1,37 +1,55 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useMemo, useCallback } from "react"
 import {
   CheckOutlined,
   CloseOutlined,
   EditOutlined
 } from '@ant-design/icons'
 import styles from './index.less'
-import { Input } from "antd"
+import { Input } from 'antd'
 import { useLayerGroup } from '@antv/dipper';
 
 export function MeshName() {
-  const { selectFeatures } = useLayerGroup()
+  const { selectFeatures, updateProperties } = useLayerGroup('grid')
   const [edit, setEdit] = useState(false)
   const ref = useRef()
 
-  const editMeshName = () =>{
+  const meshName = useMemo(() => {
+    if (!selectFeatures.length) return
+    // @ts-ignore
+    return selectFeatures[0]?.feature.properties.name
+  }, [selectFeatures])
+
+  const editMeshName = useCallback(() => {
+    // @ts-ignore
+    const value = ref.current.state.value
+    selectFeatures.forEach((item) => {
+      const properties = {
+        ...item.feature.properties,
+        name: value
+      }
+      updateProperties(item.feature, properties)
+    })
     setEdit(false)
-  }
+  }, [selectFeatures])
 
   return (
-    <div className={styles.meahname}>
-      {!edit ? <div onClick={() => setEdit(!edit)}>
-        <span>网格-001</span>
-        <EditOutlined />
-      </div>
-        : <div className={styles.edit}>
-          <Input value="网格-001" ref={ref} />
-          <CheckOutlined
-          onClick={editMeshName}
-          className={styles.closeicon}
-          />
-          <CloseOutlined onClick={()=>setEdit(false)} />
+    <>
+      {meshName && <div className={styles.meahname}>
+        {!edit ? <div onClick={() => setEdit(!edit)}>
+          <span>{meshName}</span>
+          <EditOutlined />
         </div>
-      }
-    </div>
+          : <div className={styles.edit}>
+            <Input defaultValue={meshName} ref={ref} />
+            <CheckOutlined
+              onClick={editMeshName}
+              className={styles.closeicon}
+            />
+            <CloseOutlined onClick={() => setEdit(false)} />
+          </div>
+        }
+      </div>}
+    </>
+
   )
 }
