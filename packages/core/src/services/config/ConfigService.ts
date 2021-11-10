@@ -18,13 +18,13 @@ export enum ConfigEventEnum {
 @injectable()
 export default class ConfigService<T>
   extends EventEmitter
-  implements IConfigService<T> {
+  implements IConfigService<T>
+{
   public config!: Partial<IConfig<T>>;
 
   private isInited: boolean = false;
   init(config: Partial<IConfig<T>> | undefined) {
     if (!this.isInited) {
-      console.log(defaultConfig, config);
       this.config = mergeWith(config, defaultConfig, customizer);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
     }

@@ -7,11 +7,12 @@ import {
   DiscreteColor,
   Location,
   SearchPlace,
-  MapStyle
+  MapStyle,
 } from '@antv/dipper-widgets';
 import { GridLayer } from './GridLayer';
-import { MeshIndicator } from './MeshIndicator'
-import { MeshName } from './MeshName/index'
+import { MeshIndicator } from './MeshIndicator';
+import { MeshName } from './MeshName/index';
+import { TotalPanel } from './TotalPanel';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
@@ -22,7 +23,8 @@ export function initWidgets() {
   registerWidget('discreteColor', DiscreteColor);
   registerWidget('mapStyle', MapStyle);
   registerWidget('location', Location);
-  registerWidget('searchPlaces', SearchPlace)
-  registerWidget('mesh_indicator',MeshIndicator)
-  registerWidget('meshName',MeshName)
+  registerWidget('searchPlaces', SearchPlace);
+  registerWidget('mesh_indicator', MeshIndicator);
+  registerWidget('meshName', MeshName),
+    registerWidget('total_data_panel', TotalPanel);
 }
