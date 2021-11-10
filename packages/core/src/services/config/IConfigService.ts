@@ -79,6 +79,7 @@ export interface IConfig<IInitData = any> {
 
 export interface IConfigService<T> extends EventEmitter {
   config: Partial<IConfig<T>>;
+  reset: () => void;
   init: (config: Partial<IConfig<T>> | undefined) => void;
   setConfig: (field: string, value: any) => void;
   getConfig: (key: string) => any;

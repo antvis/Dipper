@@ -24,6 +24,27 @@ Dipper 目前规范了一套默认的布局模式，组织和规范各个组件�
 
 ![Dipper 应用布局](https://gw.alipayobjects.com/mdn/rms_23a451/afts/img/A*So9xQZWYzGUAAAAAAAAAAAAAARQnAQ)
 
+## Widget
+
+dipper 配置项围绕 Widget,每个 Widgets 是个组件，同时也可以包含子组件。
+
+Widget 属性定义
+
+```ts
+export interface IWidgetProps<T> {
+  type: string;
+  title?: string;
+  position?: T | string;
+  display?: boolean;
+  options?: any;
+  children?: IWidgetProps<T>[];
+  [key: string]: any;
+}
+```
+
+- options
+  扩展可选配置项，主要是组件内部自身的配置
+
 ## headerbar
 
 头部导航配置、支持设置 Logo、Title、子组件
@@ -67,6 +88,8 @@ Dipper 目前规范了一套默认的布局模式，组织和规范各个组件�
 
 ## popup
 
+地图信息框，展示地图信息
+
 ```ts
   {
     display?: boolean; // 是否显示
@@ -82,13 +105,74 @@ Dipper 目前规范了一套默认的布局模式，组织和规范各个组件�
   }
 ```
 
-## control
+## controls
 
-自定义业务控件，目前支持 8 个方位，
+配置 control，可以配置任意多个 control
+自定义业务控件，目前支持 8 个方位
+
+```ts
+type ControlPostions =
+  | 'bottomleft'
+  | 'bottomright'
+  | 'topleft'
+  | 'topright'
+  | 'topcenter'
+  | 'bottomcenter'
+  | 'leftcenter'
+  | 'rightcenter';
+```
+
+controls 配置示例
+
+```ts
+ {
+   controls: [
+      {
+        display: true,
+        position: 'topleft',
+        type: 'mapStyle',
+        title: '地图样式',
+      },
+      {
+        display: true,
+        position: 'topright',
+        type: 'controlPosition',
+        title: '组件控制',
+      },
+    ],
+ }
+
+```
 
 <code src='./demo/control.tsx'>
 
 ## defaultcontrols
+
+L7 地图基础控件
+
+[组件](https://l7.antv.vision/zh/docs/api/component/control)
+
+- scale
+- Layers
+- Zoom
+- Layers
+
+```ts
+{
+  defaultcontrols: [
+    {
+      type: 'zoom',
+      position: 'bottomright',
+      display: true,
+    },
+    {
+      type: 'scale',
+      position: 'bottomleft',
+      display: true,
+    },
+  ];
+}
+```
 
 ## legends
 

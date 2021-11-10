@@ -6,8 +6,8 @@ import { updateConfigsField } from '../../utils/';
 import { defaultConfig } from './defaultConfig';
 
 function customizer(obj: any, src: any) {
-  if (Array.isArray(obj)) {
-    return src;
+  if (Array.isArray(src)) {
+    return obj;
   }
 }
 
@@ -18,14 +18,14 @@ export enum ConfigEventEnum {
 @injectable()
 export default class ConfigService<T>
   extends EventEmitter
-  implements IConfigService<T>
-{
+  implements IConfigService<T> {
   public config!: Partial<IConfig<T>>;
 
   private isInited: boolean = false;
   init(config: Partial<IConfig<T>> | undefined) {
     if (!this.isInited) {
-      this.config = mergeWith(defaultConfig, config, customizer);
+      console.log(defaultConfig, config);
+      this.config = mergeWith(config, defaultConfig, customizer);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
     }
     this.isInited = true;
@@ -86,5 +86,8 @@ export default class ConfigService<T>
   // 获取组件结果值
   getWidgetsOptions(key: string) {
     return this.getConfig(`viewData.widgets.${key}.options`);
+  }
+  reset() {
+    this.isInited = false;
   }
 }

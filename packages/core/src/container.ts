@@ -32,4 +32,9 @@ export default class SceneContainer<T> {
   public getContainer() {
     return this.container;
   }
+
+  public reset() {
+    console.log('重置');
+    this.configService.reset();
+  }
 }

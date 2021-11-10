@@ -4,24 +4,6 @@ import type { Container } from 'inversify';
 
 export type ISceneEventName = 'sceneChange';
 
-// export interface IConfig {
-//   header: Partial<{
-//     display: boolean;
-//     style: React.CSSProperties;
-//   }>;
-//   logo: Partial<{
-//     display: boolean;
-//     img: string;
-//     style: React.CSSProperties;
-//     href: string;
-//   }>;
-//   title: Partial<{
-//     text: string;
-//     display: boolean;
-//     style: React.CSSProperties;
-//   }>;
-// }
-
 export interface ISceneService extends EventEmitter<ISceneEventName> {
   scene: Scene | undefined;
   container: Container | undefined;
