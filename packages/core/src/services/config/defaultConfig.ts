@@ -35,12 +35,6 @@ export const defaultConfig: Partial<IConfig> = {
     },
     {
       display: true,
-      position: 'topleft',
-      type: 'searchPlaces',
-      title: '地区搜索',
-    },
-    {
-      display: true,
       position: 'bottomright',
       type: 'location',
       title: '定位',

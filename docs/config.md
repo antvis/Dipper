@@ -40,9 +40,20 @@ toc: menu
  }
 ```
 
+## toolBar
+
+二级工具条,用于放置地图交互工具
+
+```ts
+{
+  display: boolean;
+  children: (IWidgetProps < 'left') | ('right' > []);
+}
+```
+
 ## map
 
-同 L7 地图配置
+同 L7 [地图 Map](https://l7.antv.vision/zh/docs/api/scene#map-%E9%85%8D%E7%BD%AE%E9%A1%B9) 配置
 
 ## popup
 

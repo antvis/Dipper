@@ -16,6 +16,7 @@ export default function RumbMap() {
 
   useEffect(() => {
     initWidgets();
+    console.log('config', config);
     setMapConfig(config);
   }, []);
 
