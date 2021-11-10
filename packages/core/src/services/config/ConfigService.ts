@@ -41,13 +41,15 @@ export default class ConfigService<T>
   }
 
   updateControl(type: string, value: any) {
-    const index = this.config.legends?.findIndex((k) => k.type === type);
+    const index = this.config.controls?.findIndex((k) => k.type === type);
     if (index !== -1) {
-      this.setConfig(`constrols.${index}`, value);
-    } else {
-      this.setConfig(`constrols.${0}`, {
+      this.setConfig(`controls.${index}`, {
+        ...this.getConfig(`controls.${index}`),
         ...value,
       });
+    } else {
+      // 组件未添加
+      console.log('组件未添加');
     }
   }
   // legends;

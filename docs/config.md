@@ -4,6 +4,10 @@ order: 2
 toc: menu
 ---
 
+# Data 数据
+
+应用初始化和运行时的数据管理
+
 ## viewData
 
 ### global
@@ -13,6 +17,12 @@ toc: menu
 ### widgets
 
 管理和存储组件数据
+
+# 布局配置
+
+Dipper 目前规范了一套默认的布局模式，组织和规范各个组件的交互联动
+
+![Dipper 应用布局](https://gw.alipayobjects.com/mdn/rms_23a451/afts/img/A*So9xQZWYzGUAAAAAAAAAAAAAARQnAQ)
 
 ## headerbar
 
@@ -42,7 +52,7 @@ toc: menu
 
 ## toolBar
 
-二级工具条,用于放置地图交互工具
+二级工具条,用于放置地图交互工具，可选
 
 ```ts
 {
@@ -73,6 +83,10 @@ toc: menu
 ```
 
 ## control
+
+自定义业务控件，目前支持 8 个方位，
+
+<code src='./demo/control.tsx'>
 
 ## defaultcontrols
 
