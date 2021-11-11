@@ -3,6 +3,7 @@ import { BarChart } from '../components/Bar';
 import { PieChart } from '../components/Pie';
 import { useState, useEffect } from 'react';
 import { randomData, chartList } from '../configs/mock';
+import { useMemo } from 'react';
 
 export function MeshIndicator() {
   const [chartData, setChartData] = useState([]);
@@ -24,21 +25,22 @@ export function MeshIndicator() {
       setChartData(list);
     })();
   }, []);
-  return (
-    <>
-      {chartData.length &&
-        chartData.map((item) => {
-          return (
-            <div key={Math.random()} style={{ marginBottom: 20 }}>
-              <h4>{item.title}</h4>
-              {item.title === '行业分布' ? (
-                <BarChart data={item.data} />
-              ) : (
-                <PieChart data={item.data} />
-              )}
-            </div>
-          );
-        })}
-    </>
-  );
+  const charts = useMemo(() => {
+    return (
+      chartData.length &&
+      chartData.map((item) => {
+        return (
+          <div key={Math.random()} style={{ marginBottom: 20 }}>
+            <h4>{item.title}</h4>
+            {item.title === '行业分布' ? (
+              <BarChart data={item.data} />
+            ) : (
+              <PieChart data={item.data} />
+            )}
+          </div>
+        );
+      })
+    );
+  }, [chartData]);
+  return <>{charts}</>;
 }
