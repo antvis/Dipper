@@ -37,6 +37,7 @@
   "dependencies": {
     "@antv/dipper-core": "^0.0.5",
     "@turf/turf": "^6.5.0",
+    "ahooks": "^2.10.12",
     "classnames": "^2.3.1",
     "inversify": "^6.0.1",
     "inversify-react": "^1.0.0"

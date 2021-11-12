@@ -13,4 +13,8 @@ export type ControlPostions =
   | 'bottomleft'
   | 'bottomright'
   | 'topleft'
-  | 'topright';
+  | 'topright'
+  | 'topcenter'
+  | 'bottomcenter'
+  | 'leftcenter'
+  | 'rightcenter';

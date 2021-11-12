@@ -4,7 +4,6 @@ export const config: Partial<IConfig> = {
   viewData: {
     global: {
       filterData: [],
-      sceneCode: 'iot_terminal_dominant',
       areaCode: '330100',
       view: 'task',
     },
@@ -27,35 +26,10 @@ export const config: Partial<IConfig> = {
       },
     },
     title: {
-      value: '区代指挥中心',
+      value: '数据分析',
       display: true,
     },
     children: [
-      {
-        display: true,
-        position: 'left',
-        title: '选择城市',
-        type: 'citySelect',
-        event: {
-          actionType: 'map',
-          action: 'queryArea',
-        },
-      },
-      {
-        display: true,
-        options: [
-          {
-            label: '热区分析',
-            value: 'hotspot',
-          },
-          {
-            label: '任务管理',
-            value: 'task',
-          },
-        ],
-        position: 'center',
-        type: 'navibar',
-      },
       {
         display: false,
         position: 'right',
@@ -71,30 +45,31 @@ export const config: Partial<IConfig> = {
     display: true,
     enableToggle: true,
     defaultTitle: '所有网格',
-    opened: true,
+    opened: false,
     width: 360,
     position: 'right',
-    children: [
-      {
-        type: 'siderbartabcontent',
-        title: '所有网格',
-        children: [
-          {
-            display: true,
-            type: 'mesh_indicator',
-            title: '数据查看',
-          },
-          {
-            type: 'total_data_panel',
-            title: '地图面板',
-          },
-        ],
-      },
-    ],
+    children: [],
   },
   toolbar: {
-    display: false,
-    children: [],
+    display: true,
+    children: [
+      {
+        display: true,
+        position: 'left',
+        title: '选择城市',
+        type: 'citySelect',
+        event: {
+          actionType: 'map',
+          action: 'queryArea',
+        },
+      },
+      {
+        display: true,
+        position: 'left',
+        type: 'searchPlaces',
+        title: '地区搜索',
+      },
+    ],
   },
   map: {
     zoom: 10,

@@ -16,11 +16,13 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   private selectFeatures: any[] = [];
   private hoverFeature: any;
   private options: Partial<ILayerGroupOption> = {};
+  private currentActiveFeatureId: number = -1;
+  private currentSelectFeatureId: number = -1;
 
-  constructor({ name, geodata, options }: IGridLayerProps) {
+  constructor({ name, data, options }: IGridLayerProps) {
     super();
     this.name = name;
-    this.geodata = geodata;
+    this.data = data;
     this.options = options;
   }
 
@@ -35,7 +37,8 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
 
   initSource() {
-    this.source = new Source(this.geodata);
+    console.log(this.data);
+    this.source = new Source(this.data);
   }
   getLegendItem() {
     // 先取默认图例
@@ -96,7 +99,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       this.selectFeatures = [];
       this.updateSelectLayer();
     });
-    fillLayer.on('unmousemove', this.hoverHandler.bind(this));
+    fillLayer.on('mouseout', this.hoverHandler.bind(this));
     this.addLayer(fillLayer);
     this.source = fillLayer.getSource();
   }
@@ -164,7 +167,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     const map: Record<string, any> = fromPairs(
       props.map((item) => [item.id, item.properties]),
     );
-    this.geodata.features = this.geodata.features.map((item: any) => {
+    this.data.features = this.data.features.map((item: any) => {
       const { id } = item.properties;
       const newProperties = map[id];
       if (newProperties) {
@@ -172,7 +175,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       }
       return item;
     });
-    this.updateSource(this.geodata);
+    this.updateSource(this.data);
     this.emit(LayerGroupEventEnum.DATAUPDATE);
   }
 
@@ -194,14 +197,17 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     this.updateSelectLayer();
   }
 
-  hoverHandler(e: any) {
+  hoverHandler(e: IFeature) {
     this.hoverFeature = e.feature ? e : null;
-    this.emit(LayerGroupEventEnum.HOVERFEATURECHANGE, this.hoverFeature);
 
-    this.hoverLayer?.setData({
-      type: 'FeatureCollection',
-      features: e.feature ? [e.feature] : [],
-    });
+    if (this.currentActiveFeatureId !== e.featureId) {
+      this.hoverLayer?.setData({
+        type: 'FeatureCollection',
+        features: e.feature ? [e.feature] : [],
+      });
+      this.emit(LayerGroupEventEnum.HOVERFEATURECHANGE, this.hoverFeature);
+    }
+    this.currentActiveFeatureId = e.featureId || -1;
   }
 
   updateSelectLayer() {
