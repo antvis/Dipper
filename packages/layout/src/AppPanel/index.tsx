@@ -4,6 +4,7 @@ import { isDisplay } from '../utils';
 import ToggleButton from './ToggleButton';
 import { useConfigService, usePanelService } from '../hooks';
 import { AppContent } from '../AppTemplate';
+import { IPanel } from '../../../core/dist';
 
 function getStyle(
   position: string,
@@ -29,33 +30,35 @@ export default function AppPanel<T>() {
   const { globalConfig } = useConfigService<T>();
   const { siderBarService } = usePanelService();
   const { panel } = globalConfig;
+  const { options = {} } = panel as IPanel;
   const panelWidth = useMemo(() => {
-    return panel?.width ?? '360px';
-  }, [panel?.width]);
+    return options?.width ?? '360px';
+  }, [options?.width]);
   return isDisplay(panel?.display) ? (
     <div
       style={{
         ...getStyle(
           panel?.position || 'right',
-          panel?.opened || false,
+          options?.opened || false,
           panelWidth,
         ),
-        ...panel?.style,
+        ...options?.style,
       }}
       className={styles.appPanel}
     >
-      {panel?.enableToggle && (
+      {options?.enableToggle && (
         <ToggleButton
-          opened={!!panel.opened}
+          opened={!!options.opened}
           position={panel?.position || 'left'}
           setIsFold={() => {
             siderBarService.toggleOpen();
           }}
         />
       )}
+      {console.log(panel?.children)}
 
       {/* 面板内容 */}
-      <div style={{ display: panel?.opened ? 'block' : 'none' }}>
+      <div style={{ display: options?.opened ? 'block' : 'none' }}>
         <AppContent items={panel?.children || []} />
       </div>
     </div>

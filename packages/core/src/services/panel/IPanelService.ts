@@ -8,7 +8,13 @@ export interface IPanel {
   width?: number;
   opened?: boolean;
   position?: 'left' | 'right' | 'top' | 'bottom';
-  style?: React.CSSProperties;
+  options: Partial<{
+    enableToggle: boolean;
+    defaultTitle?: string;
+    width?: number;
+    opened?: boolean;
+    style?: React.CSSProperties;
+  }>;
   children?: IWidgetProps<string>[];
 }
 

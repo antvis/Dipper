@@ -1,6 +1,10 @@
 ---
 title: 填充图
 order: 4
+group:
+  title: 组件
+---
+
 ---
 
 ## 填充图
