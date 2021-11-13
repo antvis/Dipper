@@ -36,4 +36,7 @@ export default class SceneService
     this.scene = scene;
     this.emit('sceneChange', scene);
   }
+  destroy() {
+    this.scene?.destroy();
+  }
 }

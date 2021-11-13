@@ -10,4 +10,5 @@ export interface ISceneService extends EventEmitter<ISceneEventName> {
   init: (container: Container) => void;
   setScene: (scene: Scene) => void;
   getScene: () => Scene | undefined;
+  destroy: () => void;
 }

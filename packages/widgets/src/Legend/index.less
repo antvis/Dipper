@@ -37,17 +37,23 @@
   display: inline-flex;
   flex-direction: column;
   background: #fff;
-  padding: 15px;
+  padding: 12px 6px 12px 12px;
   .colorBar {
     display: flex;
-    .item {
-      display: flex;
-      flex-direction: column;
-      width: 80px;
-      height: 30px;
-      .color {
-        height: 12px;
-      }
+    .color {
+      width: 40px;
+      height: 12px;
+    }
+  }
+  .valueBar {
+    display: flex;
+    .value {
+      width: 40px;
+      height: 12px;
+    }
+    span:not(:first-child) {
+      right: 20px;
+      position: relative;
     }
   }
 }

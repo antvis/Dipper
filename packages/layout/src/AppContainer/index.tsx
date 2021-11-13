@@ -62,7 +62,7 @@ export default function SceneContainer<T>({
   const { sceneContainer } = useSceneContainer<T>(cfg);
   useUnmount(() => {
     if (sceneContainer) {
-      sceneContainer.reset();
+      sceneContainer.destroy();
     }
   });
 

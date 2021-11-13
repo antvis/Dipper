@@ -37,7 +37,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
 
   initSource() {
-    console.log(this.data);
     this.source = new Source(this.data);
   }
   getLegendItem() {
