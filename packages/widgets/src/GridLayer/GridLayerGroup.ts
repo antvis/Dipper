@@ -199,7 +199,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
 
   hoverHandler(e: IFeature) {
     this.hoverFeature = e.feature ? e : null;
-
     if (this.currentActiveFeatureId !== e.featureId) {
       this.hoverLayer?.setData({
         type: 'FeatureCollection',

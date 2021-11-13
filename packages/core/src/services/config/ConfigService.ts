@@ -18,8 +18,7 @@ export enum ConfigEventEnum {
 @injectable()
 export default class ConfigService<T>
   extends EventEmitter
-  implements IConfigService<T>
-{
+  implements IConfigService<T> {
   public config!: Partial<IConfig<T>>;
 
   private isInited: boolean = false;

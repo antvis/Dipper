@@ -45,10 +45,16 @@ export const config: Partial<IConfig> = {
     display: true,
     enableToggle: true,
     defaultTitle: '所有网格',
-    opened: false,
+    opened: true,
     width: 360,
     position: 'right',
-    children: [],
+    children: [
+      {
+        display: true,
+        type: 'meshName',
+        title: '网格名称',
+      },
+    ],
   },
   toolbar: {
     display: true,
