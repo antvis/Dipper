@@ -14,8 +14,8 @@ export function BarCahrt({ data }: ChatData) {
         // @ts-ignore
         data: data.sort((a,b)=>b.xField - a.xField),
         autoFit: true,
-        xField: 'xField',
-        yField: 'yField',
+        xField: 'yField',
+        yField: 'xField',
         xAxis: false,
         label:{
           position:'left',
@@ -30,8 +30,12 @@ export function BarCahrt({ data }: ChatData) {
 
       bar.render();
       setBarplot(bar);
+    }else{
+      barplot.update({
+        data
+      })
     }
-  }, [id.current]);
+  }, [id.current,data]);
 
   return <div ref={id} style={{height:300}}/>;
 }

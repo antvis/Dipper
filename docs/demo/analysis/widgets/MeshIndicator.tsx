@@ -1,35 +1,40 @@
-import React, { useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLayerGroup } from '@antv/dipper';
-import { MeshName } from '../../task/widgets/MeshName'
+import { SingleLineCahrt } from '../components/SingleLine';
+import { singleLineChart,barChart } from '../configs/mock';
+import { BarCahrt } from '../components/Bar';
 
 
 export function MeshIndicator() {
   const { selectFeatures, updateProperties } = useLayerGroup('grid')
+  console.log('barChart', barChart())
 
-  const meshName = useMemo(() => {
-    if (!selectFeatures.length) return []
-    return selectFeatures.map((item) => {
-      // @ts-ignore
-      return item.feature.properties.name
-    })
+  // lineChart
+  const [lineData, setLineData] = useState([])
+
+  const [barData, setBarData] = useState([])
+
+  // lineChart
+  useEffect(() => {
+    setLineData(singleLineChart())
+    setBarData(barChart())
   }, [selectFeatures])
 
-
-  const MoreMeshName = () => {
-    return (
-      <div style={{ padding: 15}}>
-        {meshName.length >= 2 && meshName.map((s) => {
-          return (
-            <span key={s}>{s},</span>
-          )
-        })}
-      </div>
-    )
-  }
+  // BarChart
+  // useEffect(() => {
+  //   setBarData(barChart())
+  // }, [selectFeatures])
 
   return (
     <div>
-      {meshName.length === 1 ? <MeshName /> : <MoreMeshName />}
+      <div>
+        <div style={{ marginBottom: 10 }}>交易笔数</div>
+        <SingleLineCahrt data={lineData} />
+      </div>
+      <div>
+        <div style={{ marginBottom: 10 }}>各场景覆盖数</div>
+        <BarCahrt data={barData}/>
+      </div>
     </div>
   )
 }
