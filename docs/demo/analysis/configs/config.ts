@@ -39,6 +39,15 @@ export const config: Partial<IConfig> = {
           action: 'publish',
         },
       },
+      {
+        display: false,
+        position: 'right',
+        type: 'publishbar',
+        event: {
+          actionType: 'map',
+          action: 'publish',
+        },
+      },
     ],
   },
   panel: {
@@ -54,6 +63,21 @@ export const config: Partial<IConfig> = {
         type: 'meshName',
         title: '网格名称',
       },
+      {
+        type: 'siderbartabcontent',
+        title: '所有网格',
+        children: [
+          {
+            display: true,
+            type: 'mesh_indicator',
+            title: '数据查看',
+          },
+          {
+            type: 'total_data_panel',
+            title: '地图面板',
+          },
+        ],
+      },
     ],
   },
   toolbar: {
@@ -68,13 +92,7 @@ export const config: Partial<IConfig> = {
           actionType: 'map',
           action: 'queryArea',
         },
-      },
-      {
-        display: true,
-        position: 'left',
-        type: 'searchPlaces',
-        title: '地区搜索',
-      },
+      }
     ],
   },
   map: {
@@ -87,9 +105,27 @@ export const config: Partial<IConfig> = {
     {
       display: true,
       position: 'topleft',
+      type: 'filter',
+      title: '筛选',
+    },
+    {
+      display: true,
+      position: 'bottomright',
+      type: 'location',
+      title: '定位',
+    },
+    {
+      display: true,
+      position: 'bottomright',
       type: 'mapStyle',
       title: '地图样式',
     },
+    {
+      display: true,
+      position: 'topleft',
+      type: 'searchPlaces',
+      title: '地区搜索',
+    }
   ],
   defaultcontrols: [
     {

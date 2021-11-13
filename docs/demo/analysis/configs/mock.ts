@@ -1,3 +1,46 @@
+import Mock from 'mockjs';
+
+// 单折线图
+export const singleLineChart = () =>{
+  const data = Mock.mock({
+    'list|9': [
+      { // 生成长度在 100~1000 之间的小写字母
+        yField: '@integer(0,5000)'},
+    ],
+  })
+  return data.list.sort((a,b)=> a.yField - b.yField).map((item,index)=>{
+    return{
+      xField: `${index + 1}月`,
+      ...item
+    }
+  })
+};
+
+// 条形图
+export const barChart = () =>{
+  let xField = ['餐饮','影院','百货购物中心','国内旅游','医疗']
+  const data = Mock.mock({
+    'list|5': [
+      { // 生成长度在 100~1000 之间的小写字母
+        yField: '@integer(0,5000)'},
+    ],
+  })
+  return data.list.sort((a,b)=> b.yField - a.yField).map((item,index)=>{
+    return{
+      xField: xField[index],
+      ...item
+    }
+  })
+};
+
+export function randomData<T>(data: T): Promise<T> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 500);
+  });
+}
+
 export const ActivityOption = [
   { label:'全部活动',value:'全部活动'},
   { label:'双十一赢金币',value:'双十一赢金币'},
