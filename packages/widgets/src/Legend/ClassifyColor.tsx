@@ -16,8 +16,6 @@ export interface IRangeControlProps {
 
 export function ClassifyColor({ options }: IWidgetProps<string>) {
   const { items, labelWidth = 100, targetName } = options as IRangeControlProps;
-  console.log(items);
-
   return (
     <div className={styles.legendClassifyControl}>
       <h4>{targetName}</h4>
