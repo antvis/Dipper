@@ -117,7 +117,7 @@ export const config: Partial<IConfig> = {
         },
         fill: {
           field: 'unit_price',
-          color: SingleSequentialColorScale.Blue,
+          color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
           bandNum: 5,
           scale: 'quantile',
           unknownName: '无类型',

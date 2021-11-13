@@ -36,11 +36,11 @@ export function GridLayer() {
 
   const updateLayerLegend = (items: any[]) => {
     updateLegend('gridLayerLegend', {
-      type: 'discreteColor',
+      type: 'classifyColor',
       display: true,
       position: 'bottomleft',
       options: {
-        targetName: '区域类型',
+        targetName: '充电宝投放数量',
         unkownName: layerProps.options.unkownName,
         items,
       },
