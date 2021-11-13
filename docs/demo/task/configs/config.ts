@@ -109,7 +109,7 @@ export const config: Partial<IConfig> = {
   controls: [
     {
       display: true,
-      position: 'topleft',
+      position: 'bottomright',
       type: 'mapStyle',
       title: '地图样式',
     },

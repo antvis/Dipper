@@ -1,9 +1,10 @@
-import { Empty, Input } from 'antd';
+import { Button, Empty, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from './index.less'
 import * as loadsh from 'lodash'
 import { Amaps, AmapService } from '../service/amaps';
 import { useConfigService } from '@antv/dipper-layout';
+import { SearchOutlined } from '@ant-design/icons';
 
 // 高德Pios 参数
 export interface Pios{
@@ -26,6 +27,7 @@ export function SearchPlace(params: GeoMethods) {
   const [pois, setPois] = useState<Pios[]>([])
   const icon = 'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*sbq2TI9VDwYAAAAAAAAAAAAAARQnAQ'
   const [map,setMap] = useState<AmapService<Pios[]>>()
+  const [inputShow,setInputShow] = useState(false)
 
   useEffect(()=>{
     const amaps = new Amaps<Pios[]>({
@@ -58,10 +60,11 @@ export function SearchPlace(params: GeoMethods) {
 
   return (
     <>
-      <Input placeholder="请输入要搜索的地区"
+      <Button icon={<SearchOutlined />} onClick={()=> setInputShow(!inputShow)}/>
+      {inputShow && <Input placeholder="请输入要搜索的地区"
         onChange={onSearchKey}
         className={styles.input}
-      />
+      />}
       {Object.keys(pois).length
         ? <div className={styles.placeContent}>
           {pois && pois.map((item) => {

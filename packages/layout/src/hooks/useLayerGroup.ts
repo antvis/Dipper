@@ -54,6 +54,7 @@ export function useLayerGroup(name: string) {
 
   const updateProperties = useCallback(
     (feature: Feature, properties: Record<string, any>) => {
+      console.log('3232',feature,properties)
       // 检索选中网格信息
       setSelectFeatures((list: any[] = []) => {
         const newList = [...list];
