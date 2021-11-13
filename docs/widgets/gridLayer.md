@@ -1,10 +1,9 @@
 ---
 title: 填充图
 order: 4
+hide: true
 group:
   title: 组件
----
-
 ---
 
 ## 填充图

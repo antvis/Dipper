@@ -40,7 +40,7 @@ export function GridLayer() {
       display: true,
       position: 'bottomleft',
       options: {
-        targetName: '区域类型',
+        title: '区域类型',
         unkownName: layerProps.options.unkownName,
         items,
       },
