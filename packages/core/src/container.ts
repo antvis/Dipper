@@ -34,7 +34,6 @@ export default class SceneContainer<T> {
   }
 
   public reset() {
-    console.log('重置');
     this.configService.reset();
   }
 }

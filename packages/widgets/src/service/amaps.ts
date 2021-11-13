@@ -95,5 +95,4 @@ export class Amaps<T> implements AmapService<T>{
     }
     return true;
   }
-
 }

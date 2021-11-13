@@ -1,4 +1,4 @@
-import Mock from "mockjs"
+import Mock from 'mockjs';
 
 export const chartList = Mock.mock({
   // 生成长度在 0~32 之间的小写字母
@@ -15,7 +15,7 @@ export const chartList = Mock.mock({
       },
     ],
   },
-})
+});
 
 export function randomData<T>(data: T): Promise<T> {
   return new Promise((resolve, reject) => {
@@ -24,9 +24,6 @@ export function randomData<T>(data: T): Promise<T> {
     }, 500);
   });
 }
-
-
-
 
 export const CityList = [
   {

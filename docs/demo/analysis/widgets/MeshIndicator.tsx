@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
-import { MeshName } from '../../rumbling/widgets/MeshName'
 import { useLayerGroup } from '@antv/dipper';
-import Item from 'antd/lib/list/Item';
+import { MeshName } from '../../task/widgets/MeshName'
+
 
 export function MeshIndicator() {
   const { selectFeatures, updateProperties } = useLayerGroup('grid')
