@@ -13,14 +13,19 @@ export function MeshName() {
   const [edit, setEdit] = useState(false)
   const ref = useRef()
 
+  /**
+   * get meshname
+   * type []string
+   */
   const meshName = useMemo(() => {
-    if (!selectFeatures.length || selectFeatures.length >= 2) return
-    // @ts-ignore
-    return selectFeatures[0]?.feature.properties.name
+    if (!selectFeatures.length ) return []
+    return selectFeatures.map((item)=>{
+      // @ts-ignore
+      return item.feature.properties.name
+    })
   }, [selectFeatures])
 
-  console.log('meshName',meshName)
-
+  // 修改 网格名称
   const editMeshName = useCallback(() => {
     // @ts-ignore
     const value = ref.current.state.value
@@ -34,10 +39,11 @@ export function MeshName() {
     setEdit(false)
   }, [selectFeatures])
 
-  return (
-    <>
-      {meshName && <div className={styles.meahname}>
-        {!edit ? <div onClick={() => setEdit(!edit)}>
+  // select more meshname 编辑 网格名称
+  const EditMeshName = () =>{
+    return(
+      <>
+       {!edit ? <div onClick={() => setEdit(!edit)}>
           <span>{meshName}</span>
           <EditOutlined />
         </div>
@@ -50,7 +56,29 @@ export function MeshName() {
             <CloseOutlined onClick={() => setEdit(false)} />
           </div>
         }
-      </div>}
+      </>
+    )
+  }
+
+  // show 多个网格名称
+  const ShowMeshNames = () =>{
+    return (
+      <div style={{ padding: 15}}>
+        {meshName.length >= 2 && meshName.map((s) => {
+          return (
+            <span key={s}>{s},</span>
+          )
+        })}
+      </div>
+    )
+  }
+
+  return (
+    <>
+      {meshName && meshName.length ? <div className={styles.meahname}>
+        { meshName.length === 1 ? <EditMeshName /> : <ShowMeshNames />}
+
+      </div> : null }
     </>
 
   )
