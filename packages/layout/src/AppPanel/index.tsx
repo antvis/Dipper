@@ -55,7 +55,9 @@ export default function AppPanel<T>() {
       )}
 
       {/* 面板内容 */}
-      <AppContent items={panel?.children || []} />
+      <div style={{ display: panel?.opened ? 'block' : 'none' }}>
+        <AppContent items={panel?.children || []} />
+      </div>
     </div>
   ) : (
     <></>
