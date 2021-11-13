@@ -36,4 +36,8 @@ export default class SceneContainer<T> {
   public reset() {
     this.configService.reset();
   }
+
+  public destroy() {
+    this.sceneService.destroy();
+  }
 }

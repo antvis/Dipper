@@ -58,8 +58,6 @@ export function SearchPlace(params: GeoMethods) {
     setWidgetsOptions('placeList',pois)
   }
 
-  console.log('inputShow',inputShow)
-
   return (
     <>
       <Button icon={<SearchOutlined />} onClick={()=> setInputShow(!inputShow)}/>
