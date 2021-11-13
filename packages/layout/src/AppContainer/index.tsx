@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useUnmount } from 'ahooks';
 import { Layout } from 'antd';
 import styles from './index.less';
 import AppHeader from '../AppHeader';
@@ -9,7 +10,7 @@ import AppLayerControl from '../AppLayer';
 import AppMap from '../AppMap';
 import { Provider } from 'inversify-react';
 
-import type { IConfig } from '@antv/dipper-core';
+import type { IConfig, IConfigService } from '@antv/dipper-core';
 import { TYPES } from '@antv/dipper-core';
 import { useSceneContainer, useConfigService } from '../hooks';
 import type { Container } from 'inversify';
@@ -59,6 +60,12 @@ export default function SceneContainer<T>({
   children,
 }: IContainerProps<T>) {
   const { sceneContainer } = useSceneContainer<T>(cfg);
+  useUnmount(() => {
+    if (sceneContainer) {
+      sceneContainer.reset();
+    }
+  });
+
   return sceneContainer ? (
     <>
       {/* 

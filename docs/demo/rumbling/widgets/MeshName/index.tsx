@@ -14,10 +14,12 @@ export function MeshName() {
   const ref = useRef()
 
   const meshName = useMemo(() => {
-    if (!selectFeatures.length) return
+    if (!selectFeatures.length || selectFeatures.length >= 2) return
     // @ts-ignore
     return selectFeatures[0]?.feature.properties.name
   }, [selectFeatures])
+
+  console.log('meshName',meshName)
 
   const editMeshName = useCallback(() => {
     // @ts-ignore

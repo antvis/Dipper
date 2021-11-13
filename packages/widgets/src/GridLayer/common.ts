@@ -15,7 +15,7 @@ export interface ILayerGroupOption {
 }
 
 export interface IGridLayerProps {
-  geodata: any;
+  data: any;
   name: string;
   options: ILayerGroupOption;
 }

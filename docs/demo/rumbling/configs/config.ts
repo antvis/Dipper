@@ -26,7 +26,7 @@ export const config: Partial<IConfig> = {
       },
     },
     title: {
-      value: '区域房价可视化',
+      value: 'XX 管理地图地图',
       display: true,
     },
     children: [
@@ -76,8 +76,8 @@ export const config: Partial<IConfig> = {
     children: [
       {
         display: true,
-        type:'meshName',
-        title:'网格名称'
+        type: 'meshName',
+        title: '网格名称',
       },
       {
         type: 'siderbartabcontent',
@@ -86,7 +86,7 @@ export const config: Partial<IConfig> = {
           {
             display: true,
             type: 'mesh_indicator',
-            title: '数据查看'
+            title: '数据查看',
           },
           {
             type: 'total_data_panel',

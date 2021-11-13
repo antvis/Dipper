@@ -1,8 +1,15 @@
 import { injectable } from 'inversify';
 import EventEmitter from 'eventemitter3';
 import type { IConfigService, IConfig } from './IConfigService';
-import { get } from 'lodash';
+import { get, mergeWith } from 'lodash';
 import { updateConfigsField } from '../../utils/';
+import { defaultConfig } from './defaultConfig';
+
+function customizer(obj: any, src: any) {
+  if (Array.isArray(src)) {
+    return obj;
+  }
+}
 
 export enum ConfigEventEnum {
   'CONFIG_CHANGE' = 'configchange',
@@ -11,14 +18,14 @@ export enum ConfigEventEnum {
 @injectable()
 export default class ConfigService<T>
   extends EventEmitter
-  implements IConfigService<T>
-{
+  implements IConfigService<T> {
   public config!: Partial<IConfig<T>>;
 
   private isInited: boolean = false;
   init(config: Partial<IConfig<T>> | undefined) {
     if (!this.isInited) {
-      this.config = config!;
+      console.log(defaultConfig, config);
+      this.config = mergeWith(config, defaultConfig, customizer);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
     }
     this.isInited = true;
@@ -34,13 +41,15 @@ export default class ConfigService<T>
   }
 
   updateControl(type: string, value: any) {
-    const index = this.config.legends?.findIndex((k) => k.type === type);
+    const index = this.config.controls?.findIndex((k) => k.type === type);
     if (index !== -1) {
-      this.setConfig(`constrols.${index}`, value);
-    } else {
-      this.setConfig(`constrols.${0}`, {
+      this.setConfig(`controls.${index}`, {
+        ...this.getConfig(`controls.${index}`),
         ...value,
       });
+    } else {
+      // 组件未添加
+      console.log('组件未添加');
     }
   }
   // legends;
@@ -77,5 +86,8 @@ export default class ConfigService<T>
   // 获取组件结果值
   getWidgetsOptions(key: string) {
     return this.getConfig(`viewData.widgets.${key}.options`);
+  }
+  reset() {
+    this.isInited = false;
   }
 }

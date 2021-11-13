@@ -21,7 +21,7 @@ export default abstract class LayerGroup
 {
   private layers: ILayer[] = [];
   private contianer!: Container;
-  protected geodata: any;
+  protected data: any;
   public source!: ISource;
   public visible: boolean = true;
   public name!: string;
@@ -57,7 +57,7 @@ export default abstract class LayerGroup
   }
 
   public setData(data: any) {
-    this.geodata = data;
+    this.data = data;
     this.source.setData(data);
 
     // 重置选中数据

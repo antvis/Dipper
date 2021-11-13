@@ -19,10 +19,10 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   private currentActiveFeatureId: number = -1;
   private currentSelectFeatureId: number = -1;
 
-  constructor({ name, geodata, options }: IGridLayerProps) {
+  constructor({ name, data, options }: IGridLayerProps) {
     super();
     this.name = name;
-    this.geodata = geodata;
+    this.data = data;
     this.options = options;
   }
 
@@ -37,7 +37,8 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
 
   initSource() {
-    this.source = new Source(this.geodata);
+    console.log(this.data);
+    this.source = new Source(this.data);
   }
   getLegendItem() {
     // 先取默认图例
@@ -166,7 +167,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     const map: Record<string, any> = fromPairs(
       props.map((item) => [item.id, item.properties]),
     );
-    this.geodata.features = this.geodata.features.map((item: any) => {
+    this.data.features = this.data.features.map((item: any) => {
       const { id } = item.properties;
       const newProperties = map[id];
       if (newProperties) {
@@ -174,7 +175,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       }
       return item;
     });
-    this.updateSource(this.geodata);
+    this.updateSource(this.data);
     this.emit(LayerGroupEventEnum.DATAUPDATE);
   }
 

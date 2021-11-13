@@ -26,29 +26,72 @@ export const config: Partial<IConfig> = {
       },
     },
     title: {
-      value: '网格划分',
+      value: '数据分析',
       display: true,
     },
     children: [
       {
-        display: false,
+        display: true,
+        position: 'left',
+        title: '选择城市',
+        type: 'citySelect',
+        event: {
+          actionType: 'map',
+          action: 'queryArea',
+        },
+      },
+      {
+        display: true,
+        position: 'left',
+        title: '活动',
+        type: 'activity'
+      },
+      {
+        display: true,
+        position: 'left',
+        title: '状态',
+        type: 'status'
+      },
+      {
+        display: true,
+        position: 'left',
+        title: '地图展示',
+        type: 'mapExhibit'
+      },
+      {
+        display: true,
+        position: 'right',
+        type: 'save',
+        event: {
+          actionType: 'map',
+          action: 'publish',
+        },
+      },
+      {
+        display: true,
         position: 'right',
         type: 'publishbar',
         event: {
           actionType: 'map',
           action: 'publish',
         },
-      },
+      }
     ],
   },
   panel: {
     display: true,
     enableToggle: true,
     defaultTitle: '所有网格',
-    opened: false,
+    opened: true,
     width: 360,
     position: 'right',
-    children: [],
+    children: [
+      {
+        display: true,
+        type: 'mesh_indicator',
+        title: '数据查看',
+      }
+    ],
   },
   toolbar: {
     display: true,
@@ -63,6 +106,12 @@ export const config: Partial<IConfig> = {
           action: 'queryArea',
         },
       },
+      {
+        display: true,
+        position: 'left',
+        type: 'searchPlaces',
+        title: '地区搜索',
+      },
     ],
   },
   map: {
@@ -72,6 +121,12 @@ export const config: Partial<IConfig> = {
     style: 'normal',
   },
   controls: [
+    {
+      display: true,
+      position: 'bottomright',
+      type: 'location',
+      title: '定位',
+    },
     {
       display: true,
       position: 'topleft',
