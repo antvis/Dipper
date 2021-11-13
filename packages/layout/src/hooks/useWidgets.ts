@@ -1,5 +1,5 @@
 import { getWidget } from '@antv/dipper-core';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 
 export function useWidgets(item: IWidgetProps<string>) {

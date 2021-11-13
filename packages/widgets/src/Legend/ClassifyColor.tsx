@@ -24,6 +24,7 @@ export function ClassifyColor({ options }: IWidgetProps<string>) {
       <div className={styles.colorBar}>
         {items.map((item, colorIndex) => (
           <span
+            key={colorIndex}
             className={styles.color}
             style={{ backgroundColor: item.color }}
           />
@@ -31,7 +32,7 @@ export function ClassifyColor({ options }: IWidgetProps<string>) {
       </div>
       <div className={styles.valueBar}>
         {items.map((item, colorIndex) => (
-          <span className={styles.value}>
+          <span key={colorIndex} className={styles.value}>
             {Math.floor(Array.isArray(item.value) ? item.value[0] : item.value)}
           </span>
         ))}
@@ -40,6 +41,5 @@ export function ClassifyColor({ options }: IWidgetProps<string>) {
         )}
       </div>
     </div>
-    // </div>
   );
 }
