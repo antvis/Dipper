@@ -24,7 +24,6 @@ export default class ConfigService<T>
   private isInited: boolean = false;
   init(config: Partial<IConfig<T>> | undefined) {
     if (!this.isInited) {
-      console.log(defaultConfig, config);
       this.config = mergeWith(config, defaultConfig, customizer);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
     }

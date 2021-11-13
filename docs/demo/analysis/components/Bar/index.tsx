@@ -1,24 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Bar } from '@antv/g2plot';
 
-export function MeshIndicator() {
+export interface ChatData{
+  data: object[]
+}
+
+export function BarCahrt({ data }: ChatData) {
   const id = useRef();
   const [barplot, setBarplot] = useState<Bar>();
-  const data = [
-    { year: '金融保险', value: 38 },
-    { year: '医疗卫生', value: 52 },
-    { year: '社会公共管理', value: 61 },
-    { year: 'IT 通讯电子', value: 145 },
-    { year: '教育', value: 48 },
-  ];
-
   useEffect(() => {
     if (!barplot && id.current) {
       const bar = new Bar(id.current, {
-        data,
+        // @ts-ignore
+        data: data.sort((a,b)=>b.xField - a.xField),
         autoFit: true,
-        xField: 'value',
-        yField: 'year',
+        xField: 'xField',
+        yField: 'yField',
+        xAxis: false,
+        label:{
+          position:'left',
+          style:{
+            fill:'#fff'
+          }
+        },
         legend: {
           position: 'top-left',
         },
@@ -29,5 +33,5 @@ export function MeshIndicator() {
     }
   }, [id.current]);
 
-  return <div ref={id} />;
+  return <div ref={id} style={{height:300}}/>;
 }

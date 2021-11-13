@@ -1,16 +1,29 @@
-export const ActivityOption = [
-  { label:'全部活动',value:'全部活动'},
-  { label:'双十一赢金币',value:'双十一赢金币'},
-  { label:'充电桩铺设',value:'充电桩铺设'},
-  { label:'1块钱升级月卡',value:'1块钱升级月卡'},
-  { label:'免费充电1小时',value:'免费充电1小时'}
-]
+import Mock from 'mockjs';
 
-export const StatusOption = [
-  { label:'全部状态',value:'全部状态'},
-  { label:'未拓展',value:'未拓展'},
-  { label:'已拓展',value:'已拓展'},
-]
+export const chartList = Mock.mock({
+  // 生成长度在 0~32 之间的小写字母
+  success: '@string("lower", 0, 32)',
+  // 生成长度在 0~32 之间的小写字母
+  errorMessage: '@string("lower", 0, 32)',
+  data: {
+    'list|4-7': [
+      {
+        // 生成长度在 100~1000 之间的小写字母
+        xField: '@integer(100,1000)',
+        // 生成长度在 3~5 之间的中文
+        yField: '@ctitle(3, 5)',
+      },
+    ],
+  },
+});
+
+export function randomData<T>(data: T): Promise<T> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 500);
+  });
+}
 
 export const CityList = [
   {

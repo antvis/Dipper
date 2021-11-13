@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { isDisplay } from '../utils';
 import { CustomControl } from '@antv/l7-react';
 import { PositionName } from '@antv/l7';
 import { Tabs } from 'antd';
 import { getWidget } from '@antv/dipper-core';
+import { useWidgets } from '../hooks/useWidgets';
 import { useEffect } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import style from './style.less';
@@ -23,7 +24,7 @@ export function AppContent({ items }: ContentProps) {
           return (
             <React.Fragment key={item.type}>
               {' '}
-              {getWidget(item.type)(item)}{' '}
+              {getWidget(item.type)(item)} {/* {useWidgets(item)} */}
             </React.Fragment>
           );
         })}
@@ -54,6 +55,8 @@ export function AppTabsContent({ items }: ContentProps) {
             className={style.tabPanel}
           >
             {getWidget(tab.type)({ ...tab.options, children: tab.children })}
+
+            {/* {useWidgets(tab)} */}
           </TabPane>
         );
       })}

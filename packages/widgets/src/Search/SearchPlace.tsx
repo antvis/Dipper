@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less'
 import * as loadsh from 'lodash'
 import { Amaps, AmapService } from '../service/amaps';
+import { useConfigService } from '@antv/dipper-layout';
 
 // 高德Pios 参数
 export interface Pios{
@@ -21,6 +22,7 @@ interface GeoMethods{
 
 export function SearchPlace(params: GeoMethods) {
   const { serviceMethod = 'Autocomplete' } = params
+  const { setWidgetsOptions,setWidgetsValue } = useConfigService()
   const [pois, setPois] = useState<Pios[]>([])
   const icon = 'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*sbq2TI9VDwYAAAAAAAAAAAAAARQnAQ'
   const [map,setMap] = useState<AmapService<Pios[]>>()
@@ -36,15 +38,22 @@ export function SearchPlace(params: GeoMethods) {
   const delayedChange = loadsh.debounce(async(searchKey: string) => {
     if (searchKey === '') return setPois([])
     map?.searchPlaces(searchKey)
-    const res = map?.getResult()
-    if (res) { setPois(res)}
+    // 延时取值 first result is undefined
+    setTimeout(()=>{
+      const result = map?.getResult() as Pios[]
+      if (result) {
+        setPois(result)
+      }
+    },300)
   },500)
 
   const onSearchKey = (e: any) => delayedChange(e.target.value);
 
   // 选择地区
   const onSelectPlace = (item: Pios) => {
-    console.log('item', item)
+    // set search place
+    setWidgetsValue('placeList',item)
+    setWidgetsOptions('placeList',pois)
   }
 
   return (
