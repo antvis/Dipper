@@ -26,6 +26,7 @@ export function SearchPlace(params: GeoMethods) {
   const { setWidgetsOptions,setWidgetsValue } = useConfigService()
   const [pois, setPois] = useState<Pios[]>([])
   const icon = 'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*sbq2TI9VDwYAAAAAAAAAAAAAARQnAQ'
+  const searchicon = 'https://gw.alipayobjects.com/zos/bmw-prod/6ef4a129-f477-49e2-b493-24d66b3b3c22.svg'
   const [map,setMap] = useState<AmapService<Pios[]>>()
   const [inputShow,setInputShow] = useState(false)
 
@@ -60,7 +61,9 @@ export function SearchPlace(params: GeoMethods) {
 
   return (
     <>
-      <Button icon={<SearchOutlined />} onClick={()=> setInputShow(!inputShow)}/>
+      <Button icon={
+        <img src={searchicon}/>
+      } onClick={()=> setInputShow(!inputShow)}/>
       {inputShow && <Input placeholder="请输入要搜索的地区"
         onChange={onSearchKey}
         className={styles.input}

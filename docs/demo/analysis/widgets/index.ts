@@ -19,6 +19,7 @@ import { Send } from './Send';
 import { Status } from './Status';
 import { MeshName } from './MeshName';
 import { Filter } from './Filter';
+import { TotalPanel } from './TotalPanel/index';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
@@ -32,6 +33,7 @@ export function initWidgets() {
   registerWidget('location', Location);
   registerWidget('filter',Filter)
   registerWidget('mesh_indicator', MeshIndicator);
+  registerWidget('total_data_panel', TotalPanel);
 
   registerWidget('draw', Draw);
   registerWidget('save', Save);
@@ -39,6 +41,5 @@ export function initWidgets() {
   registerWidget('activity', Activity);
   registerWidget('status',Status);
   registerWidget('mapExhibit', MapExhibit);
-  registerWidget('mesh_indicator',MeshIndicator)
   registerWidget('meshName',MeshName)
 }

@@ -5,36 +5,36 @@ import { ChatData } from '../Bar';
 export function LineCahrt({ data }: ChatData) {
   const id = useRef();
   const [lineplot, setLinePlot] = useState<Line>();
-  const [list,setData] = useState([])
+  // const [list,setData] = useState([])
 
-  useEffect(()=>{
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/b21e7336-0b3e-486c-9070-612ede49284e.json')
-    .then((res) => res.json())
-    .then((data) => {
-      setData(data);
-    });
-  },[])
+  // useEffect(()=>{
+  //   fetch('https://gw.alipayobjects.com/os/bmw-prod/b21e7336-0b3e-486c-9070-612ede49284e.json')
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     setData(data);
+  //   });
+  // },[])
 
   useEffect(() => {
-    if (!lineplot && id.current && list) {
-      const area = new Line(id.current, {
-        data: list,
+    if (!lineplot && id.current && data) {
+      const lineplot = new Line(id.current, {
+        data,
         autoFit: true,
-        xField: 'date',
-        yField: 'value',
-        seriesField: 'country',
+        xField: 'xField',
+        yField: 'yField',
+        seriesField: 'series',
         legend:{
           position:'top-left'
         }
       });
-      area.render();
-      setLinePlot(area);
+      lineplot.render();
+      setLinePlot(lineplot);
     }else{
       lineplot.update({
-        data: list
+        data
       })
     }
-  }, [id.current,list]);
+  }, [id.current,data]);
 
   return <div ref={id} style={{height:300}}/>;
 }
