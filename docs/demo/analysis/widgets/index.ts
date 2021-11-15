@@ -8,7 +8,7 @@ import {
   Draw,
   MapStyle,
   SearchPlace,
-  Location
+  Location,
 } from '@antv/dipper-widgets';
 import { Activity } from './Activity';
 import { GridLayer } from './GridLayer';
@@ -19,6 +19,7 @@ import { Send } from './Send';
 import { Status } from './Status';
 import { MeshName } from './MeshName';
 import { Filter } from './Filter';
+import { TotalPanel } from './TotalPanel/index';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
@@ -30,15 +31,15 @@ export function initWidgets() {
   registerWidget('mapStyle', MapStyle);
   registerWidget('searchPlaces', SearchPlace);
   registerWidget('location', Location);
-  registerWidget('filter',Filter)
+  registerWidget('filter', Filter);
   registerWidget('mesh_indicator', MeshIndicator);
+  registerWidget('total_data_panel', TotalPanel);
 
   registerWidget('draw', Draw);
   registerWidget('save', Save);
   registerWidget('publishbar', Send);
   registerWidget('activity', Activity);
-  registerWidget('status',Status);
+  registerWidget('status', Status);
   registerWidget('mapExhibit', MapExhibit);
-  registerWidget('mesh_indicator',MeshIndicator)
-  registerWidget('meshName',MeshName)
+  registerWidget('meshName', MeshName);
 }
