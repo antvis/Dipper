@@ -23,17 +23,17 @@ export default class PanelService
   }
 
   show() {
-    this.configService.setConfig('panel.opened', true);
+    this.configService.setConfig('panel.options.opened', true);
   }
 
   hide() {
-    this.configService.setConfig('panel.opened', false);
+    this.configService.setConfig('panel.options.opened', false);
   }
 
   toggleOpen() {
     this.configService.setConfig(
-      'panel.opened',
-      !this.configService.getConfig('panel.opened'),
+      'panel.options.opened',
+      !this.configService.getConfig('panel.options.opened'),
     );
   }
   setDispay(visble: boolean) {
@@ -42,6 +42,6 @@ export default class PanelService
   changeTab() {}
 
   changeWidth(width: number) {
-    this.configService.setConfig('panel.width', width);
+    this.configService.setConfig('panel.options.width', width);
   }
 }

@@ -4,7 +4,7 @@ import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
 
 export interface ILegendControlProps {
-  targetName: string;
+  title: string;
   items: {
     value: string;
     color: string;
@@ -12,12 +12,12 @@ export interface ILegendControlProps {
 }
 
 export function DiscreteColor({ options }: IWidgetProps<string>) {
-  const { targetName, items } = options as ILegendControlProps;
+  const { title, items } = options as ILegendControlProps;
   return (
     <>
       {items.length && (
         <div className={classnames([styles.legendControl])}>
-          <div className={styles.legendControlTitle}>{targetName}</div>
+          <div className={styles.legendControlTitle}>{title}</div>
           {items.map((item) => (
             <div className={styles.legendControlItem} key={item.value}>
               <div

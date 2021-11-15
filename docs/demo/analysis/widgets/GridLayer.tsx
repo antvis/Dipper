@@ -40,9 +40,16 @@ export function GridLayer() {
       display: true,
       position: 'bottomleft',
       options: {
-        targetName: '充电宝投放数量',
+        title: '充电宝投放数量',
         unkownName: layerProps.options.unkownName,
-        items,
+        items: items.map((item) => {
+          return {
+            color: item.color,
+            value: item.value.map((v) => {
+              return (v / 10000).toFixed(2);
+            }),
+          };
+        }),
       },
     });
   };

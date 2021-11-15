@@ -68,11 +68,14 @@ export const config: Partial<IConfig> = {
   },
   panel: {
     display: true,
-    enableToggle: true,
-    defaultTitle: '所有网格',
-    opened: true,
-    width: 360,
+
     position: 'right',
+    options: {
+      enableToggle: true,
+      defaultTitle: '所有网格',
+      opened: true,
+      width: 360,
+    },
     children: [
       {
         display: true,

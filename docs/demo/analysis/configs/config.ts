@@ -52,10 +52,12 @@ export const config: Partial<IConfig> = {
   },
   panel: {
     display: true,
-    enableToggle: true,
-    defaultTitle: '所有网格',
-    opened: true,
-    width: 360,
+    options: {
+      enableToggle: true,
+      defaultTitle: '所有网格',
+      opened: true,
+      width: 360,
+    },
     position: 'right',
     children: [
       {
@@ -92,7 +94,7 @@ export const config: Partial<IConfig> = {
           actionType: 'map',
           action: 'queryArea',
         },
-      }
+      },
     ],
   },
   map: {
@@ -125,7 +127,7 @@ export const config: Partial<IConfig> = {
       position: 'topleft',
       type: 'searchPlaces',
       title: '地区搜索',
-    }
+    },
   ],
   defaultcontrols: [
     {
