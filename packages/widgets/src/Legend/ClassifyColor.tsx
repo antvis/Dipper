@@ -10,15 +10,14 @@ interface ILegendItem {
 
 export interface IRangeControlProps {
   items: ILegendItem[];
-  targetName?: string;
-  labelWidth?: string | number;
+  title?: string;
 }
 
 export function ClassifyColor({ options }: IWidgetProps<string>) {
-  const { items, labelWidth = 100, targetName } = options as IRangeControlProps;
+  const { items, title } = options as IRangeControlProps;
   return (
     <div className={styles.legendClassifyControl}>
-      <h4>{targetName}</h4>
+      <h4>{title}</h4>
       <div className={styles.colorBar}>
         {items.map((item, colorIndex) => (
           <span
@@ -31,7 +30,7 @@ export function ClassifyColor({ options }: IWidgetProps<string>) {
       <div className={styles.valueBar}>
         {items.map((item, colorIndex) => (
           <span key={colorIndex} className={styles.value}>
-            {Math.floor(Array.isArray(item.value) ? item.value[0] : item.value)}
+            {Array.isArray(item.value) ? item.value[0] : item.value}
           </span>
         ))}
         {Array.isArray(items[items.length - 1].value) && (

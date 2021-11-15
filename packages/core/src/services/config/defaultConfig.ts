@@ -26,6 +26,7 @@ export const defaultConfig: Partial<IConfig> = {
     pitch: 0,
     style: 'normal',
   },
+  panel: {},
   controls: [
     {
       display: true,

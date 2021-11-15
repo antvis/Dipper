@@ -33,12 +33,51 @@ export const barChart = () =>{
   })
 };
 
+// 多维折线图
+export const multidimensionalChart = () =>{
+  const series = ['铺设失败','铺设中','铺设成功','虚假铺设']
+  const xField = new Array(12).fill('').map((item,index)=>{
+    return `${2*index + 2}:00`
+  })
+
+  return series.map((a,k)=>{
+    return xField.map((b,index)=>{
+      return {
+        xField: b,
+        series: a,
+        yField: Number(((index + 1) * 10 + 20 * Math.random() + k * 20).toFixed())
+      }
+    })
+  }).flat()
+}
+
+export const operation = () =>{
+  const data = Mock.mock({
+    'list|15': [
+      {
+        name:'@cname',
+        order_count: '@integer(0,100)',
+        staff_no: '@integer(100000,1000000)'
+      },
+    ],
+  })
+  return data.list
+}
+
 export function randomData<T>(data: T): Promise<T> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
     }, 500);
   });
+}
+
+// 生成范围内的随机数
+export const randomNumBoth = (min: number, max: number) => {
+  const Range = max - min
+  const Rand = Math.random()
+  const num = min + Math.round(Rand * Range)
+  return num;
 }
 
 export const ActivityOption = [
@@ -53,6 +92,13 @@ export const StatusOption = [
   { label:'全部状态',value:'全部状态'},
   { label:'未拓展',value:'未拓展'},
   { label:'已拓展',value:'已拓展'},
+]
+
+export const brandOption = [
+  { label:'全部类型',value:'1'},
+  { label:'街电',value:'2'},
+  { label:'怪兽',value:'3'},
+  { label:'小电',value:'4'}
 ]
 
 export const CityList = [

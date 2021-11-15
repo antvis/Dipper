@@ -22,11 +22,11 @@ export function MeshIndicator() {
   return (
     <div>
       <div>
-        <div style={{ marginBottom: 10 }}>交易笔数</div>
+        <div style={{ margin: '10px 0' }}>交易笔数</div>
         <SingleLineCahrt data={lineData} />
       </div>
       <div>
-        <div style={{ marginBottom: 10 }}>各场景覆盖数</div>
+        <div style={{ margin:'20px 0' }}>各场景覆盖数</div>
         <BarCahrt data={barData}/>
       </div>
     </div>

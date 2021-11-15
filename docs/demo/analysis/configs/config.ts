@@ -31,12 +31,13 @@ export const config: Partial<IConfig> = {
     },
     children: [
       {
-        display: false,
-        position: 'right',
-        type: 'publishbar',
+        display: true,
+        position: 'left',
+        title: '选择城市',
+        type: 'citySelect',
         event: {
           actionType: 'map',
-          action: 'publish',
+          action: 'queryArea',
         },
       },
       {
@@ -47,15 +48,17 @@ export const config: Partial<IConfig> = {
           actionType: 'map',
           action: 'publish',
         },
-      },
+      }
     ],
   },
   panel: {
     display: true,
-    enableToggle: true,
-    defaultTitle: '所有网格',
-    opened: true,
-    width: 360,
+    options: {
+      enableToggle: true,
+      defaultTitle: '所有网格',
+      opened: true,
+      width: 426,
+    },
     position: 'right',
     children: [
       {
@@ -70,11 +73,11 @@ export const config: Partial<IConfig> = {
           {
             display: true,
             type: 'mesh_indicator',
-            title: '数据查看',
+            title: '业务数据',
           },
           {
             type: 'total_data_panel',
-            title: '地图面板',
+            title: '人员数据',
           },
         ],
       },
