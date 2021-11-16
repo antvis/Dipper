@@ -6,7 +6,7 @@ import { BarCahrt } from '../components/Bar';
 
 
 export function MeshIndicator() {
-  const { selectFeatures, updateProperties } = useLayerGroup('grid')
+  const { selectFeatures } = useLayerGroup('grid')
 
   // lineChart
   const [lineData, setLineData] = useState([])
@@ -18,6 +18,7 @@ export function MeshIndicator() {
     setLineData(singleLineChart())
     setBarData(barChart())
   }, [selectFeatures])
+
 
   return (
     <div>

@@ -20,6 +20,7 @@ import { Status } from './Status';
 import { MeshName } from './MeshName';
 import { Filter } from './Filter';
 import { TotalPanel } from './TotalPanel/index';
+import { MeshChart } from './MeshChart';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
@@ -34,6 +35,7 @@ export function initWidgets() {
   registerWidget('filter',Filter)
   registerWidget('mesh_indicator', MeshIndicator);
   registerWidget('total_data_panel', TotalPanel);
+  registerWidget('meshchart',MeshChart)
 
   registerWidget('draw', Draw);
   registerWidget('save', Save);

@@ -11,9 +11,7 @@ export const Filter = () => {
   const { setWidgetsValue } = useConfigService()
 
 
-  const onBrandChange = (e: any) => {
-    setWidgetsValue('brand', e)
-  }
+  const onBrandChange = (e: any) => { setWidgetsValue('brand', e)}
 
   return (
     <div style={{ background: '#fff', borderRadius: 3 }}>
@@ -22,6 +20,8 @@ export const Filter = () => {
         bordered={false}
       >
         <Option value="全部地区">全部地区</Option>
+        <Option value="示例地区1">示例地区1</Option>
+        <Option value="示例地区2">示例地区2</Option>
       </Select>
       <Select defaultValue="1"
         style={{ width: 100, color: 'rgba(0,0,0,0.65)' }}
