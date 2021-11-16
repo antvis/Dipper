@@ -67,6 +67,12 @@ export const config: Partial<IConfig> = {
         title: '网格名称',
       },
       {
+        display: true,
+        type: 'meshchart',
+        title: '所有网格数据',
+      },
+      {
+        display: false,
         type: 'siderbartabcontent',
         title: '所有网格',
         children: [

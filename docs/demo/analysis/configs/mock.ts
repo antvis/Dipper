@@ -51,6 +51,7 @@ export const multidimensionalChart = () =>{
   }).flat()
 }
 
+// 作业单数
 export const operation = () =>{
   const data = Mock.mock({
     'list|15': [
@@ -62,6 +63,41 @@ export const operation = () =>{
     ],
   })
   return data.list
+}
+
+// 行业市场份额
+export const marketShare = () =>{
+  const data = Mock.mock({
+    'list|3': [
+      { // 生成长度在 100~1000 之间的小写字母
+        xField: '@integer(0,100)'},
+    ],
+  })
+  const yField = ['街电','怪兽','小电']
+  return data.list.sort((a,b)=> a.yField - b.yField).map((item,index)=>{
+    return{
+      yField: yField[index],
+      ...item
+    }
+  })
+}
+
+// 各品牌营收
+export const brandRevenue = () =>{
+  const series = ['街电','来电','怪兽','美团','小电']
+  const xField = new Array(11).fill('').map((item,index)=>{
+    return `${2009 + index}`
+  })
+
+  return series.map((a,k)=>{
+    return xField.map((b,index)=>{
+      return {
+        xField: b,
+        series: a,
+        yField: Number(((index + 1) * 10 + 30 * Math.random() + k * 20).toFixed())
+      }
+    })
+  }).flat()
 }
 
 export function randomData<T>(data: T): Promise<T> {

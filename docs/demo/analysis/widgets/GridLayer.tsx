@@ -2,7 +2,7 @@ import {
   useSceneService,
   useConfigService,
   LayerGroupEventEnum,
-  useLayerService,
+  useLayerService
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
@@ -64,7 +64,7 @@ export function GridLayer() {
     )
       .then((res) => res.json())
       .then((data) => {
-        const geoData = data && data.features?.map((item) => {
+        const geoDataList = data && data.features?.map((item) => {
           return {
             ...item,
             properties: {
@@ -73,23 +73,27 @@ export function GridLayer() {
             }
           }
         })
-        // @ts-ignore
-        setGeoData({ type: 'FeatureCollection', features: geoData });
+
+        // 品牌 过滤
+        if (brandValue && geoDataList) {
+          // @ts-ignore
+          const data = brandValue === '1'
+            ? geoDataList
+            : geoDataList.filter((item) => item.properties.brand_type === brandValue)
+          if (data.length) {
+            // @ts-ignore
+            setGeoData({ type: 'FeatureCollection', features: data });
+          }
+        } else {
+          // @ts-ignore
+          setGeoData({ type: 'FeatureCollection', features: geoDataList });
+        }
+
       });
     // 切换城市 高德地图方法
     sceneService.getScene().map?.setCity(cityValue[1]);
 
-  }, [JSON.stringify(cityValue)]);
-
-  // TODO 逻辑待完善
-  useEffect(() => {
-    if (geoData && brandValue) {
-      const data = geoData.features.filter((item) => item.properties.brand_type === brandValue)
-      if (data.length) {
-        setGeoData({ type: 'FeatureCollection', features: data });
-      }
-    }
-  }, [brandValue])
+  }, [JSON.stringify(cityValue), brandValue]);
 
 
   useEffect(() => {

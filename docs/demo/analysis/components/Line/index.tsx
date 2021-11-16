@@ -1,19 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Line } from '@antv/g2plot';
 import { ChatData } from '../Bar';
+import { Spin } from 'antd';
 
-export function LineCahrt({ data }: ChatData) {
+export function LineCahrt({ data,loading }: ChatData) {
   const id = useRef();
   const [lineplot, setLinePlot] = useState<Line>();
-  // const [list,setData] = useState([])
-
-  // useEffect(()=>{
-  //   fetch('https://gw.alipayobjects.com/os/bmw-prod/b21e7336-0b3e-486c-9070-612ede49284e.json')
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     setData(data);
-  //   });
-  // },[])
 
   useEffect(() => {
     if (!lineplot && id.current && data) {
@@ -36,5 +28,9 @@ export function LineCahrt({ data }: ChatData) {
     }
   }, [id.current,data]);
 
-  return <div ref={id} style={{height:300}}/>;
+  return (
+    <Spin spinning={loading}>
+      <div ref={id} style={{height:300}}/>
+    </Spin>
+  );
 }
