@@ -116,20 +116,6 @@ export const randomNumBoth = (min: number, max: number) => {
   return num;
 }
 
-export const ActivityOption = [
-  { label:'全部活动',value:'全部活动'},
-  { label:'双十一赢金币',value:'双十一赢金币'},
-  { label:'充电桩铺设',value:'充电桩铺设'},
-  { label:'1块钱升级月卡',value:'1块钱升级月卡'},
-  { label:'免费充电1小时',value:'免费充电1小时'}
-]
-
-export const StatusOption = [
-  { label:'全部状态',value:'全部状态'},
-  { label:'未拓展',value:'未拓展'},
-  { label:'已拓展',value:'已拓展'},
-]
-
 export const brandOption = [
   { label:'全部类型',value:'1'},
   { label:'街电',value:'2'},
