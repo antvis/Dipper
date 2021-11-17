@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLayerGroup } from '@antv/dipper';
+import { useLayerGroup } from '@antv/dipper'
 import { Button, List } from 'antd';
 import { multidimensionalChart, operation } from '../../configs/mock';
 import styles from './index.less';
