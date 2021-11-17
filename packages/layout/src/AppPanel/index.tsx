@@ -34,6 +34,7 @@ export default function AppPanel<T>() {
   const panelWidth = useMemo(() => {
     return options?.width ?? '360px';
   }, [options?.width]);
+
   return isDisplay(panel?.display) ? (
     <div
       style={{

@@ -20,6 +20,8 @@ export const Filter = () => {
         bordered={false}
       >
         <Option value="全部地区">全部地区</Option>
+        <Option value="示例地区1">示例地区1</Option>
+        <Option value="示例地区2">示例地区2</Option>
       </Select>
       <Select
         defaultValue="1"

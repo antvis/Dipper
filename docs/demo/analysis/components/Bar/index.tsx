@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Bar } from '@antv/g2plot';
 
-export interface ChatData{
-  data: object[]
+export interface ChatData {
+  data: object[];
+  legend?: boolean;
+  loading?: boolean;
 }
 
 export function BarCahrt({ data }: ChatData) {
@@ -12,16 +14,16 @@ export function BarCahrt({ data }: ChatData) {
     if (!barplot && id.current) {
       const bar = new Bar(id.current, {
         // @ts-ignore
-        data: data.sort((a,b)=>b.xField - a.xField),
+        data: data.sort((a, b) => b.xField - a.xField),
         autoFit: true,
         xField: 'yField',
         yField: 'xField',
         xAxis: false,
-        label:{
-          position:'left',
-          style:{
-            fill:'#fff'
-          }
+        label: {
+          position: 'left',
+          style: {
+            fill: '#fff',
+          },
         },
         legend: {
           position: 'top-left',
@@ -30,12 +32,12 @@ export function BarCahrt({ data }: ChatData) {
 
       bar.render();
       setBarplot(bar);
-    }else{
+    } else {
       barplot.update({
-        data
-      })
+        data,
+      });
     }
-  }, [id.current,data]);
+  }, [id.current, data]);
 
-  return <div ref={id} style={{height:300}}/>;
+  return <div ref={id} style={{ height: 300 }} />;
 }

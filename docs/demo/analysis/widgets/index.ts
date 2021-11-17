@@ -10,16 +10,17 @@ import {
   SearchPlace,
   Location,
 } from '@antv/dipper-widgets';
-import { Activity } from './Activity';
+import { Activity } from '../../task/widgets/Activity';
 import { GridLayer } from './GridLayer';
-import { MapExhibit } from './MapExhibit';
+import { MapExhibit } from '../../task/widgets/MapExhibit';
 import { MeshIndicator } from './MeshIndicator';
-import { Save } from './Save';
-import { Send } from './Send';
-import { Status } from './Status';
+import { Save } from '../../task/widgets/Save';
+import { Send } from '../../task/widgets/Send';
+import { Status } from '../../task/widgets/Status';
 import { MeshName } from './MeshName';
 import { Filter } from './Filter';
 import { TotalPanel } from './TotalPanel/index';
+import { MeshChart } from './MeshChart';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
@@ -34,12 +35,8 @@ export function initWidgets() {
   registerWidget('filter', Filter);
   registerWidget('mesh_indicator', MeshIndicator);
   registerWidget('total_data_panel', TotalPanel);
+  registerWidget('meshchart', MeshChart);
 
   registerWidget('draw', Draw);
-  registerWidget('save', Save);
-  registerWidget('publishbar', Send);
-  registerWidget('activity', Activity);
-  registerWidget('status', Status);
-  registerWidget('mapExhibit', MapExhibit);
   registerWidget('meshName', MeshName);
 }

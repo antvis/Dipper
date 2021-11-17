@@ -63,6 +63,7 @@ export const multidimensionalChart = () => {
     .flat();
 };
 
+// 作业单数
 export const operation = () => {
   const data = Mock.mock({
     'list|15': [
@@ -74,6 +75,49 @@ export const operation = () => {
     ],
   });
   return data.list;
+};
+
+// 行业市场份额
+export const marketShare = () => {
+  const data = Mock.mock({
+    'list|3': [
+      {
+        // 生成长度在 100~1000 之间的小写字母
+        xField: '@integer(0,100)',
+      },
+    ],
+  });
+  const yField = ['街电', '怪兽', '小电'];
+  return data.list
+    .sort((a, b) => a.yField - b.yField)
+    .map((item, index) => {
+      return {
+        yField: yField[index],
+        ...item,
+      };
+    });
+};
+
+// 各品牌营收
+export const brandRevenue = () => {
+  const series = ['街电', '来电', '怪兽', '美团', '小电'];
+  const xField = new Array(11).fill('').map((item, index) => {
+    return `${2009 + index}`;
+  });
+
+  return series
+    .map((a, k) => {
+      return xField.map((b, index) => {
+        return {
+          xField: b,
+          series: a,
+          yField: Number(
+            ((index + 1) * 10 + 30 * Math.random() + k * 20).toFixed(),
+          ),
+        };
+      });
+    })
+    .flat();
 };
 
 export function randomData<T>(data: T): Promise<T> {
@@ -91,20 +135,6 @@ export const randomNumBoth = (min: number, max: number) => {
   const num = min + Math.round(Rand * Range);
   return num;
 };
-
-export const ActivityOption = [
-  { label: '全部活动', value: '全部活动' },
-  { label: '双十一赢金币', value: '双十一赢金币' },
-  { label: '充电桩铺设', value: '充电桩铺设' },
-  { label: '1块钱升级月卡', value: '1块钱升级月卡' },
-  { label: '免费充电1小时', value: '免费充电1小时' },
-];
-
-export const StatusOption = [
-  { label: '全部状态', value: '全部状态' },
-  { label: '未拓展', value: '未拓展' },
-  { label: '已拓展', value: '已拓展' },
-];
 
 export const brandOption = [
   { label: '全部类型', value: '1' },
