@@ -24,8 +24,8 @@ export function MapExhibit() {
         borderLeft: '1px solid #f3f3f3',
         borderRight: '1px solid #f3f3f3',
         padding: '0 10px',
-        height: 20,
-        lineHeight: '20px'
+        height: 32,
+        lineHeight: '32px'
       }}>
         地图展示<DownOutlined />
       </div>

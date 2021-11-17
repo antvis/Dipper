@@ -3,7 +3,7 @@ import { Line } from '@antv/g2plot';
 import { ChatData } from '../Bar';
 import { Spin } from 'antd';
 
-export function LineCahrt({ data,loading }: ChatData) {
+export function LineCahrt({ data, loading }: ChatData) {
   const id = useRef();
   const [lineplot, setLinePlot] = useState<Line>();
 
@@ -15,22 +15,22 @@ export function LineCahrt({ data,loading }: ChatData) {
         xField: 'xField',
         yField: 'yField',
         seriesField: 'series',
-        legend:{
-          position:'top-left'
-        }
+        legend: {
+          position: 'top-left',
+        },
       });
       lineplot.render();
       setLinePlot(lineplot);
-    }else{
+    } else {
       lineplot.update({
-        data
-      })
+        data,
+      });
     }
-  }, [id.current,data]);
+  }, [id.current, data]);
 
   return (
     <Spin spinning={loading}>
-      <div ref={id} style={{height:300}}/>
+      <div ref={id} style={{ height: 300 }} />
     </Spin>
   );
 }

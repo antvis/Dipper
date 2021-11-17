@@ -76,7 +76,7 @@ export function ActivityTask() {
   const Empty = () => {
     return (
       <div className={style.empty}>
-        <img src={emptyicon} alt="" />
+        <img src={emptyicon} />
         <span>暂无数据</span>
       </div>
     )

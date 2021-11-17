@@ -47,7 +47,7 @@ export function SearchPerson() {
   );
 
   return (
-    <div>
+    <div style={{ background:'#fff'}}>
       <Dropdown overlay={menu} visible={visible}>
         <Input bordered={false}
           placeholder="搜索网格名称/人员名称"

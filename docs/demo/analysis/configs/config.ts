@@ -48,7 +48,7 @@ export const config: Partial<IConfig> = {
           actionType: 'map',
           action: 'publish',
         },
-      }
+      },
     ],
   },
   panel: {
@@ -90,19 +90,8 @@ export const config: Partial<IConfig> = {
     ],
   },
   toolbar: {
-    display: true,
-    children: [
-      {
-        display: true,
-        position: 'left',
-        title: '选择城市',
-        type: 'citySelect',
-        event: {
-          actionType: 'map',
-          action: 'queryArea',
-        },
-      }
-    ],
+    display: false,
+    children: [],
   },
   map: {
     zoom: 10,
@@ -134,7 +123,7 @@ export const config: Partial<IConfig> = {
       position: 'topleft',
       type: 'searchPlaces',
       title: '地区搜索',
-    }
+    },
   ],
   defaultcontrols: [
     {

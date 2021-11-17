@@ -40,62 +40,7 @@ export const config: Partial<IConfig> = {
           action: 'queryArea',
         },
       },
-      {
-        display: true,
-        position: 'left',
-        title: '全部活动',
-        type: 'activity',
-      },
-      {
-        display: true,
-        position: 'left',
-        title: '全部状态',
-        type: 'status',
-      },
-      {
-        display: true,
-        position: 'left',
-        title: '地图展示',
-        type: 'mapExhibit',
-      },
-      {
-        display: true,
-        position: 'left',
-        title: '人员搜索',
-        type: 'searchPerson',
-      },
 
-      // {
-      //   display: true,
-      //   options: [
-      //     {
-      //       label: '热区分析',
-      //       value: 'hotspot',
-      //     },
-      //     {
-      //       label: '任务管理',
-      //       value: 'task',
-      //     },
-      //   ],
-      //   position: 'center',
-      //   type: 'navibar',
-      // },
-      {
-        display: true,
-        position: 'right',
-        title: '保存',
-        type: 'save',
-      },
-      {
-        display: true,
-        position: 'right',
-        type: 'publishbar',
-        title: '发布',
-        event: {
-          actionType: 'map',
-          action: 'publish',
-        },
-      },
     ],
   },
   panel: {
@@ -122,8 +67,49 @@ export const config: Partial<IConfig> = {
     ],
   },
   toolbar: {
-    display: false,
-    children: [],
+    display: true,
+    children: [
+      {
+        display: true,
+        position: 'left',
+        title: '全部活动',
+        type: 'activity',
+      },
+      {
+        display: true,
+        position: 'left',
+        title: '全部状态',
+        type: 'status',
+      },
+      {
+        display: true,
+        position: 'left',
+        title: '地图展示',
+        type: 'mapExhibit',
+      },
+      {
+        display: true,
+        position: 'left',
+        title: '人员搜索',
+        type: 'searchPerson',
+      },
+      {
+        display: true,
+        position: 'right',
+        title: '保存',
+        type: 'save',
+      },
+      {
+        display: true,
+        position: 'right',
+        type: 'publishbar',
+        title: '发布',
+        event: {
+          actionType: 'map',
+          action: 'publish',
+        },
+      },
+    ],
   },
   map: {
     zoom: 10,
@@ -143,12 +129,6 @@ export const config: Partial<IConfig> = {
       position: 'rightcenter',
       type: 'meshTools',
       title: '网格工具',
-    },
-    {
-      display: true,
-      position: 'topleft',
-      type: 'searchPlaces',
-      title: '地区搜索',
     },
     {
       display: true,

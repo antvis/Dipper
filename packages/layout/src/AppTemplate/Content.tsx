@@ -22,10 +22,10 @@ export function AppContent({ items }: ContentProps) {
         ?.filter((item: any) => isDisplay(item.display))
         .map((item: any) => {
           return (
-            <React.Fragment key={item.type}>
+            <div key={item.type}>
               {' '}
               {getWidget(item.type)(item)} {/* {useWidgets(item)} */}
-            </React.Fragment>
+            </div>
           );
         })}
     </>
