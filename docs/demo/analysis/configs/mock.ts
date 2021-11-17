@@ -134,7 +134,7 @@ export const randomNumBoth = (min: number, max: number) => {
   const Rand = Math.random();
   const num = min + Math.round(Rand * Range);
   return num;
-};
+}
 
 export const brandOption = [
   { label: '全部类型', value: '1' },

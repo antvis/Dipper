@@ -40,6 +40,7 @@ export const config: Partial<IConfig> = {
           action: 'queryArea',
         },
       },
+
     ],
   },
   panel: {
@@ -128,12 +129,6 @@ export const config: Partial<IConfig> = {
       position: 'rightcenter',
       type: 'meshTools',
       title: '网格工具',
-    },
-    {
-      display: true,
-      position: 'topleft',
-      type: 'searchPlaces',
-      title: '地区搜索',
     },
     {
       display: true,

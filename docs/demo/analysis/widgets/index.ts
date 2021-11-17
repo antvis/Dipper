@@ -38,5 +38,5 @@ export function initWidgets() {
   registerWidget('meshchart', MeshChart);
 
   registerWidget('draw', Draw);
-  registerWidget('meshName', MeshName);
+  registerWidget('meshName',MeshName)
 }
