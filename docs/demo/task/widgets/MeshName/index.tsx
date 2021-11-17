@@ -63,7 +63,7 @@ export function MeshName() {
   // show 多个网格名称
   const ShowMeshNames = () =>{
     return (
-      <div style={{ padding: 15}}>
+      <div>
         {meshName.length >= 2 && meshName.map((s) => {
           return (
             <span key={s}>{s},</span>

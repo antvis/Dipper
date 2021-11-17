@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLayerGroup } from '@antv/dipper'
-import { Button, List, Typography } from 'antd';
+import { Button, List } from 'antd';
 import { multidimensionalChart, operation } from '../../configs/mock';
 import styles from './index.less'
 import { LineCahrt } from '../../components/Line'

@@ -42,23 +42,55 @@ export const config: Partial<IConfig> = {
       },
       {
         display: true,
-        options: [
-          {
-            label: '热区分析',
-            value: 'hotspot',
-          },
-          {
-            label: '任务管理',
-            value: 'task',
-          },
-        ],
-        position: 'center',
-        type: 'navibar',
+        position: 'left',
+        title: '全部活动',
+        type: 'activity',
       },
       {
-        display: false,
+        display: true,
+        position: 'left',
+        title: '全部状态',
+        type: 'status',
+      },
+      {
+        display: true,
+        position: 'left',
+        title: '地图展示',
+        type: 'mapExhibit',
+      },
+      {
+        display: true,
+        position: 'left',
+        title: '人员搜索',
+        type: 'searchPerson',
+      },
+
+      // {
+      //   display: true,
+      //   options: [
+      //     {
+      //       label: '热区分析',
+      //       value: 'hotspot',
+      //     },
+      //     {
+      //       label: '任务管理',
+      //       value: 'task',
+      //     },
+      //   ],
+      //   position: 'center',
+      //   type: 'navibar',
+      // },
+      {
+        display: true,
+        position: 'right',
+        title: '保存',
+        type: 'save',
+      },
+      {
+        display: true,
         position: 'right',
         type: 'publishbar',
+        title: '发布',
         event: {
           actionType: 'map',
           action: 'publish',
@@ -74,7 +106,7 @@ export const config: Partial<IConfig> = {
       enableToggle: true,
       defaultTitle: '所有网格',
       opened: true,
-      width: 360,
+      width: 426,
     },
     children: [
       {
@@ -83,19 +115,9 @@ export const config: Partial<IConfig> = {
         title: '网格名称',
       },
       {
-        type: 'siderbartabcontent',
-        title: '所有网格',
-        children: [
-          {
-            display: true,
-            type: 'mesh_indicator',
-            title: '数据查看',
-          },
-          {
-            type: 'total_data_panel',
-            title: '地图面板',
-          },
-        ],
+        display: true,
+        type: 'activityTask',
+        title: '活动任务',
       },
     ],
   },
@@ -115,6 +137,12 @@ export const config: Partial<IConfig> = {
       position: 'bottomright',
       type: 'mapStyle',
       title: '地图样式',
+    },
+    {
+      display: true,
+      position: 'rightcenter',
+      type: 'meshTools',
+      title: '网格工具',
     },
     {
       display: true,
