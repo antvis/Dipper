@@ -1,47 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { Dropdown, Input, Menu, Select } from 'antd';
-import { SearchOutlined } from "@ant-design/icons";
-import { personOption } from "../configs/mock";
+import { SearchOutlined } from '@ant-design/icons';
+import { personOption } from '../configs/mock';
 
-const { Search } = Input
-const { Option } = Select
+const { Search } = Input;
+const { Option } = Select;
 
 // 此功能 仅做展示，以实际业务为准
 export function SearchPerson() {
-
-  const [persons, setPersons] = useState([])
-  const [visible, setVisible] = useState(false)
+  const [persons, setPersons] = useState([]);
+  const [visible, setVisible] = useState(false);
 
   const onSearch = (e) => {
-    const value = e.target.value
+    const value = e.target.value;
     setTimeout(() => {
       if (value) {
-        setPersons(personOption())
-        setVisible(true)
+        setPersons(personOption());
+        setVisible(true);
       } else {
-        setPersons([])
-        setVisible(false)
+        setPersons([]);
+        setVisible(false);
       }
-
-    }, 300)
-  }
+    }, 300);
+  };
 
   // 人员搜索
-  const onSelect = (value) =>{
+  const onSelect = (value) => {
     // TODO 根据业务实现
-  }
+  };
 
   const menu = (
     <Menu>
       <Menu.Item key="1">
-        {persons && persons.map((item) => {
-          return (
-            <div key={item.label}
-              onClick={()=>onSelect(item.value)}
-              style={{ paddingBottom: '5px' }}
-            >{item.label}</div>
-          )
-        })}
+        {persons &&
+          persons.map((item) => {
+            return (
+              <div
+                key={item.label}
+                onClick={() => onSelect(item.value)}
+                style={{ paddingBottom: '5px' }}
+              >
+                {item.label}
+              </div>
+            );
+          })}
       </Menu.Item>
     </Menu>
   );
@@ -49,12 +51,13 @@ export function SearchPerson() {
   return (
     <div>
       <Dropdown overlay={menu} visible={visible}>
-        <Input bordered={false}
+        <Input
+          bordered={false}
           placeholder="搜索网格名称/人员名称"
           prefix={<SearchOutlined />}
           onChange={onSearch}
         />
       </Dropdown>
     </div>
-  )
+  );
 }

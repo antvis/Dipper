@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Bar } from '@antv/g2plot';
 
 export interface ChatData {
-  data: object[],
+  data: object[];
   legend?: boolean;
-  loading?: boolean
+  loading?: boolean;
 }
 
 export function BarCahrt({ data }: ChatData) {
@@ -22,8 +22,8 @@ export function BarCahrt({ data }: ChatData) {
         label: {
           position: 'left',
           style: {
-            fill: '#fff'
-          }
+            fill: '#fff',
+          },
         },
         legend: {
           position: 'top-left',
@@ -34,12 +34,10 @@ export function BarCahrt({ data }: ChatData) {
       setBarplot(bar);
     } else {
       barplot.update({
-        data
-      })
+        data,
+      });
     }
   }, [id.current, data]);
 
-  return (
-    <div ref={id} style={{ height: 300 }} />
-  );
+  return <div ref={id} style={{ height: 300 }} />;
 }

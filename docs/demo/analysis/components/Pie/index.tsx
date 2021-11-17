@@ -3,7 +3,7 @@ import { Pie } from '@antv/g2plot';
 import { ChatData } from '../Bar';
 import { Spin } from 'antd';
 
-export function PieChart({ data, legend,loading }: ChatData) {
+export function PieChart({ data, legend, loading }: ChatData) {
   const id = useRef();
   const [pieplot, setPiePlot] = useState<Pie>();
 
@@ -14,15 +14,17 @@ export function PieChart({ data, legend,loading }: ChatData) {
         autoFit: true,
         angleField: 'xField',
         colorField: 'yField',
-        radius: 0.70,
+        radius: 0.7,
         label: {
           type: 'spider',
           labelHeight: 28,
           content: '{name}\n{percentage}',
         },
-        legend: legend ? {
-          position: 'top-left'
-        } : false
+        legend: legend
+          ? {
+              position: 'top-left',
+            }
+          : false,
       });
 
       pie.render();
@@ -30,7 +32,7 @@ export function PieChart({ data, legend,loading }: ChatData) {
     } else {
       pieplot.update({
         data,
-      })
+      });
     }
   }, [id.current, data]);
 

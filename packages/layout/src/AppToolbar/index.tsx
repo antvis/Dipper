@@ -13,13 +13,13 @@ export default function AppToolbar() {
   return isDisplay(toolbar?.display) ? (
     <div className={styles.appToolbar}>
       {/* 左侧组件 */}
-      <div>
+      <div style={{ display: 'flex' }}>
         <AppContent
           items={getAppContentItem(toolbar as IWidgetProps<any>, 'left')}
         />
       </div>
       {/* 右侧组件 */}
-      <div>
+      <div style={{ display: 'flex' }}>
         <AppContent
           items={getAppContentItem(toolbar as IWidgetProps<any>, 'right')}
         />

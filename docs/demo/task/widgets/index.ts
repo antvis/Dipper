@@ -29,13 +29,13 @@ export function initWidgets() {
   registerWidget('mapStyle', MapStyle);
   registerWidget('location', Location);
   registerWidget('meshName', MeshName);
-  registerWidget('meshTools',MeshTools)
+  registerWidget('meshTools', MeshTools);
 
   registerWidget('save', Save);
   registerWidget('publishbar', Send);
   registerWidget('activity', Activity);
-  registerWidget('status',Status);
+  registerWidget('status', Status);
   registerWidget('mapExhibit', MapExhibit);
-  registerWidget('searchPerson',SearchPerson)
-  registerWidget('activityTask',ActivityTask)
+  registerWidget('searchPerson', SearchPerson);
+  registerWidget('activityTask', ActivityTask);
 }

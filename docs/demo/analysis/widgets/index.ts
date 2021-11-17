@@ -8,7 +8,7 @@ import {
   Draw,
   MapStyle,
   SearchPlace,
-  Location
+  Location,
 } from '@antv/dipper-widgets';
 import { Activity } from '../../task/widgets/Activity';
 import { GridLayer } from './GridLayer';
@@ -32,11 +32,11 @@ export function initWidgets() {
   registerWidget('mapStyle', MapStyle);
   registerWidget('searchPlaces', SearchPlace);
   registerWidget('location', Location);
-  registerWidget('filter',Filter)
+  registerWidget('filter', Filter);
   registerWidget('mesh_indicator', MeshIndicator);
   registerWidget('total_data_panel', TotalPanel);
-  registerWidget('meshchart',MeshChart)
+  registerWidget('meshchart', MeshChart);
 
   registerWidget('draw', Draw);
-  registerWidget('meshName',MeshName)
+  registerWidget('meshName', MeshName);
 }
