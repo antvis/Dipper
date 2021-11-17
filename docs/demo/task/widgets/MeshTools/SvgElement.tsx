@@ -32,7 +32,7 @@ export function MeshMergeSvg() {
         <g
           id="设计方案"
           stroke="none"
-          stroke-width="1"
+          strokeWidth="1"
           fill="none"
           fill-rule="evenodd"
         >

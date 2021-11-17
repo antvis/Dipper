@@ -56,7 +56,6 @@ export default function AppPanel<T>() {
           }}
         />
       )}
-      {console.log(panel?.children)}
 
       {/* 面板内容 */}
       <div style={{ display: options?.opened ? 'block' : 'none' }}>

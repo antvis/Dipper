@@ -88,10 +88,9 @@ export function MeshName() {
         (item) => item.type === 'meshchart',
       );
       // TODO 报错
-      setConfig(`panel.children.2.display`, true);
+      setConfig(`panel.children.1.display`, true);
       // setConfig(`panel.children.${findIdMeshchart}.display`, false)
     }
-    console.log('panel', globalConfig);
   }, [selectFeatures]);
 
   return (

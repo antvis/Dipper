@@ -90,19 +90,8 @@ export const config: Partial<IConfig> = {
     ],
   },
   toolbar: {
-    display: true,
-    children: [
-      {
-        display: true,
-        position: 'left',
-        title: '选择城市',
-        type: 'citySelect',
-        event: {
-          actionType: 'map',
-          action: 'queryArea',
-        },
-      },
-    ],
+    display: false,
+    children: [],
   },
   map: {
     zoom: 10,
