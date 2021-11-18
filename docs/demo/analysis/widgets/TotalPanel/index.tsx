@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLayerGroup } from '@antv/dipper';
+import { useLayerGroup } from '@antv/dipper'
 import { Button, List } from 'antd';
 import { multidimensionalChart, operation } from '../../configs/mock';
 import styles from './index.less';
@@ -23,10 +23,15 @@ export function TotalPanel() {
   const [lineData, setLineData] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const [ordersort, setOrderSort] = useState<Sort>(1);
+  const [loading, setLoading] = useState(false);
 
   // lineChart
   useEffect(() => {
-    setLineData(multidimensionalChart());
+    setLoading(true)
+    setTimeout(()=>{
+      setLoading(false)
+      setLineData(multidimensionalChart());
+    },300)
   }, [JSON.stringify(selectFeatures)]);
 
   useEffect(() => {
@@ -55,10 +60,10 @@ export function TotalPanel() {
   const iconOrder = { 1: No1, 2: No2, 3: No3 };
 
   return (
-    <>
+    <div style={{ overflow: 'auto', height:'560px'}}>
       <div>
         <h4>铺设进程</h4>
-        <LineCahrt data={lineData} />
+        <LineCahrt data={lineData} loading={loading}/>
       </div>
       <div className={styles.orderCon}>
         <div className={styles.teamcontainer}>
@@ -106,6 +111,6 @@ export function TotalPanel() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }

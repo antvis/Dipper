@@ -62,10 +62,11 @@ export function MeshName() {
   const ShowMeshNames = () => {
     return (
       <div>
-        {meshName.length >= 2 &&
-          meshName.map((s) => {
-            return <span key={s}>{s},</span>;
-          })}
+        {meshName.length >= 2 && meshName.map((s) => {
+          return (
+            <span key={s}>{s},</span>
+          )
+        })}
       </div>
     );
   };
