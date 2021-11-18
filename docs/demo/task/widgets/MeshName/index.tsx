@@ -19,7 +19,7 @@ export function MeshName() {
       // @ts-ignore
       return item.feature.properties.name;
     });
-  }, [selectFeatures]);
+  }, [JSON.stringify(selectFeatures)]);
 
   // 修改 网格名称
   const editMeshName = useCallback(() => {
@@ -33,7 +33,7 @@ export function MeshName() {
       updateProperties(item.feature, properties);
     });
     setEdit(false);
-  }, [selectFeatures]);
+  }, [JSON.stringify(selectFeatures)]);
 
   // select more meshname 编辑 网格名称
   const EditMeshName = () => {
@@ -62,11 +62,10 @@ export function MeshName() {
   const ShowMeshNames = () => {
     return (
       <div>
-        {meshName.length >= 2 && meshName.map((s) => {
-          return (
-            <span key={s}>{s},</span>
-          )
-        })}
+        {meshName.length >= 2 &&
+          meshName.map((s) => {
+            return <span key={s}>{s},</span>;
+          })}
       </div>
     );
   };
