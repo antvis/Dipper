@@ -9,13 +9,8 @@ import {
   SearchPlace,
   Location,
 } from '@antv/dipper-widgets';
-import { Activity } from '../../task/widgets/Activity';
 import { GridLayer } from './GridLayer';
-import { MapExhibit } from '../../task/widgets/MapExhibit';
 import { MeshIndicator } from './MeshIndicator';
-import { Save } from '../../task/widgets/Save';
-import { Send } from '../../task/widgets/Send';
-import { Status } from '../../task/widgets/Status';
 import { MeshName } from './MeshName';
 import { Filter } from './Filter';
 import { TotalPanel } from './TotalPanel/index';
@@ -36,5 +31,5 @@ export function initWidgets() {
   registerWidget('meshchart', MeshChart);
 
   registerWidget('draw', Draw);
-  registerWidget('meshName', MeshName);
+  registerWidget('meshName',MeshName)
 }
