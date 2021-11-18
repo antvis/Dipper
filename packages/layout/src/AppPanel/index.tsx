@@ -4,7 +4,8 @@ import { isDisplay } from '../utils';
 import ToggleButton from './ToggleButton';
 import { useConfigService, usePanelService } from '../hooks';
 import { AppContent } from '../AppTemplate';
-import { IPanel } from '../../../core/dist';
+import { IPanel } from '@antv/dipper-core';
+import { isEqual } from 'lodash';
 
 function getStyle(
   position: string,
@@ -26,15 +27,12 @@ function getStyle(
   };
 }
 
-export default function AppPanel<T>() {
-  const { globalConfig } = useConfigService<T>();
+function AppPanel<T>({ panel }: { panel: Partial<IPanel> }) {
   const { siderBarService } = usePanelService();
-  const { panel } = globalConfig;
   const { options = {} } = panel as IPanel;
   const panelWidth = useMemo(() => {
     return options?.width ?? '360px';
   }, [options?.width]);
-
   return isDisplay(panel?.display) ? (
     <div
       style={{
@@ -66,3 +64,4 @@ export default function AppPanel<T>() {
     <></>
   );
 }
+export default React.memo(AppPanel, isEqual);

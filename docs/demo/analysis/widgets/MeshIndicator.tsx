@@ -16,7 +16,7 @@ export function MeshIndicator() {
   useEffect(() => {
     setLineData(singleLineChart());
     setBarData(barChart());
-  }, [selectFeatures]);
+  }, [JSON.stringify(selectFeatures)]);
 
   return (
     <div>

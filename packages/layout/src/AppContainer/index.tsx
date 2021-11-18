@@ -10,7 +10,7 @@ import AppLayerControl from '../AppLayer';
 import AppMap from '../AppMap';
 import { Provider } from 'inversify-react';
 
-import type { IConfig, IConfigService } from '@antv/dipper-core';
+import type { IConfig, IConfigService, IPanel } from '@antv/dipper-core';
 import { TYPES } from '@antv/dipper-core';
 import { useSceneContainer, useConfigService } from '../hooks';
 import type { Container } from 'inversify';
@@ -50,7 +50,7 @@ export function ContainerContent<T>({
         </>
       </AppMap>
       {/* 地图信息栏 */}
-      <AppPanel />
+      <AppPanel panel={panel as IPanel} />
     </Content>
   );
 }

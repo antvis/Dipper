@@ -16,15 +16,21 @@ export function useLayerGroup(name: string) {
   const [currentSelectFeatures, setSelectFeatures] = useState<Feature[]>([]);
   const [currentHoverFeature, setHoverFeature] = useState<Feature | null>(null);
   useEffect(() => {
+    const layerAdd = (e: ILayerEventTarget) => {
+      if (e.type === 'add' && e.target?.name === name) {
+        if (!currentGroup) {
+          setLayerGroup(e.target);
+        }
+      }
+    };
     if (layerService.getLayer(name)) {
       setLayerGroup(layerService.getLayer(name));
     } else {
-      layerService.on(LayerEventEnum.LAYERCHANGE, (e: ILayerEventTarget) => {
-        if (e.type === 'add' && e.target?.name === name) {
-          setLayerGroup(e.target);
-        }
-      });
+      layerService.on(LayerEventEnum.LAYERCHANGE, layerAdd);
     }
+    return () => {
+      layerService.off(LayerEventEnum.LAYERCHANGE, layerAdd);
+    };
   }, []);
 
   useEffect(() => {
