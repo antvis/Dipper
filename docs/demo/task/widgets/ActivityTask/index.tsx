@@ -23,8 +23,8 @@ export function ActivityTask() {
     if (selectFeatures.length >= 3) {
       return '你当前多选网格中包含已分配网格，无法批量分配，建议选择单个网格、或选择多个未分配网格的批量操作'
     }
-    return ''
-  }, [selectFeatures])
+    return '';
+  }, [JSON.stringify(selectFeatures)]);
 
   const HasSelectFeature = () => {
     return (

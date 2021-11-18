@@ -106,7 +106,6 @@ export function GridLayer() {
       gridLayer.setData(geoData);
       return;
     }
-
     const layer = new GridLayerGroup({
       name: 'grid',
       data: geoData,

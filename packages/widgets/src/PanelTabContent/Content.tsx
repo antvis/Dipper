@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import styles from './index.less';
 import { AppTabsContent } from '@antv/dipper-layout';
 import type { IWidgetProps } from '@antv/dipper-core';
+import { isEqual } from 'lodash';
 
 function PanelTabContent(props: IWidgetProps<string>) {
   const { children = [] } = props;
@@ -18,4 +19,4 @@ function PanelTabContent(props: IWidgetProps<string>) {
   );
 }
 
-export default PanelTabContent;
+export default React.memo(PanelTabContent, isEqual);

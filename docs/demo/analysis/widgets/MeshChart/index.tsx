@@ -17,7 +17,7 @@ export function MeshChart() {
       setPieData(marketShare());
       setLineData(brandRevenue());
     }, 300);
-  }, [selectFeatures]);
+  }, [JSON.stringify(selectFeatures)]);
 
   return (
     <div style={{ padding: '0 15px' }}>

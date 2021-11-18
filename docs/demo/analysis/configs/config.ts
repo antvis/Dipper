@@ -73,7 +73,7 @@ export const config: Partial<IConfig> = {
       },
       {
         display: false,
-        type: 'siderbartabcontent',
+        type: 'panelTabContent',
         title: '所有网格',
         children: [
           {

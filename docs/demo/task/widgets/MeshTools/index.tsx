@@ -14,16 +14,16 @@ export function MeshTools() {
   const noDisable = { cursor: 'not-allowed', opacity: 0.25 }
 
   const cssPropsSplit = useMemo(() => {
-    if (selectFeatures.length === 1) return disable
-    return noDisable
-  }, [selectFeatures])
+    if (selectFeatures.length === 1) return disable;
+    return noDisable;
+  }, [JSON.stringify(selectFeatures)]);
 
   const cssPropsMerge = useMemo(() => {
     if (selectFeatures.length >= 2) {
       return disable
     }
-    return noDisable
-  }, [selectFeatures])
+    return noDisable;
+  }, [JSON.stringify(selectFeatures)]);
 
   const splitMesh = () => {
     // TODO 根据业务实现
