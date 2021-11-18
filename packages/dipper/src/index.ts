@@ -8,6 +8,7 @@ import {
   NavBar,
   ClassifyColor,
   DiscreteColor,
+  MultiClassifyColor,
   Location,
   SearchPlace,
   MapStyle,
@@ -18,6 +19,7 @@ registerWidget('panelTabContent', PanelTabcontent);
 registerWidget('navibar', NavBar);
 registerWidget('classifyColor', ClassifyColor);
 registerWidget('discreteColor', DiscreteColor);
+registerWidget('multiClassifyColor', MultiClassifyColor);
 registerWidget('mapStyle', MapStyle);
 registerWidget('location', Location);
 registerWidget('searchPlaces', SearchPlace);

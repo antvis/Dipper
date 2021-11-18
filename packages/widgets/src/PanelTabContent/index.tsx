@@ -4,7 +4,7 @@ import { isEqual } from 'lodash';
 
 import type { IWidgetProps } from '@antv/dipper-core';
 
-export function panelTabcontent(props: IWidgetProps<string>) {
+export function PanelTabcontent(props: IWidgetProps<string>) {
   return (
     <>
       {/** 头部表头 */}
@@ -15,5 +15,4 @@ export function panelTabcontent(props: IWidgetProps<string>) {
   );
 }
 
-export const PanelTabcontent = panelTabcontent;
-// = React.memo(panelTabcontent,isEqual)
+export default React.memo(PanelTabcontent, isEqual);
