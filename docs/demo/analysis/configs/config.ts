@@ -10,21 +10,12 @@ export const config: Partial<IConfig> = {
     widgets: {
       citySelect: {
         options: CityList,
-        value: [330000, 330100],
+        value: ['330000', '330100'],
       },
     },
   },
   headerbar: {
     display: true,
-    logo: {
-      display: true,
-      value:
-        'https://gw.alipayobjects.com/mdn/rms_855bab/afts/img/A*ObVJT4IxmlkAAAAAAAAAAAAAARQnAQ',
-      style: {
-        height: '24px',
-        width: '24px',
-      },
-    },
     title: {
       value: '数据分析',
       display: true,
