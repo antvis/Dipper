@@ -73,7 +73,7 @@ export const config: Partial<IConfig> = {
       },
       {
         display: false,
-        type: 'siderbartabcontent',
+        type: 'panelTabContent',
         title: '所有网格',
         children: [
           {
@@ -82,7 +82,7 @@ export const config: Partial<IConfig> = {
             title: '业务数据',
           },
           {
-            type: 'total_data_panel',
+            type: 'total_data_panel1',
             title: '人员数据',
           },
         ],

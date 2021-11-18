@@ -1,7 +1,6 @@
 import { registerWidget } from '@antv/dipper-core';
 import {
   CitySelect,
-  SiderBar,
   NavBar,
   ClassifyColor,
   DiscreteColor,
@@ -24,7 +23,6 @@ import { MeshChart } from './MeshChart';
 
 export function initWidgets() {
   registerWidget('citySelect', CitySelect);
-  registerWidget('siderbartabcontent', SiderBar);
   registerWidget('navibar', NavBar);
   registerWidget('gridLayer', GridLayer);
   registerWidget('classifyColor', ClassifyColor);
@@ -38,5 +36,5 @@ export function initWidgets() {
   registerWidget('meshchart', MeshChart);
 
   registerWidget('draw', Draw);
-  registerWidget('meshName',MeshName)
+  registerWidget('meshName', MeshName);
 }
