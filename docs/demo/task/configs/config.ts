@@ -4,13 +4,13 @@ export const config: Partial<IConfig> = {
   viewData: {
     global: {
       filterData: [],
-      areaCode: '330100',
+      areaCode: '110000',
       view: 'task',
     },
     widgets: {
       citySelect: {
         options: CityList,
-        value: [330000, 330100],
+        value: ['110000', '110000'],
       },
     },
   },
@@ -40,7 +40,6 @@ export const config: Partial<IConfig> = {
           action: 'queryArea',
         },
       },
-
     ],
   },
   panel: {
