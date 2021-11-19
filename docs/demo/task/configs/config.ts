@@ -4,27 +4,18 @@ export const config: Partial<IConfig> = {
   viewData: {
     global: {
       filterData: [],
-      areaCode: '330100',
+      areaCode: '110000',
       view: 'task',
     },
     widgets: {
       citySelect: {
         options: CityList,
-        value: [330000, 330100],
+        value: ['110000', '110000'],
       },
     },
   },
   headerbar: {
     display: true,
-    logo: {
-      display: true,
-      value:
-        'https://gw.alipayobjects.com/mdn/rms_855bab/afts/img/A*ObVJT4IxmlkAAAAAAAAAAAAAARQnAQ',
-      style: {
-        height: '24px',
-        width: '24px',
-      },
-    },
     title: {
       value: 'XX 管理地图地图',
       display: true,
@@ -40,7 +31,6 @@ export const config: Partial<IConfig> = {
           action: 'queryArea',
         },
       },
-
     ],
   },
   panel: {
@@ -164,7 +154,7 @@ export const config: Partial<IConfig> = {
 
         fill: {
           field: 'unit_price',
-          color: SingleSequentialColorScale.Blue,
+          color: ['#CFE1B9', '#B0C298', '#90A276', '#718355'],
           unknownName: '无类型',
           scale: {
             type: 'cat',
