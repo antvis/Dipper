@@ -1,6 +1,6 @@
 export const Config = {
   icon:
-    'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*hxcoRqWLIpgAAAAAAAAAAAAAARQnAQ',
+    'https://gw.alipayobjects.com/zos/bmw-prod/1bd3ce6f-3c52-431d-8578-bd21baec0836.svg',
   title: '地图样式',
   options: [
     {

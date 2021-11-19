@@ -31,6 +31,7 @@ export function ActivityTask() {
       <div>
         <div style={{ margin: '0 20px 20px' }}>
           {selectFeatures.length >= 2 && <Alert
+            style={{ display:'flex', alignItems:'baseline' }}
             message={alertMsg}
             type="warning" showIcon
           />}

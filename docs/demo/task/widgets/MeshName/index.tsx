@@ -42,7 +42,7 @@ export function MeshName() {
         {!edit ? (
           <div onClick={() => setEdit(!edit)}>
             <span>{meshName}</span>
-            <EditOutlined />
+            <EditOutlined style={{ paddingLeft: 12 }}/>
           </div>
         ) : (
           <div className={styles.edit}>

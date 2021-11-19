@@ -98,17 +98,17 @@ export function GridLayer() {
       return;
     }
 
-    const color = ['#CFE1B9', '#B0C298', '#90A276', '#718355'];
+    const color = ['#CFE1B9','#B0C298','#90A276','#718355']
 
     const layer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
       options: {
         ...layerProps.options,
-        fill: {
+        fill:{
           ...layerProps.options.fill,
-          color,
-        },
+          color
+        }
       },
     });
     layerService.addLayer(layer);
@@ -129,8 +129,6 @@ export function GridLayer() {
       });
       updateLayerLegend(formatLegend(layer.getLegendItem()));
     });
-
-    console.log('4232', layerProps.options);
 
     // 更新图例
     updateLayerLegend(formatLegend(layer.getLegendItem()));
