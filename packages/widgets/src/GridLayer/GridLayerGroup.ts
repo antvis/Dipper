@@ -37,7 +37,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
 
   initSource() {
-    console.log(this.data);
     this.source = new Source(this.data);
   }
   getLegendItem() {
@@ -199,7 +198,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
 
   hoverHandler(e: IFeature) {
     this.hoverFeature = e.feature ? e : null;
-
     if (this.currentActiveFeatureId !== e.featureId) {
       this.hoverLayer?.setData({
         type: 'FeatureCollection',

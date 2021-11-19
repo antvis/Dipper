@@ -7,5 +7,6 @@ export default defineConfig({
   outputPath: 'docs-dist',
   publicPath: '/Dipper/',
   base: '/Dipper/',
+  headScripts: ["localStorage.setItem('dumi:prefers-color', 'light')"],
   // more config: https://d.umijs.org/config
 });

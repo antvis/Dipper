@@ -1,12 +1,10 @@
 import React from 'react';
-import PanelHeader from './PanelHeader';
 import PanelContent from './Content';
-import { config } from './config';
-import type { IWidgetProps } from '@antv/dipper-core';
-import { useConfigService } from '@antv/dipper-layout';
+import { isEqual } from 'lodash';
 
-export function SiderBar(props: IWidgetProps<string>) {
-  const { globalConfig } = useConfigService<any>();
+import type { IWidgetProps } from '@antv/dipper-core';
+
+export function PanelTabcontent(props: IWidgetProps<string>) {
   return (
     <>
       {/** 头部表头 */}
@@ -16,3 +14,5 @@ export function SiderBar(props: IWidgetProps<string>) {
     </>
   );
 }
+
+export default React.memo(PanelTabcontent, isEqual);

@@ -17,6 +17,42 @@ export const chartList = Mock.mock({
   },
 });
 
+export const personOption = () => {
+  const data = Mock.mock({
+    'list|10': [
+      {
+        label: '@cname',
+        staffNo: '@integer(100000,1000000)',
+        value: '@integer(100000,1000000)'
+      },
+    ],
+  })
+  return data.list
+}
+
+export const selectActivityItem = [
+  {
+    label: '双十一赢金币',
+    value: '双十一赢金币',
+    icon: 'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*JYNuSaNAga8AAAAAAAAAAAAAARQnAQ'
+  },
+  {
+    label: '充电桩铺设',
+    value: '充电桩铺设',
+    icon: 'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*eay2Q7nXeG4AAAAAAAAAAAAAARQnAQ'
+  },
+  {
+    label: '1块钱升级月卡',
+    value: '1块钱升级月卡',
+    icon: 'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*nA0vQbl_hGMAAAAAAAAAAAAAARQnAQ'
+  },
+  {
+    label: '免费充电1小时',
+    value: '免费充电1小时',
+    icon: 'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*snkKRYonMgEAAAAAAAAAAAAAARQnAQ'
+  },
+]
+
 export function randomData<T>(data: T): Promise<T> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -24,6 +60,20 @@ export function randomData<T>(data: T): Promise<T> {
     }, 500);
   });
 }
+
+export const ActivityOption = [
+  { label: '全部活动', value: '全部活动' },
+  { label: '双十一赢金币', value: '双十一赢金币' },
+  { label: '充电桩铺设', value: '充电桩铺设' },
+  { label: '1块钱升级月卡', value: '1块钱升级月卡' },
+  { label: '免费充电1小时', value: '免费充电1小时' }
+]
+
+export const StatusOption = [
+  { label: '全部状态', value: '全部状态' },
+  { label: '未拓展', value: '未拓展' },
+  { label: '已拓展', value: '已拓展' },
+]
 
 export const CityList = [
   {

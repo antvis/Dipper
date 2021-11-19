@@ -18,7 +18,7 @@ export interface IConfig<IInitData = any> {
     display?: boolean;
     headerstyle?: React.CSSProperties;
 
-    logo: Partial<{
+    logo?: Partial<{
       display: boolean;
       value: string;
       style: React.CSSProperties;
@@ -31,22 +31,6 @@ export interface IConfig<IInitData = any> {
     }>;
     children?: IWidgetProps<'left' | 'right' | 'center'>[];
   };
-
-  header: Partial<{
-    display: boolean;
-    style: React.CSSProperties;
-  }>;
-  logo: Partial<{
-    display: boolean;
-    value: string;
-    style: React.CSSProperties;
-    href: string;
-  }>;
-  title: Partial<{
-    value: string;
-    display: boolean;
-    style: React.CSSProperties;
-  }>;
   panel: Partial<IPanel>;
   toolbar: {
     display: boolean;

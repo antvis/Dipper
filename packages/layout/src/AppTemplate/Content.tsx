@@ -3,8 +3,10 @@ import { isDisplay } from '../utils';
 import { CustomControl } from '@antv/l7-react';
 import { PositionName } from '@antv/l7';
 import { Tabs } from 'antd';
+import { isEqual } from 'lodash';
 import { getWidget } from '@antv/dipper-core';
 import { useWidgets } from '../hooks/useWidgets';
+import Widgets from '../Widgets';
 import { useEffect } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import style from './style.less';
@@ -15,31 +17,33 @@ interface ContentProps {
   items: IWidgetProps<string>[];
 }
 // 普通组件
-export function AppContent({ items }: ContentProps) {
+function Content({ items }: ContentProps) {
   return (
     <>
       {items
         ?.filter((item: any) => isDisplay(item.display))
-        .map((item: any) => {
+        .map((item: IWidgetProps<any>) => {
           return (
-            <React.Fragment key={item.type}>
+            <div key={item.type}>
               {' '}
-              {getWidget(item.type)(item)} {/* {useWidgets(item)} */}
-            </React.Fragment>
+              <Widgets item={item} />
+            </div>
           );
         })}
     </>
   );
 }
+export const AppContent = React.memo(Content, isEqual);
 
 // tab组件
-export function AppTabsContent({ items }: ContentProps) {
+function appTabsContent({ items }: ContentProps) {
   const [currentOperate, setCurrentOperate] = useState('');
   useEffect(() => {
     if (items.length !== 0) {
       setCurrentOperate(items[0].type + items[0]?.title);
     }
   }, [JSON.stringify(items)]);
+
   return (
     <Tabs
       activeKey={currentOperate}
@@ -54,18 +58,17 @@ export function AppTabsContent({ items }: ContentProps) {
             key={tab.type + tab?.title}
             className={style.tabPanel}
           >
-            {getWidget(tab.type)({ ...tab.options, children: tab.children })}
-
-            {/* {useWidgets(tab)} */}
+            <Widgets item={tab} />
           </TabPane>
         );
       })}
     </Tabs>
   );
 }
+export const AppTabsContent = React.memo(appTabsContent, isEqual);
 
 // 地图组件
-export function AppMapControlContent({ items }: ContentProps) {
+function appMapControlContent({ items }: ContentProps) {
   return (
     <>
       {items?.map((l) => {
@@ -74,10 +77,13 @@ export function AppMapControlContent({ items }: ContentProps) {
             position={(l?.position || 'bottomleft') as PositionName}
             key={l.type}
           >
-            {getWidget(l.type)(l) as React.ReactElement}
+            <Widgets item={l} />
+            {/* {getWidget(l.type)(l) as React.ReactElement} */}
           </CustomControl>
         );
       })}
     </>
   );
 }
+
+export const AppMapControlContent = React.memo(appMapControlContent, isEqual);
