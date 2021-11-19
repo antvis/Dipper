@@ -15,8 +15,7 @@ export function MeshName() {
   const { selectFeatures, updateProperties } = useLayerGroup('grid');
   const [edit, setEdit] = useState(false);
   const ref = useRef();
-  const { globalConfig, setConfig } = useConfigService();
-  const { panel } = globalConfig;
+  const { setConfig } = useConfigService();
 
   /**
    * get meshname
@@ -51,7 +50,7 @@ export function MeshName() {
         {!edit ? (
           <div onClick={() => setEdit(!edit)}>
             <span>{meshName}</span>
-            <EditOutlined />
+            <EditOutlined style={{ paddingLeft: 12 }} />
           </div>
         ) : (
           <div className={styles.edit}>
@@ -73,7 +72,9 @@ export function MeshName() {
       <div style={{ padding: 15 }}>
         {meshName.length >= 2 &&
           meshName.map((s) => {
-            return <span key={s}>{s},</span>;
+            return <span key={s}>
+              {s}、
+              </span>;
           })}
       </div>
     );

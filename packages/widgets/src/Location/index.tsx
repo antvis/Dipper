@@ -43,7 +43,7 @@ export function Location() {
     <>
       <Button size='small'
         loading={loading}
-        type='default' icon={<AimOutlined />}
+        type='default' icon={<AimOutlined className={styles.iconLo}/>}
         className={styles.locationBtn}
         onClick={setLocation}
       />
