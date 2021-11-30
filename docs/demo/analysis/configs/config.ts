@@ -94,6 +94,7 @@ export const config: Partial<IConfig> = {
     {
       display: true,
       position: 'topleft',
+      layout: 'horizontal',
       type: 'filter',
       title: '筛选',
     },
@@ -113,6 +114,7 @@ export const config: Partial<IConfig> = {
       display: true,
       position: 'topleft',
       type: 'searchPlaces',
+      layout: 'horizontal',
       title: '地区搜索',
     },
   ],
