@@ -39,7 +39,6 @@ export default function AppControl() {
         const [position, layout] = key.split('-');
 
         const flexDirection = layout === 'horizontal' ? 'row' : 'column';
-        console.log(key, flexDirection);
         return (
           <CustomControl
             key={key}
