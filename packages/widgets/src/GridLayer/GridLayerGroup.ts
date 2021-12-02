@@ -176,7 +176,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       // 多选
       this.selectFeatures = uniqFeatures(this.selectFeatures, e);
     } else if (
-      this.selectFeatures.length === 1 &&
+      this.selectFeatures.length === 1 && // 取消选中
       this.selectFeatures[0].featureId === e.featureId
     ) {
       // 单选
