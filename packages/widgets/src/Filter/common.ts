@@ -17,7 +17,7 @@ export const formatCityData = (items: any[]) => {
 };
 
 // 查找父级
-export const findSelectArray = (items: any[], code: number) => {
+export const findSelectArray = (items: any[], code: string) => {
   let select;
   items.forEach((item: any) => {
     if (item.children) {

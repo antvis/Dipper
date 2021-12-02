@@ -31,7 +31,15 @@ export default function AppHeader() {
 
   const titleDom = useMemo(() => {
     return (
-      <span style={title?.style} className={styles.appTitle}>
+      <span
+        style={title?.style}
+        onClick={() => {
+          if (url) {
+            document.location.href = url as string;
+          }
+        }}
+        className={styles.appTitle}
+      >
         {title?.value}
       </span>
     );
@@ -48,12 +56,7 @@ export default function AppHeader() {
         ...headerstyle,
       }}
     >
-      <div
-        className={styles.appHeaderLeft}
-        onClick={() => {
-          document.location.href = url || './';
-        }}
-      >
+      <div className={styles.appHeaderLeft}>
         {isDisplay(logo?.display) && logoDom}
         {isDisplay(title?.display) && titleDom}
 

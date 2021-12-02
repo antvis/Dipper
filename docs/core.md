@@ -30,7 +30,7 @@ config
 
 ## Widgets
 
-### getWidget
+### 获取 getWidget
 
 获取名称获取组件
 
@@ -39,10 +39,10 @@ config
 - type 组件名称
 
 ```ts
-import { Widgets } from '@antv/dipper-core';
+import { getWidget } from '@antv/dipper-core';
 ```
 
-### 注册组件
+### 注册 registerWidget
 
 registerWidget
 
@@ -50,3 +50,7 @@ registerWidget
 
 - type 组件名称
 - components 组件实例
+
+```js
+registerWidget('name', A);
+```
