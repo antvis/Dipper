@@ -2,6 +2,7 @@ import { IConfig } from './IConfigService';
 export const defaultConfig: Partial<IConfig> = {
   headerbar: {
     display: true,
+    url: './',
     logo: {
       display: true,
       value: 'https://antv-2018.alipay.com/assets/image/icon/l7.svg',

@@ -46,22 +46,15 @@ export default function AppControl() {
             style={{ display: 'flex', flexDirection }}
           >
             {controlGroupBy[key].map((c) => {
-              return getWidget(c.type)(c) as ReactElement;
+              return (
+                <React.Fragment key={c.type}>
+                  {getWidget(c.type)(c) as ReactElement}
+                </React.Fragment>
+              );
             })}
           </CustomControl>
         );
       })}
-      {/* {controls
-        ?.filter((item: any) => isDisplay(item.display))
-        .map((item: any, index: number) => {
-          const key = `${item.type}${index}`;
-          const { position, type } = item as IControlOption;
-          return (
-            <CustomControl key={key} position={position || 'bottomleft'}>
-              {getWidget(type)(item) as ReactElement}
-            </CustomControl>
-          );
-        })} */}
       {/* 添加图例 */}
       <AppMapControlContent items={legends} />
     </>

@@ -17,7 +17,7 @@ export interface IConfig<IInitData = any> {
   headerbar: {
     display?: boolean;
     headerstyle?: React.CSSProperties;
-
+    url: string;
     logo?: Partial<{
       display: boolean;
       value: string;
