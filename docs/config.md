@@ -55,6 +55,7 @@ export interface IWidgetProps<T> {
  {
     display?: boolean;
     headerstyle?: React.CSSProperties;
+    url:string; // 点击导航回到首页
 
     logo: Partial<{
       display: boolean;

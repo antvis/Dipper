@@ -6,6 +6,8 @@ group:
   title: 组件
 ---
 
+### 组件使用
+
 ### 组件通用配置
 
 #### type 必选
@@ -39,6 +41,13 @@ group:
 | "center"
 | "right"
 ```
+
+#### layout 可选
+
+设置同一 `position` 组件的排列方式，支持垂直和水平排列,只有组件配置为 Control 时生效
+
+- 'horizontal'
+- 'vertical';
 
 #### options 可选
 
