@@ -15,13 +15,12 @@ export interface IMultiClassLegendProps {
 
 export function MultiClassifyColor({ options }: IWidgetProps<string>) {
   const { values, items, title } = options as IMultiClassLegendProps;
-  console.log(items);
   return (
     <div className={styles.legendClassifyControl}>
       <h4>{title}</h4>
       {items.map((colorBar, index) => {
         return (
-          <div style={{ display: 'flex' }}>
+          <div key={'key' + index} style={{ display: 'flex' }}>
             <span style={{ width: '50px' }}>{colorBar.title}</span>
             <div className={styles.colorBar}>
               {colorBar.colors.map((item, colorIndex) => {

@@ -3,11 +3,11 @@ import {
   CitySelect,
   ClassifyColor,
   DiscreteColor,
+  MeshName,
 } from '@antv/dipper-widgets';
 import { Activity } from './Activity';
 import { ActivityTask } from './ActivityTask';
 import { GridLayer } from './GridLayer';
-import { MeshName } from './MeshName/index';
 import { Save } from './Save';
 import { SearchPerson } from './SearchPerson';
 import { Send } from './Send';

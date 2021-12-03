@@ -94,6 +94,7 @@ export const config: Partial<IConfig> = {
     {
       display: true,
       position: 'topleft',
+      layout: 'horizontal',
       type: 'filter',
       title: '筛选',
     },
@@ -113,6 +114,7 @@ export const config: Partial<IConfig> = {
       display: true,
       position: 'topleft',
       type: 'searchPlaces',
+      layout: 'horizontal',
       title: '地区搜索',
     },
   ],
@@ -144,7 +146,9 @@ export const config: Partial<IConfig> = {
           field: 'unit_price',
           color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
           bandNum: 5,
-          scale: 'quantile',
+          scale: {
+            type: 'quantile',
+          },
           unknownName: '无类型',
         },
       },

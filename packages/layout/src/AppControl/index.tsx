@@ -1,14 +1,24 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 import { isDisplay } from '../utils';
 import { Control, CustomControl } from '@antv/l7-react';
-import type { IControlOption } from '@antv/l7';
+import type { IControlOption, PositionName } from '@antv/l7';
 import { getWidget } from '@antv/dipper-core';
 import { useConfigService } from '../hooks';
 import { AppMapControlContent } from '../AppTemplate';
+import { groupBy } from 'lodash';
 
 export default function AppControl() {
   const { globalConfig } = useConfigService();
   const { controls, legends = [], defaultcontrols } = globalConfig;
+  const controlGroupBy = useMemo(() => {
+    return groupBy(
+      controls?.filter((item: any) => isDisplay(item.display)),
+      (c) => {
+        return [c.position, c.layout || 'vertical'].join('-');
+      },
+    );
+  }, [controls]);
+
   return (
     <>
       {defaultcontrols
@@ -25,17 +35,26 @@ export default function AppControl() {
             />
           );
         })}
-      {controls
-        ?.filter((item: any) => isDisplay(item.display))
-        .map((item: any, index: number) => {
-          const key = `${item.type}${index}`;
-          const { position, type } = item as IControlOption;
-          return (
-            <CustomControl key={key} position={position || 'bottomleft'}>
-              {getWidget(type)(item) as ReactElement}
-            </CustomControl>
-          );
-        })}
+      {Object.keys(controlGroupBy).map((key: string) => {
+        const [position, layout] = key.split('-');
+
+        const flexDirection = layout === 'horizontal' ? 'row' : 'column';
+        return (
+          <CustomControl
+            key={key}
+            position={position as PositionName}
+            style={{ display: 'flex', flexDirection }}
+          >
+            {controlGroupBy[key].map((c) => {
+              return (
+                <React.Fragment key={c.type}>
+                  {getWidget(c.type)(c) as ReactElement}
+                </React.Fragment>
+              );
+            })}
+          </CustomControl>
+        );
+      })}
       {/* 添加图例 */}
       <AppMapControlContent items={legends} />
     </>

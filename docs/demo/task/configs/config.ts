@@ -157,8 +157,7 @@ export const config: Partial<IConfig> = {
           color: ['#CFE1B9', '#B0C298', '#90A276', '#718355'],
           unknownName: '无类型',
           scale: {
-            type: 'cat',
-            domain: ['C', 'B', 'A'],
+            type: 'quantile',
           },
         },
       },

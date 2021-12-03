@@ -1,25 +1,29 @@
 import { Cascader } from 'antd';
 import type { CascaderOptionType } from 'antd/es/cascader/index';
-import React from 'react';
+import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
+import { IWidgetProps } from '@antv/dipper-core';
 import { useConfigService } from '@antv/dipper-layout';
+import { findSelectArray } from './common';
 
-export function CitySelect() {
-  const { globalConfig, getWidgetsOptions, getWidgetsValue, setWidgetsValue } =
+export function CitySelect({ type = 'CitySelect' }: IWidgetProps<string>) {
+  const { globalConfig, getWidgetsOptions, setWidgetsValue } =
     useConfigService();
-  const { viewData } = globalConfig;
+  const defaultSelect = useMemo(() => {
+    const cityCode = (globalConfig?.viewData?.global?.areaCode as string) || '';
+    return findSelectArray(getWidgetsOptions(type) as any[], cityCode);
+  }, [getWidgetsOptions(type)]);
+
   return (
     <>
       <Cascader
-        defaultValue={
-          (getWidgetsValue('citySelect') as number[]) || ['330000', '330100']
-        }
+        defaultValue={defaultSelect}
         style={{ width: 180 }}
         bordered={false}
-        options={getWidgetsOptions('citySelect') as CascaderOptionType[]}
+        options={getWidgetsOptions(type) as CascaderOptionType[]}
         allowClear={false}
         onChange={(e) => {
-          setWidgetsValue('citySelect', e);
+          setWidgetsValue(type, e);
         }}
         placeholder="选择城市"
       />

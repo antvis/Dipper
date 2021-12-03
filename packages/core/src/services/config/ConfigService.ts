@@ -25,7 +25,7 @@ export default class ConfigService<T>
   private isInited: boolean = false;
   init(config: Partial<IConfig<T>> | undefined) {
     if (!this.isInited) {
-      this.config = mergeWith(defaultConfig, config, customizer);
+      this.config = mergeWith({}, defaultConfig, config, customizer);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
     }
     this.isInited = true;

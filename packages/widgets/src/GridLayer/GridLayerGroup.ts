@@ -1,6 +1,6 @@
 import type { ILayerGroup } from '@antv/dipper-core';
 import { LayerGroup, LayerGroupEventEnum, getColor } from '@antv/dipper-core';
-import type { ILayer } from '@antv/l7';
+import type { ILayer, IScaleOptions } from '@antv/l7';
 import { LineLayer, PolygonLayer, Source } from '@antv/l7';
 import type { IFeature, IGridLayerProps, ILayerGroupOption } from './common';
 import { blankData, uniqFeatures, fromPairs } from './common';
@@ -69,12 +69,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
   addFillLayer() {
     let color = this.options.fill?.color;
-    if (Array.isArray(this.options.fill?.color)) {
-      color = getColor(
-        this.options.fill?.color || [], // TODO 数据为空判断
-        this.options.fill?.bandNum || 5,
-      );
-    }
     const fillLayer = new PolygonLayer({
       autoFit: false,
       name: this.name,
@@ -82,10 +76,8 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       .source(this.source)
       .shape('fill')
       .scale({
-        [this.options.fill!.field]: {
-          type: 'quantile',
-        },
-      })
+        [this.options.fill!.field]: this.options.fill?.scale,
+      } as IScaleOptions)
       .color(this.options.fill!.field, color)
       .style({ opacity: this.options.fill?.opacity || 0.8 });
 
@@ -184,7 +176,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       // 多选
       this.selectFeatures = uniqFeatures(this.selectFeatures, e);
     } else if (
-      this.selectFeatures.length === 1 &&
+      this.selectFeatures.length === 1 && // 取消选中
       this.selectFeatures[0].featureId === e.featureId
     ) {
       // 单选
@@ -225,5 +217,20 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       type: 'FeatureCollection',
       features: [],
     });
+  }
+
+  setSelectFeatureById(id: string) {
+    console.log(id);
+    const feature = this.data.features.find((f: any) => {
+      return f.properties.id === id;
+    });
+    if (feature) {
+      this.selectFeatures = [
+        {
+          feature,
+        },
+      ];
+      this.updateSelectLayer();
+    }
   }
 }

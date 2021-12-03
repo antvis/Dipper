@@ -2,6 +2,7 @@ export interface IWidgetProps<T> {
   type: string;
   title?: string;
   position?: T | string;
+  layout?: 'horizontal' | 'vertical';
   display?: boolean;
   options?: any;
   children?: IWidgetProps<T>[];

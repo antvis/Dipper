@@ -11,7 +11,7 @@ const { Header } = Layout;
 
 export default function AppHeader() {
   const { globalConfig } = useConfigService();
-  const { headerstyle, display, logo, title, children } =
+  const { headerstyle, display, logo, url, title, children } =
     globalConfig.headerbar || {};
 
   const logoDom = useMemo(() => {
@@ -31,7 +31,15 @@ export default function AppHeader() {
 
   const titleDom = useMemo(() => {
     return (
-      <span style={title?.style} className={styles.appTitle}>
+      <span
+        style={title?.style}
+        onClick={() => {
+          if (url) {
+            document.location.href = url as string;
+          }
+        }}
+        className={styles.appTitle}
+      >
         {title?.value}
       </span>
     );
