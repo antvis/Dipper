@@ -4,6 +4,8 @@ import {
   ClassifyColor,
   DiscreteColor,
   MeshName,
+  Draw,
+  Map2Image
 } from '@antv/dipper-widgets';
 import { Activity } from './Activity';
 import { ActivityTask } from './ActivityTask';
@@ -22,6 +24,8 @@ export function initWidgets() {
   registerWidget('discreteColor', DiscreteColor);
   registerWidget('meshName', MeshName);
   registerWidget('meshTools',MeshTools)
+  registerWidget('draw',Draw)
+  registerWidget('map2Image',Map2Image)
 
   registerWidget('save', Save);
   registerWidget('publishbar', Send);

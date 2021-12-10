@@ -120,11 +120,23 @@ export const config: Partial<IConfig> = {
       type: 'meshTools',
       title: '网格工具',
     },
+    // {
+    //   display: true,
+    //   position: 'bottomright',
+    //   type: 'location',
+    //   title: '定位',
+    // },
     {
       display: true,
       position: 'bottomright',
-      type: 'location',
-      title: '定位',
+      type: 'draw',
+      title: '测量',
+    },
+    {
+      display: true,
+      position: 'bottomright',
+      type: 'map2Image',
+      title: '导出地图图片',
     },
   ],
   defaultcontrols: [

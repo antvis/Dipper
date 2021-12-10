@@ -10,3 +10,4 @@ export * from './Location';
 export * from './Draw';
 export * from './Search/SearchPlace';
 export * from './MeshName'
+export * from './Map2Image'
