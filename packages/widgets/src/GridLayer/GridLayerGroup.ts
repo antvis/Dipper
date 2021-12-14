@@ -146,7 +146,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       zIndex: 11,
     })
       .source(blankData)
-      .color('#000')
+      .color('#65789B')
       .size(1)
       .shape('line')
       .style({ opacity: 1 });

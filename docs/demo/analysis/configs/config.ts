@@ -100,6 +100,12 @@ export const config: Partial<IConfig> = {
     },
     {
       display: true,
+      position: 'topleft',
+      title: '属性表',
+      type: 'property_table',
+    },
+    {
+      display: true,
       position: 'bottomright',
       type: 'location',
       title: '定位',

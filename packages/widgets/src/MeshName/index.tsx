@@ -9,7 +9,7 @@ export function MeshName() {
   const { selectFeatures, updateProperties } = useLayerGroup('grid');
   const [edit, setEdit] = useState(false);
   const ref = useRef();
-  const [aera,setArea] = useState()
+
   /**
    * get meshname
    * type []string

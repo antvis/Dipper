@@ -26,6 +26,11 @@ export default class LayerService
     return this.layerStore.find((layer) => layer.name === name) as LayerType;
   }
 
+  getLayerSource(name: string){
+    const layerProerty = this.layerStore.find((layer) => layer.name === name) as LayerType;
+    return layerProerty?.data
+  }
+
   addLayer(layer: LayerType) {
     this.layerStore.push(layer);
     layer.setContainer(this.sceneService?.container as Container);

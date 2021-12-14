@@ -53,7 +53,7 @@ export const config: Partial<IConfig> = {
         display: true,
         type: 'activityTask',
         title: '活动任务',
-      },
+      }
     ],
   },
   toolbar: {
