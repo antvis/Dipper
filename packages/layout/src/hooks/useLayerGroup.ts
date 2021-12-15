@@ -34,6 +34,12 @@ export function useLayerGroup(name: string) {
   }, []);
 
   useEffect(() => {
+    if (currentGroup) {
+      setSelectFeatures(currentGroup.getSelectFeatures?.() || []);
+    }
+  }, [currentGroup]);
+
+  useEffect(() => {
     const onSelectFeature = (features: any[]) => {
       setSelectFeatures(features);
     };
