@@ -12,7 +12,7 @@ interface IProps {
 
 function PanelHeader({ title }: IProps) {
   const { globalConfig } = useConfigService<any>();
-  const { sceneCode, areaCode } = globalConfig.initData;
+
   const { selectFeatures, updateProperties } = useLayerGroup('grid');
   const titles = useMemo(() => {
     if (selectFeatures?.length === 1) {
