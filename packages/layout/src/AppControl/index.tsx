@@ -43,7 +43,7 @@ export default function AppControl() {
           <CustomControl
             key={key}
             position={position as PositionName}
-            style={{ display: 'flex', flexDirection }}
+            style={{ display: 'flex', flexDirection, gap: '8px' }}
           >
             {controlGroupBy[key].map((c) => {
               return (
