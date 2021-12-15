@@ -8,7 +8,7 @@ export function PanelTabcontent(props: IWidgetProps<string>) {
   return (
     <>
       {/** 头部表头 */}
-      {/* <PanelHeader title={config.title} /> */}
+      {/* <PanelHeader title={props.options.title} /> */}
       {/** 内容区域 */}
       <PanelContent {...props} />
     </>
