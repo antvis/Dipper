@@ -35,8 +35,18 @@
     width: 220px;
   }
 }
-:global{
-  .ant-btn{
+:global {
+  .ant-btn {
     border-color: #fff;
+  }
+}
+.searchlist {
+  display: flex;
+  flex-direction: column;
+  :global {
+    .ant-input {
+      border-color: #fff;
+      border-radius: 0;
+    }
   }
 }

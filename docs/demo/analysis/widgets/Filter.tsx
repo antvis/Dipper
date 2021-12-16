@@ -13,7 +13,14 @@ export const Filter = () => {
   };
 
   return (
-    <div style={{ background: '#fff', borderRadius: 3,marginRight: 5 }}>
+    <div
+      style={{
+        background: '#fff',
+        borderRadius: 3,
+        marginRight: 5,
+        height: 32,
+      }}
+    >
       <Select
         defaultValue="全部地区"
         style={{ width: 100, color: 'rgba(0,0,0,0.65)' }}

@@ -61,18 +61,20 @@ export function SearchPlace(params: GeoMethods) {
   };
 
   return (
-    <>
-      <Button
-        icon={<img src={searchicon} />}
-        onClick={() => setInputShow(!inputShow)}
-      />
-      {inputShow && (
-        <Input
-          placeholder="请输入要搜索的地区"
-          onChange={onSearchKey}
-          className={styles.input}
+    <div className={styles.searchlist}>
+      <div style={{ display: 'flex' }}>
+        <Button
+          icon={<img src={searchicon} />}
+          onClick={() => setInputShow(!inputShow)}
         />
-      )}
+        {inputShow && (
+          <Input
+            placeholder="请输入要搜索的地区"
+            onChange={onSearchKey}
+            className={styles.input}
+          />
+        )}
+      </div>
       {Object.keys(pois).length ? (
         <div className={styles.placeContent}>
           {pois &&
@@ -96,6 +98,6 @@ export function SearchPlace(params: GeoMethods) {
             })}
         </div>
       ) : null}
-    </>
+    </div>
   );
 }
