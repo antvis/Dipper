@@ -53,7 +53,7 @@ export const config: Partial<IConfig> = {
         display: true,
         type: 'activityTask',
         title: '活动任务',
-      }
+      },
     ],
   },
   toolbar: {
@@ -108,12 +108,6 @@ export const config: Partial<IConfig> = {
     style: 'normal',
   },
   controls: [
-    {
-      display: true,
-      position: 'topright',
-      type: 'draw',
-      title: '测量',
-    },
     {
       display: true,
       position: 'topleft',
