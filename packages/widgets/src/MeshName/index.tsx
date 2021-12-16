@@ -1,8 +1,9 @@
-import React, { useRef, useState, useMemo, useCallback } from 'react';
+import React, { useRef, useState, useMemo, useCallback,useEffect } from 'react';
 import { CheckOutlined, CloseOutlined, EditOutlined } from '@ant-design/icons';
 import styles from './index.less';
 import { Input } from 'antd';
 import { useLayerGroup } from '@antv/dipper';
+import { Amaps } from '../service/amaps';
 
 export function MeshName() {
   const { selectFeatures, updateProperties } = useLayerGroup('grid');
@@ -34,6 +35,23 @@ export function MeshName() {
     });
     setEdit(false);
   }, [JSON.stringify(selectFeatures)]);
+
+  useEffect(()=>{
+    const amaps = new Amaps<number>({ serviceMethod: ''})
+    getLayerArea(amaps)
+  },[selectFeatures])
+
+  const getLayerArea = useCallback(
+    async (amaps: any)=>{
+      let area = 0
+      if(!selectFeatures.length) return
+      (selectFeatures || []).forEach(async (item: any)=>{
+        const points = item.feature.geometry.coordinates
+        await amaps.ringArea(points[0],'km²')
+        area = amaps.getResult()
+      })
+    },[selectFeatures]
+  )
 
   // select more meshname 编辑 网格名称
   const EditMeshName = () => {

@@ -20,7 +20,7 @@ export default function RumbMap() {
   }, []);
 
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '80vh' }}>
       <DipperContainer<IInitData> cfg={mapConfig!} />
     </div>
   );

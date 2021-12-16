@@ -60,7 +60,7 @@ export function TotalPanel() {
   const iconOrder = { 1: No1, 2: No2, 3: No3 };
 
   return (
-    <div style={{ overflow: 'auto', height:'560px'}}>
+    <div>
       <div>
         <h4>铺设进程</h4>
         <LineCahrt data={lineData} loading={loading}/>
@@ -98,13 +98,13 @@ export function TotalPanel() {
                         className={styles.ordericon}
                       />
                     ) : (
-                      <div>{index + 1}</div>
+                      <div style={{paddingLeft:4}}>{index + 1}</div>
                     )}
                     <span>
                       {item.name}({item.staff_no})
                     </span>
                   </div>
-                  <div>作业成功{item.order_count}单</div>
+                  <div className={styles.count}>作业成功{item.order_count}单</div>
                 </div>
               </List.Item>
             )}

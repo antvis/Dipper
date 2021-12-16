@@ -4,12 +4,15 @@ export interface AmapsProps {
   serviceMethod: string;
 }
 
+const BASE_AREA = 10000
+
+export type MeasureType = 'distance' | 'area'
+
 export interface AmapService<T> {
-  getResult: () => T ;
+  getResult: () => T;
   searchPlaces: (searchKey: string) => void
   gdLocation: () => void
 }
-
 
 export class Amaps<T> implements AmapService<T>{
   // 高德服务接口
@@ -48,7 +51,7 @@ export class Amaps<T> implements AmapService<T>{
   async searchPlaces(searchKey: string) {
     const AMap = await this.AMap
     const placeSearch = new AMap[this.serviceMethod]()
-    placeSearch.search(searchKey, async(status: string, result: any) => {
+    placeSearch.search(searchKey, async (status: string, result: any) => {
       if (status === 'complete') {
         if (result.info === 'OK') {
           this._resuslt = result.tips
@@ -79,6 +82,26 @@ export class Amaps<T> implements AmapService<T>{
     });
   };
 
+  // 计算ploygon 面积
+  async ringArea(points: number[][], unit?: string) {
+    if (!points.length) this._resuslt = 0 as any
+    const AMap = await this.AMap;
+    const area = Math.round(AMap.GeometryUtil.ringArea(points));
+    switch (unit) {
+      case 'm²':
+        this._resuslt = area as any
+        break;
+      case 'hm²':
+        this._resuslt = area / BASE_AREA as any
+        break
+      case 'km²':
+        this._resuslt = area / (BASE_AREA * 100) as any
+        break
+      default:
+        break;
+    }
+  }
+
   // 获取查询poi的结果
   getResult(): T {
     return this._resuslt
@@ -95,4 +118,6 @@ export class Amaps<T> implements AmapService<T>{
     }
     return true;
   }
+
+
 }

@@ -3,6 +3,7 @@ import {
   useConfigService,
   LayerGroupEventEnum,
   useLayerService,
+  useLayerGroup,
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
@@ -25,12 +26,13 @@ const formatLegend = (data: any[]) => {
 export function GridLayer() {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const { globalConfig, updateLegend, getWidgetsValue } = useConfigService();
+  const { globalConfig, updateLegend, getWidgetsValue,setConfig } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const cityValue = getWidgetsValue('citySelect');
   const brandValue = getWidgetsValue('brand');
   const [geoData, setGeoData] = useState();
+  const { selectFeatures } = useLayerGroup('grid');
 
   const layerProps = useMemo(() => {
     return layers.find((item: any) => item.type === 'gridLayer');
@@ -135,6 +137,18 @@ export function GridLayer() {
 
     setGridLayer(layer);
   }, [geoData]);
+
+  useEffect(() => {
+    if (selectFeatures.length) {
+      // TODO 报错
+      setConfig(`panel.children.1.display`, false);
+      setConfig(`panel.children.2.display`, true);
+      // setConfig(`panel.children.${findIdMeshchart}.display`, false)
+    } else {
+      setConfig(`panel.children.1.display`, true);
+      setConfig(`panel.children.2.display`, false);
+    }
+  }, [JSON.stringify(selectFeatures)])
 
   return <></>;
 }

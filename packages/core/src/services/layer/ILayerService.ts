@@ -8,6 +8,7 @@ export interface ILayerEventTarget {
   target?: LayerType;
 }
 export interface ILayerGroup extends EventEmitter {
+  data: any;
   name: string;
   source: ISource;
   show: () => void;
@@ -25,6 +26,7 @@ export type LayerType = ILayerGroup;
 export interface ILayerService extends EventEmitter {
   // init(container:Container):void;
   getLayer: (name: string) => LayerType;
+  getLayerSource: (name: string) => any;
   addLayer: (layer: LayerType) => void;
   removeLayer: (id: string) => void;
 }

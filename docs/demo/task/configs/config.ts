@@ -53,7 +53,7 @@ export const config: Partial<IConfig> = {
         display: true,
         type: 'activityTask',
         title: '活动任务',
-      },
+      }
     ],
   },
   toolbar: {
@@ -110,7 +110,13 @@ export const config: Partial<IConfig> = {
   controls: [
     {
       display: true,
-      position: 'bottomright',
+      position: 'topright',
+      type: 'draw',
+      title: '测量',
+    },
+    {
+      display: true,
+      position: 'topleft',
       type: 'mapStyle',
       title: '地图样式',
     },
@@ -120,11 +126,17 @@ export const config: Partial<IConfig> = {
       type: 'meshTools',
       title: '网格工具',
     },
+    // {
+    //   display: true,
+    //   position: 'bottomright',
+    //   type: 'location',
+    //   title: '定位',
+    // },
     {
       display: true,
       position: 'bottomright',
-      type: 'location',
-      title: '定位',
+      type: 'map2Image',
+      title: '导出地图图片',
     },
   ],
   defaultcontrols: [

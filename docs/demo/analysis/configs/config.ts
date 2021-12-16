@@ -63,7 +63,7 @@ export const config: Partial<IConfig> = {
         title: '所有网格数据',
       },
       {
-        display: false,
+        display: true,
         type: 'panelTabContent',
         title: '所有网格',
         children: [
@@ -102,12 +102,14 @@ export const config: Partial<IConfig> = {
       display: true,
       position: 'bottomright',
       type: 'location',
+      layout: 'vertical',
       title: '定位',
     },
     {
       display: true,
       position: 'bottomright',
       type: 'mapStyle',
+      layout: 'vertical',
       title: '地图样式',
     },
     {
@@ -117,6 +119,13 @@ export const config: Partial<IConfig> = {
       layout: 'horizontal',
       title: '地区搜索',
     },
+    {
+      display: true,
+      position: 'topleft',
+      layout: 'horizontal',
+      title: '属性表',
+      type: 'property_table',
+    }
   ],
   defaultcontrols: [
     {

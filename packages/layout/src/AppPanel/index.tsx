@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styles from './index.less';
 import { isDisplay } from '../utils';
 import ToggleButton from './ToggleButton';
-import { useConfigService, usePanelService } from '../hooks';
+import { usePanelService } from '../hooks';
 import { AppContent } from '../AppTemplate';
 import { IPanel } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
@@ -56,7 +56,9 @@ function AppPanel<T>({ panel }: { panel: Partial<IPanel> }) {
       )}
 
       {/* 面板内容 */}
-      {options?.opened ? <AppContent items={panel?.children || []} /> : <></>}
+      <div style={{ display: options?.opened ? 'block' : 'none',overflowY:'auto' }}>
+        <AppContent items={panel?.children || []} />
+      </div>
     </div>
   ) : (
     <></>
