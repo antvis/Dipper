@@ -56,7 +56,7 @@ function AppPanel<T>({ panel }: { panel: Partial<IPanel> }) {
       )}
 
       {/* 面板内容 */}
-      <div style={{ display: options?.opened ? 'block' : 'none' }}>
+      <div style={{ display: options?.opened ? 'block' : 'none',overflowY:'auto' }}>
         <AppContent items={panel?.children || []} />
       </div>
     </div>

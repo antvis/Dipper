@@ -9,6 +9,7 @@ import {
   SearchPlace,
   Location,
   PropertyTable,
+  MeshName
 } from '@antv/dipper-widgets';
 import { GridLayer } from './GridLayer';
 import { MeshIndicator } from './MeshIndicator';
@@ -30,6 +31,7 @@ export function initWidgets() {
   registerWidget('total_data_panel', TotalPanel);
   registerWidget('meshchart', MeshChart);
   registerWidget('property_table',PropertyTable)
+  registerWidget('meshName', MeshName);
 
   registerWidget('draw', Draw);
 }

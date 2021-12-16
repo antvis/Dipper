@@ -63,7 +63,7 @@ export const config: Partial<IConfig> = {
         title: '所有网格数据',
       },
       {
-        display: false,
+        display: true,
         type: 'panelTabContent',
         title: '所有网格',
         children: [

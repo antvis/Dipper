@@ -56,7 +56,7 @@ export function PropertyTable() {
 
   return (
     <div>
-      <Button icon={<TableOutlined />} onClick={() => setIsModalVisible(true)} />
+      <Button icon={<TableOutlined style={{ color: '#8e8e8e'}} />} onClick={() => setIsModalVisible(true)} />
       <Modal title='属性表' footer={null}
         destroyOnClose width={1400} visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}>

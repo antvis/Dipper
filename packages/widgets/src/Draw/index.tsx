@@ -16,9 +16,9 @@ export const Draw = (props: IWidgetProps<PositionName>) => {
         point: true,
         polygon: true,
         line: true,
-        circle: true,
-        rect: true,
-        delete: true,
+        // circle: true,
+        // rect: true,
+        // delete: true,
         ruler: true
       },
     });

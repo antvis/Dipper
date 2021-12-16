@@ -5,7 +5,7 @@ import style from './index.less'
 
 export function Map2Image() {
   const scene = useSceneValue();
-  const exportIcon = 'https://gw.alipayobjects.com/zos/bmw-prod/2b0001af-a8a7-4af8-b789-5cbdea0c974a.svg'
+  const exportIcon = 'https://gw.alipayobjects.com/zos/bmw-prod/2fd1468d-6187-4a40-8c84-52ade1c39668.svg'
   // 图片导出事件
   const onClickHandle = () =>{
     const images = scene.exportPng('png')

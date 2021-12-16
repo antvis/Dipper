@@ -19,7 +19,7 @@ export function MeshIndicator() {
   }, [JSON.stringify(selectFeatures)]);
 
   return (
-    <div style={{ overflow: 'auto', height:'630px'}}>
+    <div >
       <div>
         <div style={{ margin: '10px 0' }}>交易笔数</div>
         <SingleLineCahrt data={lineData} />

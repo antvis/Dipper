@@ -110,7 +110,13 @@ export const config: Partial<IConfig> = {
   controls: [
     {
       display: true,
-      position: 'bottomright',
+      position: 'topright',
+      type: 'draw',
+      title: '测量',
+    },
+    {
+      display: true,
+      position: 'topleft',
       type: 'mapStyle',
       title: '地图样式',
     },
@@ -126,12 +132,6 @@ export const config: Partial<IConfig> = {
     //   type: 'location',
     //   title: '定位',
     // },
-    {
-      display: true,
-      position: 'bottomright',
-      type: 'draw',
-      title: '测量',
-    },
     {
       display: true,
       position: 'bottomright',
