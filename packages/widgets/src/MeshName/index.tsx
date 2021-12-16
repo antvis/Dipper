@@ -1,14 +1,20 @@
-import React, { useRef, useState, useMemo, useCallback,useEffect } from 'react';
+import React, {
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+} from 'react';
 import { CheckOutlined, CloseOutlined, EditOutlined } from '@ant-design/icons';
 import styles from './index.less';
 import { Input } from 'antd';
-import { useLayerGroup } from '@antv/dipper';
+import { useLayerGroup } from '@antv/dipper-layout';
 import { Amaps } from '../service/amaps';
 
 export function MeshName() {
   const { selectFeatures, updateProperties } = useLayerGroup('grid');
   const [edit, setEdit] = useState(false);
-  const ref = useRef();
+  const ref = useRef(null);
 
   /**
    * get meshname
@@ -28,30 +34,33 @@ export function MeshName() {
     const value = ref.current.state.value;
     selectFeatures.forEach((item) => {
       const properties = {
-        ...item.feature.properties,
+        // @ts-ignore
+        ...item?.feature?.properties,
         name: value,
       };
-      updateProperties(item.feature, properties);
+      // @ts-ignore
+      updateProperties(item?.feature, properties);
     });
     setEdit(false);
   }, [JSON.stringify(selectFeatures)]);
 
-  useEffect(()=>{
-    const amaps = new Amaps<number>({ serviceMethod: ''})
-    getLayerArea(amaps)
-  },[selectFeatures])
+  useEffect(() => {
+    const amaps = new Amaps<number>({ serviceMethod: '' });
+    getLayerArea(amaps);
+  }, [selectFeatures]);
 
   const getLayerArea = useCallback(
-    async (amaps: any)=>{
-      let area = 0
-      if(!selectFeatures.length) return
-      (selectFeatures || []).forEach(async (item: any)=>{
-        const points = item.feature.geometry.coordinates
-        await amaps.ringArea(points[0],'km²')
-        area = amaps.getResult()
-      })
-    },[selectFeatures]
-  )
+    async (amaps: any) => {
+      let area = 0;
+      if (!selectFeatures.length) return;
+      (selectFeatures || []).forEach(async (item: any) => {
+        const points = item.feature.geometry.coordinates;
+        await amaps.ringArea(points[0], 'km²');
+        area = amaps.getResult();
+      });
+    },
+    [selectFeatures],
+  );
 
   // select more meshname 编辑 网格名称
   const EditMeshName = () => {
@@ -60,7 +69,7 @@ export function MeshName() {
         {!edit ? (
           <div onClick={() => setEdit(!edit)}>
             <span>{meshName}</span>
-            <EditOutlined style={{ paddingLeft: 12 }}/>
+            <EditOutlined style={{ paddingLeft: 12 }} />
           </div>
         ) : (
           <div className={styles.edit}>
@@ -80,11 +89,10 @@ export function MeshName() {
   const ShowMeshNames = () => {
     return (
       <div>
-        {meshName.length >= 2 && meshName.map((s) => {
-          return (
-            <span key={s}>{s},</span>
-          )
-        })}
+        {meshName.length >= 2 &&
+          meshName.map((s) => {
+            return <span key={s}>{s},</span>;
+          })}
       </div>
     );
   };

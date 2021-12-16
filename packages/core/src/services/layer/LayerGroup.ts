@@ -21,7 +21,7 @@ export default abstract class LayerGroup
 {
   private layers: ILayer[] = [];
   private contianer!: Container;
-  protected data: any;
+  public data: any;
   public source!: ISource;
   public visible: boolean = true;
   public name!: string;

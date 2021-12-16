@@ -119,13 +119,6 @@ export const config: Partial<IConfig> = {
       layout: 'horizontal',
       title: '地区搜索',
     },
-    {
-      display: true,
-      position: 'topleft',
-      layout: 'horizontal',
-      title: '属性表',
-      type: 'property_table',
-    }
   ],
   defaultcontrols: [
     {

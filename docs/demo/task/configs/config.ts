@@ -109,7 +109,13 @@ export const config: Partial<IConfig> = {
   },
   controls: [
     {
-      display: true,
+      display: false,
+      position: 'topright',
+      type: 'draw',
+      title: '测量',
+    },
+    {
+      display: false,
       position: 'topleft',
       type: 'mapStyle',
       title: '地图样式',
@@ -127,7 +133,7 @@ export const config: Partial<IConfig> = {
     //   title: '定位',
     // },
     {
-      display: true,
+      display: false,
       position: 'bottomright',
       type: 'map2Image',
       title: '导出地图图片',
