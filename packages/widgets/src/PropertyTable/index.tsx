@@ -2,6 +2,7 @@ import { TableOutlined } from '@ant-design/icons';
 import { useLayerService } from '@antv/dipper';
 import { Button, Modal, Table } from 'antd';
 import React, { useEffect, useState, ReactNode } from 'react';
+import styles from './index.less'
 
 interface ColProps {
   title: string | ReactNode,
@@ -55,7 +56,7 @@ export function PropertyTable() {
   }, [JSON.stringify(layerService.getLayerSource('grid'))])
 
   return (
-    <div>
+    <div className={styles.propertytable}>
       <Button icon={<TableOutlined style={{ color: '#8e8e8e'}} />} onClick={() => setIsModalVisible(true)} />
       <Modal title='属性表' footer={null}
         destroyOnClose width={1400} visible={isModalVisible}

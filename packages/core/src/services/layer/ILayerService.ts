@@ -1,4 +1,5 @@
 import type { ILayer, ISource } from '@antv/l7';
+import { Feature } from '@turf/turf';
 import type EventEmitter from 'eventemitter3';
 import type { Container } from 'inversify';
 
@@ -19,6 +20,7 @@ export interface ILayerGroup extends EventEmitter {
   removeLayer: (layer: ILayer) => void;
   destroy: () => void;
   updateSource: (data: any) => void;
+  getSelectFeatures?: () => Feature[];
 }
 export type LayerType = ILayerGroup;
 export interface ILayerService extends EventEmitter {

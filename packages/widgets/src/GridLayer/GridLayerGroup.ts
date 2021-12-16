@@ -233,4 +233,8 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       this.updateSelectLayer();
     }
   }
+
+  getSelectFeatures() {
+    return this.selectFeatures || [];
+  }
 }

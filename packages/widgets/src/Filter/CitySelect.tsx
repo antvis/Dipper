@@ -1,5 +1,4 @@
 import { Cascader } from 'antd';
-import type { CascaderOptionType } from 'antd/es/cascader/index';
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
 import { IWidgetProps } from '@antv/dipper-core';
@@ -20,9 +19,9 @@ export function CitySelect({ type = 'CitySelect' }: IWidgetProps<string>) {
         defaultValue={defaultSelect}
         style={{ width: 180 }}
         bordered={false}
-        options={getWidgetsOptions(type) as CascaderOptionType[]}
+        options={getWidgetsOptions(type) as any[]}
         allowClear={false}
-        onChange={(e) => {
+        onChange={(e: any) => {
           setWidgetsValue(type, e);
         }}
         placeholder="选择城市"

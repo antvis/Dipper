@@ -23,12 +23,7 @@ function Content({ items }: ContentProps) {
       {items
         ?.filter((item: any) => isDisplay(item.display))
         .map((item: IWidgetProps<any>) => {
-          return (
-            <div key={item.type}>
-              {' '}
-              <Widgets item={item} />
-            </div>
-          );
+          return <Widgets item={item} key={item.type} />;
         })}
     </>
   );

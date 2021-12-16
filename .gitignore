@@ -24,3 +24,4 @@
 /.vscode
 /.idea
 lerna-debug.log
+/.history
