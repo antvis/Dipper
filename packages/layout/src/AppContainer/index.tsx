@@ -10,8 +10,7 @@ import AppLayerControl from '../AppLayer';
 import AppMap from '../AppMap';
 import { Provider } from 'inversify-react';
 
-import type { IConfig, IConfigService, IPanel } from '@antv/dipper-core';
-import { TYPES } from '@antv/dipper-core';
+import type { IConfig, IPanel } from '@antv/dipper-core';
 import { useSceneContainer, useConfigService } from '../hooks';
 import type { Container } from 'inversify';
 
