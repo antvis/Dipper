@@ -5,7 +5,7 @@ import type { IWidgetProps } from '@antv/dipper-core';
 import type { PositionName } from '@antv/l7';
 import { useConfigService } from '@antv/dipper-layout';
 
-export const Draw = (props: IWidgetProps<PositionName>) => {
+export const Draw = (props: IWidgetProps) => {
   const { setWidgetsValue } = useConfigService();
   const scene = useSceneValue();
   useEffect(() => {

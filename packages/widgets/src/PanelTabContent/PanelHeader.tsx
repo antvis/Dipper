@@ -11,7 +11,7 @@ interface IProps {
 }
 
 function PanelHeader({ title }: IProps) {
-  const { globalConfig } = useConfigService<any>();
+  const { globalConfig } = useConfigService();
 
   const { selectFeatures, updateProperties } = useLayerGroup('grid');
   const titles = useMemo(() => {

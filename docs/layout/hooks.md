@@ -67,7 +67,7 @@ setConfig('');
 
 场景管理
 
-## useSceneContainer
+## useDipperContainer
 
 场景容器
 

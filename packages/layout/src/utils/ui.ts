@@ -6,15 +6,15 @@ type Position = 'left' | 'right' | 'center';
 
 // 获取AppContent children
 export const getAppContentItem = (
-  items: IWidgetProps<any>,
+  items: IWidgetProps,
   position: Position,
-): IWidgetProps<any>[] => {
+): IWidgetProps[] => {
   return items.children?.filter((bar) => bar.position === position) || [];
 };
 
 export const findItem = (
-  items: IWidgetProps<any>,
+  items: IWidgetProps,
   position: Position,
-): IWidgetProps<any> | undefined => {
+): IWidgetProps | undefined => {
   return items.children?.find((bar) => bar.position === position);
 };

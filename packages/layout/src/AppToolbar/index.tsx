@@ -3,7 +3,7 @@ import styles from './index.less';
 import { useConfigService } from '../hooks';
 import { AppContent } from '../AppTemplate';
 import { getAppContentItem, isDisplay } from '../utils/ui';
-import { IWidgetProps } from '../../../core/dist';
+import { IWidgetProps } from '@antv/dipper-core';
 
 export default function AppToolbar() {
   const { globalConfig } = useConfigService();
@@ -15,13 +15,13 @@ export default function AppToolbar() {
       {/* 左侧组件 */}
       <div style={{ display: 'flex' }}>
         <AppContent
-          items={getAppContentItem(toolbar as IWidgetProps<any>, 'left')}
+          items={getAppContentItem(toolbar as IWidgetProps, 'left')}
         />
       </div>
       {/* 右侧组件 */}
       <div style={{ display: 'flex' }}>
         <AppContent
-          items={getAppContentItem(toolbar as IWidgetProps<any>, 'right')}
+          items={getAppContentItem(toolbar as IWidgetProps, 'right')}
         />
       </div>
     </div>

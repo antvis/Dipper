@@ -42,6 +42,15 @@ Dipper 核心概念一切皆组件(Widgets)
  npm i @antv/dipper
 ```
 
+### 根容器组件
+
+DipperContainer
+参数
+
+- cfg 应该配置
+
+DipperContainer 支持传入子组件，AntD 组件，L7-React 组件
+
 ### 示例代码
 
 ```jsx pure

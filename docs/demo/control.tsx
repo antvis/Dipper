@@ -44,7 +44,7 @@ registerWidget('controlPosition', ControlPosition);
 export default function RumbMap() {
   return (
     <div style={{ height: '500px' }}>
-      <DipperContainer<any>
+      <DipperContainer
         cfg={{
           controls: [
             {

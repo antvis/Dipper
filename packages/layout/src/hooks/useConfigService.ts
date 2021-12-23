@@ -7,9 +7,9 @@ import {
 } from '@antv/dipper-core';
 import { useEffect, useState } from 'react';
 
-export function useConfigService<T>() {
-  const configService = useInjection<IConfigService<T>>(TYPES.CONFIG_SYMBOL);
-  const [globalConfig, setCfg] = useState<Partial<IConfig<T>>>(
+export function useConfigService() {
+  const configService = useInjection<IConfigService>(TYPES.CONFIG_SYMBOL);
+  const [globalConfig, setCfg] = useState<Partial<IConfig>>(
     configService.config,
   );
 

@@ -13,7 +13,7 @@ export interface IRangeControlProps {
   title?: string;
 }
 
-export function ClassifyColor({ options }: IWidgetProps<string>) {
+export function ClassifyColor({ options }: IWidgetProps) {
   const { items, title } = options as IRangeControlProps;
   return (
     <div className={styles.legendClassifyControl}>

@@ -26,7 +26,7 @@ export default function createContainer() {
     .inSingletonScope();
 
   container
-    .bind<IConfigService<any>>(TYPES.CONFIG_SYMBOL)
+    .bind<IConfigService>(TYPES.CONFIG_SYMBOL)
     .to(ConfigService)
     .inSingletonScope();
 

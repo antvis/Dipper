@@ -11,7 +11,7 @@ export interface ILegendControlProps {
   }[];
 }
 
-export function DiscreteColor({ options }: IWidgetProps<string>) {
+export function DiscreteColor({ options }: IWidgetProps) {
   const { title, items } = options as ILegendControlProps;
   return (
     <>

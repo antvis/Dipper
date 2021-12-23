@@ -16,7 +16,7 @@ export default class PanelService
   public container: Container | undefined = undefined;
 
   @inject(TYPES.CONFIG_SYMBOL)
-  protected configService!: IConfigService<string>;
+  protected configService!: IConfigService;
 
   init(config: Partial<IPanel>) {
     this.config = config;

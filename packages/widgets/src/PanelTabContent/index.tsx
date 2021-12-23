@@ -4,7 +4,7 @@ import { isEqual } from 'lodash';
 
 import type { IWidgetProps } from '@antv/dipper-core';
 
-export function PanelTabcontent(props: IWidgetProps<string>) {
+export function PanelTabcontent(props: IWidgetProps) {
   return (
     <>
       {/** 头部表头 */}

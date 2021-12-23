@@ -31,13 +31,13 @@ dipper 配置项围绕 Widget,每个 Widgets 是个组件，同时也可以包�
 Widget 属性定义
 
 ```ts
-export interface IWidgetProps<T> {
+export interface IWidgetProps {
   type: string;
   title?: string;
   position?: T | string;
   display?: boolean;
   options?: any;
-  children?: IWidgetProps<T>[];
+  children?: IWidgetProps[];
   [key: string]: any;
 }
 ```
@@ -68,7 +68,7 @@ export interface IWidgetProps<T> {
       display: boolean;
       style: React.CSSProperties;
     }>;
-    children?: IWidgetProps<'left' | 'right' | 'center'>[];
+    children?: IWidgetProps[];
  }
 ```
 
@@ -79,7 +79,7 @@ export interface IWidgetProps<T> {
 ```ts
 {
   display: boolean;
-  children: (IWidgetProps < 'left') | ('right' > []);
+  children: (IWidgetProps[]);
 }
 ```
 
@@ -188,7 +188,7 @@ L7 地图基础控件
   opened?: boolean; // 是否打开
   position?: 'left' | 'right' | 'top' | 'bottom'; // 位置
   style?: React.CSSProperties; // 样式
-  children?: IWidgetProps<string>[]; // 子组件
+  children?: IWidgetProps[]; // 子组件
  }
 ```
 

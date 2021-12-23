@@ -16,14 +16,14 @@ export enum ConfigEventEnum {
 }
 
 @injectable()
-export default class ConfigService<T>
+export default class ConfigService
   extends EventEmitter
-  implements IConfigService<T>
+  implements IConfigService
 {
-  public config!: Partial<IConfig<T>>;
+  public config!: Partial<IConfig>;
 
   private isInited: boolean = false;
-  init(config: Partial<IConfig<T>> | undefined) {
+  init(config: Partial<IConfig> | undefined) {
     if (!this.isInited) {
       this.config = mergeWith({}, defaultConfig, config, customizer);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
@@ -53,7 +53,7 @@ export default class ConfigService<T>
     }
   }
   // legends;
-  updateControlConfig(type: keyof IConfig<T>, id: string, value: any) {
+  updateControlConfig(type: keyof IConfig, id: string, value: any) {
     const index = this.config.legends?.findIndex((k) => k.id === id);
     if (index !== -1) {
       this.setConfig(`${type}.${index}`, value);

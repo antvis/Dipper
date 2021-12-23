@@ -5,19 +5,19 @@ import type { ISceneService } from './services/scene/ISceneService';
 import type { IPanelService } from './services/panel/IPanelService';
 import { TYPES } from './types';
 
-export default class SceneContainer<T> {
+export default class Dipper {
   public sceneService: ISceneService;
-  public configService: IConfigService<T>;
+  public configService: IConfigService;
   public panelService: IPanelService;
   private container: Container;
-  constructor(cfg: IConfig<T> | undefined) {
+  constructor(cfg: IConfig | undefined) {
     this.container = createContainer();
     const sceneService = this.container.get(
       TYPES.SCENE_SYMBOL,
     ) as ISceneService;
     const configService = this.container.get(
       TYPES.CONFIG_SYMBOL,
-    ) as IConfigService<T>;
+    ) as IConfigService;
     const panelService = this.container.get(
       TYPES.PANEL_SYMBOL,
     ) as IPanelService;
@@ -31,6 +31,14 @@ export default class SceneContainer<T> {
 
   public getContainer() {
     return this.container;
+  }
+
+  /**
+   * 获取L7 地图场景 实例 scene
+   * @returns
+   */
+  public getScene() {
+    return this.sceneService.getScene();
   }
 
   public reset() {
