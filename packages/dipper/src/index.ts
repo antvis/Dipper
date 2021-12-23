@@ -12,6 +12,7 @@ import {
   Location,
   SearchPlace,
   MapStyle,
+  Map2Image,
 } from '@antv/dipper-widgets';
 
 registerWidget('citySelect', CitySelect);
@@ -23,3 +24,4 @@ registerWidget('multiClassifyColor', MultiClassifyColor);
 registerWidget('mapStyle', MapStyle);
 registerWidget('location', Location);
 registerWidget('searchPlaces', SearchPlace);
+registerWidget('exportMap', Map2Image);

@@ -4,8 +4,6 @@ import { CustomControl } from '@antv/l7-react';
 import { PositionName } from '@antv/l7';
 import { Tabs } from 'antd';
 import { isEqual } from 'lodash';
-import { getWidget } from '@antv/dipper-core';
-import { useWidgets } from '../hooks/useWidgets';
 import Widgets from '../Widgets';
 import { useEffect } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
@@ -73,7 +71,6 @@ function appMapControlContent({ items }: ContentProps) {
             key={l.type}
           >
             <Widgets item={l} />
-            {/* {getWidget(l.type)(l) as React.ReactElement} */}
           </CustomControl>
         );
       })}
