@@ -119,6 +119,13 @@ export const config: Partial<IConfig> = {
       layout: 'horizontal',
       title: '地区搜索',
     },
+    {
+      display: true,
+      position: 'topleft',
+      type: 'layerVisible',
+      layout: 'horizontal',
+      title: '图层显示',
+    },
   ],
   defaultcontrols: [
     {

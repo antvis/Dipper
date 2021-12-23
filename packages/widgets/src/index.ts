@@ -9,6 +9,7 @@ export * from './NavBar';
 export * from './Location';
 export * from './Draw';
 export * from './Search/SearchPlace';
-export * from './MeshName'
-export * from './Map2Image'
-export * from './PropertyTable'
+export * from './MeshName';
+export * from './Map2Image';
+export * from './PropertyTable';
+export * from './LayerVisible';

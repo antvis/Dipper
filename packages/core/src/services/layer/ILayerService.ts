@@ -25,6 +25,7 @@ export interface ILayerGroup extends EventEmitter {
 export type LayerType = ILayerGroup;
 export interface ILayerService extends EventEmitter {
   // init(container:Container):void;
+  getLayerStore: () => any;
   getLayer: (name: string) => LayerType;
   getLayerSource: (name: string) => any;
   addLayer: (layer: LayerType) => void;
