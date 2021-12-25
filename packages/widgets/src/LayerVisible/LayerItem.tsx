@@ -4,7 +4,6 @@ import { Button } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 export default function LayerItem(props: Record<string, any>) {
-  debugger;
   const { item, onChange } = props;
   const [visible, setVisible] = useState(item.visible);
   const changeVisible = function (item: ILayerGroup) {

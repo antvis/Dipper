@@ -9,7 +9,6 @@ interface ILayerItem extends ILayerGroup {
   visible: boolean;
 }
 export function LayerVisible() {
-  debugger;
   const [checkLayerShow, setCheckLayerShow] = useState(false);
   function onChange(item: ILayerItem) {
     item.visible ? item.hide() : item.show();
