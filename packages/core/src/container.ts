@@ -4,6 +4,7 @@ import type { IConfig, IConfigService } from './services/config/IConfigService';
 import type { ISceneService } from './services/scene/ISceneService';
 import type { IPanelService } from './services/panel/IPanelService';
 import { TYPES } from './types';
+import { Scene } from '@antv/l7';
 
 export default class Dipper {
   public sceneService: ISceneService;
@@ -38,7 +39,7 @@ export default class Dipper {
    * @returns
    */
   public getScene() {
-    return this.sceneService.getScene();
+    return this.sceneService.getScene() as Scene;
   }
 
   public reset() {
