@@ -33,6 +33,7 @@ function AppPanel<T>({ panel }: { panel: Partial<IPanel> }) {
   const panelWidth = useMemo(() => {
     return options?.width ?? '360px';
   }, [options?.width]);
+
   return isDisplay(panel?.display) ? (
     <div
       style={{
@@ -56,7 +57,13 @@ function AppPanel<T>({ panel }: { panel: Partial<IPanel> }) {
       )}
 
       {/* 面板内容 */}
-      <div style={{ display: options?.opened ? 'block' : 'none',overflowY:'auto' }}>
+      <div
+        style={{
+          display: options?.opened ? 'block' : 'none',
+          overflowY: 'auto',
+          height: '100%',
+        }}
+      >
         <AppContent items={panel?.children || []} />
       </div>
     </div>

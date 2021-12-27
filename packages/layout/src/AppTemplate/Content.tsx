@@ -8,6 +8,7 @@ import Widgets from '../Widgets';
 import { useEffect } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import style from './style.less';
+import classNames from 'classnames';
 
 const { TabPane } = Tabs;
 
@@ -31,20 +32,30 @@ export const AppContent = React.memo(Content, isEqual);
 // tab组件
 function appTabsContent({ items }: ContentProps) {
   const [currentOperate, setCurrentOperate] = useState('');
+
+  const displayItems = useMemo(
+    () => items.filter((item) => isDisplay(item.display)),
+    [items],
+  );
+
   useEffect(() => {
     if (items.length !== 0) {
       setCurrentOperate(items[0].type + items[0]?.title);
     }
-  }, [JSON.stringify(items)]);
+  }, [JSON.stringify(displayItems)]);
 
   return (
     <Tabs
+      key="tab"
       activeKey={currentOperate}
       onChange={setCurrentOperate}
       type="card"
-      className={style.titleTop}
+      className={classNames({
+        [style.titleTop]: true,
+        [style.hideTop]: displayItems.length <= 1,
+      })}
     >
-      {items.map((tab: any) => {
+      {displayItems.map((tab: any) => {
         return (
           <TabPane
             tab={tab?.title}
