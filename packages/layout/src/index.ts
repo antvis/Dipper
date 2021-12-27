@@ -6,7 +6,6 @@ export { default as AppControl } from './AppControl';
 export { default as AppHeader } from './AppHeader';
 export { default as AppLayer } from './AppLayer';
 export { default as AppIcon } from './AppIcon';
-
 export * from './AppTemplate';
 export * from './hooks';
 export * from './utils';
