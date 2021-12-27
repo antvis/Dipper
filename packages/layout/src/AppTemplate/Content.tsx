@@ -12,7 +12,7 @@ import style from './style.less';
 const { TabPane } = Tabs;
 
 interface ContentProps {
-  items: IWidgetProps<string>[];
+  items: IWidgetProps[];
 }
 // 普通组件
 function Content({ items }: ContentProps) {
@@ -20,7 +20,7 @@ function Content({ items }: ContentProps) {
     <>
       {items
         ?.filter((item: any) => isDisplay(item.display))
-        .map((item: IWidgetProps<any>) => {
+        .map((item: IWidgetProps) => {
           return <Widgets item={item} key={item.type} />;
         })}
     </>

@@ -16,7 +16,7 @@ export default class SceneService
   public container: Container | undefined = undefined;
 
   @inject(TYPES.CONFIG_SYMBOL)
-  protected configService!: IConfigService<string>;
+  protected configService!: IConfigService;
 
   init(container: Container) {
     this.container = container;

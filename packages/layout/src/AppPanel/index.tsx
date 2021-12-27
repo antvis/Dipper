@@ -27,7 +27,7 @@ function getStyle(
   };
 }
 
-function AppPanel<T>({ panel }: { panel: Partial<IPanel> }) {
+function AppPanel({ panel }: { panel: Partial<IPanel> }) {
   const { siderBarService } = usePanelService();
   const { options = {} } = panel as IPanel;
   const panelWidth = useMemo(() => {
@@ -56,7 +56,13 @@ function AppPanel<T>({ panel }: { panel: Partial<IPanel> }) {
       )}
 
       {/* 面板内容 */}
-      <div style={{ display: options?.opened ? 'block' : 'none',overflowY:'auto' }}>
+      <div
+        style={{
+          display: options?.opened ? 'block' : 'none',
+          overflowY: 'auto',
+          height: '100%',
+        }}
+      >
         <AppContent items={panel?.children || []} />
       </div>
     </div>

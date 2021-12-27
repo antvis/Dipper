@@ -42,7 +42,10 @@ export default function RumbMap() {
     },[])
   return (
     <div style={{ height: '500px' }}>
-     {data &&  <DipperContainer<any>
+     {data &&  <DipperContainer
+       onLoad={(container)=>{
+           console.log(container)
+       }}
         cfg={{
           map:{
             style: 'dark',

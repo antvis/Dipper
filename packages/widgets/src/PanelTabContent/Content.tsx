@@ -5,7 +5,7 @@ import { AppTabsContent } from '@antv/dipper-layout';
 import type { IWidgetProps } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
 
-function PanelTabContent(props: IWidgetProps<string>) {
+function PanelTabContent(props: IWidgetProps) {
   const { children = [] } = props;
   return (
     <div

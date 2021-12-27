@@ -1,11 +1,11 @@
-export interface IWidgetProps<T> {
+export interface IWidgetProps {
   type: string;
   title?: string;
-  position?: T | string;
+  position?: string;
   layout?: 'horizontal' | 'vertical';
   display?: boolean;
   options?: any;
-  children?: IWidgetProps<T>[];
+  children?: IWidgetProps[];
   [key: string]: any;
 }
 

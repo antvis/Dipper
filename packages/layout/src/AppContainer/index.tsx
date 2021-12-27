@@ -11,22 +11,20 @@ import AppMap from '../AppMap';
 import { Provider } from 'inversify-react';
 
 import type { IConfig, IPanel } from '@antv/dipper-core';
-import { useSceneContainer, useConfigService } from '../hooks';
+import { Dipper } from '@antv/dipper-core';
+import { useDipperContainer, useConfigService } from '../hooks';
 import type { Container } from 'inversify';
 
 const { Content } = Layout;
 
-interface IContainerProps<T> {
-  cfg: IConfig<T>;
+interface IContainerProps {
+  cfg: IConfig;
   children?: React.ReactNode;
+  onLoad?: (sceneContainer: Dipper) => void;
 }
 
-export function ContainerContent<T>({
-  children,
-}: {
-  children?: React.ReactNode;
-}) {
-  const { globalConfig } = useConfigService<T>();
+export function ContainerContent({ children }: { children?: React.ReactNode }) {
+  const { globalConfig } = useConfigService();
   const { panel } = globalConfig;
   return (
     <Content
@@ -54,14 +52,20 @@ export function ContainerContent<T>({
   );
 }
 
-export default function SceneContainer<T>({
+export default function DipperContainer({
   cfg,
   children,
-}: IContainerProps<T>) {
-  const { sceneContainer } = useSceneContainer<T>(cfg);
+  onLoad,
+}: IContainerProps) {
+  const { sceneContainer } = useDipperContainer(cfg);
   useUnmount(() => {
     if (sceneContainer) {
       sceneContainer.destroy();
+    }
+  });
+  useEffect(() => {
+    if (sceneContainer && onLoad) {
+      onLoad(sceneContainer);
     }
   });
 
@@ -77,7 +81,7 @@ export default function SceneContainer<T>({
           <AppToolbar />
           {/* 地图区域 */}
 
-          <ContainerContent<T>>{children}</ContainerContent>
+          <ContainerContent>{children}</ContainerContent>
         </Layout>
       </Provider>
     </>

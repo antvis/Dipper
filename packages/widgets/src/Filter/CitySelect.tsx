@@ -5,7 +5,7 @@ import { IWidgetProps } from '@antv/dipper-core';
 import { useConfigService } from '@antv/dipper-layout';
 import { findSelectArray } from './common';
 
-export function CitySelect({ type = 'CitySelect' }: IWidgetProps<string>) {
+export function CitySelect({ type = 'CitySelect' }: IWidgetProps) {
   const { globalConfig, getWidgetsOptions, setWidgetsValue } =
     useConfigService();
   const defaultSelect = useMemo(() => {

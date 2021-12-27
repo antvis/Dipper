@@ -6,6 +6,12 @@ toc: menu
 
 dipper-core 提供了一些框架共用的管理的能力方法。
 
+## DipperContainer
+
+Dipper 容器对象，复杂应用初始化和相关服务的管理
+
+React 中可以通过
+
 ## ConfigSerice
 
 配置管理服务
