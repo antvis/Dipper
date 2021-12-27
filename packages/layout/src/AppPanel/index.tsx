@@ -33,6 +33,7 @@ function AppPanel({ panel }: { panel: Partial<IPanel> }) {
   const panelWidth = useMemo(() => {
     return options?.width ?? '360px';
   }, [options?.width]);
+
   return isDisplay(panel?.display) ? (
     <div
       style={{
