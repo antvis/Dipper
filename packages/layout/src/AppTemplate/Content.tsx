@@ -37,19 +37,14 @@ function appTabsContent({ items }: ContentProps) {
     }
   }, [JSON.stringify(items)]);
 
-  const displayItems = useMemo(
-    () => items.filter((item) => isDisplay(item.display)),
-    [items],
-  );
-
-  return displayItems.length > 1 ? (
+  return (
     <Tabs
       activeKey={currentOperate}
       onChange={setCurrentOperate}
       type="card"
       className={style.titleTop}
     >
-      {displayItems.map((tab: any) => {
+      {items.map((tab: any) => {
         return (
           <TabPane
             tab={tab?.title}
@@ -61,8 +56,6 @@ function appTabsContent({ items }: ContentProps) {
         );
       })}
     </Tabs>
-  ) : (
-    <Widgets item={displayItems[0]} />
   );
 }
 export const AppTabsContent = React.memo(appTabsContent, isEqual);
