@@ -12,6 +12,7 @@
     "release": "lerna publish from-package --registry https://registry.npmjs.org/ --force-publish && lerna run sync",
     "docs:deploy": "gh-pages -d docs-dist",
     "build": "yarn clean && lerna run build",
+    "build-watch": "yarn clean && lerna run watch",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",

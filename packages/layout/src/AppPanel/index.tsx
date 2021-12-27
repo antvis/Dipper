@@ -60,6 +60,7 @@ function AppPanel({ panel }: { panel: Partial<IPanel> }) {
         style={{
           display: options?.opened ? 'block' : 'none',
           overflowY: 'auto',
+          height: '100%',
         }}
       >
         <AppContent items={panel?.children || []} />

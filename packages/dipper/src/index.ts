@@ -14,7 +14,6 @@ import {
   MapStyle,
   Map2Image,
 } from '@antv/dipper-widgets';
-
 registerWidget('citySelect', CitySelect);
 registerWidget('panelTabContent', PanelTabcontent);
 registerWidget('navibar', NavBar);

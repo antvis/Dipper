@@ -5,5 +5,4 @@ export * from './types';
 export * from './widgetFactory';
 export { default as Dipper } from './container';
 export * from './utils';
-
 export { createContainer };
