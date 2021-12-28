@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-layout",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -36,7 +36,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@antv/dipper-core": "^0.0.17",
+    "@antv/dipper-core": "^0.0.18",
     "@turf/turf": "^6.5.0",
     "ahooks": "^2.10.12",
     "classnames": "^2.3.1",
