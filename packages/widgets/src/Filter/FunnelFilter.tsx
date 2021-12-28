@@ -1,42 +1,51 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from '@alipay/bigfish/react';
 import styles from './index.less';
-import { DownOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Input } from 'antd';
-import classnames from 'classnames';
-import { cloneDeep } from 'lodash';
-import { useConfigService } from '@antv/dipper-layout';
+import { DownOutlined } from '@alipay/bigfish/icons';
+import { Button, Dropdown, Input } from '@alipay/bigfish/antd';
+import classnames from '@alipay/bigfish/util/classnames';
+import { cloneDeep } from '@alipay/bigfish/util/lodash';
+import { useConfigService } from '@antv/dipper';
 
-function FunnelFilter({ title, data }: any) {
-  const { globalConfig, setConfig } = useConfigService();
+function FunnelFilter({ condition, type, event }: any) {
+  // const { defaultOpen = false } = options || {};
+  const [visible, setVisible] = useState(false);
+  const { setWidgetsOptions, setWidgetsValue } = useConfigService();
   const [conditionList, setConditionList] = useState<any[]>([]);
-
   useEffect(() => {
-    setConditionList(cloneDeep(data));
-  }, [JSON.stringify(data)]);
-
-  const hasFilterValue = useMemo(() => {
-    return !!(globalConfig.initData.filterData ?? []).find(
-      (item) => item.value,
+    setConditionList(
+      cloneDeep([...condition.filter_schema, ...condition.funnel_schema]),
     );
-  }, [globalConfig.initData.filterData]);
+  }, [JSON.stringify(condition)]);
 
   const onItemChange = useCallback(
     (newValue: string, index: number) => {
-      const newConditionList = [...conditionList];
-      newConditionList[index].value = newValue;
-      setConditionList(newConditionList);
+      const reg = /^-?\d*(\.\d*)?$/;
+      if (!isNaN(+newValue) && reg.test(newValue)) {
+        const newConditionList = [...conditionList];
+        newConditionList[index].value = newValue;
+        setConditionList(newConditionList);
+      }
     },
     [conditionList],
   );
 
   const onSubmit = useCallback(
     (newConditionList) => {
-      setConfig('initData', {
-        ...globalConfig?.initData,
-        filterData: cloneDeep(newConditionList),
+      const valuesObj = {};
+      newConditionList
+        .filter((item: any) => {
+          return !!item.value;
+        })
+        .forEach((element: any) => {
+          valuesObj[element.code] = element.value;
+        });
+      setWidgetsValue('filterData', {
+        searchType: type,
+        ...valuesObj,
+        ...event,
       });
     },
-    [globalConfig.initData, setConfig],
+    [setWidgetsOptions],
   );
 
   const onReset = useCallback(() => {
@@ -52,7 +61,13 @@ function FunnelFilter({ title, data }: any) {
 
   const content = (
     <div className={styles.funnelSelectContent}>
-      <div onClick={(e) => e.stopPropagation()}>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          maxHeight: '300px',
+          overflow: 'scroll',
+        }}
+      >
         {conditionList.map((item, index) => (
           <div
             className={styles.conditionItem}
@@ -61,11 +76,22 @@ function FunnelFilter({ title, data }: any) {
               e.stopPropagation();
             }}
           >
-            <div className={styles.conditionName}>{item.name}</div>
+            <div className={styles.conditionName}>
+              {item.name}
+              {item.type === 'funnel' && (
+                <span style={{ marginLeft: 8, color: '#aaa', fontSize: 12 }}>
+                  筛选前X%
+                </span>
+              )}
+            </div>
             <Input
               value={item.value}
-              addonBefore={item.prefix ? <span>{item.prefix}</span> : undefined}
-              placeholder={0}
+              addonBefore={
+                item.relationOperator ? (
+                  <span>{item.relationOperator}</span>
+                ) : undefined
+              }
+              placeholder={'0'}
               onChange={(e) => onItemChange(e.target.value, index)}
               allowClear
             />
@@ -84,18 +110,23 @@ function FunnelFilter({ title, data }: any) {
   );
 
   return (
-    <Dropdown overlay={content}>
+    <Dropdown
+      trigger={['click']}
+      visible={visible}
+      onVisibleChange={setVisible}
+      overlay={content}
+    >
       <div
         className={classnames({
           [styles.funnelSelect]: true,
-          [styles.funnelSelectActive]: hasFilterValue,
+          [styles.funnelSelectActive]: false, // TODO  根据选中设置
         })}
       >
-        <span className={styles.funnelSelectTitle}>{title}</span>
+        <span className={styles.funnelSelectTitle}>{condition.title}</span>
         <DownOutlined
           className={classnames({
             [styles.downIcon]: true,
-            // [styles.downIconRotate]: isOpen,
+            // [styles.downIconRotate]: false,
           })}
         />
       </div>

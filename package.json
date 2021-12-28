@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@antv/g2plot": "^2.3.39",
-    "@antv/l7": "^2.5.40",
+    "@antv/l7": "^2.6.29",
     "@antv/l7-draw": "^2.4.20",
     "@antv/l7-react": "^2.3.9",
     "antd": "^4.16.13",
@@ -48,8 +48,8 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@antv/l7": "^2.5.40",
-    "@antv/l7-maps": "^2.5.40",
+    "@antv/l7": "^2.6.29",
+    "@antv/l7-maps": "^2.6.29",
     "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.178",
     "@types/react": "^16.14.2",
