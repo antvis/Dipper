@@ -59,8 +59,9 @@ function AppPanel({ panel }: { panel: Partial<IPanel> }) {
       {/* 面板内容 */}
       <div
         style={{
-          display: options?.opened ? 'block' : 'none',
+          display: options?.opened ? 'flex' : 'none',
           overflowY: 'auto',
+          flexDirection: 'column',
           height: '100%',
         }}
       >
