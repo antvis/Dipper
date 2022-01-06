@@ -33,13 +33,11 @@ export const defaultConfig: Partial<IConfig> = {
       display: true,
       position: 'topleft',
       type: 'mapStyle',
-      title: '地图样式',
     },
     {
       display: true,
       position: 'bottomright',
       type: 'location',
-      title: '定位',
     },
   ],
   defaultcontrols: [

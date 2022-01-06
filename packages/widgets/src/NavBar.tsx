@@ -10,7 +10,7 @@ export function NavBar() {
   const options = useMemo(() => {
     if (headerbar) {
       //@ts-ignore
-      return findItem(headerbar, 'center')?.options;
+      return findItem(headerbar, 'center')?.options || [];
     }
     return [];
   }, [headerbar]);

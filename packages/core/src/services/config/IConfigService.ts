@@ -1,6 +1,9 @@
 import type EventEmitter from 'eventemitter3';
 import type { IMapConfig, IPopupOption } from '@antv/l7';
-import type { IWidgetProps, ControlPostions } from '../interface';
+import type {
+  IWidgetProps,
+  IControlWidgetsProps,
+} from '../widgets/IWidgetsService';
 import type { IPanel } from '../panel/IPanelService';
 
 export interface IConfig {
@@ -50,7 +53,7 @@ export interface IConfig {
         };
     children?: React.ReactNode;
   };
-  controls: IWidgetProps[]; // 自定义组件配置
+  controls: IControlWidgetsProps[]; // 自定义组件配置
   defaultcontrols: IWidgetProps[]; // 地图自带组件
   legends: IWidgetProps[];
   layers: {

@@ -40,7 +40,7 @@ function appTabsContent({ items }: ContentProps) {
 
   useEffect(() => {
     if (items.length !== 0) {
-      setCurrentOperate(items[0].type + items[0]?.title);
+      setCurrentOperate(items[0].type); // TODO 去掉了Title
     }
   }, [JSON.stringify(displayItems)]);
 
@@ -57,11 +57,7 @@ function appTabsContent({ items }: ContentProps) {
     >
       {displayItems.map((tab: any) => {
         return (
-          <TabPane
-            tab={tab?.title}
-            key={tab.type + tab?.title}
-            className={style.tabPanel}
-          >
+          <TabPane tab={tab?.title} key={tab.type} className={style.tabPanel}>
             <Widgets item={tab} />
           </TabPane>
         );

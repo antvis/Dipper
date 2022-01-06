@@ -1,5 +1,5 @@
 import type EventEmitter from 'eventemitter3';
-import type { IWidgetProps } from '../interface';
+import type { IWidgetProps } from '../widgets/IWidgetsService';
 
 export interface IPanel {
   display: boolean;
