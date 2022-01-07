@@ -12,7 +12,8 @@ export interface IWidgetProps<P = any> {
   position?: string;
   display?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
-  children?: IWidgetProps<P>[];
+  children?: JSX.Element | JSX.Element[] | Array<JSX.Element | undefined>;
+  childrens?: IWidgetProps<P>[];
 }
 
 export interface IControlWidgetsProps<IControlOption = any>
