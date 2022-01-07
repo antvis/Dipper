@@ -10,7 +10,6 @@ interface IWidgetsComponent extends IWidgetProps {
 export const CustomBaseWidgets = (props: IWidgetsComponent) => {
   const { widgetsService } = useWidgetsService();
   const [widget, setWidgets] = useState<IWidget>();
-  console.log(props);
   useEffect(() => {
     const wid = new BaseWidget(props);
     setWidgets(wid);
@@ -22,5 +21,5 @@ export const CustomBaseWidgets = (props: IWidgetsComponent) => {
 
   // TODO 状态更新
 
-  return props?.children;
+  return (widget && props?.children) || '';
 };

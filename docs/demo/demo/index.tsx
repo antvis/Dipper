@@ -3,17 +3,20 @@ import {
   DipperContainer,
   registerWidget,
   useConfigService,
+  useWidgets,
+  IWidgetProps,
 } from '@antv/dipper';
 import { Select, Button } from 'antd';
 import { CustomBaseWidgets } from '@antv/dipper-widgets';
 const { Option } = Select;
 
-const demo = (props: any) => {
+const demo = (props: IWidgetProps) => {
+  const { widgetsOptions, widget } = useWidgets(props?.id || props.type);
   return <Button value="测试">{props.options.title}</Button>;
 };
 
 const layout = (props: any) => {
-  return <CustomBaseWidgets>{demo(props)}</CustomBaseWidgets>;
+  return <CustomBaseWidgets {...props}>{demo(props)}</CustomBaseWidgets>;
 };
 
 const ControlPosition = () => {
@@ -61,6 +64,7 @@ export default function RumbMap() {
               display: true,
               position: 'topleft',
               type: 'demo',
+              id: 'demo',
               options: {
                 title: '这个是测试',
               },

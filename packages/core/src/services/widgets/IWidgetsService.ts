@@ -21,7 +21,7 @@ export interface IControlWidgetsProps<IControlOption = any>
   layout?: 'horizontal' | 'vertical';
 }
 
-export interface IWidget<IOptions = any, IValue = any> {
+export interface IWidget<IOptions = any, IValue = any> extends EventEmitter {
   id: string;
   show: () => void;
   hide: () => void;
@@ -29,9 +29,15 @@ export interface IWidget<IOptions = any, IValue = any> {
   getValue: () => Partial<IValue>;
   setOptions: (option: Partial<IWidgetProps<IOptions>>) => void;
   setValues: (values: Partial<IValue>) => void;
+  destroy: () => void;
 }
 
 export enum WidgetsEventEnum {
   'OPTIONT_CHANGE' = 'optionchange',
   'VALUE_CHANGE' = 'valuechange',
+}
+
+export enum WidgetsServiceEnum {
+  'ADD' = 'add',
+  'REMOVE' = 'remove',
 }
