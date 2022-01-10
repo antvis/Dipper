@@ -11,7 +11,7 @@ const { Header } = Layout;
 
 export default function AppHeader() {
   const { globalConfig } = useConfigService();
-  const { headerstyle, display, logo, url, title, children } =
+  const { headerstyle, display, logo, url, title, childrens } =
     globalConfig.headerbar || {};
 
   const logoDom = useMemo(() => {
@@ -62,17 +62,17 @@ export default function AppHeader() {
 
         {/* 
         // @ts-ignore */}
-        <AppContent items={children?.filter((c) => c.position === 'left')} />
+        <AppContent items={childrens?.filter((c) => c.position === 'left')} />
       </div>
       <div>
         {/* 
           // @ts-ignore */}
-        <AppContent items={children?.filter((c) => c.position === 'center')} />
+        <AppContent items={childrens?.filter((c) => c.position === 'center')} />
       </div>
       <div className={styles.appHeaderRight}>
         {/* 
         // @ts-ignore */}
-        <AppContent items={children?.filter((c) => c.position === 'right')} />
+        <AppContent items={childrens?.filter((c) => c.position === 'right')} />
       </div>
     </Header>
   ) : (

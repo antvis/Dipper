@@ -15,11 +15,11 @@ export const defaultConfig: Partial<IConfig> = {
       value: 'XX 管理系统',
       display: true,
     },
-    children: [],
+    childrens: [],
   },
   toolbar: {
     display: false,
-    children: [],
+    childrens: [],
   },
   map: {
     zoom: 10,

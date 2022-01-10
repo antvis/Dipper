@@ -26,7 +26,8 @@ const formatLegend = (data: any[]) => {
 export function GridLayer() {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const { globalConfig, updateLegend, getWidgetsValue,setConfig } = useConfigService();
+  const { globalConfig, updateLegend, getWidgetsValue, setConfig } =
+    useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const cityValue = getWidgetsValue('citySelect');
@@ -141,14 +142,14 @@ export function GridLayer() {
   useEffect(() => {
     if (selectFeatures.length) {
       // TODO 报错
-      setConfig(`panel.children.1.display`, false);
-      setConfig(`panel.children.2.display`, true);
-      // setConfig(`panel.children.${findIdMeshchart}.display`, false)
+      setConfig(`panel.childrens.1.display`, false);
+      setConfig(`panel.childrens.2.display`, true);
+      // setConfig(`panel.childrens.${findIdMeshchart}.display`, false)
     } else {
-      setConfig(`panel.children.1.display`, true);
-      setConfig(`panel.children.2.display`, false);
+      setConfig(`panel.childrens.1.display`, true);
+      setConfig(`panel.childrens.2.display`, false);
     }
-  }, [JSON.stringify(selectFeatures)])
+  }, [JSON.stringify(selectFeatures)]);
 
   return <></>;
 }

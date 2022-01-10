@@ -31,12 +31,12 @@ export interface IConfig {
       display: boolean;
       style: React.CSSProperties;
     }>;
-    children?: IWidgetProps[];
+    childrens?: IWidgetProps[];
   };
   panel: Partial<IPanel>;
   toolbar: {
     display: boolean;
-    children: IWidgetProps[];
+    childrens: IWidgetProps[];
   };
   headerWidgets?: IWidgetProps[]; // 导航栏配置
   map: Partial<IMapConfig>;
