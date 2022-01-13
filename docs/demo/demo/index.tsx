@@ -12,6 +12,7 @@ const { Option } = Select;
 
 const demo = (props: IWidgetProps) => {
   const { widgetsOptions, widget } = useWidgets(props?.id || props.type);
+  // 状态维护
   return <Button value="测试">{props.options.title}</Button>;
 };
 
