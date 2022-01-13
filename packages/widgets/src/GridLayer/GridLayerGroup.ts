@@ -220,7 +220,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
 
   setSelectFeatureById(id: string) {
-    console.log(id);
     const feature = this.data.features.find((f: any) => {
       return f.properties.id === id;
     });
