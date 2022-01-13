@@ -45,4 +45,7 @@ export default class BaseWidget<IOptions, IValue>
     this.values = values;
     this.emit(WidgetsEventEnum.VALUE_CHANGE, this.options);
   }
+  destroy() {
+    this.removeAllListeners();
+  }
 }

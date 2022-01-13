@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 import EventEmitter from 'eventemitter3';
 import type { IWidget, IWidgetsService } from './IWidgetsService';
+import { WidgetsServiceEnum } from './IWidgetsService';
 
 @injectable()
 export default class WidgetsService
@@ -11,6 +12,7 @@ export default class WidgetsService
 
   public addWidget(w: IWidget) {
     this.widgets.push(w);
+    this.emit(WidgetsServiceEnum.ADD, w);
   }
 
   public getWidget(id: string) {
@@ -18,6 +20,8 @@ export default class WidgetsService
   }
 
   public removeWidget(id: string) {
-    this.widgets = this.widgets.filter((w: IWidget) => w.id !== id);
+    const index = this.widgets.findIndex((w: IWidget) => w.id === id);
+    const w = this.widgets.splice(index, 1);
+    this.emit(WidgetsServiceEnum.REMOVE, w[0]);
   }
 }
