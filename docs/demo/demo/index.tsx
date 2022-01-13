@@ -92,16 +92,20 @@ export default function RumbMap() {
         cfg={{
           headerbar: {
             display: true,
-            title: {
-              value: 'XX 管理地图地图',
-              display: true,
+            id: 1,
+            options: {
+              title: {
+                value: 'XX 管理地图地图',
+                display: true,
+              },
             },
-            children: [
+            subChildren: [
               {
                 display: true,
                 position: 'left',
                 title: '选择城市',
                 type: 'demo',
+                id: 2,
                 // event: {
                 //   actionType: 'map',
                 //   action: 'queryArea',

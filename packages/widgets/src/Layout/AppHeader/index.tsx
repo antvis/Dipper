@@ -1,22 +1,19 @@
-// import { useModel } from '@alipay/bigfish';
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Layout } from 'antd';
 import { IConfig } from '@antv/dipper-core';
 import styles from './index.less';
 import { isDisplay } from '../utils/ui';
-import { CustomBaseWidgets } from '../../BaseWidget/widget';
 import { AppContent } from '../AppTemplate/Content';
+import { BaseLayoutComp } from '../BaseLayoutComp';
 
 const { Header } = Layout;
 
-function AppHeaderContent({
-  headerstyle,
+export function AppHeaderContent({
   display,
-  logo,
-  url,
-  title,
-  children,
+  options,
+  subChildren,
 }: IConfig['headerbar']) {
+  const { logo, title, url, headerstyle } = options;
   const logoDom = useMemo(() => {
     if (!isDisplay(logo?.display)) {
       return null;
@@ -48,6 +45,7 @@ function AppHeaderContent({
     );
   }, [title?.style, title?.value]);
 
+  console.log(111111);
   return isDisplay(display) ? (
     <Header
       className={styles.appHeader}
@@ -63,17 +61,17 @@ function AppHeaderContent({
         {isDisplay(display) && logoDom}
         {isDisplay(title?.display) && titleDom}
         <AppContent
-          items={children?.filter((c) => c.position === 'left') || []}
+          items={subChildren?.filter((c) => c.position === 'left') || []}
         />
       </div>
       <div>
         <AppContent
-          items={children?.filter((c) => c.position === 'center') || []}
+          items={subChildren?.filter((c) => c.position === 'center') || []}
         />
       </div>
       <div className={styles.appHeaderRight}>
         <AppContent
-          items={children?.filter((c) => c.position === 'right') || []}
+          items={subChildren?.filter((c) => c.position === 'right') || []}
         />
       </div>
     </Header>
@@ -82,9 +80,20 @@ function AppHeaderContent({
 
 export default function AppHeader(props: IConfig['headerbar']) {
   return (
-    <CustomBaseWidgets {...props} type="header">
-      {/* @ts-ignore */}
-      <AppHeaderContent {...props} />
-    </CustomBaseWidgets>
+    <>
+      <Header
+        className={styles.appHeader}
+        style={{
+          backgroundColor: '#fff',
+          padding: '0 24px',
+          height: '48px',
+          lineHeight: '48px',
+        }}
+      >
+        <div className={styles.appHeaderLeft}>
+          <BaseLayoutComp {...props} type="header" />
+        </div>
+      </Header>
+    </>
   );
 }

@@ -12,6 +12,7 @@ import {
   SearchPlace,
   MapStyle,
   Map2Image,
+  AppHeaderContent,
 } from '@antv/dipper-widgets';
 registerWidget('citySelect', CitySelect);
 registerWidget('panelTabContent', PanelTabcontent);
@@ -23,3 +24,4 @@ registerWidget('mapStyle', MapStyle);
 registerWidget('location', Location);
 registerWidget('searchPlaces', SearchPlace);
 registerWidget('exportMap', Map2Image);
+registerWidget('header', AppHeaderContent);

@@ -17,7 +17,7 @@ export interface IWidgetProps<P = any> {
     actionType: string;
     action: string;
   };
-  children?: IWidgetProps<P>[];
+  subChildren?: IWidgetProps<P>[];
 }
 
 export interface IControlWidgetsProps<IControlOption = any>

@@ -16,11 +16,13 @@ export const config: Partial<IConfig> = {
   },
   headerbar: {
     display: true,
-    title: {
-      value: '数据分析',
-      display: true,
+    options: {
+      title: {
+        value: '数据分析',
+        display: true,
+      },
     },
-    children: [
+    subChildren: [
       {
         display: true,
         position: 'left',
@@ -51,7 +53,7 @@ export const config: Partial<IConfig> = {
       width: 426,
     },
     position: 'right',
-    children: [
+    subChildren: [
       {
         display: true,
         type: 'meshName',
@@ -66,7 +68,7 @@ export const config: Partial<IConfig> = {
         display: true,
         type: 'panelTabContent',
         title: '所有网格',
-        children: [
+        subChildren: [
           {
             display: true,
             type: 'mesh_indicator',
@@ -82,7 +84,7 @@ export const config: Partial<IConfig> = {
   },
   toolbar: {
     display: false,
-    children: [],
+    subChildren: [],
   },
   map: {
     zoom: 10,

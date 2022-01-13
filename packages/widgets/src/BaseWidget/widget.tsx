@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, FC } from 'react';
 import { IWidgetProps } from '@antv/dipper-core';
-import BaseWidget from '.';
 import { useWidgetsService } from '../Layout/hooks';
 
 export const CustomBaseWidgets: FC<IWidgetProps> = (props) => {
   const { widgetsService } = useWidgetsService();
+  const wid = widgetsService.getWidget(props.id || '');
   const { display } = props;
   const id = useRef('');
   useEffect(() => {
@@ -18,11 +18,12 @@ export const CustomBaseWidgets: FC<IWidgetProps> = (props) => {
       return;
     }
 
-    const wid = new BaseWidget(props);
-    id.current = wid.id;
-    widgetsService.addWidget(wid);
+    id.current = wid?.id || '';
+    if (wid) {
+      widgetsService.addWidget(wid);
+    }
     return () => {
-      widgetsService.removeWidget(wid.id);
+      widgetsService.removeWidget(wid?.id || '');
     };
   }, [display]);
 
