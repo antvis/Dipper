@@ -9,12 +9,12 @@ export const getAppContentItem = (
   items: IWidgetProps,
   position: Position,
 ): IWidgetProps[] => {
-  return items.childrens?.filter((bar) => bar.position === position) || [];
+  return items.children?.filter((bar) => bar.position === position) || [];
 };
 
 export const findItem = (
   items: IWidgetProps,
   position: Position,
 ): IWidgetProps | undefined => {
-  return items.childrens?.find((bar) => bar.position === position);
+  return items.children?.find((bar) => bar.position === position);
 };

@@ -18,7 +18,6 @@ export default class WidgetsService
   }
 
   public removeWidget(id: string) {
-    const index = this.widgets.findIndex((w: IWidget) => w.id === id);
-    this.widgets.splice(index, 1);
+    this.widgets = this.widgets.filter((w: IWidget) => w.id !== id);
   }
 }

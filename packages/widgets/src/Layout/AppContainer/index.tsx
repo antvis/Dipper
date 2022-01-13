@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useUnmount } from 'ahooks';
 import { Layout } from 'antd';
 import styles from './index.less';
@@ -19,7 +19,6 @@ const { Content } = Layout;
 
 interface IContainerProps {
   cfg: IConfig;
-  children?: React.ReactNode;
   onLoad?: (sceneContainer: Dipper) => void;
 }
 
@@ -52,11 +51,7 @@ export function ContainerContent({ children }: { children?: React.ReactNode }) {
   );
 }
 
-export default function DipperContainer({
-  cfg,
-  children,
-  onLoad,
-}: IContainerProps) {
+const DipperContainer: FC<IContainerProps> = ({ cfg, children, onLoad }) => {
   const { sceneContainer } = useDipperContainer(cfg);
   useUnmount(() => {
     if (sceneContainer) {
@@ -67,7 +62,7 @@ export default function DipperContainer({
     if (sceneContainer && onLoad) {
       onLoad(sceneContainer);
     }
-  });
+  }, []);
 
   return sceneContainer ? (
     <>
@@ -76,7 +71,7 @@ export default function DipperContainer({
       <Provider container={sceneContainer?.getContainer() as Container}>
         <Layout className={styles.pageMap}>
           {/* 导航栏 */}
-          <AppHeader />
+          <AppHeader {...cfg.headerbar} />
           {/* 导航栏工具条 */}
           <AppToolbar />
           {/* 地图区域 */}
@@ -88,4 +83,6 @@ export default function DipperContainer({
   ) : (
     <></>
   );
-}
+};
+
+export default DipperContainer;

@@ -19,7 +19,7 @@ export interface IConfig {
   headerbar: {
     display?: boolean;
     headerstyle?: React.CSSProperties;
-    url: string;
+    url?: string;
     logo?: Partial<{
       display: boolean;
       value: string;
@@ -31,12 +31,12 @@ export interface IConfig {
       display: boolean;
       style: React.CSSProperties;
     }>;
-    childrens?: IWidgetProps[];
+    children?: IWidgetProps[];
   };
   panel: Partial<IPanel>;
   toolbar: {
     display: boolean;
-    childrens: IWidgetProps[];
+    children: IWidgetProps[];
   };
   headerWidgets?: IWidgetProps[]; // 导航栏配置
   map: Partial<IMapConfig>;

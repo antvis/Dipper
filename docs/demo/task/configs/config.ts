@@ -20,7 +20,7 @@ export const config: Partial<IConfig> = {
       value: 'XX 管理地图地图',
       display: true,
     },
-    childrens: [
+    children: [
       {
         display: true,
         position: 'left',
@@ -43,7 +43,7 @@ export const config: Partial<IConfig> = {
       opened: true,
       width: 426,
     },
-    childrens: [
+    children: [
       {
         display: true,
         type: 'meshName',
@@ -58,7 +58,7 @@ export const config: Partial<IConfig> = {
   },
   toolbar: {
     display: true,
-    childrens: [
+    children: [
       {
         display: true,
         position: 'left',

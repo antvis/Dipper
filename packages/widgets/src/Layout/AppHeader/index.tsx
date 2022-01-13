@@ -1,19 +1,22 @@
 // import { useModel } from '@alipay/bigfish';
+import React, { FC, useMemo } from 'react';
 import { Layout } from 'antd';
-import { useMemo } from 'react';
-import React from 'react';
+import { IConfig } from '@antv/dipper-core';
 import styles from './index.less';
 import { isDisplay } from '../utils/ui';
-import { useConfigService } from '../hooks';
-import { AppContent } from '../AppTemplate';
+import { CustomBaseWidgets } from '../../BaseWidget/widget';
+import { AppContent } from '../AppTemplate/Content';
 
 const { Header } = Layout;
 
-export default function AppHeader() {
-  const { globalConfig } = useConfigService();
-  const { headerstyle, display, logo, url, title, childrens } =
-    globalConfig.headerbar || {};
-
+function AppHeaderContent({
+  headerstyle,
+  display,
+  logo,
+  url,
+  title,
+  children,
+}: IConfig['headerbar']) {
   const logoDom = useMemo(() => {
     if (!isDisplay(logo?.display)) {
       return null;
@@ -57,25 +60,31 @@ export default function AppHeader() {
       }}
     >
       <div className={styles.appHeaderLeft}>
-        {isDisplay(logo?.display) && logoDom}
+        {isDisplay(display) && logoDom}
         {isDisplay(title?.display) && titleDom}
-
-        {/* 
-        // @ts-ignore */}
-        <AppContent items={childrens?.filter((c) => c.position === 'left')} />
+        <AppContent
+          items={children?.filter((c) => c.position === 'left') || []}
+        />
       </div>
       <div>
-        {/* 
-          // @ts-ignore */}
-        <AppContent items={childrens?.filter((c) => c.position === 'center')} />
+        <AppContent
+          items={children?.filter((c) => c.position === 'center') || []}
+        />
       </div>
       <div className={styles.appHeaderRight}>
-        {/* 
-        // @ts-ignore */}
-        <AppContent items={childrens?.filter((c) => c.position === 'right')} />
+        <AppContent
+          items={children?.filter((c) => c.position === 'right') || []}
+        />
       </div>
     </Header>
-  ) : (
-    <></>
+  ) : null;
+}
+
+export default function AppHeader(props: IConfig['headerbar']) {
+  return (
+    <CustomBaseWidgets {...props} type="header">
+      {/* @ts-ignore */}
+      <AppHeaderContent {...props} />
+    </CustomBaseWidgets>
   );
 }

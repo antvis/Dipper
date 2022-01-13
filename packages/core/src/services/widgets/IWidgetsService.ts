@@ -9,11 +9,15 @@ export interface IWidgetsService extends EventEmitter {
 export interface IWidgetProps<P = any> {
   type: string; //
   id?: string;
+  title?: string;
   position?: string;
   display?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
-  children?: JSX.Element | JSX.Element[] | Array<JSX.Element | undefined>;
-  childrens?: IWidgetProps<P>[];
+  event?: {
+    actionType: string;
+    action: string;
+  };
+  children?: IWidgetProps<P>[];
 }
 
 export interface IControlWidgetsProps<IControlOption = any>
