@@ -68,6 +68,14 @@ export default function RumbMap() {
           headerbar: {
             display: true,
             options: {
+              logo: {
+                value:
+                  'https://gw.alipayobjects.com/mdn/rms_855bab/afts/img/A*ObVJT4IxmlkAAAAAAAAAAAAAARQnAQ',
+                style: {
+                  height: '32px',
+                  width: '32px',
+                },
+              },
               title: {
                 value: 'XX 管理地图地图',
                 display: true,
@@ -76,10 +84,12 @@ export default function RumbMap() {
             subChildren: [
               {
                 display: true,
-                position: 'left',
-                title: '选择城市',
-                type: 'demo',
                 id: '2',
+                position: 'left',
+                options: {
+                  title: '选择城市',
+                },
+                type: 'demo',
               },
             ],
           },

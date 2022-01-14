@@ -1,8 +1,7 @@
 import React, { useRef, useEffect, FC } from 'react';
-import { getWidget, IWidgetProps } from '@antv/dipper-core';
+import { IWidgetProps } from '@antv/dipper-core';
 import BaseLayout from './BaseLayout';
 import { useWidgetsService } from './hooks';
-import { CustomBaseWidgets } from '..';
 
 export const BaseLayoutComp: FC<IWidgetProps> = (props) => {
   const container =
@@ -27,21 +26,5 @@ export const BaseLayoutComp: FC<IWidgetProps> = (props) => {
     };
   }, []);
 
-  if (props.subChildren && props.subChildren.length) {
-    return (
-      <>
-        {props.subChildren.map((sub, i) => {
-          <BaseLayoutComp {...sub} type={sub.type} key={i}>
-            {getWidget(sub.type)(sub)}
-          </BaseLayoutComp>;
-        })}
-      </>
-    );
-  }
-
-  return (
-    <CustomBaseWidgets {...props}>
-      {getWidget(props.type)(props)}
-    </CustomBaseWidgets>
-  );
+  return <>{props.children}</>;
 };
