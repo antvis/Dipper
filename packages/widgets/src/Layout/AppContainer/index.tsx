@@ -73,7 +73,7 @@ const DipperContainer: FC<IContainerProps> = ({ cfg, children, onLoad }) => {
           {/* 导航栏 */}
           <AppHeader {...cfg.headerbar} />
           {/* 导航栏工具条 */}
-          <AppToolbar />
+          <AppToolbar {...cfg.toolbar} />
           {/* 地图区域 */}
 
           <ContainerContent>{children}</ContainerContent>

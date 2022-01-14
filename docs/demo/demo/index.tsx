@@ -66,7 +66,6 @@ export default function RumbMap() {
       <DipperContainer
         cfg={{
           headerbar: {
-            display: true,
             options: {
               logo: {
                 value:
@@ -78,18 +77,32 @@ export default function RumbMap() {
               },
               title: {
                 value: 'XX 管理地图地图',
-                display: true,
               },
             },
             subChildren: [
               {
-                display: true,
                 id: '2',
                 position: 'left',
                 options: {
                   title: '选择城市',
                 },
                 type: 'demo',
+              },
+            ],
+          },
+          toolbar: {
+            subChildren: [
+              {
+                type: 'controlPosition',
+                id: '3',
+              },
+              {
+                type: 'controlPosition',
+                id: '4',
+              },
+              {
+                type: 'controlPosition',
+                id: '5',
               },
             ],
           },

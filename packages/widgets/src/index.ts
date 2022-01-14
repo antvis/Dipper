@@ -20,7 +20,6 @@ export { default as AppSiderBar } from './Layout/AppPanel';
 export { default as AppMap } from './Layout/AppMap';
 export { default as AppControl } from './Layout/AppControl';
 export { default as AppHeader } from './Layout/AppHeader';
-export { AppHeaderContent } from './Layout/AppHeader';
 export { default as AppLayer } from './Layout/AppLayer';
 export { default as AppIcon } from './Layout/AppIcon';
 export * from './Layout/AppTemplate';

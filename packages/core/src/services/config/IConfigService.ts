@@ -37,8 +37,8 @@ export interface IConfig {
   };
   panel: Partial<IPanel>;
   toolbar: {
-    display: boolean;
     subChildren: IWidgetProps[];
+    display?: boolean;
   };
   headerWidgets?: IWidgetProps[]; // 导航栏配置
   map: Partial<IMapConfig>;

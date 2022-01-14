@@ -1,31 +1,24 @@
 import React from 'react';
 import styles from './index.less';
-import { useConfigService } from '../hooks';
-import { AppContent } from '../AppTemplate/Content';
-import { getAppContentItem, isDisplay } from '../utils/ui';
-import { IWidgetProps } from '@antv/dipper-core';
+import { isDisplay } from '../utils/ui';
+import { getWidget, IConfig } from '@antv/dipper-core';
+import { BaseLayoutComp } from '../BaseLayoutComp';
+import { CustomBaseWidgets } from '../../BaseWidget/widget';
 
-export default function AppToolbar() {
-  const { globalConfig } = useConfigService();
-  const { toolbar } = globalConfig;
+export default function AppToolbar(props: IConfig['toolbar']) {
+  const { display = true } = props || {};
 
-  // TODO 根据配置
-  return isDisplay(toolbar?.display) ? (
-    <div className={styles.appToolbar}>
-      {/* 左侧组件 */}
-      <div style={{ display: 'flex' }}>
-        <AppContent
-          items={getAppContentItem(toolbar as IWidgetProps, 'left')}
-        />
-      </div>
-      {/* 右侧组件 */}
-      <div style={{ display: 'flex' }}>
-        <AppContent
-          items={getAppContentItem(toolbar as IWidgetProps, 'right')}
-        />
-      </div>
-    </div>
-  ) : (
-    <></>
+  return (
+    <BaseLayoutComp {...props} type="toolbar">
+      {isDisplay(display) ? (
+        <div className={styles.appToolbar}>
+          {props.subChildren.map((child) => (
+            <CustomBaseWidgets {...child} type={child.type}>
+              {getWidget(child.type)(child)}
+            </CustomBaseWidgets>
+          ))}
+        </div>
+      ) : null}
+    </BaseLayoutComp>
   );
 }

@@ -5,7 +5,7 @@ import { useWidgetsService } from '../Layout/hooks';
 export const CustomBaseWidgets: FC<IWidgetProps> = (props) => {
   const { widgetsService } = useWidgetsService();
   const wid = widgetsService.getWidget(props.id || '');
-  const { display } = props;
+  const { display = true } = props;
   const id = useRef('');
   useEffect(() => {
     if (!display) {
