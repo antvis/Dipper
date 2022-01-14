@@ -25,10 +25,6 @@ const demo = (props: IWidgetProps) => {
   return <Button value="测试">测试</Button>;
 };
 
-const layout = (props: any) => {
-  return <CustomBaseWidgets {...props}>{demo(props)}</CustomBaseWidgets>;
-};
-
 const ControlPosition = () => {
   const { updateControl } = useConfigService();
   return (
@@ -62,7 +58,7 @@ const ControlPosition = () => {
 };
 
 registerWidget('controlPosition', ControlPosition);
-registerWidget('demo', layout);
+registerWidget('demo', demo);
 
 export default function RumbMap() {
   return (
@@ -71,7 +67,6 @@ export default function RumbMap() {
         cfg={{
           headerbar: {
             display: true,
-            id: '1',
             options: {
               title: {
                 value: 'XX 管理地图地图',
@@ -85,10 +80,6 @@ export default function RumbMap() {
                 title: '选择城市',
                 type: 'demo',
                 id: '2',
-                // event: {
-                //   actionType: 'map',
-                //   action: 'queryArea',
-                // },
               },
             ],
           },

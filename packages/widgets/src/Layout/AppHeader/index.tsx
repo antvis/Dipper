@@ -80,20 +80,18 @@ export function AppHeaderContent({
 
 export default function AppHeader(props: IConfig['headerbar']) {
   return (
-    <>
-      <Header
-        className={styles.appHeader}
-        style={{
-          backgroundColor: '#fff',
-          padding: '0 24px',
-          height: '48px',
-          lineHeight: '48px',
-        }}
-      >
-        <div className={styles.appHeaderLeft}>
-          <BaseLayoutComp {...props} type="header" />
-        </div>
-      </Header>
-    </>
+    <Header
+      className={styles.appHeader}
+      style={{
+        backgroundColor: '#fff',
+        padding: '0 24px',
+        height: '48px',
+        lineHeight: '48px',
+      }}
+    >
+      <div className={styles.appHeaderLeft}>
+        <BaseLayoutComp {...props} type="header" />
+      </div>
+    </Header>
   );
 }

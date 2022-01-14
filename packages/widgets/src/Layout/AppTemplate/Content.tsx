@@ -21,11 +21,7 @@ function Content({ items }: ContentProps) {
   return (
     <>
       {items.map((item: IWidgetProps, idx) => {
-        return (
-          <CustomBaseWidgets {...item} key={idx}>
-            <Widgets item={item} />
-          </CustomBaseWidgets>
-        );
+        return <Widgets item={item} />;
       })}
     </>
   );

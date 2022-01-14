@@ -3,7 +3,6 @@ import { getWidget, IWidgetProps } from '@antv/dipper-core';
 import BaseLayout from './BaseLayout';
 import { useWidgetsService } from './hooks';
 import { CustomBaseWidgets } from '..';
-import BaseWidget from '../BaseWidget';
 
 export const BaseLayoutComp: FC<IWidgetProps> = (props) => {
   const container =
@@ -28,7 +27,7 @@ export const BaseLayoutComp: FC<IWidgetProps> = (props) => {
     };
   }, []);
 
-  if (props.subChildren) {
+  if (props.subChildren && props.subChildren.length) {
     return (
       <>
         {props.subChildren.map((sub, i) => {
