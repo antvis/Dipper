@@ -1,19 +1,20 @@
-import React, { useMemo } from 'react';
+// import { useModel } from '@alipay/bigfish';
 import { Layout } from 'antd';
-import { IConfig } from '@antv/dipper-core';
+import { useMemo } from 'react';
+import React from 'react';
 import styles from './index.less';
-import { isDisplay } from '../utils/ui';
-import { AppContent } from '../AppTemplate/Content';
-import { BaseLayoutComp } from '../BaseLayoutComp';
 
+import { useConfigService } from '../../hooks';
+import { LayoutContent } from '../baseLayout';
+
+export const isDisplay = (display?: any) => display !== false;
 const { Header } = Layout;
 
-export function AppHeaderContent({
-  display,
-  options,
-  subChildren,
-}: IConfig['headerbar']) {
-  const { logo, title, url, headerstyle } = options;
+export default function AppHeader() {
+  const { globalConfig } = useConfigService();
+  const { headerstyle, display, logo, url, title, childrens } =
+    globalConfig.headerbar || {};
+
   const logoDom = useMemo(() => {
     if (!isDisplay(logo?.display)) {
       return null;
@@ -45,7 +46,6 @@ export function AppHeaderContent({
     );
   }, [title?.style, title?.value]);
 
-  console.log(111111);
   return isDisplay(display) ? (
     <Header
       className={styles.appHeader}
@@ -58,40 +58,24 @@ export function AppHeaderContent({
       }}
     >
       <div className={styles.appHeaderLeft}>
-        {isDisplay(display) && logoDom}
+        {isDisplay(logo?.display) && logoDom}
         {isDisplay(title?.display) && titleDom}
-        <AppContent
-          items={subChildren?.filter((c) => c.position === 'left') || []}
+        <LayoutContent
+          items={childrens?.filter((c) => c.position === 'left') || []}
         />
       </div>
       <div>
-        <AppContent
-          items={subChildren?.filter((c) => c.position === 'center') || []}
+        <LayoutContent
+          items={childrens?.filter((c) => c.position === 'center') || []}
         />
       </div>
       <div className={styles.appHeaderRight}>
-        <AppContent
-          items={subChildren?.filter((c) => c.position === 'right') || []}
+        <LayoutContent
+          items={childrens?.filter((c) => c.position === 'right') || []}
         />
       </div>
     </Header>
-  ) : null;
-}
-
-export default function AppHeader(props: IConfig['headerbar']) {
-  return (
-    <Header
-      className={styles.appHeader}
-      style={{
-        backgroundColor: '#fff',
-        padding: '0 24px',
-        height: '48px',
-        lineHeight: '48px',
-      }}
-    >
-      <div className={styles.appHeaderLeft}>
-        <BaseLayoutComp {...props} type="header" />
-      </div>
-    </Header>
+  ) : (
+    <></>
   );
 }

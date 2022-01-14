@@ -1,32 +1,21 @@
-import React, { useEffect, useRef, FC } from 'react';
-import { IWidgetProps } from '@antv/dipper-core';
-import { useWidgetsService } from '../Layout/hooks';
+import React, { useEffect, useState } from 'react';
+import { IWidgetProps, IWidget, getWidget } from '@antv/dipper-core';
+import BaseWidget from '.';
+import { useWidgetsService } from '../hooks';
 
-export const CustomBaseWidgets: FC<IWidgetProps> = (props) => {
+export const CustomBaseWidgets = (props: IWidgetProps) => {
   const { widgetsService } = useWidgetsService();
-  const wid = widgetsService.getWidget(props.id || '');
-  const { display } = props;
-  const id = useRef('');
+  const [widget, setWidgets] = useState<IWidget>();
   useEffect(() => {
-    if (!display) {
-      widgetsService.removeWidget(id.current);
-      id.current = '';
-      return;
-    }
-
-    if (id.current) {
-      return;
-    }
-
-    id.current = wid?.id || '';
-    if (wid) {
-      widgetsService.addWidget(wid);
-    }
+    const wid = new BaseWidget(props);
+    setWidgets(wid);
+    widgetsService.addWidget(wid);
     return () => {
-      widgetsService.removeWidget(wid?.id || '');
+      widgetsService.removeWidget(wid.id);
     };
-  }, [display]);
+  }, []);
 
   // TODO 状态更新
-  return <>{(display && props.children) || null}</>;
+
+  return <React.Fragment>{getWidget(props.type)(props)}</React.Fragment>;
 };

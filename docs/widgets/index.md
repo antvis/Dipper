@@ -53,7 +53,7 @@ group:
 
 组件内部配置信息
 
-#### subChildren 可选
+#### childrens 可选
 
 子组件 数据格式
 
@@ -69,7 +69,7 @@ group:
       width: 360,
     },
     position: 'right',
-    subChildren: [
+    childrens: [
       {
         display: true,
         type: 'meshName',

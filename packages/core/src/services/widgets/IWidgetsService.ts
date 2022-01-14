@@ -1,5 +1,5 @@
 import type EventEmitter from 'eventemitter3';
-
+import type { Container } from 'inversify';
 export interface IWidgetsService extends EventEmitter {
   addWidget: (ctr: IWidget) => void;
   removeWidget: (id: string) => void;
@@ -13,11 +13,16 @@ export interface IWidgetProps<P = any> {
   position?: string;
   display?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
+  children?:
+    | JSX.Element
+    | JSX.Element[]
+    | Array<JSX.Element | undefined>
+    | React.FC;
+  childrens?: IWidgetProps<P>[];
   event?: {
     actionType: string;
     action: string;
   };
-  subChildren?: IWidgetProps<P>[];
 }
 
 export interface IControlWidgetsProps<IControlOption = any>
@@ -29,6 +34,8 @@ export interface IWidget<IOptions = any, IValue = any> extends EventEmitter {
   id: string;
   show: () => void;
   hide: () => void;
+  setContainer: (container: Container) => void;
+  init: () => void;
   getOptions: () => IWidgetProps<IOptions>;
   getValue: () => Partial<IValue>;
   setOptions: (option: Partial<IWidgetProps<IOptions>>) => void;

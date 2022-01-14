@@ -142,12 +142,12 @@ export function GridLayer() {
   useEffect(() => {
     if (selectFeatures.length) {
       // TODO 报错
-      setConfig(`panel.subChildren.1.display`, false);
-      setConfig(`panel.subChildren.2.display`, true);
-      // setConfig(`panel.subChildren.${findIdMeshchart}.display`, false)
+      setConfig(`panel.childrens.1.display`, false);
+      setConfig(`panel.childrens.2.display`, true);
+      // setConfig(`panel.childrens.${findIdMeshchart}.display`, false)
     } else {
-      setConfig(`panel.subChildren.1.display`, true);
-      setConfig(`panel.subChildren.2.display`, false);
+      setConfig(`panel.childrens.1.display`, true);
+      setConfig(`panel.childrens.2.display`, false);
     }
   }, [JSON.stringify(selectFeatures)]);
 

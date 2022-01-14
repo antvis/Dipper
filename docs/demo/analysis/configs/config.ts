@@ -22,7 +22,7 @@ export const config: Partial<IConfig> = {
         display: true,
       },
     },
-    subChildren: [
+    childrens: [
       {
         display: true,
         position: 'left',
@@ -53,7 +53,7 @@ export const config: Partial<IConfig> = {
       width: 426,
     },
     position: 'right',
-    subChildren: [
+    childrens: [
       {
         display: true,
         type: 'meshName',
@@ -68,7 +68,7 @@ export const config: Partial<IConfig> = {
         display: true,
         type: 'panelTabContent',
         title: '所有网格',
-        subChildren: [
+        childrens: [
           {
             display: true,
             type: 'mesh_indicator',
@@ -84,7 +84,7 @@ export const config: Partial<IConfig> = {
   },
   toolbar: {
     display: false,
-    subChildren: [],
+    childrens: [],
   },
   map: {
     zoom: 10,

@@ -37,7 +37,7 @@ export interface IWidgetProps {
   position?: T | string;
   display?: boolean;
   options?: any;
-  subChildren?: IWidgetProps[];
+  childrens?: IWidgetProps[];
   [key: string]: any;
 }
 ```
@@ -68,7 +68,7 @@ export interface IWidgetProps {
       display: boolean;
       style: React.CSSProperties;
     }>;
-    subChildren?: IWidgetProps[];
+    childrens?: IWidgetProps[];
  }
 ```
 
@@ -79,7 +79,7 @@ export interface IWidgetProps {
 ```ts
 {
   display: boolean;
-  subChildren: (IWidgetProps[]);
+  childrens: (IWidgetProps[]);
 }
 ```
 
@@ -102,7 +102,7 @@ export interface IWidgetProps {
           lng: number;
           lat: number;
         };
-    subChildren?: React.ReactNode;
+    childrens?: React.ReactNode;
   }
 ```
 
@@ -188,7 +188,7 @@ L7 地图基础控件
   opened?: boolean; // 是否打开
   position?: 'left' | 'right' | 'top' | 'bottom'; // 位置
   style?: React.CSSProperties; // 样式
-  subChildren?: IWidgetProps[]; // 子组件
+  childrens?: IWidgetProps[]; // 子组件
  }
 ```
 

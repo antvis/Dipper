@@ -2,26 +2,25 @@ import { IConfig } from './IConfigService';
 export const defaultConfig: Partial<IConfig> = {
   headerbar: {
     display: true,
-    options: {
-      url: './',
-      logo: {
-        display: true,
-        value: 'https://antv-2018.alipay.com/assets/image/icon/l7.svg',
-        style: {
-          height: '24px',
-          width: '24px',
-        },
-      },
-      title: {
-        value: 'XX 管理系统',
-        display: true,
+    url: './',
+    logo: {
+      display: true,
+      value: 'https://antv-2018.alipay.com/assets/image/icon/l7.svg',
+      style: {
+        height: '24px',
+        width: '24px',
       },
     },
-    subChildren: [],
+    title: {
+      value: 'XX 管理系统',
+      display: true,
+    },
+
+    childrens: [],
   },
   toolbar: {
     display: false,
-    subChildren: [],
+    childrens: [],
   },
   map: {
     zoom: 10,

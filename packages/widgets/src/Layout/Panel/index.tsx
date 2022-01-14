@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import styles from './index.less';
-import { isDisplay } from '../utils';
+import { isDisplay } from '../../util/ui';
 import ToggleButton from './ToggleButton';
-import { usePanelService } from '../hooks';
+import { usePanelService } from '../../hooks';
+import { LayoutContent } from '../baseLayout';
 import { IPanel } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
-import { AppContent } from '../AppTemplate/Content';
 
 function getStyle(
   position: string,
@@ -65,7 +65,7 @@ function AppPanel({ panel }: { panel: Partial<IPanel> }) {
           height: '100%',
         }}
       >
-        <AppContent items={panel?.subChildren || []} />
+        <LayoutContent items={panel?.childrens || []} />
       </div>
     </div>
   ) : (

@@ -22,7 +22,7 @@ export const config: Partial<IConfig> = {
         display: true,
       },
     },
-    subChildren: [
+    childrens: [
       {
         display: true,
         position: 'left',
@@ -45,7 +45,7 @@ export const config: Partial<IConfig> = {
       opened: true,
       width: 426,
     },
-    subChildren: [
+    childrens: [
       {
         display: true,
         type: 'meshName',
@@ -60,7 +60,7 @@ export const config: Partial<IConfig> = {
   },
   toolbar: {
     display: true,
-    subChildren: [
+    childrens: [
       {
         display: true,
         position: 'left',

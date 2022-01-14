@@ -1,20 +1,21 @@
 import React from 'react';
 import classnames from 'classnames';
 import styles from './index.less';
+import { AppTabsContent } from '../Layout/baseLayout';
 import type { IWidgetProps } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
-import { AppTabsContent } from '../Layout/AppTemplate';
 
 function PanelTabContent(props: IWidgetProps) {
-  const { subChildren = [] } = props;
+  const { childrens = [] } = props;
+
   return (
     <div
       className={classnames({
         [styles.appPanelContent]: true,
-        [styles.appPanelContentWithoutTabs]: subChildren.length <= 1,
+        [styles.appPanelContentWithoutTabs]: childrens.length <= 1,
       })}
     >
-      <AppTabsContent items={subChildren || []} />
+      <AppTabsContent items={childrens || []} />
     </div>
   );
 }

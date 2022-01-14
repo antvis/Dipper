@@ -73,7 +73,7 @@ export default function RumbMap() {
                 display: true,
               },
             },
-            subChildren: [
+            childrens: [
               {
                 display: true,
                 position: 'left',

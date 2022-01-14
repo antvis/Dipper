@@ -2,7 +2,7 @@ import React, { useEffect, useState, ReactNode } from 'react';
 import { Button, Modal, Table } from 'antd';
 import { TableOutlined } from '@ant-design/icons';
 import styles from './index.less';
-import { useLayerService } from '../Layout/hooks';
+import { useLayerService } from '../hooks';
 
 interface ColProps {
   title: string | ReactNode;

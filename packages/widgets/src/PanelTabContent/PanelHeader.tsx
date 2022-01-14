@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { Tooltip, Typography } from 'antd';
-import { useLayerGroup } from '../Layout';
-import styles from './index.less';
+import { useConfigService, useLayerGroup } from '@/hooks';
 
 const { Paragraph } = Typography;
 

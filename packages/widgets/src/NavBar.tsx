@@ -2,7 +2,7 @@ import { Menu } from 'antd';
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
 import type { IConfig } from '@antv/dipper-core';
-import { findItem } from './Layout/utils';
+import { findItem } from './util/ui';
 
 interface NavBarProps {
   headerBar?: IConfig['headerBar'];
