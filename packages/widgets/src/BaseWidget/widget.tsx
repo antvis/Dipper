@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { IWidgetProps, IWidget } from '@antv/dipper-core';
+import { IWidgetProps, IWidget, getWidget } from '@antv/dipper-core';
 import BaseWidget from '.';
-import { useWidgetsService } from '@antv/dipper-layout';
+import { useWidgetsService } from '../hooks';
 
-interface IWidgetsComponent extends IWidgetProps {
-  children?: JSX.Element | JSX.Element[] | Array<JSX.Element | undefined>;
-}
-
-export const CustomBaseWidgets = (props: IWidgetsComponent) => {
+export const CustomBaseWidgets = (props: IWidgetProps) => {
   const { widgetsService } = useWidgetsService();
   const [widget, setWidgets] = useState<IWidget>();
   useEffect(() => {
@@ -21,5 +17,5 @@ export const CustomBaseWidgets = (props: IWidgetsComponent) => {
 
   // TODO 状态更新
 
-  return (widget && props?.children) || '';
+  return <React.Fragment>{getWidget(props.type)(props)}</React.Fragment>;
 };

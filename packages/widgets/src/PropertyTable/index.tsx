@@ -1,5 +1,5 @@
 import { TableOutlined } from '@ant-design/icons';
-import { useLayerService } from '@antv/dipper-layout';
+import { useLayerService } from '../hooks';
 import { Button, Modal, Table } from 'antd';
 import React, { useEffect, useState, ReactNode } from 'react';
 import styles from './index.less';

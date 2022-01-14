@@ -1,5 +1,16 @@
 import EventEmitter from 'eventemitter3';
-import { IWidget, IWidgetProps, WidgetsEventEnum } from '@antv/dipper-core';
+import type { Container } from 'inversify';
+import { injectable, inject } from 'inversify';
+
+import {
+  IWidget,
+  IWidgetsService,
+  IWidgetProps,
+  WidgetsEventEnum,
+  WidgetsService,
+  TYPES,
+  ISceneService,
+} from '@antv/dipper-core';
 export default class BaseWidget<IOptions, IValue>
   extends EventEmitter
   implements IWidget<IOptions, IValue>
@@ -9,11 +20,30 @@ export default class BaseWidget<IOptions, IValue>
   };
   private values: Partial<IValue> = {};
   public id: string;
+  private contianer!: Container;
+
+  @inject(TYPES.SCENE_SYMBOL)
+  public sceneService!: ISceneService;
+
+  @inject(TYPES.WIDGETS_SYMBOL)
+  public widgetsService!: IWidgetsService;
+
   constructor(props: IWidgetProps<IOptions>) {
     super();
     this.id = props.id || props.type;
     this.options = Object.assign({}, this.options, props);
   }
+
+  public setContainer(container: Container) {
+    this.contianer = container;
+    this.sceneService = this.contianer.get(TYPES.SCENE_SYMBOL) as ISceneService;
+    this.widgetsService = this.contianer.get(
+      TYPES.WIDGETS_SYMBOL,
+    ) as IWidgetsService;
+  }
+
+  public init() {}
+
   getOptions(): IWidgetProps<IOptions> {
     return this.options;
   }

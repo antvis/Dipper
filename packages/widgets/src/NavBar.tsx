@@ -1,7 +1,8 @@
 import { Menu } from 'antd';
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
-import { useConfigService, findItem } from '@antv/dipper-layout';
+import { useConfigService } from './hooks';
+import { findItem } from './util/ui';
 
 export function NavBar() {
   const { globalConfig } = useConfigService();

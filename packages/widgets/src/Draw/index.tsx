@@ -3,7 +3,7 @@ import { DrawControl } from '@antv/l7-draw';
 import { useSceneValue } from '@antv/l7-react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import type { PositionName } from '@antv/l7';
-import { useConfigService } from '@antv/dipper-layout';
+import { useConfigService } from '../hooks';
 
 export const Draw = (props: IWidgetProps) => {
   const { setWidgetsValue } = useConfigService();

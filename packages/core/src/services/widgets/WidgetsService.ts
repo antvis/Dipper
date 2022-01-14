@@ -1,17 +1,25 @@
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
 import EventEmitter from 'eventemitter3';
 import type { IWidget, IWidgetsService } from './IWidgetsService';
+import type { Container } from 'inversify';
+import type { ISceneService } from '../scene/ISceneService';
 import { WidgetsServiceEnum } from './IWidgetsService';
+import { TYPES } from '../../types';
 
 @injectable()
 export default class WidgetsService
   extends EventEmitter
   implements IWidgetsService
 {
+  @inject(TYPES.SCENE_SYMBOL)
+  protected sceneService!: ISceneService;
+
   private widgets: IWidget[] = [];
 
   public addWidget(w: IWidget) {
     this.widgets.push(w);
+    w.setContainer(this.sceneService?.container as Container);
+    w.init();
     this.emit(WidgetsServiceEnum.ADD, w);
   }
 

@@ -1,4 +1,4 @@
-export { default as DipperContainer } from './AppContainer';
+// export { default as DipperContainer } from './AppContainer';
 export { default as AppToolbar } from './AppToolbar';
 export { default as AppSiderBar } from './AppPanel';
 export { default as AppMap } from './AppMap';
