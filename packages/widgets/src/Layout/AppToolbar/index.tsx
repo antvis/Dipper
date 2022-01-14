@@ -12,8 +12,8 @@ export default function AppToolbar(props: IConfig['toolbar']) {
     <BaseLayoutComp {...props} type="toolbar">
       {isDisplay(display) ? (
         <div className={styles.appToolbar}>
-          {props.subChildren.map((child) => (
-            <CustomBaseWidgets {...child} type={child.type}>
+          {props.subChildren.map((child, index) => (
+            <CustomBaseWidgets {...child} type={child.type} key={index}>
               {getWidget(child.type)(child)}
             </CustomBaseWidgets>
           ))}
