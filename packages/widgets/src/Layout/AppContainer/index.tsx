@@ -22,9 +22,9 @@ interface IContainerProps {
   onLoad?: (sceneContainer: Dipper) => void;
 }
 
-export function ContainerContent({ children }: { children?: React.ReactNode }) {
-  const { globalConfig } = useConfigService();
-  const { panel } = globalConfig;
+export const ContainerContent: FC<
+  Pick<IConfig, 'controls' | 'defaultcontrols' | 'legends' | 'panel'>
+> = ({ controls, defaultcontrols, legends, panel, children }) => {
   return (
     <Content
       style={{
@@ -38,7 +38,11 @@ export function ContainerContent({ children }: { children?: React.ReactNode }) {
       <AppMap>
         <>
           {/* 地图控件 图例、比例尺 */}
-          <AppControl />
+          <AppControl
+            defaultcontrols={defaultcontrols}
+            legends={legends}
+            controls={controls}
+          />
           {/* 添加图层 */}
           <AppLayerControl />
           {/* 自定义内容 */}
@@ -46,10 +50,10 @@ export function ContainerContent({ children }: { children?: React.ReactNode }) {
         </>
       </AppMap>
       {/* 地图信息栏 */}
-      <AppPanel panel={panel as IPanel} />
+      {/* <AppPanel panel={panel as IPanel} /> */}
     </Content>
   );
-}
+};
 
 const DipperContainer: FC<IContainerProps> = ({ cfg, children, onLoad }) => {
   const { sceneContainer } = useDipperContainer(cfg);
@@ -66,8 +70,6 @@ const DipperContainer: FC<IContainerProps> = ({ cfg, children, onLoad }) => {
 
   return sceneContainer ? (
     <>
-      {/* 
-        // @ts-ignore */}
       <Provider container={sceneContainer?.getContainer() as Container}>
         <Layout className={styles.pageMap}>
           {/* 导航栏 */}
@@ -76,7 +78,14 @@ const DipperContainer: FC<IContainerProps> = ({ cfg, children, onLoad }) => {
           <AppToolbar {...cfg.toolbar} />
           {/* 地图区域 */}
 
-          <ContainerContent>{children}</ContainerContent>
+          <ContainerContent
+            controls={cfg.controls}
+            defaultcontrols={cfg.defaultcontrols}
+            legends={cfg.legends}
+            panel={cfg.panel}
+          >
+            {children}
+          </ContainerContent>
         </Layout>
       </Provider>
     </>

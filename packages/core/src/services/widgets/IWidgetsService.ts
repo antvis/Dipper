@@ -22,6 +22,7 @@ export interface IWidgetProps<P = any> {
 
 export interface IControlWidgetsProps<IControlOption = any>
   extends IWidgetProps<IControlOption> {
+  position: string;
   layout?: 'horizontal' | 'vertical';
 }
 

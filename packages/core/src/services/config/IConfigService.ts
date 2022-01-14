@@ -56,7 +56,7 @@ export interface IConfig {
     subChildren?: React.ReactNode;
   };
   controls: IControlWidgetsProps[]; // 自定义组件配置
-  defaultcontrols: IWidgetProps[]; // 地图自带组件
+  defaultcontrols: IControlWidgetsProps[]; // 地图自带组件
   legends: IWidgetProps[];
   layers: {
     type: string;

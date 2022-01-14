@@ -6,6 +6,7 @@ import {
   useWidgets,
   IWidgetProps,
   CustomBaseWidgets,
+  MapStyle,
 } from '@antv/dipper';
 import { Select, Button } from 'antd';
 import {
@@ -19,6 +20,8 @@ import {
   singleLineChart,
 } from '../analysis/configs/mock';
 const { Option } = Select;
+
+registerWidget('mapStyle', MapStyle);
 
 const demo = (props: IWidgetProps) => {
   // 状态维护
@@ -106,6 +109,28 @@ export default function RumbMap() {
               },
             ],
           },
+          controls: [
+            {
+              position: 'topleft',
+              type: 'mapStyle',
+              title: '地图样式',
+            },
+            {
+              position: 'topright',
+              type: 'controlPosition',
+              title: '组件控制',
+            },
+          ],
+          defaultcontrols: [
+            {
+              type: 'zoom',
+              position: 'bottomright',
+            },
+            {
+              type: 'scale',
+              position: 'bottomleft',
+            },
+          ],
         }}
       />
     </div>

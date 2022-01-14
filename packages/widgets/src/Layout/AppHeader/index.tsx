@@ -1,9 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Layout } from 'antd';
 import { getWidget, IConfig, registerWidget } from '@antv/dipper-core';
 import styles from './index.less';
-import { isDisplay } from '../utils/ui';
-import { AppContent } from '../AppTemplate/Content';
 import { BaseLayoutComp } from '../BaseLayoutComp';
 import { CustomBaseWidgets } from '../../BaseWidget/widget';
 

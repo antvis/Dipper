@@ -1,62 +1,61 @@
-import React, { ReactElement, useMemo } from 'react';
-import { isDisplay } from '../utils';
+import React from 'react';
 import { Control, CustomControl } from '@antv/l7-react';
 import type { IControlOption, PositionName } from '@antv/l7';
-import { getWidget } from '@antv/dipper-core';
-import { useConfigService } from '../hooks';
+import { getWidget, IConfig, IControlWidgetsProps } from '@antv/dipper-core';
 import { AppMapControlContent } from '../AppTemplate';
-import { groupBy } from 'lodash';
+import { BaseLayoutComp } from '../BaseLayoutComp';
+import { CustomBaseWidgets } from '../../BaseWidget/widget';
 
-export default function AppControl() {
-  const { globalConfig } = useConfigService();
-  const { controls, legends = [], defaultcontrols } = globalConfig;
-  const controlGroupBy = useMemo(() => {
-    return groupBy(
-      controls?.filter((item: any) => isDisplay(item.display)),
-      (c) => {
-        return [c.position, c.layout || 'vertical'].join('-');
-      },
-    );
-  }, [controls]);
+export function DipperControl(props: IControlWidgetsProps) {
+  const { display = true, position, layout, type } = props || {};
+  const flexDirection = layout === 'horizontal' ? 'row' : 'column';
+  return display ? (
+    <CustomBaseWidgets type="controlItem">
+      <CustomControl
+        position={position as PositionName}
+        style={{ display: 'flex', flexDirection, gap: '8px' }}
+      >
+        <>{getWidget(type)(props)}</>
+      </CustomControl>
+    </CustomBaseWidgets>
+  ) : null;
+}
+
+function DefaultControl(props: IControlOption) {
+  const { display = true, type, position, options } = props;
+  return display ? (
+    <CustomBaseWidgets type="defaultControlItem">
+      <Control type={type} position={position} {...options} />
+    </CustomBaseWidgets>
+  ) : null;
+}
+
+export default function AppControl(
+  props: Pick<IConfig, 'controls' | 'defaultcontrols' | 'legends'>,
+) {
+  const { controls, legends = [], defaultcontrols } = props || {};
 
   return (
     <>
-      {defaultcontrols
-        ?.filter((item: any) => isDisplay(item.display))
-        .map((item: any, index: number) => {
-          const key = `${item.type}${index}`;
-          const { position } = item as IControlOption;
-          return (
-            <Control
-              key={key}
-              type={item.type}
-              position={position}
-              {...item.options}
-            />
-          );
-        })}
-      {Object.keys(controlGroupBy).map((key: string) => {
-        const [position, layout] = key.split('-');
-
-        const flexDirection = layout === 'horizontal' ? 'row' : 'column';
-        return (
-          <CustomControl
-            key={key}
-            position={position as PositionName}
-            style={{ display: 'flex', flexDirection, gap: '8px' }}
-          >
-            {controlGroupBy[key].map((c) => {
-              return (
-                <React.Fragment key={c.type}>
-                  {getWidget(c.type)(c) as ReactElement}
-                </React.Fragment>
-              );
-            })}
-          </CustomControl>
-        );
-      })}
-      {/* 添加图例 */}
-      <AppMapControlContent items={legends} />
+      <BaseLayoutComp type="defaultControl" {...defaultcontrols}>
+        <>
+          {defaultcontrols?.map((defaultcontrol, index) => (
+            // @ts-ignore
+            <DefaultControl key={index} {...defaultcontrol} name={`${index}`} />
+          ))}
+        </>
+      </BaseLayoutComp>
+      <BaseLayoutComp type="control" {...controls}>
+        <>
+          {controls?.map((control, index) => (
+            <DipperControl key={index} {...control} />
+          ))}
+        </>
+      </BaseLayoutComp>
+      {/* 添加图例, TODO: 可否合并 */}
+      <BaseLayoutComp type="legends">
+        <AppMapControlContent items={legends} />
+      </BaseLayoutComp>
     </>
   );
 }
