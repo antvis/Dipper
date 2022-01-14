@@ -5,7 +5,7 @@ import ToggleButton from './ToggleButton';
 import { usePanelService } from '../hooks';
 import { IPanel } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
-import { AppContent } from '../AppTemplate/Content';
+import { AppContent } from '../AppTemplate';
 
 function getStyle(
   position: string,

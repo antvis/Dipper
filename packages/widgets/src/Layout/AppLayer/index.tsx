@@ -1,6 +1,6 @@
 import { useConfigService } from '../hooks';
 import React from 'react';
-import { AppContent } from '../AppTemplate/Content';
+import { AppContent } from '../AppTemplate';
 
 export default function AppLayerControl() {
   const { globalConfig } = useConfigService();
