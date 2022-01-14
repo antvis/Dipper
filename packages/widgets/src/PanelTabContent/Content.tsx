@@ -7,6 +7,7 @@ import { isEqual } from 'lodash';
 
 function PanelTabContent(props: IWidgetProps) {
   const { childrens = [] } = props;
+
   return (
     <div
       className={classnames({

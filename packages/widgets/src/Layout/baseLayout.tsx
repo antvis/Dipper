@@ -23,6 +23,7 @@ export const LayoutContent = ({ items }: ContentProps) => {
   return (
     <React.Fragment>
       {items?.map((w: IWidgetProps<any>, index: number) => {
+        console.log(w);
         return <CustomBaseWidgets key={w.type + index} {...w} />; // TODO 渲染子组件
       })}
     </React.Fragment>
@@ -54,9 +55,13 @@ export function AppTabsContent({ items }: ContentProps) {
         [style.hideTop]: displayItems.length <= 1,
       })}
     >
-      {displayItems.map((tab: any) => {
+      {displayItems.map((tab: IWidgetProps) => {
         return (
-          <TabPane tab={tab?.title} key={tab.type} className={style.tabPanel}>
+          <TabPane
+            tab={tab?.options?.title}
+            key={tab.type}
+            className={style.tabPanel}
+          >
             <CustomBaseWidgets {...tab} />
           </TabPane>
         );

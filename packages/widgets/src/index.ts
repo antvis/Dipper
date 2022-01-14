@@ -1,7 +1,7 @@
 export * from './Legend/ClassifyColor';
 export * from './Legend/DiscreteColor';
 export * from './Legend/MultiClassifyColor';
-// export * from './PanelTabContent';
+export * from './PanelTabContent';
 export * from './GridLayer/GridLayerGroup';
 export * from './MapStyle';
 export * from './Filter/CitySelect';

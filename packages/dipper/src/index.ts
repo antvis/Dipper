@@ -4,7 +4,7 @@ export * from '@antv/dipper-widgets';
 import { registerWidget } from '@antv/dipper-core';
 import {
   CitySelect,
-  // PanelTabcontent,
+  PanelTabcontent,
   NavBar,
   ClassifyColor,
   DiscreteColor,
@@ -15,7 +15,7 @@ import {
   Map2Image,
 } from '@antv/dipper-widgets';
 registerWidget('citySelect', CitySelect);
-// registerWidget('panelTabContent', PanelTabcontent);
+registerWidget('panelTabContent', PanelTabcontent);
 registerWidget('navibar', NavBar);
 registerWidget('classifyColor', ClassifyColor);
 registerWidget('discreteColor', DiscreteColor);

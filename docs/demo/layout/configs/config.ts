@@ -24,6 +24,38 @@ export const config: Partial<IConfig> = {
       },
     ],
   },
+  panel: {
+    display: true,
+    options: {
+      enableToggle: true,
+      defaultTitle: '所有网格',
+      opened: true,
+      width: 426,
+    },
+    position: 'right',
+    childrens: [
+      {
+        display: true,
+        type: 'panelTabContent',
+        childrens: [
+          {
+            display: true,
+            type: 'mesh_indicator',
+            options: {
+              title: '任务面板',
+            },
+          },
+          {
+            type: 'total_data_panel',
+            display: true,
+            options: {
+              title: '数据分析',
+            },
+          },
+        ],
+      },
+    ],
+  },
   headerbar: {
     display: true,
     title: {
