@@ -16,9 +16,11 @@ export const config: Partial<IConfig> = {
   },
   headerbar: {
     display: true,
-    title: {
-      value: 'XX 管理地图地图',
-      display: true,
+    options: {
+      title: {
+        value: 'XX 管理地图地图',
+        display: true,
+      },
     },
     childrens: [
       {

@@ -1,8 +1,8 @@
 ---
 group:
-  title: 布局测试
+  title: 模板案例
 ---
 
-## 测试 demo
+## 布局测试
 
 <code src="./layout/index.tsx"></code>

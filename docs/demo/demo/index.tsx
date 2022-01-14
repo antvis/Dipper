@@ -5,19 +5,24 @@ import {
   useConfigService,
   useWidgets,
   IWidgetProps,
+  CustomBaseWidgets,
 } from '@antv/dipper';
 import { Select, Button } from 'antd';
-import { CustomBaseWidgets } from '@antv/dipper-widgets';
+import {
+  PieChart,
+  AreaChart,
+  LinesChart,
+  ColumnsChart,
+} from '@alipay/dipper-dubhe';
+import {
+  multidimensionalChart,
+  singleLineChart,
+} from '../analysis/configs/mock';
 const { Option } = Select;
 
 const demo = (props: IWidgetProps) => {
-  const { widgetsOptions, widget } = useWidgets(props?.id || props.type);
   // 状态维护
-  return <Button value="测试">{props.options.title}</Button>;
-};
-
-const layout = (props: any) => {
-  return <CustomBaseWidgets {...props}>{demo(props)}</CustomBaseWidgets>;
+  return <Button value="测试">测试</Button>;
 };
 
 const ControlPosition = () => {
@@ -53,29 +58,31 @@ const ControlPosition = () => {
 };
 
 registerWidget('controlPosition', ControlPosition);
-registerWidget('demo', layout);
+registerWidget('demo', demo);
 
 export default function RumbMap() {
   return (
     <div style={{ height: '500px' }}>
       <DipperContainer
         cfg={{
-          controls: [
-            {
-              display: true,
-              position: 'topleft',
-              type: 'demo',
-              id: 'demo',
-              options: {
-                title: '这个是测试',
+          headerbar: {
+            display: true,
+            options: {
+              title: {
+                value: 'XX 管理地图地图',
+                display: true,
               },
             },
-            {
-              display: true,
-              position: 'topright',
-              type: 'controlPosition',
-            },
-          ],
+            childrens: [
+              {
+                display: true,
+                position: 'left',
+                title: '选择城市',
+                type: 'demo',
+                id: '2',
+              },
+            ],
+          },
         }}
       />
     </div>

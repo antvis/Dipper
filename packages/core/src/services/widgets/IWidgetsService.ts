@@ -9,6 +9,7 @@ export interface IWidgetsService extends EventEmitter {
 export interface IWidgetProps<P = any> {
   type: string; //
   id?: string;
+  title?: string;
   position?: string;
   display?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
@@ -18,6 +19,10 @@ export interface IWidgetProps<P = any> {
     | Array<JSX.Element | undefined>
     | React.FC;
   childrens?: IWidgetProps<P>[];
+  event?: {
+    actionType: string;
+    action: string;
+  };
 }
 
 export interface IControlWidgetsProps<IControlOption = any>

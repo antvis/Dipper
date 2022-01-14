@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useUnmount } from 'ahooks';
 import { Layout } from 'antd';
 import styles from './index.less';
@@ -16,8 +16,8 @@ const { Content } = Layout;
 
 interface IContainerProps {
   cfg: IConfig;
-  children?: React.ReactNode;
   onLoad?: (sceneContainer: Dipper) => void;
+  children: any;
 }
 
 export default function DipperContainer({
@@ -35,7 +35,7 @@ export default function DipperContainer({
     if (sceneContainer && onLoad) {
       onLoad(sceneContainer);
     }
-  });
+  }, []);
 
   return sceneContainer ? (
     <>

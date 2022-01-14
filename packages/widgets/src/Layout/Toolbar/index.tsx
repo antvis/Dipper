@@ -8,6 +8,7 @@ import { IWidgetProps } from '@antv/dipper-core';
 export default function MapToolbar() {
   const { globalConfig } = useConfigService();
   const { toolbar } = globalConfig;
+  console.log('toolbar', toolbar);
 
   // TODO 根据配置
   return isDisplay(toolbar?.display) ? (

@@ -19,7 +19,7 @@ export interface IConfig {
   headerbar: {
     display?: boolean;
     headerstyle?: React.CSSProperties;
-    url: string;
+    url?: string;
     logo?: Partial<{
       display: boolean;
       value: string;
@@ -51,7 +51,7 @@ export interface IConfig {
           lng: number;
           lat: number;
         };
-    children?: React.ReactNode;
+    childrens?: React.ReactNode;
   };
   controls: IControlWidgetsProps[]; // 自定义组件配置
   defaultcontrols: IWidgetProps[]; // 地图自带组件

@@ -15,6 +15,7 @@ export const defaultConfig: Partial<IConfig> = {
       value: 'XX 管理系统',
       display: true,
     },
+
     childrens: [],
   },
   toolbar: {

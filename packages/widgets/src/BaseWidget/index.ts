@@ -53,11 +53,17 @@ export default class BaseWidget<IOptions, IValue>
   }
 
   show() {
-    this.options.display = true;
+    // this.options.display = true;
+    this.setOptions({
+      display: true,
+    });
   }
 
   hide() {
-    this.options.display = false;
+    this.setOptions({
+      display: false,
+    });
+    // this.options.display = false;
   }
 
   setOptions(option: Partial<IWidgetProps<IOptions>>) {
