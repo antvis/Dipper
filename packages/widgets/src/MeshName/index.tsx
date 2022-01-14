@@ -8,8 +8,8 @@ import React, {
 import { CheckOutlined, CloseOutlined, EditOutlined } from '@ant-design/icons';
 import styles from './index.less';
 import { Input } from 'antd';
-import { useLayerGroup } from '@antv/dipper-layout';
 import { Amaps } from '../service/amaps';
+import { useLayerGroup } from '../Layout/hooks';
 
 export function MeshName() {
   const { selectFeatures, updateProperties } = useLayerGroup('grid');

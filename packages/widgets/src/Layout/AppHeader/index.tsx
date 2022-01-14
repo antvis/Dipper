@@ -1,19 +1,19 @@
-// import { useModel } from '@alipay/bigfish';
+import React, { useMemo } from 'react';
 import { Layout } from 'antd';
-import { useMemo } from 'react';
-import React from 'react';
+import { IConfig } from '@antv/dipper-core';
 import styles from './index.less';
 import { isDisplay } from '../utils/ui';
-import { useConfigService } from '../hooks';
-import { AppContent } from '../AppTemplate';
+import { AppContent } from '../AppTemplate/Content';
+import { BaseLayoutComp } from '../BaseLayoutComp';
 
 const { Header } = Layout;
 
-export default function AppHeader() {
-  const { globalConfig } = useConfigService();
-  const { headerstyle, display, logo, url, title, childrens } =
-    globalConfig.headerbar || {};
-
+export function AppHeaderContent({
+  display,
+  options,
+  subChildren,
+}: IConfig['headerbar']) {
+  const { logo, title, url, headerstyle } = options;
   const logoDom = useMemo(() => {
     if (!isDisplay(logo?.display)) {
       return null;
@@ -45,6 +45,7 @@ export default function AppHeader() {
     );
   }, [title?.style, title?.value]);
 
+  console.log(111111);
   return isDisplay(display) ? (
     <Header
       className={styles.appHeader}
@@ -57,25 +58,40 @@ export default function AppHeader() {
       }}
     >
       <div className={styles.appHeaderLeft}>
-        {isDisplay(logo?.display) && logoDom}
+        {isDisplay(display) && logoDom}
         {isDisplay(title?.display) && titleDom}
-
-        {/* 
-        // @ts-ignore */}
-        <AppContent items={childrens?.filter((c) => c.position === 'left')} />
+        <AppContent
+          items={subChildren?.filter((c) => c.position === 'left') || []}
+        />
       </div>
       <div>
-        {/* 
-          // @ts-ignore */}
-        <AppContent items={childrens?.filter((c) => c.position === 'center')} />
+        <AppContent
+          items={subChildren?.filter((c) => c.position === 'center') || []}
+        />
       </div>
       <div className={styles.appHeaderRight}>
-        {/* 
-        // @ts-ignore */}
-        <AppContent items={childrens?.filter((c) => c.position === 'right')} />
+        <AppContent
+          items={subChildren?.filter((c) => c.position === 'right') || []}
+        />
       </div>
     </Header>
-  ) : (
-    <></>
+  ) : null;
+}
+
+export default function AppHeader(props: IConfig['headerbar']) {
+  return (
+    <Header
+      className={styles.appHeader}
+      style={{
+        backgroundColor: '#fff',
+        padding: '0 24px',
+        height: '48px',
+        lineHeight: '48px',
+      }}
+    >
+      <div className={styles.appHeaderLeft}>
+        <BaseLayoutComp {...props} type="header" />
+      </div>
+    </Header>
   );
 }

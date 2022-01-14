@@ -30,7 +30,7 @@ export default function AppMap({ children }: IProps) {
       {/* Popup */}
       {popup?.display && popup.lngLat && (
         <Popup lnglat={popup.lngLat} option={popup.options}>
-          {popup.children}
+          {popup.subChildren}
         </Popup>
       )}
       {isLoaded && children}

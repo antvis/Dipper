@@ -1,5 +1,4 @@
 export * from '@antv/dipper-core';
-export * from '@antv/dipper-layout';
 export * from '@antv/dipper-widgets';
 import { registerWidget } from '@antv/dipper-core';
 import {
@@ -13,6 +12,7 @@ import {
   SearchPlace,
   MapStyle,
   Map2Image,
+  AppHeaderContent,
 } from '@antv/dipper-widgets';
 registerWidget('citySelect', CitySelect);
 registerWidget('panelTabContent', PanelTabcontent);
@@ -24,3 +24,4 @@ registerWidget('mapStyle', MapStyle);
 registerWidget('location', Location);
 registerWidget('searchPlaces', SearchPlace);
 registerWidget('exportMap', Map2Image);
+registerWidget('header', AppHeaderContent);

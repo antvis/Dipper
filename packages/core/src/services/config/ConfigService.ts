@@ -49,7 +49,7 @@ export default class ConfigService
       });
     } else {
       // 组件未添加
-      console.log('组件未添加');
+      console.warn('组件未添加');
     }
   }
   // legends;

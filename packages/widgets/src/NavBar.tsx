@@ -1,24 +1,31 @@
 import { Menu } from 'antd';
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
-import { useConfigService, findItem } from '@antv/dipper-layout';
+import type { IConfig } from '@antv/dipper-core';
+import { findItem } from './Layout/utils';
 
-export function NavBar() {
-  const { globalConfig } = useConfigService();
-  const { headerbar, viewData } = globalConfig;
+interface NavBarProps {
+  headerBar?: IConfig['headerBar'];
+  viewData?: {
+    global?: {
+      view?: string;
+    };
+  };
+}
 
+export function NavBar({ headerBar, viewData }: NavBarProps) {
   const options = useMemo(() => {
-    if (headerbar) {
-      //@ts-ignore
-      return findItem(headerbar, 'center')?.options || [];
+    if (headerBar) {
+      return findItem(headerBar, 'center')?.options || [];
     }
     return [];
-  }, [headerbar]);
+  }, [headerBar]);
+
   return (
     <Menu
       theme="light"
       mode="horizontal"
-      defaultSelectedKeys={[viewData?.global?.view]}
+      defaultSelectedKeys={[viewData?.global?.view || '']}
       style={{ width: '400px' }}
       onClick={(e) => {
         // console.info('您点击了', e);

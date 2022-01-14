@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { IWidgetProps, IWidget } from '@antv/dipper-core';
-import BaseWidget from '.';
-import { useWidgetsService } from '@antv/dipper-layout';
+import React, { useEffect, useRef, FC } from 'react';
+import { IWidgetProps } from '@antv/dipper-core';
+import { useWidgetsService } from '../Layout/hooks';
 
-interface IWidgetsComponent extends IWidgetProps {
-  children?: JSX.Element | JSX.Element[] | Array<JSX.Element | undefined>;
-}
-
-export const CustomBaseWidgets = (props: IWidgetsComponent) => {
+export const CustomBaseWidgets: FC<IWidgetProps> = (props) => {
   const { widgetsService } = useWidgetsService();
-  const [widget, setWidgets] = useState<IWidget>();
+  const wid = widgetsService.getWidget(props.id || '');
+  const { display } = props;
+  const id = useRef('');
   useEffect(() => {
-    const wid = new BaseWidget(props);
-    setWidgets(wid);
-    widgetsService.addWidget(wid);
+    if (!display) {
+      widgetsService.removeWidget(id.current);
+      id.current = '';
+      return;
+    }
+
+    if (id.current) {
+      return;
+    }
+
+    id.current = wid?.id || '';
+    if (wid) {
+      widgetsService.addWidget(wid);
+    }
     return () => {
-      widgetsService.removeWidget(wid.id);
+      widgetsService.removeWidget(wid?.id || '');
     };
-  }, []);
+  }, [display]);
 
   // TODO 状态更新
-
-  return (widget && props?.children) || '';
+  return <>{(display && props.children) || null}</>;
 };

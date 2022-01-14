@@ -1,6 +1,6 @@
 export const config = {
   title: '所有网格',
-  children: [
+  subChildren: [
     {
       type: 'assignform',
       title: '区划分配',

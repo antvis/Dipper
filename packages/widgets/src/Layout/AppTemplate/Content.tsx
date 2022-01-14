@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import style from './style.less';
 import classNames from 'classnames';
+import { CustomBaseWidgets } from '../../BaseWidget/widget';
 
 const { TabPane } = Tabs;
 
@@ -19,11 +20,9 @@ interface ContentProps {
 function Content({ items }: ContentProps) {
   return (
     <>
-      {items
-        ?.filter((item: any) => isDisplay(item.display))
-        .map((item: IWidgetProps) => {
-          return <Widgets item={item} key={item.type} />;
-        })}
+      {items.map((item: IWidgetProps, idx) => {
+        return <Widgets item={item} />;
+      })}
     </>
   );
 }
@@ -58,7 +57,9 @@ function appTabsContent({ items }: ContentProps) {
       {displayItems.map((tab: any) => {
         return (
           <TabPane tab={tab?.title} key={tab.type} className={style.tabPanel}>
-            <Widgets item={tab} />
+            <CustomBaseWidgets {...tab}>
+              <Widgets item={tab} />
+            </CustomBaseWidgets>
           </TabPane>
         );
       })}
@@ -71,13 +72,15 @@ export const AppTabsContent = React.memo(appTabsContent, isEqual);
 function appMapControlContent({ items }: ContentProps) {
   return (
     <>
-      {items?.map((l) => {
+      {items?.map((item) => {
         return (
           <CustomControl
-            position={(l?.position || 'bottomleft') as PositionName}
-            key={l.type}
+            position={(item?.position || 'bottomleft') as PositionName}
+            key={item.type}
           >
-            <Widgets item={l} />
+            <CustomBaseWidgets {...item}>
+              <Widgets item={item} />
+            </CustomBaseWidgets>
           </CustomControl>
         );
       })}

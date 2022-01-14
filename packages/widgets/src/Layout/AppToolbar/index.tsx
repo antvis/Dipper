@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.less';
 import { useConfigService } from '../hooks';
-import { AppContent } from '../AppTemplate';
+import { AppContent } from '../AppTemplate/Content';
 import { getAppContentItem, isDisplay } from '../utils/ui';
 import { IWidgetProps } from '@antv/dipper-core';
 
