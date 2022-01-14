@@ -1,10 +1,11 @@
 import React, { ReactElement, useMemo } from 'react';
-import { isDisplay } from '../utils';
+import { isDisplay } from '../../util/ui';
 import { Control, CustomControl } from '@antv/l7-react';
 import type { IControlOption, PositionName } from '@antv/l7';
 import { getWidget } from '@antv/dipper-core';
-import { useConfigService } from '../hooks';
-import { AppMapControlContent } from '../AppTemplate';
+import { useConfigService } from '../../hooks';
+import { AppMapControlContent } from '../baseLayout';
+import { CustomBaseWidgets } from '../../BaseWidget/widget';
 import { groupBy } from 'lodash';
 
 export default function AppControl() {
@@ -45,13 +46,9 @@ export default function AppControl() {
             position={position as PositionName}
             style={{ display: 'flex', flexDirection, gap: '8px' }}
           >
-            {controlGroupBy[key].map((c) => {
-              return (
-                <React.Fragment key={c.type}>
-                  {getWidget(c.type)(c) as ReactElement}
-                </React.Fragment>
-              );
-            })}
+            {controlGroupBy[key].map((c) => (
+              <CustomBaseWidgets {...c} />
+            ))}
           </CustomControl>
         );
       })}

@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import styles from './index.less';
-import { AppTabsContent } from '@/hooks';
+import { AppTabsContent } from '../Layout/baseLayout';
 import type { IWidgetProps } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
 

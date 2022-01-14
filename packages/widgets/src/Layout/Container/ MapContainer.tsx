@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Layout } from 'antd';
 import Map from '../Map';
+import MapControl from '../MapControl';
+import Panel from '../Panel';
 import type { IConfig, IPanel } from '@antv/dipper-core';
 import { Dipper } from '@antv/dipper-core';
 import { useDipperContainer, useConfigService } from '../../hooks';
@@ -28,10 +30,16 @@ export function MapContainer({ children }: { children?: React.ReactNode }) {
       {/* 地图 */}
       <Map>
         <>
+          {/* 地图控件 图例、比例尺 */}
+          <MapControl />
+          {/* 添加图层 */}
+          {/* <AppLayerControl /> TODO 图层加载 */}
+
           {/* 自定义内容 */}
           {children}
         </>
       </Map>
+      <Panel panel={panel as IPanel} />
       {/* 地图信息栏 */}
     </Content>
   );

@@ -1,10 +1,10 @@
-import { useConfigService } from '../hooks';
+import { useConfigService } from '../../hooks';
 import React from 'react';
-import { AppContent } from '../AppTemplate';
+import { LayoutContent } from '../baseLayout';
 
 export default function AppLayerControl() {
   const { globalConfig } = useConfigService();
   const { layers = [] } = globalConfig;
 
-  return <AppContent items={layers} />;
+  return <LayoutContent items={layers} />;
 }

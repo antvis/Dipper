@@ -5,6 +5,7 @@ import styles from './index.less';
 
 import { Provider } from 'inversify-react';
 import DipperHeader from '../Header';
+import ToolBar from '../Toolbar';
 import { MapContainer } from './ MapContainer';
 import type { IConfig, IPanel } from '@antv/dipper-core';
 import { Dipper } from '@antv/dipper-core';
@@ -44,6 +45,11 @@ export default function DipperContainer({
         <Layout className={styles.pageMap}>
           {/* 导航栏 */}
           <DipperHeader />
+
+          {/* 导航栏工具条 */}
+          <ToolBar />
+
+          {/* 地图区域 */}
           <MapContainer>{children} </MapContainer>
         </Layout>
       </Provider>

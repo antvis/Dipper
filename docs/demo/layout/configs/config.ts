@@ -14,6 +14,16 @@ export const config: Partial<IConfig> = {
       },
     },
   },
+  toolbar: {
+    display: true,
+    childrens: [
+      {
+        display: true,
+        position: 'left',
+        type: 'citySelect',
+      },
+    ],
+  },
   headerbar: {
     display: true,
     title: {
@@ -24,21 +34,17 @@ export const config: Partial<IConfig> = {
       {
         display: true,
         position: 'left',
-        title: '选择城市',
         type: 'citySelect',
-        event: {
-          actionType: 'map',
-          action: 'queryArea',
-        },
       },
       {
-        display: false,
+        display: true,
+        position: 'center',
+        type: 'mapStyle',
+      },
+      {
+        display: true,
         position: 'right',
-        type: 'publishbar',
-        event: {
-          actionType: 'map',
-          action: 'publish',
-        },
+        type: 'mapStyle',
       },
     ],
   },
