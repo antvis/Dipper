@@ -8,7 +8,7 @@ import { AppMapControlContent } from '../baseLayout';
 import { CustomBaseWidgets } from '../../BaseWidget/widget';
 import { groupBy } from 'lodash';
 
-export default function AppControl() {
+export default function MapControl() {
   const { globalConfig } = useConfigService();
   const { controls, legends = [], defaultcontrols } = globalConfig;
   const controlGroupBy = useMemo(() => {
@@ -46,8 +46,8 @@ export default function AppControl() {
             position={position as PositionName}
             style={{ display: 'flex', flexDirection, gap: '8px' }}
           >
-            {controlGroupBy[key].map((c) => (
-              <CustomBaseWidgets {...c} />
+            {controlGroupBy[key].map((c, index) => (
+              <CustomBaseWidgets key={c.type + index} {...c} />
             ))}
           </CustomControl>
         );

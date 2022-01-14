@@ -22,8 +22,8 @@ interface ContentProps {
 export const LayoutContent = ({ items }: ContentProps) => {
   return (
     <React.Fragment>
-      {items?.map((w: IWidgetProps<any>) => {
-        return <CustomBaseWidgets {...w} />; // TODO 渲染子组件
+      {items?.map((w: IWidgetProps<any>, index: number) => {
+        return <CustomBaseWidgets key={w.type + index} {...w} />; // TODO 渲染子组件
       })}
     </React.Fragment>
   );

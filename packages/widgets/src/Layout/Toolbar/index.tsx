@@ -5,10 +5,9 @@ import { LayoutContent } from '../baseLayout';
 import { getAppContentItem, isDisplay } from '../../util/ui';
 import { IWidgetProps } from '@antv/dipper-core';
 
-export default function AppToolbar() {
+export default function MapToolbar() {
   const { globalConfig } = useConfigService();
   const { toolbar } = globalConfig;
-  console.log(toolbar);
 
   // TODO 根据配置
   return isDisplay(toolbar?.display) ? (
