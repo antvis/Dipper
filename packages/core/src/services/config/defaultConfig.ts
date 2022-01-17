@@ -3,7 +3,6 @@ export const defaultConfig: Partial<IConfig> = {
   headerbar: {
     display: true,
     options: {
-      url: './',
       logo: {
         display: true,
         value: 'https://antv-2018.alipay.com/assets/image/icon/l7.svg',
@@ -13,6 +12,7 @@ export const defaultConfig: Partial<IConfig> = {
         },
       },
       title: {
+        url: './',
         value: 'XX 管理系统',
         display: true,
       },

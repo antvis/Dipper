@@ -20,7 +20,6 @@ export interface IConfig {
     display?: boolean;
     options: {
       headerstyle?: React.CSSProperties;
-      url?: string;
       logo?: Partial<{
         display: boolean;
         value: string;
@@ -28,6 +27,7 @@ export interface IConfig {
         href: string;
       }>;
       title: Partial<{
+        url?: string;
         value: string;
         display: boolean;
         style: React.CSSProperties;

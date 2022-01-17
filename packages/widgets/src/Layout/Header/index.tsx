@@ -1,50 +1,57 @@
-// import { useModel } from '@alipay/bigfish';
 import { Layout } from 'antd';
-import { useMemo } from 'react';
 import React from 'react';
 import styles from './index.less';
-
 import { useConfigService } from '../../hooks';
 import { LayoutContent } from '../baseLayout';
+import { isDisplay } from '../utils';
 
-export const isDisplay = (display?: any) => display !== false;
+interface LogoDomProps {
+  value?: string;
+  style?: React.CSSProperties;
+  href?: string;
+}
+
+function LogoDom({ value, style, href }: LogoDomProps) {
+  const imgDom = <img src={value} style={style} />;
+  if (href) {
+    return (
+      <a href={href} target="_blank">
+        {imgDom}
+      </a>
+    );
+  }
+
+  return imgDom;
+}
+
+interface TitleDomProps {
+  style?: React.CSSProperties;
+  url?: string;
+  value?: string;
+}
+
+function TitleDom({ style, url, value }: TitleDomProps) {
+  return (
+    <span
+      style={style}
+      onClick={() => {
+        if (url) {
+          document.location.href = url as string;
+        }
+      }}
+      className={styles.appTitle}
+    >
+      {value}
+    </span>
+  );
+}
+
 const { Header } = Layout;
 
 export default function AppHeader() {
   const { globalConfig } = useConfigService();
   const { display, childrens, options } = globalConfig.headerbar || {};
-  const { headerstyle, logo, url, title } = options || {};
-
-  const logoDom = useMemo(() => {
-    if (!isDisplay(logo?.display)) {
-      return null;
-    }
-    const imgDom = <img src={logo?.value} style={logo?.style} />;
-    if (logo?.href) {
-      return (
-        <a href={logo?.href} target="_blank">
-          {imgDom}
-        </a>
-      );
-    }
-    return imgDom;
-  }, [logo?.display, logo?.href, logo?.value, logo?.style]);
-
-  const titleDom = useMemo(() => {
-    return (
-      <span
-        style={title?.style}
-        onClick={() => {
-          if (url) {
-            document.location.href = url as string;
-          }
-        }}
-        className={styles.appTitle}
-      >
-        {title?.value}
-      </span>
-    );
-  }, [title?.style, title?.value]);
+  const { headerstyle, logo, title } = options || {};
 
   return isDisplay(display) ? (
     <Header
@@ -58,17 +65,27 @@ export default function AppHeader() {
       }}
     >
       <div className={styles.appHeaderLeft}>
-        {isDisplay(logo?.display) && logoDom}
-        {isDisplay(title?.display) && titleDom}
+        {isDisplay(logo?.display) ? (
+          <LogoDom
+            value={logo?.value || ''}
+            style={logo?.style || {}}
+            href={logo?.href || ''}
+          />
+        ) : null}
+        {isDisplay(title?.display) ? (
+          <TitleDom
+            value={title?.value || ''}
+            style={title?.style || {}}
+            url={title?.url || ''}
+          />
+        ) : null}
         <LayoutContent
           items={childrens?.filter((c) => c.position === 'left') || []}
         />
       </div>
-      <div>
-        <LayoutContent
-          items={childrens?.filter((c) => c.position === 'center') || []}
-        />
-      </div>
+      <LayoutContent
+        items={childrens?.filter((c) => c.position === 'center') || []}
+      />
       <div className={styles.appHeaderRight}>
         <LayoutContent
           items={childrens?.filter((c) => c.position === 'right') || []}
