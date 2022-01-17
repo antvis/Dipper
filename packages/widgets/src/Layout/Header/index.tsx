@@ -11,7 +11,7 @@ interface LogoDomProps {
   href?: string;
 }
 
-function LogoDom({ value, style, href }: LogoDomProps) {
+export function LogoDom({ value, style, href }: LogoDomProps) {
   const imgDom = <img src={value} style={style} />;
   if (href) {
     return (
@@ -30,7 +30,7 @@ interface TitleDomProps {
   value?: string;
 }
 
-function TitleDom({ style, url, value }: TitleDomProps) {
+export function TitleDom({ style, url, value }: TitleDomProps) {
   return (
     <span
       style={style}

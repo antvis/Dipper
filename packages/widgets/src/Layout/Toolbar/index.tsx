@@ -8,19 +8,18 @@ import { IWidgetProps } from '@antv/dipper-core';
 export default function MapToolbar() {
   const { globalConfig } = useConfigService();
   const { toolbar } = globalConfig;
-  console.log('toolbar', toolbar);
 
   // TODO 根据配置
   return isDisplay(toolbar?.display) ? (
     <div className={styles.appToolbar}>
       {/* 左侧组件 */}
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <LayoutContent
           items={getAppContentItem(toolbar as IWidgetProps, 'left')}
         />
       </div>
       {/* 右侧组件 */}
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <LayoutContent
           items={getAppContentItem(toolbar as IWidgetProps, 'right')}
         />
