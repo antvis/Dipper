@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@antv/dipper-core';
 import { PositionName } from '@antv/l7';
 import { CustomControl } from '@antv/l7-react';
@@ -88,17 +88,16 @@ export const AppMapControlContent = ({ items }: ContentProps) => {
 
 export const CustomBaseLayout = (props: IWidgetsComponent) => {
   const { widgetsService } = useWidgetsService();
-  const [layout, setLayout] = useState<BaseLayout>();
+  const layout = useRef<BaseLayout>();
   useEffect(() => {
-    const wid = new BaseLayout(props);
-    setLayout(wid);
-    widgetsService.addWidget(wid);
+    layout.current = new BaseLayout(props);
+    widgetsService.addWidget(layout.current);
     return () => {
-      widgetsService.removeWidget(wid.id);
+      widgetsService.removeWidget(layout.current!.id);
     };
   }, []);
 
   // TODO 状态更新
 
-  return <LayoutContent items={layout?.getOptions().childrens || []} />;
+  return <LayoutContent items={props.childrens || []} />;
 };

@@ -3,9 +3,8 @@ import {
   DipperContainer,
   registerWidget,
   useConfigService,
-  IWidgetProps,
 } from '@antv/dipper';
-import { Select, Button, Form, Cascader, Avatar } from 'antd';
+import { Select, Form, Cascader, Avatar } from 'antd';
 import { useLocalStorageState } from 'ahooks';
 import { SettingOutlined } from '@ant-design/icons';
 import styles from './styles.less';
@@ -164,13 +163,11 @@ export default function RumbMap() {
             childrens: [
               {
                 type: 'logo',
-                position: 'left',
                 value:
                   'https://gw.alipayobjects.com/zos/bmw-prod/16d55406-0875-495c-9216-0fb998e2eecd.svg',
               },
               {
                 type: 'myTitle',
-                position: 'left',
               },
               {
                 type: 'perosn',

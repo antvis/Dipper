@@ -9,7 +9,10 @@ export const getAppContentItem = (
   items: IWidgetProps,
   position: Position,
 ): IWidgetProps[] => {
-  return items.childrens?.filter((bar) => bar.position === position) || [];
+  return (
+    items.childrens?.filter((bar) => (bar.position || 'left') === position) ||
+    []
+  );
 };
 
 export const findItem = (

@@ -2,7 +2,7 @@ import { Layout } from 'antd';
 import React from 'react';
 import styles from './index.less';
 import { useConfigService } from '../../hooks';
-import { LayoutContent } from '../baseLayout';
+import { CustomBaseLayout } from '../baseLayout';
 import { isDisplay } from '../../util/ui';
 
 interface LogoDomProps {
@@ -79,15 +79,18 @@ export default function AppHeader() {
             url={title?.url || ''}
           />
         ) : null}
-        <LayoutContent
+        <CustomBaseLayout
+          type="header-left"
           items={childrens?.filter((c) => c.position === 'left') || []}
         />
       </div>
-      <LayoutContent
+      <CustomBaseLayout
+        type="header-center"
         items={childrens?.filter((c) => c.position === 'center') || []}
       />
       <div className={styles.appHeaderRight}>
-        <LayoutContent
+        <CustomBaseLayout
+          type="header-right"
           items={childrens?.filter((c) => c.position === 'right') || []}
         />
       </div>
