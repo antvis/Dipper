@@ -11,46 +11,6 @@ import { SettingOutlined } from '@ant-design/icons';
 import styles from './styles.less';
 const { Option } = Select;
 
-const demo = (props: IWidgetProps) => {
-  // 状态维护
-  return <Button value="测试">测试</Button>;
-};
-
-const ControlPosition = () => {
-  const { updateControl } = useConfigService();
-  return (
-    <Select
-      defaultValue="topleft"
-      style={{ width: 120 }}
-      onChange={(e) => {
-        updateControl('mapStyle', {
-          position: e,
-        });
-      }}
-    >
-      {[
-        'bottomleft',
-        'bottomright',
-        'topleft',
-        'topright',
-        'topcenter',
-        'bottomcenter',
-        'leftcenter',
-        'rightcenter',
-      ].map((value: string) => {
-        return (
-          <Option key={value} value={value}>
-            {value}
-          </Option>
-        );
-      })}
-    </Select>
-  );
-};
-
-registerWidget('controlPosition', ControlPosition);
-registerWidget('demo', demo);
-
 interface Option {
   label: string;
   value: string;
