@@ -18,19 +18,21 @@ export interface IConfig {
   };
   headerbar: {
     display?: boolean;
-    headerstyle?: React.CSSProperties;
-    url?: string;
-    logo?: Partial<{
-      display: boolean;
-      value: string;
-      style: React.CSSProperties;
-      href: string;
-    }>;
-    title: Partial<{
-      value: string;
-      display: boolean;
-      style: React.CSSProperties;
-    }>;
+    options: {
+      headerstyle?: React.CSSProperties;
+      url?: string;
+      logo?: Partial<{
+        display: boolean;
+        value: string;
+        style: React.CSSProperties;
+        href: string;
+      }>;
+      title: Partial<{
+        value: string;
+        display: boolean;
+        style: React.CSSProperties;
+      }>;
+    };
     childrens?: IWidgetProps[];
   };
   panel: Partial<IPanel>;

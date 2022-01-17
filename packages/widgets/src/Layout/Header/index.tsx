@@ -12,8 +12,8 @@ const { Header } = Layout;
 
 export default function AppHeader() {
   const { globalConfig } = useConfigService();
-  const { headerstyle, display, logo, url, title, childrens } =
-    globalConfig.headerbar || {};
+  const { display, childrens, options } = globalConfig.headerbar || {};
+  const { headerstyle, logo, url, title } = options || {};
 
   const logoDom = useMemo(() => {
     if (!isDisplay(logo?.display)) {
