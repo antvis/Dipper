@@ -25,7 +25,5 @@ export default function MapToolbar() {
         />
       </div>
     </div>
-  ) : (
-    <></>
-  );
+  ) : null;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './index.less';
 import { useConfigService } from '../../hooks';
 import { LayoutContent } from '../baseLayout';
-import { isDisplay } from '../utils';
+import { isDisplay } from '../../util/ui';
 
 interface LogoDomProps {
   value?: string;
