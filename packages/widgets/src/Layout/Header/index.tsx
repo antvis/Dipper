@@ -81,17 +81,17 @@ export default function AppHeader() {
         ) : null}
         <CustomBaseLayout
           type="header-left"
-          items={childrens?.filter((c) => c.position === 'left') || []}
+          childrens={childrens?.filter((c) => c.position === 'left') || []}
         />
       </div>
       <CustomBaseLayout
         type="header-center"
-        items={childrens?.filter((c) => c.position === 'center') || []}
+        childrens={childrens?.filter((c) => c.position === 'center') || []}
       />
       <div className={styles.appHeaderRight}>
         <CustomBaseLayout
           type="header-right"
-          items={childrens?.filter((c) => c.position === 'right') || []}
+          childrens={childrens?.filter((c) => c.position === 'right') || []}
         />
       </div>
     </Header>
