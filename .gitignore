@@ -25,3 +25,5 @@
 /.idea
 lerna-debug.log
 /.history
+
+/packages/*/dist
