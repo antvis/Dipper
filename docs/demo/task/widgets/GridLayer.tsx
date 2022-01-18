@@ -98,22 +98,22 @@ export function GridLayer() {
       return;
     }
 
-    const color = ['#CFE1B9','#B0C298','#90A276','#718355']
+    const color = ['#CFE1B9', '#B0C298', '#90A276', '#718355'];
 
     const layer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
       options: {
         ...layerProps.options,
-        fill:{
+        fill: {
           ...layerProps.options.fill,
-          color
-        }
+          color,
+        },
       },
     });
     layerService.addLayer(layer);
 
-    layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
+    layer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
       layer.getLegendItem().map((item) => {
         if (Array.isArray(item.value)) {
           return {

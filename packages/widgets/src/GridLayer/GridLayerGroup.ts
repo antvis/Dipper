@@ -13,11 +13,11 @@ export type IGridLayerGroup = ILayerGroup & {
 export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   private hoverLayer: ILayer | undefined;
   private clickLayer: ILayer | undefined;
-  private selectFeatures: any[] = [];
-  private hoverFeature: any;
-  private options: Partial<ILayerGroupOption> = {};
-  private currentActiveFeatureId: number = -1;
-  private currentSelectFeatureId: number = -1;
+  protected selectFeatures: any[] = [];
+  protected hoverFeature: any;
+  protected options: Partial<ILayerGroupOption> = {};
+  protected currentActiveFeatureId: number = -1;
+  protected currentSelectFeatureId: number = -1;
 
   constructor({ name, data, options }: IGridLayerProps) {
     super();
@@ -33,11 +33,12 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
     this.addTextLayer();
     this.addClickHightLayer();
     this.addHoverHightLayer();
-    this.on(LayerGroupEventEnum.DATAUPDATE, this.resetActive);
+    this.on(LayerGroupEventEnum.DATA_UPDATE, this.resetActive);
   }
 
   initSource() {
     this.source = new Source(this.data);
+    return this.source;
   }
   getLegendItem() {
     // 先取默认图例
@@ -167,7 +168,7 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
       return item;
     });
     this.updateSource(this.data);
-    this.emit(LayerGroupEventEnum.DATAUPDATE);
+    this.emit(LayerGroupEventEnum.DATA_UPDATE);
   }
 
   clickHandler(e: any) {
@@ -195,13 +196,13 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
         type: 'FeatureCollection',
         features: e.feature ? [e.feature] : [],
       });
-      this.emit(LayerGroupEventEnum.HOVERFEATURECHANGE, this.hoverFeature);
+      this.emit(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, this.hoverFeature);
     }
     this.currentActiveFeatureId = e.featureId || -1;
   }
 
   updateSelectLayer() {
-    this.emit(LayerGroupEventEnum.SELECTFEATURECHANGE, this.selectFeatures);
+    this.emit(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, this.selectFeatures);
     this.clickLayer?.setData({
       type: 'FeatureCollection',
       features: this.selectFeatures.map((f: IFeature) => f.feature),
@@ -220,7 +221,6 @@ export class GridLayerGroup extends LayerGroup implements ILayerGroup {
   }
 
   setSelectFeatureById(id: string) {
-    console.log(id);
     const feature = this.data.features.find((f: any) => {
       return f.properties.id === id;
     });

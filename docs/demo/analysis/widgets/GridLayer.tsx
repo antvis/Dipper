@@ -8,6 +8,8 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
+import { centerOfMass, FeatureCollection } from '@turf/turf';
+
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
     if (Array.isArray(item.value)) {
@@ -26,16 +28,21 @@ const formatLegend = (data: any[]) => {
 export function GridLayer() {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const { globalConfig, updateLegend, getWidgetsValue,setConfig } = useConfigService();
+  const { globalConfig, updateLegend, getWidgetsValue, setConfig } =
+    useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const cityValue = getWidgetsValue('citySelect');
   const brandValue = getWidgetsValue('brand');
-  const [geoData, setGeoData] = useState();
+  const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 
-  const layerProps = useMemo(() => {
+  const gridLayerProps = useMemo(() => {
     return layers.find((item: any) => item.type === 'gridLayer');
+  }, [layers]);
+
+  const pointLayerProps = useMemo(() => {
+    return layers.find((item: any) => item.type === 'pointLayer');
   }, [layers]);
 
   const updateLayerLegend = (items: any[]) => {
@@ -45,7 +52,7 @@ export function GridLayer() {
       position: 'bottomleft',
       options: {
         title: '充电宝投放数量',
-        unkownName: layerProps.options.unkownName,
+        unkownName: gridLayerProps.options.unkownName,
         items: items.map((item) => {
           return {
             color: item.color,
@@ -108,15 +115,26 @@ export function GridLayer() {
       gridLayer.setData(geoData);
       return;
     }
-    const layer = new GridLayerGroup({
+    const gridLayer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
-      options: layerProps.options,
+      options: gridLayerProps.options,
     });
-    layerService.addLayer(layer);
 
-    layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
-      layer.getLegendItem().map((item) => {
+    // const pointLayer = new PointLayerGroup({
+    //   name: 'point',
+    //   data: {
+    //     ...geoData,
+    //     features: geoData.features.map((item) => centerOfMass(item)),
+    //   },
+    //   options: pointLayerProps.options,
+    // });
+
+    layerService.addLayer(gridLayer);
+    // layerService.addLayer(pointLayer);
+
+    gridLayer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
+      gridLayer.getLegendItem().map((item) => {
         if (Array.isArray(item.value)) {
           return {
             ...item,
@@ -129,13 +147,13 @@ export function GridLayer() {
           };
         }
       });
-      updateLayerLegend(formatLegend(layer.getLegendItem()));
+      updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
     });
 
     // 更新图例
-    updateLayerLegend(formatLegend(layer.getLegendItem()));
+    updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
 
-    setGridLayer(layer);
+    setGridLayer(gridLayer);
   }, [geoData]);
 
   useEffect(() => {
@@ -148,7 +166,7 @@ export function GridLayer() {
       setConfig(`panel.children.1.display`, true);
       setConfig(`panel.children.2.display`, false);
     }
-  }, [JSON.stringify(selectFeatures)])
+  }, [JSON.stringify(selectFeatures)]);
 
   return <></>;
 }
