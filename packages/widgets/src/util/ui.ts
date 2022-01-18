@@ -1,4 +1,4 @@
-import { IWidgetProps, IConfig } from '@antv/dipper-core';
+import { IWidgetProps } from '@antv/dipper-core';
 
 export const isDisplay = (display?: any) => display !== false;
 
