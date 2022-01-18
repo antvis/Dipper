@@ -16,25 +16,27 @@ export interface IConfig {
       };
     };
   };
-  headerbar: {
-    display?: boolean;
-    options: {
-      headerstyle?: React.CSSProperties;
-      logo?: Partial<{
-        display: boolean;
-        value: string;
-        style: React.CSSProperties;
-        href: string;
-      }>;
-      title: Partial<{
-        url?: string;
-        value: string;
-        display: boolean;
-        style: React.CSSProperties;
-      }>;
-    };
-    childrens?: IWidgetProps[];
-  };
+  headerbar:
+    | {
+        display?: boolean;
+        options: {
+          headerstyle?: React.CSSProperties;
+          logo?: Partial<{
+            display: boolean;
+            value: string;
+            style: React.CSSProperties;
+            href: string;
+          }>;
+          title: Partial<{
+            url?: string;
+            value: string;
+            display: boolean;
+            style: React.CSSProperties;
+          }>;
+        };
+        childrens?: IWidgetProps[];
+      }
+    | false;
   panel: Partial<IPanel>;
   toolbar: {
     display?: boolean;

@@ -17,7 +17,7 @@ const { Content } = Layout;
 interface IContainerProps {
   cfg: IConfig;
   onLoad?: (sceneContainer: Dipper) => void;
-  children: any;
+  children: React.ReactNode;
 }
 
 export default function DipperContainer({
@@ -50,7 +50,7 @@ export default function DipperContainer({
           <ToolBar />
 
           {/* 地图区域 */}
-          <MapContainer>{children} </MapContainer>
+          <MapContainer>{children}</MapContainer>
         </Layout>
       </Provider>
     </>

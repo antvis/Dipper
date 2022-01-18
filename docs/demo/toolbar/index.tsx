@@ -4,11 +4,30 @@ import {
   registerWidget,
   useConfigService,
 } from '@antv/dipper';
-import { Select, Form, Cascader, Avatar } from 'antd';
+import {
+  Select,
+  Form,
+  Cascader,
+  Avatar,
+  Tabs,
+  Collapse,
+  Row,
+  Col,
+  Input,
+  Popover,
+} from 'antd';
 import { useLocalStorageState } from 'ahooks';
-import { SettingOutlined } from '@ant-design/icons';
+import {
+  DownOutlined,
+  QuestionCircleOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
+import { StatisticCard } from '@ant-design/pro-card';
 import styles from './styles.less';
+
 const { Option } = Select;
+const { TabPane } = Tabs;
+const { Panel } = Collapse;
 
 interface Option {
   label: string;
@@ -46,6 +65,23 @@ const MOCK: Record<string, Option[]> = {
     { label: '测试', value: 'test' },
   ],
 };
+
+interface StaticCard {
+  title: string;
+  value: number;
+  unit?: '' | '%';
+}
+
+const MOCK_STATIC: StaticCard[] = [
+  { title: '商户数量(个)', value: 1623 },
+  { title: '0-9天商户动销数(个)', value: 774 },
+  { title: '10-19天商户动销数(个)', value: 90 },
+  { title: '20-31天商户动销数(个)', value: 767 },
+  { title: '7天日均交易笔数(笔)', value: 956 },
+  { title: '30天日均交易笔数(笔)', value: 772 },
+  { title: '商户密度', value: 0.7, unit: '%' },
+  { title: '支付商家占比', value: 0.45, unit: '%' },
+];
 
 function useGetFilters(type) {
   const [options, setOptions] = useState<{ label: string; value: string }[]>(
@@ -150,14 +186,100 @@ function Person() {
 }
 registerWidget('perosn', Person);
 
+function Tab1() {
+  const [staticCards, setStaticCards] = useState<StaticCard[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fakePromise(MOCK_STATIC);
+      setStaticCards(res);
+    })();
+  }, []);
+  return (
+    <Collapse ghost>
+      <Panel header={<div className={styles['overview']}>概况</div>} key="1">
+        <Row>
+          {staticCards.map((staticCard, index) => (
+            <Col key={index} span={!index ? 24 : 12}>
+              <StatisticCard
+                statistic={{
+                  title: staticCard.title,
+                  value: staticCard.value,
+                }}
+              />
+            </Col>
+          ))}
+        </Row>
+      </Panel>
+      <Panel
+        header={<div className={styles['overview']}>覆盖行业情况</div>}
+        key="2"
+      ></Panel>
+    </Collapse>
+  );
+}
+
+function MyPanel() {
+  return (
+    <>
+      <div className={styles['panel-title']}>杭州</div>
+      <div className={styles['panel-sub-title']}>已选择</div>
+      <Tabs type="card">
+        <TabPane tab="商户画像" key="1">
+          <Tab1 />
+        </TabPane>
+        <TabPane tab="消费者画像" key="2"></TabPane>
+        <TabPane tab="服务商概况" key="3"></TabPane>
+        <TabPane tab="分层统计" key="4"></TabPane>
+      </Tabs>
+    </>
+  );
+}
+
+registerWidget('myPanel', MyPanel);
+
+function Layers() {
+  return (
+    <>
+      <div>
+        叠加数据图层
+        <QuestionCircleOutlined />
+      </div>
+    </>
+  );
+}
+
+function CustomLegend() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div className={styles['aoi-filter']}>
+        AOI 筛选
+        <DownOutlined />
+      </div>
+      <div className={`${styles['aoi-filter']} ${styles['select']}`}>
+        <Select placeholder="搜索网格名称/人员名称" showSearch />
+      </div>
+      <Popover trigger="click" content={Layers}>
+        <div className={`${styles['aoi-filter']} ${styles['icon']}`}>
+          <img
+            src="https://gw.alipayobjects.com/zos/bmw-prod/1bd3ce6f-3c52-431d-8578-bd21baec0836.svg"
+            height="13"
+            width="13"
+          />
+        </div>
+      </Popover>
+    </div>
+  );
+}
+
+registerWidget('customLegend', CustomLegend);
+
 export default function RumbMap() {
   return (
     <div style={{ height: '500px' }}>
       <DipperContainer
         cfg={{
-          headerbar: {
-            display: false,
-          },
+          headerbar: false,
           toolbar: {
             display: true,
             childrens: [
@@ -175,6 +297,26 @@ export default function RumbMap() {
               },
             ],
           },
+          panel: {
+            display: true,
+            options: {
+              defaultTitle: '城市洞察',
+              opened: true,
+              enableToggle: true,
+            },
+            childrens: [
+              {
+                type: 'myPanel',
+              },
+            ],
+          },
+          controls: [],
+          legends: [
+            {
+              type: 'customLegend',
+              position: 'topleft',
+            },
+          ],
         }}
       />
     </div>
