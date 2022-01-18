@@ -16,26 +16,30 @@ export interface IConfig {
       };
     };
   };
-  headerbar: {
-    display?: boolean;
-    headerstyle?: React.CSSProperties;
-    url?: string;
-    logo?: Partial<{
-      display: boolean;
-      value: string;
-      style: React.CSSProperties;
-      href: string;
-    }>;
-    title: Partial<{
-      value: string;
-      display: boolean;
-      style: React.CSSProperties;
-    }>;
-    childrens?: IWidgetProps[];
-  };
+  headerbar:
+    | {
+        display?: boolean;
+        options: {
+          headerstyle?: React.CSSProperties;
+          logo?: Partial<{
+            display: boolean;
+            value: string;
+            style: React.CSSProperties;
+            href: string;
+          }>;
+          title: Partial<{
+            url?: string;
+            value: string;
+            display: boolean;
+            style: React.CSSProperties;
+          }>;
+        };
+        childrens?: IWidgetProps[];
+      }
+    | false;
   panel: Partial<IPanel>;
   toolbar: {
-    display: boolean;
+    display?: boolean;
     childrens: IWidgetProps[];
   };
   headerWidgets?: IWidgetProps[]; // 导航栏配置
