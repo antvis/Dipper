@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
-import { centerOfMass, FeatureCollection } from '@turf/turf';
+import { FeatureCollection } from '@turf/turf';
 
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
@@ -159,12 +159,12 @@ export function GridLayer() {
   useEffect(() => {
     if (selectFeatures.length) {
       // TODO 报错
-      setConfig(`panel.children.1.display`, false);
-      setConfig(`panel.children.2.display`, true);
-      // setConfig(`panel.children.${findIdMeshchart}.display`, false)
+      setConfig(`panel.childrens.1.display`, false);
+      setConfig(`panel.childrens.2.display`, true);
+      // setConfig(`panel.childrens.${findIdMeshchart}.display`, false)
     } else {
-      setConfig(`panel.children.1.display`, true);
-      setConfig(`panel.children.2.display`, false);
+      setConfig(`panel.childrens.1.display`, true);
+      setConfig(`panel.childrens.2.display`, false);
     }
   }, [JSON.stringify(selectFeatures)]);
 

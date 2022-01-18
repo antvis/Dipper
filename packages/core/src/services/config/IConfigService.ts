@@ -16,27 +16,31 @@ export interface IConfig {
       };
     };
   };
-  headerbar: {
-    display?: boolean;
-    headerstyle?: React.CSSProperties;
-    url: string;
-    logo?: Partial<{
-      display: boolean;
-      value: string;
-      style: React.CSSProperties;
-      href: string;
-    }>;
-    title: Partial<{
-      value: string;
-      display: boolean;
-      style: React.CSSProperties;
-    }>;
-    children?: IWidgetProps[];
-  };
+  headerbar:
+    | {
+        display?: boolean;
+        options: {
+          headerstyle?: React.CSSProperties;
+          logo?: Partial<{
+            display: boolean;
+            value: string;
+            style: React.CSSProperties;
+            href: string;
+          }>;
+          title: Partial<{
+            url?: string;
+            value: string;
+            display: boolean;
+            style: React.CSSProperties;
+          }>;
+        };
+        childrens?: IWidgetProps[];
+      }
+    | false;
   panel: Partial<IPanel>;
   toolbar: {
-    display: boolean;
-    children: IWidgetProps[];
+    display?: boolean;
+    childrens: IWidgetProps[];
   };
   headerWidgets?: IWidgetProps[]; // 导航栏配置
   map: Partial<IMapConfig>;
@@ -51,7 +55,7 @@ export interface IConfig {
           lng: number;
           lat: number;
         };
-    children?: React.ReactNode;
+    childrens?: React.ReactNode;
   };
   controls: IControlWidgetsProps[]; // 自定义组件配置
   defaultcontrols: IWidgetProps[]; // 地图自带组件

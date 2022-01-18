@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.less';
 import { Dropdown, Menu } from 'antd';
-import { useConfigService } from '@antv/dipper-layout';
+import { useConfigService } from '../hooks';
 import { Config } from './config';
 
 export interface IMapStyleOption {}

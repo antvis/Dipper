@@ -1,8 +1,8 @@
-import { TableOutlined } from '@ant-design/icons';
-import { useLayerService } from '@antv/dipper-layout';
-import { Button, Modal, Table } from 'antd';
 import React, { useEffect, useState, ReactNode } from 'react';
+import { Button, Modal, Table } from 'antd';
+import { TableOutlined } from '@ant-design/icons';
 import styles from './index.less';
+import { useLayerService } from '../hooks';
 
 interface ColProps {
   title: string | ReactNode;

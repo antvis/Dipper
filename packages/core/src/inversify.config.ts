@@ -8,7 +8,7 @@ import type { IWidgetsService } from './services/widgets/IWidgetsService';
 import SceneService from './services/scene/SceneService';
 import LayerService from './services/layer/LayerService';
 import ConfigService from './services/config/ConfigService';
-import ControlService from './services/widgets/WidgetsService';
+import WidgetsService from './services/widgets/WidgetsService';
 import type { IPanelService } from './services/panel/IPanelService';
 import PanelService from './services/panel/PanelService';
 
@@ -32,7 +32,7 @@ export default function createContainer() {
 
   container
     .bind<IWidgetsService>(TYPES.WIDGETS_SYMBOL)
-    .to(ControlService)
+    .to(WidgetsService)
     .inSingletonScope();
 
   container

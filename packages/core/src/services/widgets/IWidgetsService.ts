@@ -1,5 +1,5 @@
 import type EventEmitter from 'eventemitter3';
-
+import type { Container } from 'inversify';
 export interface IWidgetsService extends EventEmitter {
   addWidget: (ctr: IWidget) => void;
   removeWidget: (id: string) => void;
@@ -9,10 +9,21 @@ export interface IWidgetsService extends EventEmitter {
 export interface IWidgetProps<P = any> {
   type: string; //
   id?: string;
+  title?: string;
   position?: string;
   display?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
-  children?: IWidgetProps<P>[];
+  children?:
+    | JSX.Element
+    | JSX.Element[]
+    | Array<JSX.Element | undefined>
+    | React.FC;
+  childrens?: IWidgetProps<P>[];
+  event?: {
+    actionType: string;
+    action: string;
+  };
+  [key: string]: any;
 }
 
 export interface IControlWidgetsProps<IControlOption = any>
@@ -20,17 +31,25 @@ export interface IControlWidgetsProps<IControlOption = any>
   layout?: 'horizontal' | 'vertical';
 }
 
-export interface IWidget<IOptions = any, IValue = any> {
+export interface IWidget<IOptions = any, IValue = any> extends EventEmitter {
   id: string;
   show: () => void;
   hide: () => void;
+  setContainer: (container: Container) => void;
+  init: () => void;
   getOptions: () => IWidgetProps<IOptions>;
   getValue: () => Partial<IValue>;
   setOptions: (option: Partial<IWidgetProps<IOptions>>) => void;
   setValues: (values: Partial<IValue>) => void;
+  destroy: () => void;
 }
 
 export enum WidgetsEventEnum {
   'OPTIONT_CHANGE' = 'optionchange',
   'VALUE_CHANGE' = 'valuechange',
+}
+
+export enum WidgetsServiceEnum {
+  'ADD' = 'add',
+  'REMOVE' = 'remove',
 }
