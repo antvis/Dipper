@@ -3,6 +3,7 @@ import { Collapse } from 'antd';
 import styles from './index.less';
 import { CustomBaseLayout } from '..';
 import { IWidgetProps } from '@antv/dipper-core';
+import { CaretRightOutlined } from '@ant-design/icons';
 
 const { Panel } = Collapse;
 
@@ -18,7 +19,12 @@ export function DipperCollapse({
   title,
 }: DipperCollapseProps) {
   return (
-    <Collapse ghost>
+    <Collapse
+      ghost
+      expandIcon={({ isActive }) => (
+        <CaretRightOutlined rotate={isActive ? 90 : 0} />
+      )}
+    >
       <Panel header={<div className={styles['overview']}>{title}</div>} key="1">
         <CustomBaseLayout type={type} childrens={childrens}></CustomBaseLayout>
       </Panel>

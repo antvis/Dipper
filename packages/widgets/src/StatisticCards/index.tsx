@@ -3,7 +3,7 @@ import React from 'react';
 import { StatisticCard } from '@ant-design/pro-card';
 import { formatNumber } from '../util/format';
 
-export interface StaticCard {
+interface StaticCard {
   title: string;
   value: number;
   unit?: '' | '%';
