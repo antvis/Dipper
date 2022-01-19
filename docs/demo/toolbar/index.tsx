@@ -79,7 +79,12 @@ function Filters() {
       area: [options2[0].value],
       industry: options3[0].value,
     });
-  }, [options1, options2, options3]);
+    widget.setValues({
+      map: map || options1[0].value,
+      area: [options2[0].value],
+      industry: options3[0].value,
+    });
+  }, [options1, options2, options3, widget]);
 
   const onFieldsChange = useCallback(() => {
     const filterVal = form.getFieldsValue(true);
@@ -156,6 +161,12 @@ function StatisticCardsGroup(props) {
   const [staticCards, setStaticCards] = useState<StaticCard[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    if (!widgetsValue) {
+      return;
+    }
+
+    console.log(widgetsValue);
+
     (async () => {
       setLoading(true);
       const res = await mock[props.options.url](MOCK_STATIC);
