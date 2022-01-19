@@ -1,6 +1,6 @@
 ---
 group:
-title: GridLayer配置
+  title: 模板案例
 hide: true
 ---
 
