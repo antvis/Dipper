@@ -16,12 +16,18 @@ import {
   Col,
   Checkbox,
   Popover,
+  Radio,
+  InputNumber,
+  Input,
+  Button,
+  DatePicker,
 } from 'antd';
 import { useLocalStorageState } from 'ahooks';
 import {
   DownOutlined,
   QuestionCircleOutlined,
   SettingOutlined,
+  UpOutlined,
 } from '@ant-design/icons';
 import { StatisticCard } from '@ant-design/pro-card';
 import styles from './styles.less';
@@ -29,6 +35,7 @@ import styles from './styles.less';
 const { Option } = Select;
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
+const { RangePicker } = DatePicker;
 
 interface Option {
   label: string;
@@ -82,6 +89,16 @@ const MOCK_STATIC: StaticCard[] = [
   { title: '30天日均交易笔数(笔)', value: 772 },
   { title: '商户密度', value: 0.7, unit: '%' },
   { title: '支付商家占比', value: 0.45, unit: '%' },
+];
+
+interface ScreenType {
+  label: string;
+  value: string;
+}
+
+const MOCK_SCREENRODI: ScreenType[] = [
+  { label: '普通筛选', value: '普通筛选' },
+  { label: '漏斗筛选', value: '漏斗筛选' },
 ];
 
 function useGetFilters(type) {
@@ -171,7 +188,7 @@ function Person() {
     setPost(val);
   }, []);
 
-  const onSettingClick = useCallback(() => {}, []);
+  const onSettingClick = useCallback(() => { }, []);
   return (
     <>
       <Avatar src={avatar} />
@@ -277,25 +294,78 @@ function Layers() {
 }
 
 function CustomLegend(url) {
+  const [form] = Form.useForm();
+  const [visible, setVisible] = useState(false);
+  const onReset = () => {
+    form.resetFields();
+  };
+  const onFinish = (values: any) => {
+    console.log(values);
+  };
+
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <div className={styles['aoi-filter']}>
-        AOI 筛选
-        <DownOutlined />
-      </div>
-      <div className={`${styles['aoi-filter']} ${styles['select']}`}>
-        <Select placeholder="搜索网格名称/人员名称" showSearch />
-      </div>
-      <Popover trigger="click" content={Layers} placement="bottom">
-        <div className={`${styles['aoi-filter']} ${styles['icon']}`}>
-          <img
-            src="https://gw.alipayobjects.com/zos/bmw-prod/1bd3ce6f-3c52-431d-8578-bd21baec0836.svg"
-            height="13"
-            width="13"
-          />
+    <>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div
+          className={styles['aoi-filter']}
+          onClick={() => {
+            setVisible(!visible);
+          }}
+        >
+          AOI 筛选
+          {visible ? <UpOutlined /> : <DownOutlined />}
         </div>
-      </Popover>
-    </div>
+        <div className={`${styles['aoi-filter']} ${styles['select']}`}>
+          <Select placeholder="搜索网格名称/人员名称" showSearch />
+        </div>
+        <Popover trigger="click" content={Layers} placement="bottom">
+          <div className={`${styles['aoi-filter']} ${styles['icon']}`}>
+            <img
+              src="https://gw.alipayobjects.com/zos/bmw-prod/1bd3ce6f-3c52-431d-8578-bd21baec0836.svg"
+              height="13"
+              width="13"
+            />
+          </div>
+        </Popover>
+      </div>
+      {visible !== false ? (
+        <div className={styles['aoi-screen']}>
+          <Form form={form} onFinish={onFinish} layout="vertical">
+            <Form.Item name="screenType" label="筛选类型">
+              <Radio.Group options={MOCK_SCREENRODI} />
+            </Form.Item>
+            <Form.Item name="ChenckBox" label="多选标题">
+              <Checkbox.Group options={MOCK_SCREENRODI} />
+            </Form.Item>
+            <Form.Item name="NumberInout" label="数值标题">
+              <InputNumber placeholder="0" />
+            </Form.Item>
+            <Form.Item name="RangeTime" label="时间标题">
+              <RangePicker />
+            </Form.Item>
+            <Form.Item label="时间标题" style={{ display: 'flex' }}>
+              <Form.Item name="year" style={{ display: 'inline-block' }}>
+                <Input placeholder="最小值" />
+              </Form.Item>
+              ～
+              <Form.Item name="month" style={{ display: 'inline-block' }}>
+                <Input placeholder="最大值" />
+              </Form.Item>
+            </Form.Item>
+            <div className={styles['aoi-buttonflex']}>
+              <Form.Item>
+                <a onClick={onReset} style={{ marginRight: 10 }}>
+                  一键清除
+                </a>
+                <Button type="primary" htmlType="submit">
+                  确认
+                </Button>
+              </Form.Item>
+            </div>
+          </Form>
+        </div>
+      ) : null}
+    </>
   );
 }
 
@@ -305,7 +375,7 @@ registerWidget('PanelTabcontent', PanelTabcontent);
 
 export default function RumbMap() {
   return (
-    <div style={{ height: '500px' }}>
+    <div style={{ height: '800px' }}>
       <DipperContainer
         cfg={{
           headerbar: {
