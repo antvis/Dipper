@@ -13,7 +13,7 @@ export default class SceneService
 {
   private config: Partial<IConfig> = {};
   public scene: Scene | undefined;
-  public container: Container | undefined = undefined;
+  public container!: Container;
 
   @inject(TYPES.CONFIG_SYMBOL)
   protected configService!: IConfigService;
