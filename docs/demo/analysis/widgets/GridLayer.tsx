@@ -9,6 +9,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
 import { FeatureCollection } from '@turf/turf';
+import { Container } from '_inversify@5.1.1@inversify';
 
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
@@ -118,7 +119,8 @@ export function GridLayer() {
     const gridLayer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
-      options: gridLayerProps.options,
+      options: layerProps?.options,
+      container: sceneService.container as Container,
     });
 
     // const pointLayer = new PointLayerGroup({
@@ -133,25 +135,25 @@ export function GridLayer() {
     layerService.addLayer(gridLayer);
     // layerService.addLayer(pointLayer);
 
-    gridLayer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
-      gridLayer.getLegendItem().map((item) => {
-        if (Array.isArray(item.value)) {
-          return {
-            ...item,
-            value: item.value.map((v) => v.toFixed(2)),
-          };
-        } else {
-          return {
-            ...item,
-            value: item.value.toFixed(2),
-          };
-        }
-      });
-      updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
-    });
-
-    // 更新图例
-    updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
+    // gridLayer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
+    //   gridLayer.getLegendItem().map((item) => {
+    //     if (Array.isArray(item.value)) {
+    //       return {
+    //         ...item,
+    //         value: item.value.map((v) => v.toFixed(2)),
+    //       };
+    //     } else {
+    //       return {
+    //         ...item,
+    //         value: item.value.toFixed(2),
+    //       };
+    //     }
+    //   });
+    //   updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
+    // });
+    //
+    // // 更新图例
+    // updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
 
     setGridLayer(gridLayer);
   }, [geoData]);

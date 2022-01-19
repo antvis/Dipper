@@ -6,6 +6,7 @@ import {
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
+import { Container } from 'inversify';
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
     if (Array.isArray(item.value)) {
@@ -86,7 +87,7 @@ export function GridLayer() {
         setGeoData(data);
       });
     // 切换城市 高德地图方法
-    sceneService.getScene().map?.setCity(cityValue[1]);
+    sceneService.getScene()?.map?.setCity(cityValue[1]);
   }, [JSON.stringify(cityValue)]);
 
   useEffect(() => {
@@ -103,35 +104,30 @@ export function GridLayer() {
     const layer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
-      options: {
-        ...layerProps.options,
-        fill: {
-          ...layerProps.options.fill,
-          color,
-        },
-      },
+      options: layerProps?.options,
+      container: sceneService.container as Container,
     });
     layerService.addLayer(layer);
 
     layer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
-      layer.getLegendItem().map((item) => {
-        if (Array.isArray(item.value)) {
-          return {
-            ...item,
-            value: item.value.map((v) => v.toFixed(2)),
-          };
-        } else {
-          return {
-            ...item,
-            value: item.value.toFixed(2),
-          };
-        }
-      });
-      updateLayerLegend(formatLegend(layer.getLegendItem()));
+      // layer.getLegendItem().map((item) => {
+      //   if (Array.isArray(item.value)) {
+      //     return {
+      //       ...item,
+      //       value: item.value.map((v) => v.toFixed(2)),
+      //     };
+      //   } else {
+      //     return {
+      //       ...item,
+      //       value: item.value.toFixed(2),
+      //     };
+      //   }
+      // });
+      // updateLayerLegend(formatLegend(layer.getLegendItem()));
     });
 
     // 更新图例
-    updateLayerLegend(formatLegend(layer.getLegendItem()));
+    // updateLayerLegend(formatLegend(layer.getLegendItem()));
 
     setGridLayer(layer);
   }, [geoData]);

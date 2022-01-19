@@ -37,8 +37,8 @@ export const defaultGridSelectOptions = {
 
 export const defaultGridLayerOptions: IGridLayerGroupOptions = {
   normal: {
-    fillColor: '#ff0000',
-    borderColor: '#ff0000',
+    fillColor: '#1990FF',
+    borderColor: '#1990FF',
     borderWidth: 0,
   },
   text: false,
