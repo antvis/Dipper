@@ -17,15 +17,17 @@ export function useWidgets(id: string) {
         setWidget(e);
       }
     };
-    if (widgetsService.getWidget(id)) {
-      setWidget(widgetsService.getWidget(id) as IWidget);
+    const widget = widgetsService.getWidget(id);
+    if (widget) {
+      setWidget(widget as IWidget);
+      setWidgetsValue(widget.getValue());
     } else {
       widgetsService.on(WidgetsServiceEnum.ADD, widgetsAdd);
     }
     return () => {
       widgetsService.off(WidgetsServiceEnum.ADD, widgetsAdd);
     };
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     widget?.on(WidgetsEventEnum.VALUE_CHANGE, (e: any) => {
