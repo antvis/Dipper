@@ -1,240 +1,188 @@
-import type { ILayerGroup } from '@antv/dipper-core';
-import { LayerGroup, LayerGroupEventEnum, getColor } from '@antv/dipper-core';
-import type { ILayer, IScaleOptions } from '@antv/l7';
-import { LineLayer, PolygonLayer, Source } from '@antv/l7';
-import type { IFeature, IGridLayerProps, ILayerGroupOption } from './common';
-import { blankData, uniqFeatures, fromPairs } from './common';
+import {
+  LayerGroup,
+  ILayerGroupOptions,
+  getLayerFieldArgus,
+  ILayerFieldProperties,
+  ILayerGroupProps,
+  LayerGroupEventEnum,
+  ILayerGroupText,
+  defaultGridTextOptions,
+} from '@antv/dipper-core';
+import { PointLayer, PolygonLayer } from '@antv/l7';
+import { cloneDeep, merge } from 'lodash';
+import { featureCollection, simplify } from '@turf/turf';
 
-export type IGridLayerGroup = ILayerGroup & {
-  getLegendItem: () => any;
-  updateProperties: (props: Record<string, any>[]) => any;
+export interface IGridLayerGroupStyle {
+  borderColor: ILayerFieldProperties<string>;
+  borderWidth: ILayerFieldProperties<number>;
+}
+
+export interface IGridLayerGroupOptions extends ILayerGroupOptions {
+  normal: IGridLayerGroupStyle & { fillColor: ILayerFieldProperties<string> };
+  autoFit?: boolean;
+  text: boolean | ILayerGroupText;
+  select?: boolean | IGridLayerGroupStyle;
+  hover?: boolean | IGridLayerGroupStyle;
+}
+
+export const defaultGridHoverOptions = {
+  borderColor: '#ffffff',
+  borderWidth: 2,
 };
 
-export class GridLayerGroup extends LayerGroup implements ILayerGroup {
-  private hoverLayer: ILayer | undefined;
-  private clickLayer: ILayer | undefined;
-  protected selectFeatures: any[] = [];
-  protected hoverFeature: any;
-  protected options: Partial<ILayerGroupOption> = {};
-  protected currentActiveFeatureId: number = -1;
-  protected currentSelectFeatureId: number = -1;
+export const defaultGridSelectOptions = {
+  borderColor: '#000000',
+  borderWidth: 1,
+};
 
-  constructor({ name, data, options }: IGridLayerProps) {
-    super();
-    this.name = name;
-    this.data = data;
-    this.options = options;
-  }
+export const defaultGridLayerOptions: IGridLayerGroupOptions = {
+  normal: {
+    fillColor: '#ff0000',
+    borderColor: '#ff0000',
+    borderWidth: 0,
+  },
+  text: false,
+  select: true,
+  hover: true,
+};
 
-  public init() {
-    this.initSource();
-    this.addFillLayer();
-    this.addLineLayer();
-    this.addTextLayer();
-    this.addClickHightLayer();
-    this.addHoverHightLayer();
-    this.on(LayerGroupEventEnum.DATA_UPDATE, this.resetActive);
-  }
-
-  initSource() {
-    this.source = new Source(this.data);
-    return this.source;
-  }
-  getLegendItem() {
-    // 先取默认图例
-    let legend = this.getLayer(this.name)?.getLegendItems('color') || [];
-    if (legend.length !== 0) {
-      return legend;
-    }
-
-    // @ts-ignore
-    const scale =
-      // @ts-ignore
-      this.getLayer(this.name)?.styleAttributeService?.getLayerAttributeScale(
-        'color',
-      );
-
-    if (scale?.domain) {
-      legend = scale
-        .domain()
-        .filter((item: any) => item !== 'label')
-        .map((item: string | number) => {
-          return {
-            // @ts-ignore
-            value: item || this.options.fill.unkownName || '无',
-            color: scale(item),
-          };
-        });
-    }
-    return legend;
-  }
-  addFillLayer() {
-    let color = this.options.fill?.color;
-    const fillLayer = new PolygonLayer({
-      autoFit: false,
-      name: this.name,
-    })
-      .source(this.source)
-      .shape('fill')
-      .scale({
-        [this.options.fill!.field]: this.options.fill?.scale,
-      } as IScaleOptions)
-      .color(this.options.fill!.field, color)
-      .style({ opacity: this.options.fill?.opacity || 0.8 });
-
-    fillLayer.once('inited', () => {
-      fillLayer.fitBounds();
-    });
-    fillLayer.on('click', this.clickHandler.bind(this));
-    fillLayer.on('mousemove', this.hoverHandler.bind(this));
-    fillLayer.on('unclick', () => {
-      this.selectFeatures = [];
-      this.updateSelectLayer();
-    });
-    fillLayer.on('mouseout', this.hoverHandler.bind(this));
-    this.addLayer(fillLayer);
+export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
+  constructor(props: ILayerGroupProps<IGridLayerGroupOptions>) {
+    super(props);
+    const { normal, hover, select, text } = this.options;
+    const fillLayer = this.initFillLayer();
     this.source = fillLayer.getSource();
+
+    if (normal?.borderWidth) {
+      this.initLineLayer();
+    }
+    if (text) {
+      this.initTextLayer();
+    }
+    if (hover) {
+      this.onLayerHover(fillLayer);
+      this.initHoverLayer();
+    }
+    if (select) {
+      this.onLayerSelect(fillLayer);
+      this.initSelectLayer();
+    }
   }
 
-  addLineLayer() {
-    const linelayer = new PolygonLayer()
+  getDefaultOptions() {
+    return cloneDeep(defaultGridLayerOptions);
+  }
+
+  initFillLayer() {
+    const {
+      normal: { fillColor },
+      autoFit = false,
+    } = this.options;
+
+    const fillLayer = new PolygonLayer({
+      autoFit,
+    });
+
+    fillLayer
+      .source(this.source)
+      // @ts-ignore
+      .color(...getLayerFieldArgus(fillColor))
+      .shape('fill');
+
+    this.addLayer(fillLayer);
+
+    this.source = fillLayer.getSource();
+
+    return fillLayer;
+  }
+
+  initLineLayer() {
+    const {
+      normal: { borderColor, borderWidth },
+    } = this.options;
+
+    const borderLayer = new PolygonLayer();
+
+    borderLayer
       .shape('line')
       // @ts-ignore
-      .size(1)
-      .color('#fff')
-      .style({ opacity: 1.0 });
-    linelayer.setSource(this.source);
-    this.addLayer(linelayer);
-  }
-  // 添加文本标注
-  addTextLayer() {
-    const textlayer = new PolygonLayer({
-      zIndex: 20,
-    })
-      .source(this.source)
-      .shape(this.options?.label?.field || 'name', 'text')
-      .size(12)
-      .color('#000')
-      .style({
-        fontWeight: 400,
-        stroke: '#fff',
-        strokeWidth: 1.5,
-        opacity: 1.0,
-      });
-    textlayer.setSource(this.source);
-    this.addLayer(textlayer);
-  }
-  // hover 高亮图层
-  addHoverHightLayer() {
-    const layer = new LineLayer({
-      name: 'highlightLayer',
-      zIndex: 10,
-    })
-      .source(blankData)
-      .shape('line')
-      .size(2)
-      .color('#fff')
-      .style({ opacity: 1.0 });
+      .color(...getLayerFieldArgus(borderColor))
+      // @ts-ignore
+      .size(...getLayerFieldArgus(borderWidth));
 
-    this.hoverLayer = layer;
-    this.addLayer(layer);
+    borderLayer.setSource(this.source);
+    this.addLayer(borderLayer);
   }
 
-  // 点击高亮图层
-  addClickHightLayer() {
-    const clicklayer = new PolygonLayer({
-      name: 'clickHighlightLayer',
-      zIndex: 11,
-    })
-      .source(blankData)
-      .color('#65789B')
-      .size(1)
-      .shape('line')
-      .style({ opacity: 1 });
-    this.addLayer(clicklayer);
-    this.clickLayer = clicklayer;
-  }
-
-  updateProperties(props: { id: string; properties: any }[]) {
-    const map: Record<string, any> = fromPairs(
-      props.map((item) => [item.id, item.properties]),
+  initTextLayer() {
+    const { field, stroke, strokeWidth, weight, color, size } = merge(
+      defaultGridTextOptions,
+      this.options.text,
     );
-    this.data.features = this.data.features.map((item: any) => {
-      const { id } = item.properties;
-      const newProperties = map[id];
-      if (newProperties) {
-        Object.assign(item.properties, newProperties);
-      }
-      return item;
-    });
-    this.updateSource(this.data);
-    this.emit(LayerGroupEventEnum.DATA_UPDATE);
-  }
 
-  clickHandler(e: any) {
-    const { target } = e;
-    if (target.shiftKey) {
-      // 多选
-      this.selectFeatures = uniqFeatures(this.selectFeatures, e);
-    } else if (
-      this.selectFeatures.length === 1 && // 取消选中
-      this.selectFeatures[0].featureId === e.featureId
-    ) {
-      // 单选
-      this.selectFeatures = [];
-    } else {
-      this.selectFeatures = [e];
-    }
-    //
-    this.updateSelectLayer();
-  }
-
-  hoverHandler(e: IFeature) {
-    this.hoverFeature = e.feature ? e : null;
-    if (this.currentActiveFeatureId !== e.featureId) {
-      this.hoverLayer?.setData({
-        type: 'FeatureCollection',
-        features: e.feature ? [e.feature] : [],
+    const textLayer = new PolygonLayer()
+      .shape(field || 'name', 'text')
+      // @ts-ignore
+      .size(...getLayerFieldArgus(size))
+      // @ts-ignore
+      .color(...getLayerFieldArgus(color))
+      .style({
+        // @ts-ignore
+        // fontWeight: weight,
+        stroke,
+        strokeWidth,
+        opacity: 1,
       });
-      this.emit(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, this.hoverFeature);
-    }
-    this.currentActiveFeatureId = e.featureId || -1;
+    textLayer.setSource(this.source);
+    this.addLayer(textLayer);
   }
 
-  updateSelectLayer() {
-    this.emit(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, this.selectFeatures);
-    this.clickLayer?.setData({
-      type: 'FeatureCollection',
-      features: this.selectFeatures.map((f: IFeature) => f.feature),
+  initHoverLayer() {
+    const { borderColor, borderWidth } = merge(
+      defaultGridHoverOptions,
+      this.options.hover,
+    );
+
+    const hoverLayer = new PolygonLayer();
+    hoverLayer
+      .shape('line')
+      // @ts-ignore
+      .color(...getLayerFieldArgus(borderColor))
+      // @ts-ignore
+      .size(...getLayerFieldArgus(borderWidth))
+      .source(featureCollection([]));
+
+    this.addLayer(hoverLayer);
+
+    this.on(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, () => {
+      hoverLayer.setData(
+        featureCollection(this.hoverFeature ? [this.hoverFeature.feature] : []),
+      );
     });
   }
 
-  resetActive() {
-    this.clickLayer?.setData({
-      type: 'FeatureCollection',
-      features: [],
-    });
-    this.hoverLayer?.setData({
-      type: 'FeatureCollection',
-      features: [],
-    });
-  }
+  initSelectLayer() {
+    const { borderColor, borderWidth } = merge(
+      defaultGridSelectOptions,
+      this.options.select,
+    );
 
-  setSelectFeatureById(id: string) {
-    const feature = this.data.features.find((f: any) => {
-      return f.properties.id === id;
-    });
-    if (feature) {
-      this.selectFeatures = [
-        {
-          feature,
-        },
-      ];
-      this.updateSelectLayer();
-    }
-  }
+    const selectLayer = new PolygonLayer();
 
-  getSelectFeatures() {
-    return this.selectFeatures || [];
+    selectLayer
+      .shape('line')
+      // @ts-ignore
+      .color(...getLayerFieldArgus(borderColor))
+      // @ts-ignore
+      .size(...getLayerFieldArgus(borderWidth))
+      .source(featureCollection([]));
+
+    this.addLayer(selectLayer);
+
+    this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
+      selectLayer.setData(
+        featureCollection(this.selectFeatures.map((item) => item.feature)),
+      );
+    });
   }
 }

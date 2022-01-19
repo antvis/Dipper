@@ -4,7 +4,7 @@ import {
   useSceneService,
   useLayerService,
   IGridLayerGroupOptions,
-  GridLayerGroup1,
+  GridLayerGroup,
   // @ts-ignore
 } from '@antv/dipper';
 import { Scene } from '@antv/l7';
@@ -18,10 +18,10 @@ export default function GridLayer({
 }) {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const [layerGroup, setLayerGroup] = useState<GridLayerGroup1 | null>(null);
+  const [layerGroup, setLayerGroup] = useState<GridLayerGroup | null>(null);
 
   useMount(() => {
-    const gridLayerGroup = new GridLayerGroup1({
+    const gridLayerGroup = new GridLayerGroup({
       name: 'grid',
       options: {
         text: {
