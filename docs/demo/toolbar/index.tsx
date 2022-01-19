@@ -2,16 +2,16 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
   DipperContainer,
   registerWidget,
-  useConfigService,
   PanelTabcontent,
+  StatisticCards,
+  useWidgets,
+  useLayerGroup,
 } from '@antv/dipper';
 import {
   Select,
   Form,
   Cascader,
   Avatar,
-  Tabs,
-  Collapse,
   Row,
   Col,
   Checkbox,
@@ -20,6 +20,7 @@ import {
   InputNumber,
   Input,
   Button,
+  Spin,
   DatePicker,
 } from 'antd';
 import { useLocalStorageState } from 'ahooks';
@@ -29,77 +30,21 @@ import {
   SettingOutlined,
   UpOutlined,
 } from '@ant-design/icons';
-import { StatisticCard } from '@ant-design/pro-card';
+// import { Pie, PieConfig } from '@alipay/tech-vis';
 import styles from './styles.less';
+import {
+  fakePromise,
+  MOCK_STATIC,
+  StaticCard,
+  Option,
+  MOCK_SCREENRODI,
+  MOCK,
+  MockLayers,
+} from './util';
+import * as mock from './util/mock';
+import { initWidgets } from '../layer/widgets';
 
-const { Option } = Select;
-const { TabPane } = Tabs;
-const { Panel } = Collapse;
 const { RangePicker } = DatePicker;
-
-interface Option {
-  label: string;
-  value: string;
-}
-
-function fakePromise<T>(data: T): Promise<T> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(data);
-    }, 1000);
-  });
-}
-
-const MOCK: Record<string, Option[]> = {
-  1: [
-    { label: '方案1', value: '方案1' },
-    { label: '方案2', value: '方案2' },
-    { label: '方案3', value: '方案3' },
-  ],
-  2: [
-    { label: '全国', value: '86' },
-    { label: '浙江', value: '186' },
-    { label: '湖南', value: '286' },
-  ],
-  3: [
-    { label: '全部行业', value: 'all' },
-    { label: '行业1', value: '行业1' },
-    { label: '行业2', value: '行业2' },
-    { label: '行业3', value: '行业3' },
-  ],
-  4: [
-    { label: '城市经理', value: 'cityManager' },
-    { label: '技术', value: 'dev' },
-    { label: '测试', value: 'test' },
-  ],
-};
-
-interface StaticCard {
-  title: string;
-  value: number;
-  unit?: '' | '%';
-}
-
-const MOCK_STATIC: StaticCard[] = [
-  { title: '商户数量(个)', value: 1623 },
-  { title: '0-9天商户动销数(个)', value: 774 },
-  { title: '10-19天商户动销数(个)', value: 90 },
-  { title: '20-31天商户动销数(个)', value: 767 },
-  { title: '7天日均交易笔数(笔)', value: 956 },
-  { title: '30天日均交易笔数(笔)', value: 772 },
-  { title: '商户密度', value: 0.7, unit: '%' },
-  { title: '支付商家占比', value: 0.45, unit: '%' },
-];
-
-interface ScreenType {
-  label: string;
-  value: string;
-}
-
-const MOCK_SCREENRODI: ScreenType[] = [
-  { label: '普通筛选', value: '普通筛选' },
-  { label: '漏斗筛选', value: '漏斗筛选' },
-];
 
 function useGetFilters(type) {
   const [options, setOptions] = useState<{ label: string; value: string }[]>(
@@ -117,7 +62,7 @@ function useGetFilters(type) {
 }
 
 function Filters() {
-  const { updateControl } = useConfigService();
+  const { widget } = useWidgets('headetFilter');
   const options1 = useGetFilters(1);
   const options2 = useGetFilters(2);
   const options3 = useGetFilters(3);
@@ -139,7 +84,8 @@ function Filters() {
   const onFieldsChange = useCallback(() => {
     const filterVal = form.getFieldsValue(true);
     setMap(filterVal.map);
-  }, []);
+    widget.setValues(filterVal);
+  }, [widget]);
 
   return (
     <Form form={form} layout="inline" onFieldsChange={onFieldsChange}>
@@ -160,13 +106,14 @@ function Filters() {
   );
 }
 
+registerWidget('headetFilter', Filters);
+
 function Title() {
   return (
     <>
       <div className={styles['main-title']}>万象台</div>
       <div className={styles['sub-title']}> · 城市洞察</div>
       <div className={styles['split-line']}></div>
-      <Filters />
     </>
   );
 }
@@ -188,7 +135,7 @@ function Person() {
     setPost(val);
   }, []);
 
-  const onSettingClick = useCallback(() => { }, []);
+  const onSettingClick = useCallback(() => {}, []);
   return (
     <>
       <Avatar src={avatar} />
@@ -204,62 +151,56 @@ function Person() {
 }
 registerWidget('perosn', Person);
 
-function Tab1() {
+function StatisticCardsGroup(props) {
+  const cb = useCallback(({ type, e }: { type: string; e: any }) => {
+    console.log(type, e);
+  }, []);
+  const { widget } = useWidgets('statisticCards', cb);
   const [staticCards, setStaticCards] = useState<StaticCard[]>([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
-      const res = await fakePromise(MOCK_STATIC);
+      setLoading(true);
+      const res = await mock[props.options.url](MOCK_STATIC);
+      setLoading(false);
       setStaticCards(res);
     })();
-  }, []);
+  }, [props.options.url]);
   return (
-    <Collapse ghost>
-      <Panel header={<div className={styles['overview']}>概况</div>} key="1">
-        <Row>
-          {staticCards.map((staticCard, index) => (
-            <Col key={index} span={!index ? 24 : 12}>
-              <StatisticCard
-                statistic={{
-                  title: staticCard.title,
-                  value: staticCard.value,
-                }}
-              />
-            </Col>
-          ))}
-        </Row>
-      </Panel>
-      <Panel
-        header={<div className={styles['overview']}>覆盖行业情况</div>}
-        key="2"
-      ></Panel>
-    </Collapse>
+    <Spin spinning={loading}>
+      <StatisticCards childrens={staticCards} />
+    </Spin>
   );
 }
 
-function MyPanel() {
-  return (
-    <>
-      <div className={styles['panel-title']}>杭州</div>
-      <div className={styles['panel-sub-title']}>已选择</div>
-      <Tabs type="card">
-        <TabPane tab="商户画像" key="1">
-          <Tab1 />
-        </TabPane>
-        <TabPane tab="消费者画像" key="2"></TabPane>
-        <TabPane tab="服务商概况" key="3"></TabPane>
-        <TabPane tab="分层统计" key="4"></TabPane>
-      </Tabs>
-    </>
-  );
-}
+registerWidget('statisticCards', StatisticCardsGroup);
 
-registerWidget('myPanel', MyPanel);
+// function PieCharts() {
+//   const config: PieConfig = {
+//     originalData: [
+//       { type: '分类 1', value: 10 },
+//       { type: '分类 2', value: 13 },
+//     ],
+//     formattedData: [
+//       { type: '分类 1', value: 10 },
+//       { type: '分类 2', value: 13 },
+//     ],
+//     dimensions: ['type'],
+//     measures: ['value'],
+//     label: {
+//       type: 'spider',
+//       content: '{name}\n{value}',
+//       showLabelPercent: true,
+//     }
+//   };
+//   return (
+//     <div style={{ width: 300, height: 250 }}>
+//       <Pie config={config} />
+//     </div>
+//   );
+// }
 
-const MockLayers: Option[] = [
-  { label: 'AOI 图层', value: '1' },
-  { label: 'xxx图层', value: '2' },
-];
+// registerWidget('pieCharts', PieCharts);
 
 function Layers() {
   const [layers, setLayers] = useState<Option[]>([]);
@@ -293,7 +234,7 @@ function Layers() {
   );
 }
 
-function CustomLegend(url) {
+function CustomLegend() {
   const [form] = Form.useForm();
   const [visible, setVisible] = useState(false);
   const onReset = () => {
@@ -370,10 +311,28 @@ function CustomLegend(url) {
 }
 
 registerWidget('customLegend', CustomLegend);
-
 registerWidget('PanelTabcontent', PanelTabcontent);
 
+function SidePanelTitle() {
+  const [area, setArea] = useState('杭州');
+  const [areaNumber, setAreaNumber] = useState(0);
+  const { selectFeatures } = useLayerGroup('grid');
+
+  useEffect(() => {
+    console.log(selectFeatures);
+  }, [selectFeatures]);
+  return (
+    <>
+      <div className={styles['panel-title']}>{area}</div>
+      <div className={styles['panel-sub-title']}>共选择{areaNumber}个</div>
+    </>
+  );
+}
+
+registerWidget('sidePanelTitle', SidePanelTitle);
+
 export default function RumbMap() {
+  initWidgets();
   return (
     <div style={{ height: '800px' }}>
       <DipperContainer
@@ -394,6 +353,10 @@ export default function RumbMap() {
                 position: 'left',
               },
               {
+                type: 'headetFilter',
+                position: 'left',
+              },
+              {
                 type: 'perosn',
                 position: 'right',
               },
@@ -407,30 +370,39 @@ export default function RumbMap() {
             },
             childrens: [
               {
-                type: '',
+                type: 'sidePanelTitle',
               },
               {
                 type: 'PanelTabcontent',
                 childrens: [
                   {
                     type: 'tab-panel-1',
-                    // options: {
-                    //   title: '商户画像',
-                    //   childrens: [
-                    //     {
-                    //       type: 'collapse',
-                    //       childrens: [
-                    //         {
-                    //           type: 'statisticCards',
-                    //           display: true,
-                    //           childrens: [
-
-                    //           ]
-                    //         },
-                    //       ]
-                    //     },
-                    //   ]
-                    // }
+                    options: {
+                      title: '商户画像',
+                      childrens: [
+                        {
+                          type: 'collapse',
+                          title: '概况',
+                          childrens: [
+                            {
+                              type: 'statisticCards',
+                              options: {
+                                url: 'fakePromise',
+                              },
+                            },
+                          ],
+                        },
+                        {
+                          type: 'collapse',
+                          title: '覆盖行业情况',
+                          childrens: [
+                            {
+                              type: 'pieCharts',
+                            },
+                          ],
+                        },
+                      ],
+                    },
                   },
                   {
                     type: 'tab-panel-2',
@@ -448,11 +420,37 @@ export default function RumbMap() {
               },
             ],
           },
-          controls: [],
-          legends: [
+          controls: [
             {
               type: 'customLegend',
               position: 'topleft',
+            },
+          ],
+          legends: [
+            {
+              type: 'multiClassifyColor',
+              // position: 'bottomledt',
+              options: {
+                items: [
+                  {
+                    colors: ['red', 'green', 'yellow'],
+                    values: [100, 200, 300],
+                    title: '已分配',
+                  },
+                  {
+                    colors: ['green', 'blue', 'gray'],
+                    values: [300, 400, 500],
+                    title: '未分配',
+                  },
+                ],
+                // title: '图例'
+              },
+            },
+          ],
+          layers: [
+            {
+              type: 'gridLayer',
+              options: {},
             },
           ],
         }}
