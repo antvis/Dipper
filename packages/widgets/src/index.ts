@@ -12,7 +12,7 @@ export * from './Search/SearchPlace';
 export * from './MeshName';
 export * from './Map2Image';
 export * from './PropertyTable';
-export * from './PointLayer/PointLayerGroup';
+// export * from './PointLayer/PointLayerGroup';
 export * from './BaseWidget/widget';
 export * from './Layout';
 export * from './hooks';

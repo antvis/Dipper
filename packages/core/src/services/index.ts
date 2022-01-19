@@ -8,6 +8,7 @@ export * from './config/ConfigService';
 export * from './layer/LayerService';
 export * from './layer/LayerGroup';
 export * from './widgets/WidgetsService';
+export * from './widgets/IWidgetsService';
 
 export { default as ControlService } from './widgets/WidgetsService';
 export { default as LayerGroup } from './layer/LayerGroup';
