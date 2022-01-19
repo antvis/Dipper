@@ -152,10 +152,7 @@ function Person() {
 registerWidget('perosn', Person);
 
 function StatisticCardsGroup(props) {
-  const cb = useCallback(({ type, e }: { type: string; e: any }) => {
-    console.log(type, e);
-  }, []);
-  const { widget } = useWidgets('statisticCards', cb);
+  const { widgetsValue } = useWidgets('headetFilter');
   const [staticCards, setStaticCards] = useState<StaticCard[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -165,7 +162,7 @@ function StatisticCardsGroup(props) {
       setLoading(false);
       setStaticCards(res);
     })();
-  }, [props.options.url]);
+  }, [props.options.url, widgetsValue]);
   return (
     <Spin spinning={loading}>
       <StatisticCards childrens={staticCards} />
