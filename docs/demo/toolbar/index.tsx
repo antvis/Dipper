@@ -3,6 +3,7 @@ import {
   DipperContainer,
   registerWidget,
   useConfigService,
+  PanelTabcontent,
 } from '@antv/dipper';
 import {
   Select,
@@ -275,7 +276,7 @@ function Layers() {
   );
 }
 
-function CustomLegend() {
+function CustomLegend(url) {
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <div className={styles['aoi-filter']}>
@@ -299,6 +300,8 @@ function CustomLegend() {
 }
 
 registerWidget('customLegend', CustomLegend);
+
+registerWidget('PanelTabcontent', PanelTabcontent);
 
 export default function RumbMap() {
   return (
@@ -334,7 +337,44 @@ export default function RumbMap() {
             },
             childrens: [
               {
-                type: 'myPanel',
+                type: '',
+              },
+              {
+                type: 'PanelTabcontent',
+                childrens: [
+                  {
+                    type: 'tab-panel-1',
+                    // options: {
+                    //   title: '商户画像',
+                    //   childrens: [
+                    //     {
+                    //       type: 'collapse',
+                    //       childrens: [
+                    //         {
+                    //           type: 'statisticCards',
+                    //           display: true,
+                    //           childrens: [
+
+                    //           ]
+                    //         },
+                    //       ]
+                    //     },
+                    //   ]
+                    // }
+                  },
+                  {
+                    type: 'tab-panel-2',
+                    options: {
+                      title: '消费者画像',
+                    },
+                  },
+                  {
+                    type: 'tab-panel-3',
+                    options: {
+                      title: '服务商概况',
+                    },
+                  },
+                ],
               },
             ],
           },
