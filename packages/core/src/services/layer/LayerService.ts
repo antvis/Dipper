@@ -26,15 +26,20 @@ export default class LayerService
     return this.layerStore.find((layer) => layer.name === name) as LayerType;
   }
 
-  getLayerSource(name: string){
-    const layerProerty = this.layerStore.find((layer) => layer.name === name) as LayerType;
-    return layerProerty?.data
+  getLayers() {
+    return this.layerStore;
+  }
+
+  getLayerSource(name: string) {
+    const layerProerty = this.layerStore.find(
+      (layer) => layer.name === name,
+    ) as LayerType;
+    return layerProerty?.data;
   }
 
   addLayer(layer: LayerType) {
     this.layerStore.push(layer);
-    layer.setContainer(this.sceneService?.container as Container);
-    layer.init();
+    // layer.setContainer(this.sceneService?.container as Container);
     this.emit(LayerEventEnum.LAYERCHANGE, {
       type: 'add',
       target: layer,
