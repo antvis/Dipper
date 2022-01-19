@@ -13,7 +13,7 @@ import {
   Collapse,
   Row,
   Col,
-  Input,
+  Checkbox,
   Popover,
 } from 'antd';
 import { useLocalStorageState } from 'ahooks';
@@ -238,13 +238,39 @@ function MyPanel() {
 
 registerWidget('myPanel', MyPanel);
 
+const MockLayers: Option[] = [
+  { label: 'AOI 图层', value: '1' },
+  { label: 'xxx图层', value: '2' },
+];
+
 function Layers() {
+  const [layers, setLayers] = useState<Option[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fakePromise(MockLayers);
+      setLayers(res);
+    })();
+  }, []);
+
   return (
     <>
       <div>
         叠加数据图层
         <QuestionCircleOutlined />
       </div>
+      <Checkbox.Group>
+        <Row>
+          {layers.map((layer) => (
+            <Col span={24} key={layer.value}>
+              <Checkbox>
+                {layer.value}
+                {layer.label}
+              </Checkbox>
+            </Col>
+          ))}
+        </Row>
+      </Checkbox.Group>
     </>
   );
 }
@@ -259,7 +285,7 @@ function CustomLegend() {
       <div className={`${styles['aoi-filter']} ${styles['select']}`}>
         <Select placeholder="搜索网格名称/人员名称" showSearch />
       </div>
-      <Popover trigger="click" content={Layers}>
+      <Popover trigger="click" content={Layers} placement="bottom">
         <div className={`${styles['aoi-filter']} ${styles['icon']}`}>
           <img
             src="https://gw.alipayobjects.com/zos/bmw-prod/1bd3ce6f-3c52-431d-8578-bd21baec0836.svg"
@@ -279,17 +305,20 @@ export default function RumbMap() {
     <div style={{ height: '500px' }}>
       <DipperContainer
         cfg={{
-          headerbar: false,
-          toolbar: {
-            display: true,
-            childrens: [
-              {
-                type: 'logo',
+          headerbar: {
+            options: {
+              logo: {
                 value:
                   'https://gw.alipayobjects.com/zos/bmw-prod/16d55406-0875-495c-9216-0fb998e2eecd.svg',
               },
+              title: {
+                display: false,
+              },
+            },
+            childrens: [
               {
                 type: 'myTitle',
+                position: 'left',
               },
               {
                 type: 'perosn',
@@ -300,7 +329,6 @@ export default function RumbMap() {
           panel: {
             display: true,
             options: {
-              defaultTitle: '城市洞察',
               opened: true,
               enableToggle: true,
             },
