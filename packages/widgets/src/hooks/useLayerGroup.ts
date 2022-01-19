@@ -47,17 +47,20 @@ export function useLayerGroup(name: string) {
       setHoverFeature(feature);
     };
     if (currentGroup) {
-      currentGroup.on(LayerGroupEventEnum.SELECTFEATURECHANGE, onSelectFeature);
-      currentGroup.on(LayerGroupEventEnum.HOVERFEATURECHANGE, onHoverFeature);
+      currentGroup.on(
+        LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
+        onSelectFeature,
+      );
+      currentGroup.on(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, onHoverFeature);
     }
     return () => {
       if (currentGroup) {
         currentGroup.off(
-          LayerGroupEventEnum.SELECTFEATURECHANGE,
+          LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
           onSelectFeature,
         );
         currentGroup.off(
-          LayerGroupEventEnum.HOVERFEATURECHANGE,
+          LayerGroupEventEnum.HOVER_FEATURE_CHANGE,
           onHoverFeature,
         );
       }

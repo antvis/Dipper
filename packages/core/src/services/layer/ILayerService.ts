@@ -3,18 +3,27 @@ import { Feature } from '@turf/turf';
 import type EventEmitter from 'eventemitter3';
 import type { Container } from 'inversify';
 
+export interface IFeature {
+  featureId: number;
+  feature: Feature;
+  lngLat: {
+    lng: number;
+    lat: number;
+  };
+  target: MouseEvent;
+}
+
 export interface ILayerEventTarget {
   type: 'add' | 'remove';
   target?: LayerType;
 }
+
 export interface ILayerGroup extends EventEmitter {
   data: any;
   name: string;
   source: ISource;
   show: () => void;
   hide: () => void;
-  setContainer: (container: Container) => void;
-  init: () => void;
   setData: (data: any) => void;
   addLayer: (layer: ILayer) => void;
   removeLayer: (layer: ILayer) => void;

@@ -8,6 +8,9 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
+import { FeatureCollection } from '@turf/turf';
+import { Container } from '_inversify@5.1.1@inversify';
+
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
     if (Array.isArray(item.value)) {
@@ -32,11 +35,15 @@ export function GridLayer() {
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const cityValue = getWidgetsValue('citySelect');
   const brandValue = getWidgetsValue('brand');
-  const [geoData, setGeoData] = useState();
+  const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 
-  const layerProps = useMemo(() => {
+  const gridLayerProps = useMemo(() => {
     return layers.find((item: any) => item.type === 'gridLayer');
+  }, [layers]);
+
+  const pointLayerProps = useMemo(() => {
+    return layers.find((item: any) => item.type === 'pointLayer');
   }, [layers]);
 
   const updateLayerLegend = (items: any[]) => {
@@ -46,7 +53,7 @@ export function GridLayer() {
       position: 'bottomleft',
       options: {
         title: '充电宝投放数量',
-        unkownName: layerProps.options.unkownName,
+        unkownName: gridLayerProps.options.unkownName,
         items: items.map((item) => {
           return {
             color: item.color,
@@ -109,34 +116,46 @@ export function GridLayer() {
       gridLayer.setData(geoData);
       return;
     }
-    const layer = new GridLayerGroup({
+    const gridLayer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
-      options: layerProps.options,
-    });
-    layerService.addLayer(layer);
-
-    layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
-      layer.getLegendItem().map((item) => {
-        if (Array.isArray(item.value)) {
-          return {
-            ...item,
-            value: item.value.map((v) => v.toFixed(2)),
-          };
-        } else {
-          return {
-            ...item,
-            value: item.value.toFixed(2),
-          };
-        }
-      });
-      updateLayerLegend(formatLegend(layer.getLegendItem()));
+      options: layerProps?.options,
+      container: sceneService.container as Container,
     });
 
-    // 更新图例
-    updateLayerLegend(formatLegend(layer.getLegendItem()));
+    // const pointLayer = new PointLayerGroup({
+    //   name: 'point',
+    //   data: {
+    //     ...geoData,
+    //     features: geoData.features.map((item) => centerOfMass(item)),
+    //   },
+    //   options: pointLayerProps.options,
+    // });
 
-    setGridLayer(layer);
+    layerService.addLayer(gridLayer);
+    // layerService.addLayer(pointLayer);
+
+    // gridLayer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
+    //   gridLayer.getLegendItem().map((item) => {
+    //     if (Array.isArray(item.value)) {
+    //       return {
+    //         ...item,
+    //         value: item.value.map((v) => v.toFixed(2)),
+    //       };
+    //     } else {
+    //       return {
+    //         ...item,
+    //         value: item.value.toFixed(2),
+    //       };
+    //     }
+    //   });
+    //   updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
+    // });
+    //
+    // // 更新图例
+    // updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
+
+    setGridLayer(gridLayer);
   }, [geoData]);
 
   useEffect(() => {

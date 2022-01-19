@@ -141,19 +141,16 @@ export const config: Partial<IConfig> = {
     {
       type: 'gridLayer',
       options: {
-        label: {
+        text: {
           field: 'name',
           size: 12,
           color: '#000',
         },
-        fill: {
-          field: 'unit_price',
-          color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
-          bandNum: 5,
-          scale: {
-            type: 'quantile',
+        normal: {
+          fillColor: {
+            field: 'unit_price',
+            color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
           },
-          unknownName: '无类型',
         },
       },
     },
