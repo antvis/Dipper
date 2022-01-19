@@ -14,9 +14,6 @@ interface StatisticCardsProps {
 }
 
 export function StatisticCards({ childrens }: StatisticCardsProps) {
-  // 响应 筛选器变化
-  // service 发送一个事件
-  // service updateValue
   return (
     <Row>
       {childrens.map((child, index) => (

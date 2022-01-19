@@ -8,13 +8,18 @@ const { Panel } = Collapse;
 
 interface DipperCollapseProps {
   type: string;
+  title: string;
   childrens: IWidgetProps[];
 }
 
-export function DipperCollapse({ type, childrens }: DipperCollapseProps) {
+export function DipperCollapse({
+  type,
+  childrens,
+  title,
+}: DipperCollapseProps) {
   return (
     <Collapse ghost>
-      <Panel header={<div className={styles['overview']}>概况</div>} key="1">
+      <Panel header={<div className={styles['overview']}>{title}</div>} key="1">
         <CustomBaseLayout type={type} childrens={childrens}></CustomBaseLayout>
       </Panel>
     </Collapse>

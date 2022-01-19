@@ -14,7 +14,6 @@ import {
   Map2Image,
   TitleDom,
   LogoDom,
-  StatisticCards,
   DipperCollapse,
 } from '@antv/dipper-widgets';
 registerWidget('citySelect', CitySelect);
@@ -29,5 +28,4 @@ registerWidget('searchPlaces', SearchPlace);
 registerWidget('exportMap', Map2Image);
 registerWidget('title', TitleDom);
 registerWidget('logo', LogoDom);
-registerWidget('statisticCards', StatisticCards);
 registerWidget('collapse', DipperCollapse);
