@@ -71,7 +71,7 @@ export default class BaseWidget<IOptions, IValue>
 
   setValues(values: Partial<IValue>) {
     this.values = values;
-    this.emit(WidgetsEventEnum.VALUE_CHANGE, this.options);
+    this.emit(WidgetsEventEnum.VALUE_CHANGE, this.values);
   }
   destroy() {
     this.removeAllListeners();
