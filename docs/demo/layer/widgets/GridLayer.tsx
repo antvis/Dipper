@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMount } from 'ahooks';
 import {
   useSceneService,
@@ -9,6 +9,8 @@ import {
 } from '@antv/dipper';
 import { Scene } from '@antv/l7';
 import { FeatureCollection } from '@turf/turf';
+import { Container } from 'inversify';
+import { useLayerGroup } from '@antv/dipper-widgets';
 
 export default function GridLayer({
   options,
@@ -20,6 +22,12 @@ export default function GridLayer({
   const { sceneService } = useSceneService();
   const [layerGroup, setLayerGroup] = useState<GridLayerGroup | null>(null);
 
+  const { selectFeatures } = useLayerGroup(layerGroup);
+
+  useEffect(() => {
+    console.log(selectFeatures);
+  }, [selectFeatures]);
+
   useMount(() => {
     const gridLayerGroup = new GridLayerGroup({
       name: 'grid',
@@ -28,7 +36,7 @@ export default function GridLayer({
           field: 'source',
         },
       },
-      container: sceneService.container,
+      container: sceneService.container as Container,
     });
 
     layerService.addLayer(gridLayerGroup);

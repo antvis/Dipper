@@ -26,6 +26,10 @@ export default class LayerService
     return this.layerStore.find((layer) => layer.name === name) as LayerType;
   }
 
+  getLayers() {
+    return this.layerStore;
+  }
+
   getLayerSource(name: string) {
     const layerProerty = this.layerStore.find(
       (layer) => layer.name === name,
