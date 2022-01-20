@@ -57,7 +57,6 @@ export interface ILayerGroupProps<T = any> {
   name: string;
   data?: any[] | FeatureCollection | any;
   options: DeepPartial<T>;
-  container: Container;
 }
 
 @injectable()
@@ -71,33 +70,38 @@ export default abstract class LayerGroup<T = any>
   public name: string;
   public data: any;
   public options: T;
-  public source!: Source;
-  public container!: Container;
-  public scene: Scene;
+  public source: Source;
+  public container?: Container;
 
   public selectFeatures: IFeature[] = [];
   public hoverFeature?: IFeature | null = null;
 
-  constructor({ name, data, options, container }: ILayerGroupProps<T>) {
+  public get scene() {
+    return (
+      this.container?.get(TYPES.SCENE_SYMBOL) as ISceneService | undefined
+    )?.getScene();
+  }
+
+  constructor({ name, data, options }: ILayerGroupProps<T>) {
     super();
     this.name = name;
     this.data = data;
     this.options = merge({}, this.getDefaultOptions(), options);
-
-    this.scene = (
-      container.get(TYPES.SCENE_SYMBOL) as ISceneService
-    ).getScene() as Scene;
-    this.source = new Source(this.data ?? featureCollection([]));
+    this.source = new Source(featureCollection([]));
   }
+
+  // 会被LayerService调用
+  public setContainer(container: Container) {
+    this.container = container;
+  }
+
+  public abstract initLayerList(): void;
 
   public abstract getDefaultOptions(): T;
 
-  public updateSource(data: any) {
-    // this.source.setData(data);
-  }
-
   public addLayer(layer: ILayer) {
     this.layers.push(layer);
+    // 在layerService.addLayer()前的layer不会通过此处注册进scene中，而是在LayerService中的addLayer中完成注册
     this.scene?.addLayer(layer);
   }
 

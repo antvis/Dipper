@@ -22,11 +22,7 @@ export default function GridLayer({
   const { sceneService } = useSceneService();
   const [layerGroup, setLayerGroup] = useState<GridLayerGroup | null>(null);
 
-  const { selectFeatures } = useLayerGroup(layerGroup);
-
-  useEffect(() => {
-    // console.log(selectFeatures);
-  }, [selectFeatures]);
+  const { selectFeatures } = useLayerGroup('grid');
 
   useMount(() => {
     const gridLayerGroup = new GridLayerGroup({
@@ -36,7 +32,6 @@ export default function GridLayer({
           field: 'source',
         },
       },
-      container: sceneService.container as Container,
     });
 
     layerService.addLayer(gridLayerGroup);
