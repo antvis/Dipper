@@ -20,7 +20,7 @@ export function MultiClassifyColor({ options }: IWidgetProps) {
       {title ? <h4>{title}</h4> : null}
       {items.map((colorBar, index) => {
         return (
-          <div style={{ marginBottom: 8 }}>
+          <div style={{ marginBottom: 8 }} key={index}>
             <div key={'key' + index} style={{ display: 'flex' }}>
               <span style={{ width: '50px' }}>{colorBar.title}</span>
               <div className={styles.colorBar}>
