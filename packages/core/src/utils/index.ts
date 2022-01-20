@@ -6,3 +6,4 @@ export const updateConfigsField = (source: any, key: string, value: any) => {
 };
 
 export * from './const';
+export * from './typings';

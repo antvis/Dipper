@@ -8,6 +8,7 @@ import { merge } from 'lodash';
 import { isPressing } from '../../utils/keyboard';
 import { TYPES } from '../../types';
 import { ISceneService } from '../scene/ISceneService';
+import { DeepPartial } from '../../utils';
 
 export enum LayerGroupEventEnum {
   VISIBLE_CHANGE = 'visibleChange',
@@ -50,10 +51,6 @@ export const defaultGridTextOptions = {
   weight: 400,
   stroke: '#ffffff',
   strokeWidth: 2,
-};
-
-type DeepPartial<T> = {
-  [P in keyof T]?: DeepPartial<T[P]>;
 };
 
 export interface ILayerGroupProps<T = any> {

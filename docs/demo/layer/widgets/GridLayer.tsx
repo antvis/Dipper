@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMount } from 'ahooks';
 import {
   useSceneService,
@@ -7,6 +7,7 @@ import {
   GridLayerGroup,
   // @ts-ignore
 } from '@antv/dipper';
+import { Scene } from '@antv/l7';
 import { FeatureCollection } from '@turf/turf';
 import { Container } from 'inversify';
 import { useLayerGroup } from '@antv/dipper-widgets';
@@ -24,7 +25,7 @@ export default function GridLayer({
   const { selectFeatures } = useLayerGroup(layerGroup);
 
   useEffect(() => {
-    console.log(selectFeatures);
+    // console.log(selectFeatures);
   }, [selectFeatures]);
 
   useMount(() => {
