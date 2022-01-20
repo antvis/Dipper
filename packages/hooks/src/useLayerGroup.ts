@@ -52,21 +52,12 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
 
       layerGroup?.on(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
       layerGroup?.on(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, setHoverFeature);
-      layerGroup?.on(
-        LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
-        setSelectFeatures,
-      );
+      layerGroup?.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
     }
     return () => {
       layerGroup?.off(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
-      layerGroup?.off(
-        LayerGroupEventEnum.HOVER_FEATURE_CHANGE,
-        setHoverFeature,
-      );
-      layerGroup?.off(
-        LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
-        setSelectFeatures,
-      );
+      layerGroup?.off(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, setHoverFeature);
+      layerGroup?.off(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
     };
   }, [layerGroup]);
 

@@ -1,5 +1,4 @@
-import BaseWidget from '../BaseWidget/index';
-import { IWidgetProps } from '@antv/dipper-core';
+import { IWidgetProps, BaseWidget } from '@antv/dipper-core';
 
 export default class BaseLayout extends BaseWidget<any, any> {
   public widgets: IWidgetProps<any>[] = [];

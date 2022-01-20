@@ -4,7 +4,7 @@ import { PositionName } from '@antv/l7';
 import { CustomControl } from '@antv/l7-react';
 import classNames from 'classnames';
 import BaseLayout from './base';
-import { useWidgetsService } from '../hooks';
+import { useWidgetsService } from '@antv/dipper-hooks';
 import { CustomBaseWidgets } from '../BaseWidget/widget';
 import { isDisplay } from '../util/ui';
 import { Tabs } from 'antd';

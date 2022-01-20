@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import * as loadsh from 'lodash';
 import { Amaps, AmapService } from '../service/amaps';
-import { useConfigService } from '../hooks';
+import { useConfigService } from '@antv/dipper-hooks';
 import { SearchOutlined } from '@ant-design/icons';
 
 // 高德Pios 参数

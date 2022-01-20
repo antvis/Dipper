@@ -16,6 +16,7 @@ export interface IConfig {
       };
     };
   };
+  global?: Record<string, any>;
   headerbar:
     | {
         display?: boolean;

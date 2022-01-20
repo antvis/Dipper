@@ -2,7 +2,7 @@ import { Cascader } from 'antd';
 import React, { useMemo } from 'react';
 import 'antd/dist/antd.css';
 import { IWidgetProps } from '@antv/dipper-core';
-import { useConfigService } from '../hooks';
+import { useConfigService } from '@antv/dipper-hooks';
 import { findSelectArray } from './common';
 
 export function CitySelect({ type = 'CitySelect' }: IWidgetProps) {

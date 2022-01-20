@@ -9,7 +9,7 @@ import ToolBar from '../Toolbar';
 import { MapContainer } from './ MapContainer';
 import type { IConfig, IPanel } from '@antv/dipper-core';
 import { Dipper } from '@antv/dipper-core';
-import { useDipperContainer, useConfigService } from '../../hooks';
+import { useDipperContainer, useConfigService } from '@antv/dipper-hooks';
 import type { Container } from 'inversify';
 
 const { Content } = Layout;

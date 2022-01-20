@@ -3,7 +3,7 @@ import { isDisplay } from '../../util/ui';
 import { Control, CustomControl } from '@antv/l7-react';
 import type { IControlOption, PositionName } from '@antv/l7';
 import { getWidget } from '@antv/dipper-core';
-import { useConfigService } from '../../hooks';
+import { useConfigService } from '@antv/dipper-hooks';
 import { AppMapControlContent } from '../baseLayout';
 import { CustomBaseWidgets } from '../../BaseWidget/widget';
 import { groupBy } from 'lodash';

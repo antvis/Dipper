@@ -1,17 +1,10 @@
 import { useInjection } from 'inversify-react';
-import {
-  ConfigEventEnum,
-  IConfigService,
-  TYPES,
-  IConfig,
-} from '@antv/dipper-core';
+import { ConfigEventEnum, IConfigService, TYPES, IConfig } from '@antv/dipper-core';
 import { useEffect, useState } from 'react';
 
 export function useConfigService() {
   const configService = useInjection<IConfigService>(TYPES.CONFIG_SYMBOL);
-  const [globalConfig, setCfg] = useState<Partial<IConfig>>(
-    configService.config,
-  );
+  const [globalConfig, setCfg] = useState<Partial<IConfig>>(configService.config);
 
   useEffect(() => {
     configService.on(ConfigEventEnum.CONFIG_CHANGE, (cfg: any) => {

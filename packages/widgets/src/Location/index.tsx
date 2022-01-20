@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useConfigService } from '../hooks';
+import { useConfigService } from '@antv/dipper-hooks';
 import { Button, message } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 import styles from './index.less';
