@@ -24,6 +24,7 @@ export function DipperCollapse({
       expandIcon={({ isActive }) => (
         <CaretRightOutlined rotate={isActive ? 90 : 0} />
       )}
+      defaultActiveKey={['1']}
     >
       <Panel header={<div className={styles['overview']}>{title}</div>} key="1">
         <CustomBaseLayout type={type} childrens={childrens}></CustomBaseLayout>
