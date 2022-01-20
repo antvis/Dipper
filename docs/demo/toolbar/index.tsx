@@ -79,7 +79,12 @@ function Filters() {
       area: [options2[0].value],
       industry: options3[0].value,
     });
-  }, [options1, options2, options3]);
+    widget.setValues({
+      map: map || options1[0].value,
+      area: [options2[0].value],
+      industry: options3[0].value,
+    });
+  }, [options1, options2, options3, widget]);
 
   const onFieldsChange = useCallback(() => {
     const filterVal = form.getFieldsValue(true);
@@ -152,20 +157,23 @@ function Person() {
 registerWidget('perosn', Person);
 
 function StatisticCardsGroup(props) {
-  const cb = useCallback(({ type, e }: { type: string; e: any }) => {
-    console.log(type, e);
-  }, []);
-  const { widget } = useWidgets('statisticCards', cb);
+  const { widgetsValue } = useWidgets('headetFilter');
   const [staticCards, setStaticCards] = useState<StaticCard[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    if (!widgetsValue) {
+      return;
+    }
+
+    console.log(widgetsValue);
+
     (async () => {
       setLoading(true);
       const res = await mock[props.options.url](MOCK_STATIC);
       setLoading(false);
       setStaticCards(res);
     })();
-  }, [props.options.url]);
+  }, [props.options.url, widgetsValue]);
   return (
     <Spin spinning={loading}>
       <StatisticCards childrens={staticCards} />
