@@ -51,12 +51,12 @@
     "@antv/l7-draw": "^2.4.20",
     "@antv/l7-react": "^2.3.9",
     "classnames": "^2.3.1",
-    "inversify-react": "^1.0.1"
+    "inversify-react": "^1.0.1",
+    "@turf/turf": "^6.5.0",
+    "@ant-design/pro-card": "^1.18.24"
   },
   "devDependencies": {
     "mockjs": "^1.1.0",
-    "@ant-design/pro-card": "^1.18.24",
-    "@turf/turf": "^6.5.0",
     "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.178",
     "@types/react": "^16.14.2",

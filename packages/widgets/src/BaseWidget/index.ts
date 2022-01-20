@@ -53,7 +53,6 @@ export default class BaseWidget<IOptions, IValue>
   }
 
   show() {
-    // this.options.display = true;
     this.setOptions({
       display: true,
     });
@@ -63,7 +62,6 @@ export default class BaseWidget<IOptions, IValue>
     this.setOptions({
       display: false,
     });
-    // this.options.display = false;
   }
 
   setOptions(option: Partial<IWidgetProps<IOptions>>) {
@@ -73,7 +71,7 @@ export default class BaseWidget<IOptions, IValue>
 
   setValues(values: Partial<IValue>) {
     this.values = values;
-    this.emit(WidgetsEventEnum.VALUE_CHANGE, this.options);
+    this.emit(WidgetsEventEnum.VALUE_CHANGE, this.values);
   }
   destroy() {
     this.removeAllListeners();
