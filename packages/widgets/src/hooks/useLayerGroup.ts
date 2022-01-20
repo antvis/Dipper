@@ -15,7 +15,6 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
   const [layerGroup, setLayerGroup] = useState<LayerGroup | null>(null);
 
   const [layerData, setLayerData] = useState(featureCollection([]));
-  const [hoverFeature, setHoverFeature] = useState<IFeature | null>(null);
   const [selectFeatures, setSelectFeatures] = useState<IFeature[]>([]);
 
   const getLayerGroup = () => {
@@ -42,12 +41,10 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
 
   useEffect(() => {
     if (layerGroup) {
-      setHoverFeature(layerGroup.hoverFeature ?? null);
       setSelectFeatures(layerGroup.selectFeatures ?? []);
       setLayerData(layerGroup.data);
 
       layerGroup?.on(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
-      layerGroup?.on(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, setHoverFeature);
       layerGroup?.on(
         LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
         setSelectFeatures,
@@ -55,10 +52,6 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
     }
     return () => {
       layerGroup?.off(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
-      layerGroup?.off(
-        LayerGroupEventEnum.HOVER_FEATURE_CHANGE,
-        setHoverFeature,
-      );
       layerGroup?.off(
         LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
         setSelectFeatures,
@@ -69,7 +62,6 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
   return {
     layerData,
     setLayerData,
-    hoverFeature,
     setHoverFeature: (hoverFeature: IFeature | null) => {
       layerGroup?.setHoverFeature(hoverFeature);
     },
