@@ -1,5 +1,5 @@
 import { useInjection } from 'inversify-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
   IFeature,
   LayerGroup,
@@ -18,27 +18,31 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
   const [hoverFeature, setHoverFeature] = useState<IFeature | null>(null);
   const [selectFeatures, setSelectFeatures] = useState<IFeature[]>([]);
 
-  const getLayerGroup = () => {
+  const getLayerGroup = useCallback(() => {
     if (typeof targetLayer === 'string') {
-      setLayerGroup((layerService.getLayer(targetLayer) as LayerGroup) ?? null);
+      const targetLayerGroup = layerService.getLayer(targetLayer) as LayerGroup;
+      if (targetLayerGroup) {
+        setLayerGroup(targetLayerGroup);
+      }
     } else if (targetLayer instanceof Object) {
       setLayerGroup(targetLayer as LayerGroup);
     } else if (targetLayer) {
       console.warn('未找到指定LayerGroup');
     }
-  };
+  }, [targetLayer, layerService]);
+
+  useEffect(() => {
+    layerService.on(LayerEventEnum.LAYERCHANGE, () => getLayerGroup());
+    return () => {
+      layerService.off(LayerEventEnum.LAYERCHANGE, () => getLayerGroup());
+    };
+  }, [getLayerGroup]);
 
   useEffect(() => {
     if (targetLayer) {
       getLayerGroup();
     }
-  }, [
-    targetLayer,
-    layerService
-      .getLayers()
-      .map((layer) => layer.name)
-      .join(','),
-  ]);
+  }, [targetLayer, getLayerGroup]);
 
   useEffect(() => {
     if (layerGroup) {
@@ -67,6 +71,7 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
   }, [layerGroup]);
 
   return {
+    layerGroup,
     layerData,
     setLayerData,
     hoverFeature,

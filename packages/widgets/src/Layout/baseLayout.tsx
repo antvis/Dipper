@@ -61,7 +61,10 @@ export function AppTabsContent({ items }: ContentProps) {
             key={tab.type}
             className={style.tabPanel}
           >
-            <CustomBaseWidgets {...tab} />
+            <CustomBaseLayout
+              type={tab.type}
+              childrens={tab.options?.childrens}
+            />
           </TabPane>
         );
       })}
