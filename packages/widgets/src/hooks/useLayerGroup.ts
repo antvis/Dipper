@@ -5,7 +5,6 @@ import {
   LayerGroup,
   LayerGroupEventEnum,
   ILayerService,
-  LayerEventEnum,
   TYPES,
 } from '@antv/dipper-core';
 import { featureCollection } from '@turf/turf';
@@ -62,9 +61,6 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
   return {
     layerData,
     setLayerData,
-    setHoverFeature: (hoverFeature: IFeature | null) => {
-      layerGroup?.setHoverFeature(hoverFeature);
-    },
     selectFeatures,
     setSelectFeatures: (selectFeatures: IFeature[]) => {
       layerGroup?.setSelectFeatures(selectFeatures);
