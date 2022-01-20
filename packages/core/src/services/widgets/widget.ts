@@ -1,12 +1,8 @@
 import EventEmitter from 'eventemitter3';
 import type { Container } from 'inversify';
 import { inject } from 'inversify';
-import {
-  IWidgetsService,
-  IWidget,
-  IWidgetProps,
-  WidgetsEventEnum,
-} from './IWidgetsService';
+import type { IWidget, IWidgetsService, IWidgetProps } from './IWidgetsService';
+import { WidgetsEventEnum } from './IWidgetsService';
 import { ISceneService } from '../scene/ISceneService';
 import { TYPES } from '../../types';
 

@@ -1,7 +1,7 @@
 import { useInjection } from 'inversify-react';
 import { useEffect, useState, useCallback } from 'react';
+import type { IFeature } from '@antv/dipper-core';
 import {
-  IFeature,
   LayerGroup,
   LayerGroupEventEnum,
   ILayerService,

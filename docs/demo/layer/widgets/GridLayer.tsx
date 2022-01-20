@@ -5,11 +5,11 @@ import {
   useLayerService,
   IGridLayerGroupOptions,
   GridLayerGroup,
+  useLayerGroup,
   // @ts-ignore
 } from '@antv/dipper';
 import { FeatureCollection } from '@turf/turf';
 import { Container } from 'inversify';
-import { useLayerGroup } from '@antv/dipper-widgets';
 
 export default function GridLayer({
   options,
