@@ -9,3 +9,7 @@ export function getWidget(type: string) {
 export const registerWidget = (type: string, components: any): void => {
   WIDGETS[type] = components;
 };
+
+export function getAllWidgets() {
+  return WIDGETS;
+}

@@ -38,9 +38,18 @@ export function useWidgets(id: string) {
     });
   }, [widget]);
 
+  const setOption = (option: Partial<IWidgetProps<any>>) => {
+    return widget?.setOptions(option);
+  };
+  const setValues = (values: any) => {
+    return widget?.setValues(values);
+  };
+
   return {
     widgetsOptions,
     widget,
     widgetsValue,
+    setOption,
+    setValues,
   };
 }
