@@ -2,8 +2,8 @@ import type { ILayer } from '@antv/l7';
 import EventEmitter from 'eventemitter3';
 import { Container, injectable } from 'inversify';
 import type { ILayerGroup, IFeature } from './ILayerService';
-import { Source, Scene } from '@antv/l7';
-import { FeatureCollection, featureCollection } from '@turf/turf';
+import { Source } from '@antv/l7';
+import { BBox, FeatureCollection, featureCollection } from '@turf/turf';
 import { merge } from 'lodash';
 import { isPressing } from '../../utils/keyboard';
 import { TYPES } from '../../types';
@@ -113,6 +113,8 @@ export default abstract class LayerGroup<T = any>
     return this.layers;
   }
 
+  public boxSelect(bbox: BBox) {}
+
   public onLayerHover(layer: ILayer) {
     layer.on('mouseenter', this.onMouseMove);
     layer.on('mousemove', this.onMouseMove);
@@ -139,12 +141,12 @@ export default abstract class LayerGroup<T = any>
       (item) => item.featureId === e.featureId,
     );
     if (hasSelectFeature) {
-      this.setSelectFeatures(
-        this.selectFeatures.filter((item) => item !== hasSelectFeature),
-      );
-      return;
-    }
-    if (isPressShift) {
+      if (this.selectFeatures.length > 1) {
+        this.setSelectFeatures([e]);
+      } else {
+        this.setSelectFeatures([]);
+      }
+    } else if (isPressShift) {
       this.setSelectFeatures([...this.selectFeatures, e]);
     } else {
       this.setSelectFeatures([e]);

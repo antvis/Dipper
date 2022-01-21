@@ -17,3 +17,4 @@ export * from './Layout';
 export * from './hooks';
 export * from './StatisticCards';
 export * from './Collapse';
+export * from './BoxSelectLayer';

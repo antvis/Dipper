@@ -5,11 +5,10 @@ import {
   useLayerService,
   IGridLayerGroupOptions,
   GridLayerGroup,
+  BoxSelectLayerGroup,
   // @ts-ignore
 } from '@antv/dipper';
-import { Scene } from '@antv/l7';
 import { FeatureCollection } from '@turf/turf';
-import { Container } from 'inversify';
 import { useLayerGroup } from '@antv/dipper-widgets';
 
 export default function GridLayer({
@@ -29,16 +28,42 @@ export default function GridLayer({
       name: 'grid',
       options: {
         text: {
-          field: 'source',
+          field: 'name',
+        },
+        normal: {
+          fillColor: {
+            field: 'name',
+            value: [
+              'rgb(247, 251, 255)',
+              'rgb(222, 235, 247)',
+              'rgb(198, 219, 239)',
+              'rgb(158, 202, 225)',
+              'rgb(107, 174, 214)',
+              'rgb(66, 146, 198)',
+              'rgb(33, 113, 181)',
+              'rgb(8, 81, 156)',
+              'rgb(8, 48, 107)',
+            ],
+          },
+          borderWidth: 1,
+          borderColor: '#ffffff',
         },
       },
     });
 
+    const boxSelectLayerGroup = new BoxSelectLayerGroup({
+      name: 'boxSelect',
+      options: {
+        targets: ['grid'],
+      },
+    });
+
     layerService.addLayer(gridLayerGroup);
+    layerService.addLayer(boxSelectLayerGroup);
     setLayerGroup(gridLayerGroup);
 
     fetch(
-      'https://gw.alipayobjects.com/os/bmw-prod/e868565b-d3f7-4057-bd60-4df5d869970f.json',
+      'https://gw.alipayobjects.com/os/bmw-prod/0e5277e2-0223-45f6-bfa3-b066131ae2f4.json',
     )
       .then((res) => res.json())
       .then((geoJson: FeatureCollection) => {
