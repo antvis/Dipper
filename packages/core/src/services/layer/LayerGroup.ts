@@ -141,7 +141,13 @@ export default abstract class LayerGroup<T = any>
       (item) => item.featureId === e.featureId,
     );
     if (hasSelectFeature) {
-      if (this.selectFeatures.length > 1) {
+      if (isPressShift) {
+        this.setSelectFeatures(
+          [...this.selectFeatures].filter(
+            (item) => item.featureId !== e.featureId,
+          ),
+        );
+      } else if (this.selectFeatures.length > 1) {
         this.setSelectFeatures([e]);
       } else {
         this.setSelectFeatures([]);
