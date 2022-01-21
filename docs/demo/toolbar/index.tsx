@@ -437,21 +437,21 @@ export default function RumbMap() {
           legends: [
             {
               type: 'multiClassifyColor',
-              // position: 'bottomledt',
+              position: 'bottomleft',
               options: {
                 items: [
                   {
                     colors: ['red', 'green', 'yellow'],
-                    values: [100, 200, 300],
                     title: '已分配',
                   },
                   {
                     colors: ['green', 'blue', 'gray'],
-                    values: [300, 400, 500],
+
                     title: '未分配',
                   },
                 ],
-                // title: '图例'
+                values: [300, 400, 500],
+                title: '图例',
               },
             },
           ],

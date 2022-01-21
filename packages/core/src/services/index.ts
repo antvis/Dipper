@@ -12,6 +12,7 @@ export * from './widgets/IWidgetsService';
 
 export { default as ControlService } from './widgets/WidgetsService';
 export { default as LayerGroup } from './layer/LayerGroup';
+export { default as BaseWidget } from './widgets/widget';
 export { default as LayerService } from './layer/LayerService';
 export { default as ConfigService } from './config/ConfigService';
 export { default as PanelService } from './panel/PanelService';
