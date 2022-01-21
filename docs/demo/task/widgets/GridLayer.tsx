@@ -105,7 +105,6 @@ export function GridLayer() {
       name: 'grid',
       data: geoData,
       options: layerProps?.options,
-      container: sceneService.container as Container,
     });
     layerService.addLayer(layer);
 

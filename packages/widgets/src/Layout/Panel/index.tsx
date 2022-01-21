@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styles from './index.less';
 import { isDisplay } from '../../util/ui';
 import ToggleButton from './ToggleButton';
-import { usePanelService } from '../../hooks';
+import { usePanelService } from '@antv/dipper-hooks';
 import { LayoutContent } from '../baseLayout';
 import { IPanel } from '@antv/dipper-core';
 import { isEqual } from 'lodash';

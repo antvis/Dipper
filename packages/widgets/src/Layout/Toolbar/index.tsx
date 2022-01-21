@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.less';
-import { useConfigService } from '../../hooks';
+import { useConfigService } from '@antv/dipper-hooks';
 import { LayoutContent } from '../baseLayout';
 import { getAppContentItem, isDisplay } from '../../util/ui';
 import { IWidgetProps } from '@antv/dipper-core';
@@ -8,7 +8,6 @@ import { IWidgetProps } from '@antv/dipper-core';
 export default function MapToolbar() {
   const { globalConfig } = useConfigService();
   const { toolbar } = globalConfig;
-  console.log('toolbar', toolbar);
 
   // TODO 根据配置
   return isDisplay(toolbar?.display) ? (

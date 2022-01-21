@@ -4,49 +4,51 @@ import styles from './index.less';
 
 interface ILegendItem {
   colors: string[];
-  values: number[];
   title: string;
 }
 
 export interface IMultiClassLegendProps {
   items: ILegendItem[];
   title?: string;
+  values: Array<number | [number, number]>;
 }
 
 export function MultiClassifyColor({ options }: IWidgetProps) {
-  const { items = [], title } = options as IMultiClassLegendProps;
+  console.log('MultiClassifyColor', options);
+  const { values, items, title } = options as IMultiClassLegendProps;
   return (
     <div className={styles.legendClassifyControl}>
-      {title ? <h4>{title}</h4> : null}
+      <h4>{title}</h4>
       {items.map((colorBar, index) => {
         return (
-          <div style={{ marginBottom: 8 }}>
-            <div key={'key' + index} style={{ display: 'flex' }}>
-              <span style={{ width: '50px' }}>{colorBar.title}</span>
-              <div className={styles.colorBar}>
-                {colorBar.colors.map((item, colorIndex) => {
-                  return (
-                    <span
-                      key={colorIndex}
-                      className={styles.color}
-                      style={{ backgroundColor: item }}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <div className={styles.valueBar}>
-              <span style={{ width: '50px' }}>{}</span>
-              {colorBar.values.map((item, colorIndex) => (
-                <span key={colorIndex} className={styles.value}>
-                  {Array.isArray(item) ? item[0] : item}
-                </span>
-              ))}
+          <div key={'key' + index} style={{ display: 'flex' }}>
+            <span style={{ width: '50px' }}>{colorBar.title}</span>
+            <div className={styles.colorBar}>
+              {colorBar.colors.map((item, colorIndex) => {
+                return (
+                  <span
+                    key={colorIndex}
+                    className={styles.color}
+                    style={{ backgroundColor: item }}
+                  />
+                );
+              })}
             </div>
           </div>
         );
       })}
       {/* 数字 */}
+      <div className={styles.valueBar}>
+        <span style={{ width: '50px' }}>{}</span>
+        {values.map((item, colorIndex) => (
+          <span key={colorIndex} className={styles.value}>
+            {Array.isArray(item) ? item[0] : item}
+          </span>
+        ))}
+        {Array.isArray(values[0]) && (
+          <span>{(values[values.length - 1] as number[])[1]}</span>
+        )}
+      </div>
     </div>
   );
 }

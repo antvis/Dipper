@@ -9,7 +9,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
 import { FeatureCollection } from '@turf/turf';
-import { Container } from '_inversify@5.1.1@inversify';
 
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
@@ -120,7 +119,6 @@ export function GridLayer() {
       name: 'grid',
       data: geoData,
       options: layerProps?.options,
-      container: sceneService.container as Container,
     });
 
     // const pointLayer = new PointLayerGroup({

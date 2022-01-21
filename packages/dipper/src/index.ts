@@ -1,5 +1,6 @@
 export * from '@antv/dipper-core';
 export * from '@antv/dipper-widgets';
+export * from '@antv/dipper-hooks';
 import { registerWidget } from '@antv/dipper-core';
 import {
   CitySelect,
@@ -12,8 +13,6 @@ import {
   SearchPlace,
   MapStyle,
   Map2Image,
-  TitleDom,
-  LogoDom,
   DipperCollapse,
 } from '@antv/dipper-widgets';
 registerWidget('citySelect', CitySelect);
@@ -26,6 +25,4 @@ registerWidget('mapStyle', MapStyle);
 registerWidget('location', Location);
 registerWidget('searchPlaces', SearchPlace);
 registerWidget('exportMap', Map2Image);
-registerWidget('title', TitleDom);
-registerWidget('logo', LogoDom);
 registerWidget('collapse', DipperCollapse);
