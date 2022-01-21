@@ -14,6 +14,7 @@ export interface IMultiClassLegendProps {
 }
 
 export function MultiClassifyColor({ options }: IWidgetProps) {
+  console.log('MultiClassifyColor', options);
   const { values, items, title } = options as IMultiClassLegendProps;
   return (
     <div className={styles.legendClassifyControl}>

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Tooltip, Typography } from 'antd';
-import { useConfigService, useLayerGroup } from '@/hooks';
+import { useConfigService, useLayerGroup } from '@antv/dipper-hooks';
 
 const { Paragraph } = Typography;
 

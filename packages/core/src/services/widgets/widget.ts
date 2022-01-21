@@ -1,16 +1,11 @@
 import EventEmitter from 'eventemitter3';
 import type { Container } from 'inversify';
-import { injectable, inject } from 'inversify';
+import { inject } from 'inversify';
+import type { IWidget, IWidgetsService, IWidgetProps } from './IWidgetsService';
+import { WidgetsEventEnum } from './IWidgetsService';
+import { ISceneService } from '../scene/ISceneService';
+import { TYPES } from '../../types';
 
-import {
-  IWidget,
-  IWidgetsService,
-  IWidgetProps,
-  WidgetsEventEnum,
-  WidgetsService,
-  TYPES,
-  ISceneService,
-} from '@antv/dipper-core';
 export default class BaseWidget<IOptions, IValue>
   extends EventEmitter
   implements IWidget<IOptions, IValue>

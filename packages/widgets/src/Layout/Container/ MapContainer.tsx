@@ -6,7 +6,7 @@ import Layer from '../Layer';
 import Panel from '../Panel';
 import type { IConfig, IPanel } from '@antv/dipper-core';
 import { Dipper } from '@antv/dipper-core';
-import { useDipperContainer, useConfigService } from '../../hooks';
+import { useDipperContainer, useConfigService } from '@antv/dipper-hooks';
 
 const { Content } = Layout;
 

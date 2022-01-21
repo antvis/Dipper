@@ -1,4 +1,4 @@
-import { useConfigService } from '../../hooks';
+import { useConfigService } from '@antv/dipper-hooks';
 import React from 'react';
 import { LayoutContent } from '../baseLayout';
 
