@@ -47,8 +47,7 @@ export const defaultGridLayerOptions: IGridLayerGroupOptions = {
 };
 
 export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
-  constructor(props: ILayerGroupProps<IGridLayerGroupOptions>) {
-    super(props);
+  initLayerList() {
     const { normal, hover, select, text } = this.options;
     const fillLayer = this.initFillLayer();
     this.source = fillLayer.getSource();
@@ -84,14 +83,12 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
     });
 
     fillLayer
-      .source(this.source)
+      .source(this.data ?? featureCollection([]))
       // @ts-ignore
       .color(...getLayerFieldArgus(fillColor))
       .shape('fill');
 
     this.addLayer(fillLayer);
-
-    this.source = fillLayer.getSource();
 
     return fillLayer;
   }

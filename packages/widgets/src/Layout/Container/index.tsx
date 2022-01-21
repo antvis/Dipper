@@ -17,7 +17,7 @@ const { Content } = Layout;
 interface IContainerProps {
   cfg: IConfig;
   onLoad?: (sceneContainer: Dipper) => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function DipperContainer({

@@ -26,8 +26,6 @@ group:
 
 ### 方法
 
-#### updateSource
-
 #### show
 
 图层选

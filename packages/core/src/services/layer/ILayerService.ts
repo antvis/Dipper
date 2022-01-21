@@ -21,14 +21,16 @@ export interface ILayerEventTarget {
 export interface ILayerGroup extends EventEmitter {
   data: any;
   name: string;
-  source: ISource;
+  source?: ISource;
   show: () => void;
   hide: () => void;
   setData: (data: any) => void;
   addLayer: (layer: ILayer) => void;
   removeLayer: (layer: ILayer) => void;
+  getLayers: () => ILayer[];
+  setContainer: (container: Container) => void;
+  initLayerList: () => void;
   destroy: () => void;
-  updateSource: (data: any) => void;
   getSelectFeatures?: () => Feature[];
 }
 export type LayerType = ILayerGroup;

@@ -1,4 +1,4 @@
-import { Button, Empty, Input } from 'antd';
+import { Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import * as loadsh from 'lodash';
@@ -63,8 +63,11 @@ export function SearchPlace(params: GeoMethods) {
   return (
     <div className={styles.searchlist}>
       <div style={{ display: 'flex' }}>
-        <Button
-          icon={<img src={searchicon} />}
+        <img
+          src={searchicon}
+          width="13"
+          height="13"
+          style={{ height: 28 }}
           onClick={() => setInputShow(!inputShow)}
         />
         {inputShow && (
@@ -72,6 +75,7 @@ export function SearchPlace(params: GeoMethods) {
             placeholder="请输入要搜索的地区"
             onChange={onSearchKey}
             className={styles.input}
+            size="small"
           />
         )}
       </div>
