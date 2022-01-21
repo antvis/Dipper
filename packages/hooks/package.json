@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-hooks",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -24,7 +24,6 @@
     "es",
     "README.md"
   ],
-  
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
@@ -37,8 +36,8 @@
     ]
   },
   "dependencies": {
-    "react": "^16.12.0 || ^17.0.0",
-    "@antv/dipper-core": "^0.2.0"
+    "@antv/dipper-core": "^0.2.1",
+    "react": "^16.12.0 || ^17.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.1",
