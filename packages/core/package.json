@@ -55,7 +55,7 @@
   },
   "peerDependencies": {
     "@antv/l7": "^2.5.38",
-    "react": "^16.12.0 || ^17.0.0"
+    "react": "^16.14.0 || ^17.0.0"
   },
   "publishConfig": {
     "access": "public"
