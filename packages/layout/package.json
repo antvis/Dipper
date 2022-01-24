@@ -1,5 +1,5 @@
 {
-  "name": "@antv/dipper-hooks",
+  "name": "@antv/dipper-layout",
   "version": "0.2.1",
   "scripts": {
     "start": "dumi dev",

@@ -12,6 +12,5 @@ export * from './Search';
 export * from './MeshName';
 export * from './Map2Image';
 export * from './PropertyTable';
-export * from './Layout';
 export * from './StatisticCards';
 export * from './Collapse';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse } from 'antd';
 import styles from './index.less';
-import { CustomBaseLayout } from '..';
+import { CustomBaseLayout } from '@antv/dipper-layout';
 import { IWidgetProps } from '@antv/dipper-core';
 import { CaretRightOutlined } from '@ant-design/icons';
 

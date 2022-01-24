@@ -6,7 +6,7 @@ import Layer from '../Layer';
 import Panel from '../Panel';
 import type { IConfig, IPanel } from '@antv/dipper-core';
 import { Dipper } from '@antv/dipper-core';
-import { useDipperContainer, useConfigService } from '@antv/dipper-hooks';
+import { useDipperContainer, useConfigService } from '../../hooks';
 
 const { Content } = Layout;
 
@@ -22,10 +22,7 @@ export function MapContainer({ children }: { children?: React.ReactNode }) {
   return (
     <Content
       style={{
-        flexDirection:
-          panel?.position === 'bottom' || panel?.position === 'top'
-            ? 'column'
-            : 'row',
+        flexDirection: panel?.position === 'bottom' || panel?.position === 'top' ? 'column' : 'row',
       }}
     >
       {/* 地图 */}

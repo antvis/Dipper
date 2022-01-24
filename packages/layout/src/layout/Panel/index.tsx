@@ -2,16 +2,12 @@ import React, { useMemo } from 'react';
 import styles from './index.less';
 import { isDisplay } from '../../util/ui';
 import ToggleButton from './ToggleButton';
-import { usePanelService } from '@antv/dipper-hooks';
+import { usePanelService } from '../../hooks';
 import { LayoutContent } from '../baseLayout';
 import { IPanel } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
 
-function getStyle(
-  position: string,
-  opened: boolean,
-  panelWidth: string | number,
-) {
+function getStyle(position: string, opened: boolean, panelWidth: string | number) {
   const order = position === 'left' || position === 'top' ? -1 : 1;
 
   if (position === 'bottom' || position === 'top') {
@@ -37,11 +33,7 @@ function AppPanel({ panel }: { panel: Partial<IPanel> }) {
   return isDisplay(panel?.display) ? (
     <div
       style={{
-        ...getStyle(
-          panel?.position || 'right',
-          options?.opened || false,
-          panelWidth,
-        ),
+        ...getStyle(panel?.position || 'right', options?.opened || false, panelWidth),
         ...options?.style,
       }}
       className={styles.appPanel}

@@ -1,6 +1,7 @@
 export * from '@antv/dipper-core';
+export * from '@antv/dipper-layout';
 export * from '@antv/dipper-widgets';
-export * from '@antv/dipper-hooks';
+
 import { registerWidget } from '@antv/dipper-core';
 import {
   CitySelect,
