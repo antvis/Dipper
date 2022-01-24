@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import React from 'react';
 import styles from './index.less';
-import { useConfigService } from '@antv/dipper-hooks';
+import { useConfigService } from '../../hooks';
 import { CustomBaseLayout } from '../baseLayout';
 import { isDisplay } from '../../util/ui';
 
@@ -66,18 +66,10 @@ export default function AppHeader() {
     >
       <div className={styles.appHeaderLeft}>
         {isDisplay(logo?.display) ? (
-          <LogoDom
-            value={logo?.value || ''}
-            style={logo?.style || {}}
-            href={logo?.href || ''}
-          />
+          <LogoDom value={logo?.value || ''} style={logo?.style || {}} href={logo?.href || ''} />
         ) : null}
         {isDisplay(title?.display) ? (
-          <TitleDom
-            value={title?.value || ''}
-            style={title?.style || {}}
-            url={title?.url || ''}
-          />
+          <TitleDom value={title?.value || ''} style={title?.style || {}} url={title?.url || ''} />
         ) : null}
         <CustomBaseLayout
           type="header-left"

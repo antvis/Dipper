@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AMapScene, Popup } from '@antv/l7-react';
 import type {} from '@antv/l7-react';
 import styles from './index.less';
-import { useSceneService, useConfigService } from '@antv/dipper-hooks';
+import { useSceneService, useConfigService } from '../../hooks';
 
 interface IProps {
   children?: JSX.Element;

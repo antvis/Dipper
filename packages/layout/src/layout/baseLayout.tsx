@@ -4,8 +4,8 @@ import { PositionName } from '@antv/l7';
 import { CustomControl } from '@antv/l7-react';
 import classNames from 'classnames';
 import BaseLayout from './base';
-import { useWidgetsService } from '@antv/dipper-hooks';
-import { CustomBaseWidgets } from '../BaseWidget/widget';
+import { useWidgetsService } from '../hooks';
+import { CustomBaseWidgets } from '../baseWidget/widget';
 import { isDisplay } from '../util/ui';
 import { Tabs } from 'antd';
 import style from './style.less';
@@ -32,10 +32,7 @@ export const LayoutContent = ({ items }: ContentProps) => {
 export function AppTabsContent({ items }: ContentProps) {
   const [currentOperate, setCurrentOperate] = useState('');
 
-  const displayItems = useMemo(
-    () => items.filter((item) => isDisplay(item.display)),
-    [items],
-  );
+  const displayItems = useMemo(() => items.filter((item) => isDisplay(item.display)), [items]);
 
   useEffect(() => {
     if (items.length !== 0) {
@@ -56,15 +53,8 @@ export function AppTabsContent({ items }: ContentProps) {
     >
       {displayItems.map((tab: IWidgetProps) => {
         return (
-          <TabPane
-            tab={tab?.options?.title}
-            key={tab.type}
-            className={style.tabPanel}
-          >
-            <CustomBaseLayout
-              type={tab.type}
-              childrens={tab.options?.childrens}
-            />
+          <TabPane tab={tab?.options?.title} key={tab.type} className={style.tabPanel}>
+            <CustomBaseLayout type={tab.type} childrens={tab.options?.childrens} />
           </TabPane>
         );
       })}
@@ -77,10 +67,7 @@ export const AppMapControlContent = ({ items }: ContentProps) => {
     <>
       {items?.map((l) => {
         return (
-          <CustomControl
-            position={(l?.position || 'bottomleft') as PositionName}
-            key={l.type}
-          >
+          <CustomControl position={(l?.position || 'bottomleft') as PositionName} key={l.type}>
             <CustomBaseWidgets {...l} />
           </CustomControl>
         );

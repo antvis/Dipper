@@ -9,7 +9,7 @@ import ToolBar from '../Toolbar';
 import { MapContainer } from './ MapContainer';
 import type { IConfig, IPanel } from '@antv/dipper-core';
 import { Dipper } from '@antv/dipper-core';
-import { useDipperContainer, useConfigService } from '@antv/dipper-hooks';
+import { useDipperContainer, useConfigService } from '../../hooks';
 import type { Container } from 'inversify';
 
 const { Content } = Layout;
@@ -20,11 +20,7 @@ interface IContainerProps {
   children?: React.ReactNode;
 }
 
-export default function DipperContainer({
-  cfg,
-  children,
-  onLoad,
-}: IContainerProps) {
+export default function DipperContainer({ cfg, children, onLoad }: IContainerProps) {
   const { sceneContainer } = useDipperContainer(cfg);
   useUnmount(() => {
     if (sceneContainer) {

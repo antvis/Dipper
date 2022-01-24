@@ -3,9 +3,9 @@ import { isDisplay } from '../../util/ui';
 import { Control, CustomControl } from '@antv/l7-react';
 import type { IControlOption, PositionName } from '@antv/l7';
 import { getWidget } from '@antv/dipper-core';
-import { useConfigService } from '@antv/dipper-hooks';
+import { useConfigService } from '../../hooks';
 import { AppMapControlContent } from '../baseLayout';
-import { CustomBaseWidgets } from '../../BaseWidget/widget';
+import { CustomBaseWidgets } from '../../baseWidget/widget';
 import { groupBy } from 'lodash';
 
 export default function MapControl() {
@@ -27,14 +27,7 @@ export default function MapControl() {
         .map((item: any, index: number) => {
           const key = `${item.type}${index}`;
           const { position } = item as IControlOption;
-          return (
-            <Control
-              key={key}
-              type={item.type}
-              position={position}
-              {...item.options}
-            />
-          );
+          return <Control key={key} type={item.type} position={position} {...item.options} />;
         })}
       {Object.keys(controlGroupBy).map((key: string) => {
         const [position, layout] = key.split('-');

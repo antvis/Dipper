@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  IWidgetProps,
-  IWidget,
-  getWidget,
-  BaseWidget,
-} from '@antv/dipper-core';
+import { IWidgetProps, IWidget, getWidget, BaseWidget } from '@antv/dipper-core';
 
-import { useWidgetsService } from '@antv/dipper-hooks';
+import { useWidgetsService } from '../hooks';
 
 export const CustomBaseWidgets = (props: IWidgetProps) => {
   const { widgetsService } = useWidgetsService();

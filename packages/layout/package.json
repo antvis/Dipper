@@ -1,6 +1,6 @@
 {
-  "name": "@antv/dipper-hooks",
-  "version": "0.2.1",
+  "name": "@antv/dipper-layout",
+  "version": "0.2.2",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -36,7 +36,7 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-core": "^0.2.1",
+    "@antv/dipper-core": "^0.2.2",
     "react": "^16.12.0 || ^17.0.0"
   },
   "devDependencies": {
@@ -51,5 +51,9 @@
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.1",
     "yorkie": "^2.0.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "0ab188cbbd501a91226dbec5c59a197bf4336e9c"
 }

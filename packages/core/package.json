@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "start": "dumi dev",
     "clean": "rimraf dist",
@@ -61,5 +61,5 @@
     "access": "public"
   },
   "license": "MIT",
-  "gitHead": "8e816a06af40f4d04895996ce2ab29e1ff3da932"
+  "gitHead": "0ab188cbbd501a91226dbec5c59a197bf4336e9c"
 }
