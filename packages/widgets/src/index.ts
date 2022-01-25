@@ -14,3 +14,4 @@ export * from './Map2Image';
 export * from './PropertyTable';
 export * from './StatisticCards';
 export * from './Collapse';
+export * from './BoxSelectLayer';

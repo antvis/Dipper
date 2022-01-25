@@ -5,5 +5,6 @@ export const updateConfigsField = (source: any, key: string, value: any) => {
   return set(clone, key, value);
 };
 
+export * from './keyboard';
 export * from './const';
 export * from './typings';

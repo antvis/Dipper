@@ -1,7 +1,7 @@
 import { useInjection } from 'inversify-react';
 import { useEffect, useState, useCallback } from 'react';
-import type { IFeature } from '@antv/dipper-core';
 import {
+  IFeature,
   LayerGroup,
   LayerGroupEventEnum,
   ILayerService,
@@ -49,11 +49,17 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
       setLayerData(layerGroup.data);
 
       layerGroup?.on(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
-      layerGroup?.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
+      layerGroup?.on(
+        LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
+        setSelectFeatures,
+      );
     }
     return () => {
       layerGroup?.off(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
-      layerGroup?.off(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
+      layerGroup?.off(
+        LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
+        setSelectFeatures,
+      );
     };
   }, [layerGroup]);
 

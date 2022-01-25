@@ -7,10 +7,11 @@ import {
   LayerGroupEventEnum,
   ILayerGroupText,
   defaultGridTextOptions,
+  IFeature,
 } from '@antv/dipper-core';
-import { PointLayer, PolygonLayer } from '@antv/l7';
+import { PolygonLayer } from '@antv/l7';
 import { cloneDeep, merge } from 'lodash';
-import { featureCollection, simplify } from '@turf/turf';
+import { BBox, featureCollection } from '@turf/turf';
 
 export interface IGridLayerGroupStyle {
   borderColor: ILayerFieldProperties<string>;
@@ -79,6 +80,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
     } = this.options;
 
     const fillLayer = new PolygonLayer({
+      name: 'fill',
       autoFit,
     });
 
@@ -181,5 +183,31 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
         featureCollection(this.selectFeatures.map((item) => item.feature)),
       );
     });
+  }
+
+  public boxSelect(bbox: BBox) {
+    const fillLayer = this.layers.find((layer) => layer.name === 'fill');
+    if (fillLayer) {
+      // @ts-ignore
+      fillLayer.boxSelect(bbox, (e) => {
+        if (this.selectFeatures.length === e.length) {
+          return;
+        }
+        const newSelectFeatures: IFeature[] = (Array.from(e) ? e : []).map(
+          ({ pickedFeatureIdx: featureId, ...feature }: any) => {
+            return {
+              featureId,
+              feature,
+            };
+          },
+        );
+        if (
+          newSelectFeatures.map((item) => item.featureId).join(',') !==
+          this.selectFeatures.map((item) => item.featureId).join(',')
+        ) {
+          this.setSelectFeatures(newSelectFeatures);
+        }
+      });
+    }
   }
 }
