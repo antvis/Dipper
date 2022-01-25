@@ -12,15 +12,16 @@ export function useWidgets(id: string) {
   const [widgetsValue, setWidgetsValue] = useState<any>();
 
   useEffect(() => {
-    const widgetsAdd = (e: IWidget) => {
-      if (!widget) {
-        setWidget(e);
+    const widgetsAdd = (newWidget: IWidget) => {
+      if (!widget && newWidget.id === id) {
+        setWidget(newWidget);
       }
     };
     const widget = widgetsService.getWidget(id);
     if (widget) {
       setWidget(widget as IWidget);
       setWidgetsValue(widget.getValue());
+      setWidgetsOptions(widget.getOptions());
     } else {
       widgetsService.on(WidgetsServiceEnum.ADD, widgetsAdd);
     }
@@ -30,12 +31,20 @@ export function useWidgets(id: string) {
   }, [id]);
 
   useEffect(() => {
-    widget?.on(WidgetsEventEnum.VALUE_CHANGE, (e: any) => {
-      setWidgetsValue(e);
-    });
-    widget?.on(WidgetsEventEnum.OPTIONT_CHANGE, (e: any) => {
-      setWidgetsOptions(e);
-    });
+    if (widget) {
+      const onValueChange = (e: any) => {
+        setWidgetsValue(e);
+      }
+      const onOptionsChange = (e: any) => {
+        setWidgetsOptions(e);
+      }
+      widget?.on(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
+      widget?.on(WidgetsEventEnum.OPTIONT_CHANGE, onOptionsChange);
+      return () => {
+        widget?.off(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
+        widget?.off(WidgetsEventEnum.OPTIONT_CHANGE, onOptionsChange);
+      }
+    }
   }, [widget]);
 
   const setOption = (option: Partial<IWidgetProps<any>>) => {
