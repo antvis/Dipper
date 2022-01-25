@@ -35,13 +35,13 @@ export interface IConfig {
             style: React.CSSProperties;
           }>;
         };
-        childrens?: IWidgetProps[];
+        children?: IWidgetProps[];
       }
     | false;
   panel: Partial<IPanel>;
   toolbar: {
     display?: boolean;
-    childrens: IWidgetProps[];
+    children: IWidgetProps[];
   };
   headerWidgets?: IWidgetProps[]; // 导航栏配置
   map: Partial<IMapConfig>;
@@ -56,7 +56,7 @@ export interface IConfig {
           lng: number;
           lat: number;
         };
-    childrens?: React.ReactNode;
+    children?: React.ReactNode;
   };
   controls: IControlWidgetsProps[]; // 自定义组件配置
   defaultcontrols: IWidgetProps[]; // 地图自带组件

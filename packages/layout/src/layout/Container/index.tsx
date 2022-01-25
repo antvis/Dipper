@@ -17,10 +17,10 @@ const { Content } = Layout;
 interface IContainerProps {
   cfg: IConfig;
   onLoad?: (sceneContainer: Dipper) => void;
-  children?: React.ReactNode;
+  customComponent?: React.ReactNode;
 }
 
-export default function DipperContainer({ cfg, children, onLoad }: IContainerProps) {
+export default function DipperContainer({ cfg, customComponent, onLoad }: IContainerProps) {
   const { sceneContainer } = useDipperContainer(cfg);
   useUnmount(() => {
     if (sceneContainer) {
@@ -46,7 +46,7 @@ export default function DipperContainer({ cfg, children, onLoad }: IContainerPro
           <ToolBar />
 
           {/* 地图区域 */}
-          <MapContainer>{children}</MapContainer>
+          <MapContainer>{customComponent}</MapContainer>
         </Layout>
       </Provider>
     </>
