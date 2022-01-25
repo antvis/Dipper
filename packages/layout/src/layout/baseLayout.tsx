@@ -10,9 +10,6 @@ import { isDisplay } from '../util/ui';
 import { Tabs } from 'antd';
 import style from './style.less';
 const { TabPane } = Tabs;
-interface IWidgetsComponent extends IWidgetProps {
-  children?: JSX.Element | JSX.Element[] | Array<JSX.Element | undefined>;
-}
 
 interface ContentProps {
   items: IWidgetProps[];
@@ -54,7 +51,7 @@ export function AppTabsContent({ items }: ContentProps) {
       {displayItems.map((tab: IWidgetProps) => {
         return (
           <TabPane tab={tab?.options?.title} key={tab.type} className={style.tabPanel}>
-            <CustomBaseLayout type={tab.type} childrens={tab.options?.childrens} />
+            <CustomBaseLayout type={tab.type} children={tab.options?.children} />
           </TabPane>
         );
       })}
@@ -76,7 +73,7 @@ export const AppMapControlContent = ({ items }: ContentProps) => {
   );
 };
 
-export const CustomBaseLayout = (props: IWidgetsComponent) => {
+export const CustomBaseLayout = (props: IWidgetProps) => {
   const { widgetsService } = useWidgetsService();
   const layout = useRef<BaseLayout>();
   useEffect(() => {
@@ -89,5 +86,5 @@ export const CustomBaseLayout = (props: IWidgetsComponent) => {
 
   // TODO 状态更新
 
-  return <LayoutContent items={props.childrens || []} />;
+  return <LayoutContent items={props.children || []} />;
 };
