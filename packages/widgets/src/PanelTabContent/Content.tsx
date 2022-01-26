@@ -6,16 +6,16 @@ import type { IWidgetProps } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
 
 function PanelTabContent(props: IWidgetProps) {
-  const { subChildren = [] } = props;
+  const { components = [] } = props;
 
   return (
     <div
       className={classnames({
         [styles.appPanelContent]: true,
-        [styles.appPanelContentWithoutTabs]: subChildren.length <= 1,
+        [styles.appPanelContentWithoutTabs]: components.length <= 1,
       })}
     >
-      <AppTabsContent items={subChildren || []} />
+      <AppTabsContent items={components || []} />
     </div>
   );
 }

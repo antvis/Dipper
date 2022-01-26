@@ -18,7 +18,7 @@ export interface IWidgetProps<P = any> {
     | JSX.Element[]
     | Array<JSX.Element | undefined>
     | React.FC;
-  subChildren?: IWidgetProps<P>[];
+  components?: IWidgetProps<P>[];
   event?: {
     actionType: string;
     action: string;

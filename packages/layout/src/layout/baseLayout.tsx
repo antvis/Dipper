@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
-import { IWidgetProps } from '@antv/dipper-core';
+import { IWidgetProps, getWidgetChildren } from '@antv/dipper-core';
 import { PositionName } from '@antv/l7';
 import { CustomControl } from '@antv/l7-react';
 import classNames from 'classnames';
@@ -51,7 +51,7 @@ export function AppTabsContent({ items }: ContentProps) {
       {displayItems.map((tab: IWidgetProps) => {
         return (
           <TabPane tab={tab?.options?.title} key={tab.type} className={style.tabPanel}>
-            <CustomBaseLayout type={tab.type} children={tab.options?.children} />
+            <CustomBaseLayout type={tab.type} components={getWidgetChildren(tab)} />
           </TabPane>
         );
       })}
@@ -86,5 +86,5 @@ export const CustomBaseLayout = (props: IWidgetProps) => {
 
   // TODO 状态更新
 
-  return <LayoutContent items={props.subChildren || []} />;
+  return <LayoutContent items={getWidgetChildren(props)} />;
 };

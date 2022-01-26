@@ -1,4 +1,4 @@
-import { IWidgetProps, BaseWidget } from '@antv/dipper-core';
+import { IWidgetProps, BaseWidget, getWidgetChildren } from '@antv/dipper-core';
 
 export default class BaseLayout extends BaseWidget<any, any> {
   public widgets: IWidgetProps<any>[] = [];
@@ -9,6 +9,6 @@ export default class BaseLayout extends BaseWidget<any, any> {
 
   private initWidgets() {
     const option = this.getOptions();
-    this.widgets = [...(option.subChildren || [])];
+    this.widgets = [...getWidgetChildren(option)];
   }
 }

@@ -8,3 +8,4 @@ export const updateConfigsField = (source: any, key: string, value: any) => {
 export * from './keyboard';
 export * from './const';
 export * from './typings';
+export * from './util';

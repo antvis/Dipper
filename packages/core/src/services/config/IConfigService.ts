@@ -35,14 +35,14 @@ export interface IConfig {
             style: React.CSSProperties;
           }>;
         };
-        subChildren?: IWidgetProps[];
+        components?: IWidgetProps[];
         children?: React.ReactNode;
       }
     | false;
   panel: Partial<IPanel>;
   toolbar: {
     display?: boolean;
-    subChildren?: IWidgetProps[];
+    components?: IWidgetProps[];
     children?: React.ReactNode;
   };
   map: Partial<IMapConfig>;
