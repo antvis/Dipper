@@ -1,4 +1,4 @@
-import { IWidgetProps } from '@antv/dipper-core';
+import { IWidgetProps, getWidgetChildren } from '@antv/dipper-core';
 
 export const isDisplay = (display?: any) => display !== false;
 
@@ -9,12 +9,14 @@ export const getAppContentItem = (
   items: IWidgetProps,
   position: Position,
 ): IWidgetProps[] => {
-  return items.children?.filter((bar) => bar.position === position) || [];
+  return (
+    getWidgetChildren(items).filter((bar) => bar.position === position) || []
+  );
 };
 
 export const findItem = (
   items: IWidgetProps,
   position: Position,
 ): IWidgetProps | undefined => {
-  return items.children?.find((bar) => bar.position === position);
+  return getWidgetChildren(items).find((bar) => bar.position === position);
 };

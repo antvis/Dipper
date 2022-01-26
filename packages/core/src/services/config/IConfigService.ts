@@ -35,15 +35,16 @@ export interface IConfig {
             style: React.CSSProperties;
           }>;
         };
-        children?: IWidgetProps[];
+        components?: IWidgetProps[];
+        children?: React.ReactNode;
       }
     | false;
   panel: Partial<IPanel>;
   toolbar: {
     display?: boolean;
-    children: IWidgetProps[];
+    components?: IWidgetProps[];
+    children?: React.ReactNode;
   };
-  headerWidgets?: IWidgetProps[]; // 导航栏配置
   map: Partial<IMapConfig>;
   popup: {
     // 信息框

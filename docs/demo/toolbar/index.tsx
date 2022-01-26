@@ -355,7 +355,7 @@ export default function RumbMap() {
                 display: false,
               },
             },
-            childrens: [
+            components: [
               {
                 type: 'myTitle',
                 position: 'left',

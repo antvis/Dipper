@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { Children, FC, useEffect } from 'react';
 import { useUnmount } from 'ahooks';
 import { Layout } from 'antd';
 import styles from './index.less';
@@ -17,10 +17,10 @@ const { Content } = Layout;
 interface IContainerProps {
   cfg: IConfig;
   onLoad?: (sceneContainer: Dipper) => void;
-  customComponent?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-export default function DipperContainer({ cfg, customComponent, onLoad }: IContainerProps) {
+export default function DipperContainer({ cfg, children, onLoad }: IContainerProps) {
   const { sceneContainer } = useDipperContainer(cfg);
   useUnmount(() => {
     if (sceneContainer) {
@@ -46,7 +46,7 @@ export default function DipperContainer({ cfg, customComponent, onLoad }: IConta
           <ToolBar />
 
           {/* 地图区域 */}
-          <MapContainer>{customComponent}</MapContainer>
+          <MapContainer>{children}</MapContainer>
         </Layout>
       </Provider>
     </>
