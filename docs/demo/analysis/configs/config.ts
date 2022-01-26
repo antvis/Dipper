@@ -138,22 +138,22 @@ export const config: Partial<IConfig> = {
     enable: false,
   },
   layers: [
-    {
-      type: 'gridLayer',
-      options: {
-        text: {
-          field: 'name',
-          size: 12,
-          color: '#000',
-        },
-        normal: {
-          fillColor: {
-            field: 'unit_price',
-            color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
-          },
-        },
-      },
-    },
+    // {
+    //   type: 'gridLayer',
+    //   options: {
+    //     text: {
+    //       field: 'name',
+    //       size: 12,
+    //       color: '#000',
+    //     },
+    //     normal: {
+    //       fillColor: {
+    //         field: 'unit_price',
+    //         color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
+    //       },
+    //     },
+    //   },
+    // },
   ],
   legends: [],
 };
