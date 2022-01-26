@@ -5,21 +5,22 @@ import { IWidgetProps } from '@antv/dipper-core';
 import { useConfigService } from '@antv/dipper-layout';
 import { findSelectArray } from './common';
 
-export function CitySelect({ type = 'CitySelect' }: IWidgetProps) {
+export function CitySelect({ type = 'CitySelect', options }: IWidgetProps) {
   const { globalConfig, getWidgetsOptions, setWidgetsValue } =
     useConfigService();
-  const defaultSelect = useMemo(() => {
-    const cityCode = (globalConfig?.viewData?.global?.areaCode as string) || '';
-    return findSelectArray(getWidgetsOptions(type) as any[], cityCode);
-  }, [getWidgetsOptions(type)]);
+  // const defaultSelect = useMemo(() => {
+  //   const cityCode = (globalConfig?.viewData?.global?.areaCode as string) || '';
+  //   console.log(type, getWidgetsOptions(type))
+  //   return findSelectArray(getWidgetsOptions(type) as any[], cityCode);
+  // }, [getWidgetsOptions(type)]);
 
   return (
     <>
       <Cascader
-        defaultValue={defaultSelect}
+        defaultValue={options?.defaultValue || []}
         style={{ width: 180 }}
         bordered={false}
-        options={getWidgetsOptions(type) as any[]}
+        options={options?.options || []}
         allowClear={false}
         onChange={(e: any) => {
           setWidgetsValue(type, e);

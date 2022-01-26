@@ -16,7 +16,7 @@ import {
   Map2Image,
   DipperCollapse,
 } from '@antv/dipper-widgets';
-registerWidget('citySelect', CitySelect);
+registerWidget('cityselect', CitySelect);
 registerWidget('panelTabContent', PanelTabcontent);
 registerWidget('navibar', NavBar);
 registerWidget('classifyColor', ClassifyColor);
