@@ -6,9 +6,11 @@ import { useWidgetsService } from '../hooks';
 export const CustomBaseWidgets = (props: IWidgetProps) => {
   const { widgetsService } = useWidgetsService();
   const widget = useRef<IWidget>();
-  useEffect(() => {
+  if (!widget.current) {
     widget.current = new BaseWidget(props);
     widgetsService.addWidget(widget.current);
+  }
+  useEffect(() => {
     return () => {
       widgetsService.removeWidget(widget.current!.id);
     };
@@ -16,5 +18,5 @@ export const CustomBaseWidgets = (props: IWidgetProps) => {
 
   // TODO 状态更新
 
-  return <>{getWidget(props.type)(props)}</>;
+  return <>{getWidget(props.type)(widget.current.getOptions())}</>;
 };

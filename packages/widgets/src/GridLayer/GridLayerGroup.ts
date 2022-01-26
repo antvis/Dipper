@@ -210,4 +210,32 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       });
     }
   }
+  getLegendItem() {
+    // 先取默认图例
+    let legend = this.getLayer(this.name)?.getLegendItems('color') || [];
+    if (legend.length !== 0) {
+      return legend;
+    }
+
+    // @ts-ignore
+    const scale =
+      // @ts-ignore
+      this.getLayer(this.name)?.styleAttributeService?.getLayerAttributeScale(
+        'color',
+      );
+
+    if (scale?.domain) {
+      legend = scale
+        .domain()
+        .filter((item: any) => item !== 'label')
+        .map((item: string | number) => {
+          return {
+            // @ts-ignore
+            value: item || this.options.fill.unkownName || '无',
+            color: scale(item),
+          };
+        });
+    }
+    return legend;
+  }
 }

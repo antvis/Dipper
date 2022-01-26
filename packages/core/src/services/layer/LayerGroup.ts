@@ -206,7 +206,6 @@ export default abstract class LayerGroup<T = any>
     this.visible = false;
     this.emit(LayerGroupEventEnum.VISIBLE_CHANGE, false);
   }
-
   public destroy() {
     this.layers.forEach((layer) => layer.destroy());
     this.emit(LayerGroupEventEnum.DESTROY);

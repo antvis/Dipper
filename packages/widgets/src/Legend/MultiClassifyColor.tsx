@@ -1,6 +1,7 @@
 import React from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
+import { useWidgets } from '@antv/dipper-layout';
 
 interface ILegendItem {
   colors: string[];
@@ -13,7 +14,7 @@ export interface IMultiClassLegendProps {
   values: Array<number | [number, number]>;
 }
 
-export function MultiClassifyColor({ options }: IWidgetProps) {
+export function MultiClassifyColor({ options, id, type }: IWidgetProps) {
   const { values, items, title } = options as IMultiClassLegendProps;
   return (
     <div className={styles.legendClassifyControl}>
