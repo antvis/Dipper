@@ -9,6 +9,6 @@ export default class BaseLayout extends BaseWidget<any, any> {
 
   private initWidgets() {
     const option = this.getOptions();
-    this.widgets = [...(option.children || [])];
+    this.widgets = [...(option.subChildren || [])];
   }
 }

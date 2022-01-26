@@ -17,12 +17,11 @@ export const defaultConfig: Partial<IConfig> = {
         display: true,
       },
     },
-
-    children: [],
+    subChildren: [],
   },
   toolbar: {
     display: false,
-    children: [],
+    subChildren: [],
   },
   map: {
     zoom: 10,

@@ -50,7 +50,7 @@ const { Header } = Layout;
 
 export default function AppHeader() {
   const { globalConfig } = useConfigService();
-  const { display, children, options } = globalConfig.headerbar || {};
+  const { display, subChildren, options } = globalConfig.headerbar || {};
   const { headerstyle, logo, title } = options || {};
 
   return isDisplay(display) ? (
@@ -73,17 +73,17 @@ export default function AppHeader() {
         ) : null}
         <CustomBaseLayout
           type="header-left"
-          children={children?.filter((c) => c.position === 'left') || []}
+          subChildren={subChildren?.filter((c) => c.position === 'left') || []}
         />
       </div>
       <CustomBaseLayout
         type="header-center"
-        children={children?.filter((c) => c.position === 'center') || []}
+        subChildren={subChildren?.filter((c) => c.position === 'center') || []}
       />
       <div className={styles.appHeaderRight}>
         <CustomBaseLayout
           type="header-right"
-          children={children?.filter((c) => c.position === 'right') || []}
+          subChildren={subChildren?.filter((c) => c.position === 'right') || []}
         />
       </div>
     </Header>

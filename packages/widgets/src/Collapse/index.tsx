@@ -23,7 +23,7 @@ export function DipperCollapse({ type, children, title }: DipperCollapseProps) {
       defaultActiveKey={['1']}
     >
       <Panel header={<div className={styles['overview']}>{title}</div>} key="1">
-        <CustomBaseLayout type={type} children={children}></CustomBaseLayout>
+        <CustomBaseLayout type={type} subChildren={children}></CustomBaseLayout>
       </Panel>
     </Collapse>
   );

@@ -57,7 +57,7 @@ function AppPanel({ panel }: { panel: Partial<IPanel> }) {
           height: '100%',
         }}
       >
-        <LayoutContent items={panel?.children || []} />
+        <LayoutContent items={panel?.subChildren || []} />
       </div>
     </div>
   ) : (

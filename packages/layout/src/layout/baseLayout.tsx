@@ -86,5 +86,5 @@ export const CustomBaseLayout = (props: IWidgetProps) => {
 
   // TODO 状态更新
 
-  return <LayoutContent items={props.children || []} />;
+  return <LayoutContent items={props.subChildren || []} />;
 };

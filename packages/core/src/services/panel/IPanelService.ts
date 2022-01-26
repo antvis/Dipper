@@ -15,7 +15,8 @@ export interface IPanel {
     opened?: boolean;
     style?: React.CSSProperties;
   }>;
-  children?: IWidgetProps[];
+  children?: React.ReactNode;
+  subChildren?: IWidgetProps[];
 }
 
 export interface IPanelService extends EventEmitter {

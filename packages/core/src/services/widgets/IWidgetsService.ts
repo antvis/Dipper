@@ -13,12 +13,12 @@ export interface IWidgetProps<P = any> {
   position?: string;
   display?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
-  customComponent?:
+  children?:
     | JSX.Element
     | JSX.Element[]
     | Array<JSX.Element | undefined>
     | React.FC;
-  children?: IWidgetProps<P>[];
+  subChildren?: IWidgetProps<P>[];
   event?: {
     actionType: string;
     action: string;
