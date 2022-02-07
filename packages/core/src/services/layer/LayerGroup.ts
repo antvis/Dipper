@@ -9,6 +9,10 @@ import { isPressing } from '../../utils/keyboard';
 import { TYPES } from '../../types';
 import { ISceneService } from '../scene/ISceneService';
 import { DeepPartial } from '../../utils';
+import {
+  IScale,
+  IScaleOptions,
+} from '@antv/l7-core/es/services/layer/IStyleAttributeService';
 
 export enum LayerGroupEventEnum {
   VISIBLE_CHANGE = 'visibleChange',
@@ -21,6 +25,8 @@ export enum LayerGroupEventEnum {
 export type ILayerFieldProperties<T> =
   | T
   | { field: string; value: T | ((field: string) => T) };
+
+export type ILayerScale = IScaleOptions | [string, IScale];
 
 export const getLayerFieldArgus = <T>(properties: ILayerFieldProperties<T>) => {
   if (properties instanceof Object) {
@@ -209,5 +215,8 @@ export default abstract class LayerGroup<T = any>
   public destroy() {
     this.layers.forEach((layer) => layer.destroy());
     this.emit(LayerGroupEventEnum.DESTROY);
+  }
+  public getLegendItem() {
+    return [];
   }
 }

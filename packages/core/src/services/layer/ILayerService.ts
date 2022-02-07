@@ -33,6 +33,7 @@ export interface ILayerGroup extends EventEmitter {
   destroy: () => void;
   getSelectFeatures?: () => Feature[];
   boxSelect: (bbox: BBox) => void;
+  getLegendItem: () => { color: string; value: any }[];
 }
 export type LayerType = ILayerGroup;
 export interface ILayerService extends EventEmitter {

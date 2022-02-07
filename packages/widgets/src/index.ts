@@ -5,6 +5,7 @@ export * from './PanelTabContent';
 export * from './GridLayer/GridLayerGroup';
 export * from './MapStyle';
 export * from './Filter/CitySelect';
+export * from './Filter/Select';
 export * from './NavBar';
 export * from './Location';
 export * from './Draw';
