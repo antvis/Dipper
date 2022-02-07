@@ -4,7 +4,7 @@ import { isDisplay } from '../../util/ui';
 import ToggleButton from './ToggleButton';
 import { usePanelService } from '../../hooks';
 import { LayoutContent } from '../baseLayout';
-import { IPanel } from '@antv/dipper-core';
+import { IPanel, getWidgetChildren } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
 
 function getStyle(position: string, opened: boolean, panelWidth: string | number) {
@@ -57,7 +57,7 @@ function AppPanel({ panel }: { panel: Partial<IPanel> }) {
           height: '100%',
         }}
       >
-        <LayoutContent items={panel?.childrens || []} />
+        <LayoutContent items={getWidgetChildren(panel)} />
       </div>
     </div>
   ) : (

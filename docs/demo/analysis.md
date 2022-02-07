@@ -5,4 +5,4 @@ group:
 
 ## 数据分析
 
-<code src="./task/index"></code>
+<code src="./analysis/index"></code>

@@ -4,6 +4,7 @@ import styles from './index.less';
 import { useConfigService } from '../../hooks';
 import { CustomBaseLayout } from '../baseLayout';
 import { isDisplay } from '../../util/ui';
+import { getWidgetChildren, IWidgetProps } from '@antv/dipper-core';
 
 interface LogoDomProps {
   value?: string;
@@ -50,7 +51,8 @@ const { Header } = Layout;
 
 export default function AppHeader() {
   const { globalConfig } = useConfigService();
-  const { display, childrens, options } = globalConfig.headerbar || {};
+  const { display, options } = globalConfig.headerbar || {};
+  const components = getWidgetChildren(globalConfig.headerbar);
   const { headerstyle, logo, title } = options || {};
 
   return isDisplay(display) ? (
@@ -73,17 +75,17 @@ export default function AppHeader() {
         ) : null}
         <CustomBaseLayout
           type="header-left"
-          childrens={childrens?.filter((c) => c.position === 'left') || []}
+          components={components?.filter((c) => c.position === 'left') || []}
         />
       </div>
       <CustomBaseLayout
         type="header-center"
-        childrens={childrens?.filter((c) => c.position === 'center') || []}
+        components={components?.filter((c) => c.position === 'center') || []}
       />
       <div className={styles.appHeaderRight}>
         <CustomBaseLayout
           type="header-right"
-          childrens={childrens?.filter((c) => c.position === 'right') || []}
+          components={components?.filter((c) => c.position === 'right') || []}
         />
       </div>
     </Header>

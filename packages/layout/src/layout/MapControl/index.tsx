@@ -15,7 +15,8 @@ export default function MapControl() {
     return groupBy(
       controls?.filter((item: any) => isDisplay(item.display)),
       (c) => {
-        return [c.position, c.layout || 'vertical'].join('-');
+        const defaultLayout = c.position === 'topleft' ? 'horizontal' : 'vertical';
+        return [c.position, c.layout || defaultLayout].join('-');
       },
     );
   }, [controls]);

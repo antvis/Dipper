@@ -16,7 +16,7 @@ export const config: Partial<IConfig> = {
   },
   toolbar: {
     display: true,
-    childrens: [
+    children: [
       {
         display: true,
         position: 'left',
@@ -33,11 +33,11 @@ export const config: Partial<IConfig> = {
       width: 426,
     },
     position: 'right',
-    childrens: [
+    children: [
       {
         display: true,
         type: 'panelTabContent',
-        childrens: [
+        children: [
           {
             display: true,
             type: 'mesh_indicator',
@@ -56,13 +56,29 @@ export const config: Partial<IConfig> = {
       },
     ],
   },
+  controls: [
+    {
+      display: true,
+      position: 'topleft',
+      type: 'location',
+      // layout:'horizontal',
+      title: '定位',
+    },
+    {
+      display: true,
+      position: 'topleft',
+      type: 'mapStyle',
+      // layout:'horizontal',
+      title: '地图样式',
+    },
+  ],
   headerbar: {
     display: true,
     title: {
       value: '布局测试',
       display: true,
     },
-    childrens: [
+    children: [
       {
         display: true,
         position: 'left',

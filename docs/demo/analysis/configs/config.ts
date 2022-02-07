@@ -22,7 +22,7 @@ export const config: Partial<IConfig> = {
         display: true,
       },
     },
-    childrens: [
+    components: [
       {
         display: true,
         position: 'left',
@@ -53,7 +53,7 @@ export const config: Partial<IConfig> = {
       width: 426,
     },
     position: 'right',
-    childrens: [
+    components: [
       {
         display: true,
         type: 'meshName',
@@ -68,7 +68,7 @@ export const config: Partial<IConfig> = {
         display: true,
         type: 'panelTabContent',
         title: '所有网格',
-        childrens: [
+        components: [
           {
             display: true,
             type: 'mesh_indicator',
@@ -84,7 +84,7 @@ export const config: Partial<IConfig> = {
   },
   toolbar: {
     display: false,
-    childrens: [],
+    components: [],
   },
   map: {
     zoom: 10,
@@ -138,22 +138,22 @@ export const config: Partial<IConfig> = {
     enable: false,
   },
   layers: [
-    {
-      type: 'gridLayer',
-      options: {
-        text: {
-          field: 'name',
-          size: 12,
-          color: '#000',
-        },
-        normal: {
-          fillColor: {
-            field: 'unit_price',
-            color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
-          },
-        },
-      },
-    },
+    // {
+    //   type: 'gridLayer',
+    //   options: {
+    //     text: {
+    //       field: 'name',
+    //       size: 12,
+    //       color: '#000',
+    //     },
+    //     normal: {
+    //       fillColor: {
+    //         field: 'unit_price',
+    //         color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
+    //       },
+    //     },
+    //   },
+    // },
   ],
   legends: [],
 };

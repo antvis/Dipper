@@ -10,12 +10,12 @@ const { Panel } = Collapse;
 interface DipperCollapseProps {
   type: string;
   title: string;
-  childrens: IWidgetProps[];
+  components: IWidgetProps[];
 }
 
 export function DipperCollapse({
   type,
-  childrens,
+  components,
   title,
 }: DipperCollapseProps) {
   return (
@@ -27,7 +27,10 @@ export function DipperCollapse({
       defaultActiveKey={['1']}
     >
       <Panel header={<div className={styles['overview']}>{title}</div>} key="1">
-        <CustomBaseLayout type={type} childrens={childrens}></CustomBaseLayout>
+        <CustomBaseLayout
+          type={type}
+          components={components}
+        ></CustomBaseLayout>
       </Panel>
     </Collapse>
   );

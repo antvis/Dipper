@@ -35,15 +35,16 @@ export interface IConfig {
             style: React.CSSProperties;
           }>;
         };
-        childrens?: IWidgetProps[];
+        components?: IWidgetProps[];
+        children?: React.ReactNode;
       }
     | false;
   panel: Partial<IPanel>;
   toolbar: {
     display?: boolean;
-    childrens: IWidgetProps[];
+    components?: IWidgetProps[];
+    children?: React.ReactNode;
   };
-  headerWidgets?: IWidgetProps[]; // 导航栏配置
   map: Partial<IMapConfig>;
   popup: {
     // 信息框
@@ -56,7 +57,7 @@ export interface IConfig {
           lng: number;
           lat: number;
         };
-    childrens?: React.ReactNode;
+    children?: React.ReactNode;
   };
   controls: IControlWidgetsProps[]; // 自定义组件配置
   defaultcontrols: IWidgetProps[]; // 地图自带组件
@@ -77,7 +78,7 @@ export interface IConfigService extends EventEmitter {
   updateLegend: (id: string, value: any) => void;
   updateControl: (type: string, value: any) => void;
   setWidgetsOptions: (key: string, options: Record<string, any>) => void;
-  getWidgetsValue: (key: string) => Record<string, any>;
+  getWidgetsValue: (key: string) => Record<string, any> | undefined;
   setWidgetsValue: (key: string, options: Record<string, any>) => void;
-  getWidgetsOptions: (key: string) => Record<string, any>;
+  getWidgetsOptions: (key: string) => Record<string, any> | undefined;
 }

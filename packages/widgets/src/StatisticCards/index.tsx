@@ -10,13 +10,13 @@ interface StaticCard {
 }
 
 interface StatisticCardsProps {
-  childrens: StaticCard[];
+  children: StaticCard[];
 }
 
-export function StatisticCards({ childrens }: StatisticCardsProps) {
+export function StatisticCards({ children }: StatisticCardsProps) {
   return (
     <Row>
-      {childrens.map((child, index) => (
+      {children.map((child, index) => (
         <Col key={index} span={!index ? 24 : 12}>
           <StatisticCard
             statistic={{

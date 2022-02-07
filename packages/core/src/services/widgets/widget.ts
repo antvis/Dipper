@@ -4,6 +4,7 @@ import { inject } from 'inversify';
 import type { IWidget, IWidgetsService, IWidgetProps } from './IWidgetsService';
 import { WidgetsEventEnum } from './IWidgetsService';
 import { ISceneService } from '../scene/ISceneService';
+import { IConfigService } from '../config/IConfigService';
 import { TYPES } from '../../types';
 
 export default class BaseWidget<IOptions, IValue>
@@ -13,12 +14,15 @@ export default class BaseWidget<IOptions, IValue>
   private options: IWidgetProps = {
     type: 'base',
   };
-  private values: Partial<IValue> = {};
+  private values: Partial<IValue> | any;
   public id: string;
   private contianer!: Container;
 
-  @inject(TYPES.SCENE_SYMBOL)
+  @inject(TYPES.CONFIG_SYMBOL)
   public sceneService!: ISceneService;
+
+  @inject(TYPES.SCENE_SYMBOL)
+  public configService!: IConfigService;
 
   @inject(TYPES.WIDGETS_SYMBOL)
   public widgetsService!: IWidgetsService;
@@ -26,15 +30,29 @@ export default class BaseWidget<IOptions, IValue>
   constructor(props: IWidgetProps<IOptions>) {
     super();
     this.id = props.id || props.type;
-    this.options = Object.assign({}, this.options, props);
+    this.options = Object.assign({}, props);
   }
 
   public setContainer(container: Container) {
     this.contianer = container;
     this.sceneService = this.contianer.get(TYPES.SCENE_SYMBOL) as ISceneService;
+    this.configService = this.contianer.get(
+      TYPES.CONFIG_SYMBOL,
+    ) as IConfigService;
     this.widgetsService = this.contianer.get(
       TYPES.WIDGETS_SYMBOL,
     ) as IWidgetsService;
+    this.options = Object.assign(
+      {},
+      {
+        ...this.options,
+        options: {
+          initData: this.configService.getWidgetsOptions(this.id),
+          ...this.options.options,
+        },
+      },
+    );
+    this.values = this.configService.getWidgetsValue(this.id);
   }
 
   public init() {}
