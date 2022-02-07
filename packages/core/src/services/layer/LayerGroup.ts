@@ -216,4 +216,7 @@ export default abstract class LayerGroup<T = any>
     this.layers.forEach((layer) => layer.destroy());
     this.emit(LayerGroupEventEnum.DESTROY);
   }
+  public getLegendItem() {
+    return [];
+  }
 }
