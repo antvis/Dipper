@@ -11,6 +11,7 @@ import {
   Select,
 } from 'antd';
 import { FormLayout } from 'antd/es/form/Form';
+import styles from './index.less';
 
 const { RangePicker } = DatePicker;
 
@@ -60,7 +61,6 @@ export function FilterUI({
   filterConfig,
   filterSelects,
   layout = 'inline',
-  bottomClass,
   showBottomBtn = false,
 }: FilterUProps) {
   return (
@@ -70,46 +70,80 @@ export function FilterUI({
       style={{ backgroundColor: '#fff' }}
       onFieldsChange={onFinish}
     >
-      {filterConfig.map((filter, index) =>
-        filter.type === RelationFieldType.NUMBER ? (
-          <Form.Item name={filter.name} label={filter.label} key={filter.name}>
-            <InputNumber />
-          </Form.Item>
-        ) : filter.type === RelationFieldType.TEXT ? (
-          <Form.Item name={filter.name} label={filter.label} key={filter.name}>
-            <Input
-              addonBefore={filter.addOnBefore}
-              addonAfter={filter.addonAfter}
-            />
-          </Form.Item>
-        ) : filter.type === RelationFieldType.SELECT ? (
-          <Form.Item name={filter.name} label={filter.label} key={filter.name}>
-            <Select options={filterSelects[index]} />
-          </Form.Item>
-        ) : filter.type === RelationFieldType.MULTI_SELECT ? (
-          <Form.Item name={filter.name} label={filter.label} key={filter.name}>
-            <Select mode="multiple" options={filterSelects[index]} />
-          </Form.Item>
-        ) : filter.type === RelationFieldType.DATE ? (
-          <Form.Item name={filter.name} label={filter.label} key={filter.name}>
-            <DatePicker />
-          </Form.Item>
-        ) : filter.type === RelationFieldType.RANGE_DATE ? (
-          <Form.Item name={filter.name} label={filter.label} key={filter.name}>
-            <RangePicker />
-          </Form.Item>
-        ) : filter.type === RelationFieldType.CHECK_BOX ? (
-          <Form.Item name={filter.name} label={filter.label} key={filter.name}>
-            <Checkbox.Group options={filterSelects[index]} />
-          </Form.Item>
-        ) : filter.type === RelationFieldType.RADIO ? (
-          <Form.Item name={filter.name} label={filter.label} key={filter.name}>
-            <Radio.Group options={filterSelects[index]} />
-          </Form.Item>
-        ) : null,
-      )}
+      <div className={styles['aoi-screen']}>
+        {filterConfig.map((filter, index) =>
+          filter.type === RelationFieldType.NUMBER ? (
+            <Form.Item
+              name={filter.name}
+              label={filter.label}
+              key={filter.name}
+            >
+              <InputNumber />
+            </Form.Item>
+          ) : filter.type === RelationFieldType.TEXT ? (
+            <Form.Item
+              name={filter.name}
+              label={filter.label}
+              key={filter.name}
+            >
+              <Input
+                addonBefore={filter.addOnBefore}
+                addonAfter={filter.addonAfter}
+              />
+            </Form.Item>
+          ) : filter.type === RelationFieldType.SELECT ? (
+            <Form.Item
+              name={filter.name}
+              label={filter.label}
+              key={filter.name}
+            >
+              <Select options={filterSelects[index]} />
+            </Form.Item>
+          ) : filter.type === RelationFieldType.MULTI_SELECT ? (
+            <Form.Item
+              name={filter.name}
+              label={filter.label}
+              key={filter.name}
+            >
+              <Select mode="multiple" options={filterSelects[index]} />
+            </Form.Item>
+          ) : filter.type === RelationFieldType.DATE ? (
+            <Form.Item
+              name={filter.name}
+              label={filter.label}
+              key={filter.name}
+            >
+              <DatePicker />
+            </Form.Item>
+          ) : filter.type === RelationFieldType.RANGE_DATE ? (
+            <Form.Item
+              name={filter.name}
+              label={filter.label}
+              key={filter.name}
+            >
+              <RangePicker />
+            </Form.Item>
+          ) : filter.type === RelationFieldType.CHECK_BOX ? (
+            <Form.Item
+              name={filter.name}
+              label={filter.label}
+              key={filter.name}
+            >
+              <Checkbox.Group options={filterSelects[index]} />
+            </Form.Item>
+          ) : filter.type === RelationFieldType.RADIO ? (
+            <Form.Item
+              name={filter.name}
+              label={filter.label}
+              key={filter.name}
+            >
+              <Radio.Group options={filterSelects[index]} />
+            </Form.Item>
+          ) : null,
+        )}
+      </div>
       {showBottomBtn ? (
-        <div className={bottomClass}>
+        <div className={styles['aoi-buttonflex']}>
           <Form.Item>
             <a onClick={onReset} style={{ marginRight: 10 }}>
               一键清除
