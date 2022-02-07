@@ -32,7 +32,7 @@ export default function GridLayer({
         },
         normal: {
           fillColor: {
-            field: 'name',
+            field: 'id',
             value: [
               'rgb(247, 251, 255)',
               'rgb(222, 235, 247)',
@@ -63,7 +63,7 @@ export default function GridLayer({
     setLayerGroup(gridLayerGroup);
 
     fetch(
-      'https://gw.alipayobjects.com/os/bmw-prod/0e5277e2-0223-45f6-bfa3-b066131ae2f4.json',
+      'https://gw.alipayobjects.com/os/bmw-prod/955b43e4-21ef-42f4-a2b6-c08c843f5d18.json',
     )
       .then((res) => res.json())
       .then((geoJson: FeatureCollection) => {

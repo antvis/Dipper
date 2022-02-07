@@ -3,11 +3,11 @@ import {
   ILayerGroupOptions,
   getLayerFieldArgus,
   ILayerFieldProperties,
-  ILayerGroupProps,
   LayerGroupEventEnum,
   ILayerGroupText,
   defaultGridTextOptions,
   IFeature,
+  ILayerScale,
 } from '@antv/dipper-core';
 import { PolygonLayer } from '@antv/l7';
 import { cloneDeep, merge } from 'lodash';
@@ -19,7 +19,10 @@ export interface IGridLayerGroupStyle {
 }
 
 export interface IGridLayerGroupOptions extends ILayerGroupOptions {
-  normal: IGridLayerGroupStyle & { fillColor: ILayerFieldProperties<string> };
+  normal: IGridLayerGroupStyle & {
+    fillColor: ILayerFieldProperties<string>;
+    scale?: ILayerScale;
+  };
   autoFit?: boolean;
   text: boolean | ILayerGroupText;
   select?: boolean | IGridLayerGroupStyle;
@@ -75,7 +78,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
 
   initFillLayer() {
     const {
-      normal: { fillColor },
+      normal: { fillColor, scale },
       autoFit = false,
     } = this.options;
 
@@ -89,6 +92,11 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       // @ts-ignore
       .color(...getLayerFieldArgus(fillColor))
       .shape('fill');
+
+    if (scale) {
+      // @ts-ignore
+      fillLayer.scale(...(Array.isArray(scale) ? scale : [scale]));
+    }
 
     this.addLayer(fillLayer);
 
