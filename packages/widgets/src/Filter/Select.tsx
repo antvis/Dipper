@@ -5,12 +5,11 @@ import { useWidgets } from '@antv/dipper-layout';
 
 export function DipperSelect({ id, type = 'select', options }: IWidgetProps) {
   const { widget } = useWidgets(id || type);
-  console.log(id);
   useEffect(() => {
     widget?.setValues(
       options?.defaultValue || options?.options?.[0]?.value || '',
     );
-  }, []);
+  }, [widget]);
 
   return (
     <Select
