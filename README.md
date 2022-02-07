@@ -29,3 +29,20 @@ packages 目录下新建目录名,在新建目录下执行创建项目
 - [] 数据面板
 - [] 测量
 - [] 书签
+
+# 发布
+
+- 切换到发布分支
+  master
+- 生成版本号
+  执行版本生成命令，选择版本号
+
+```bash
+yarn run version:prerelease
+```
+
+- 发布版本
+
+```bash
+yarn  run release
+```
