@@ -23,6 +23,7 @@ export interface IWidgetProps<P = any> {
     actionType: string;
     action: string;
   };
+  widget?: IWidget;
 }
 
 export interface IControlWidgetsProps<IControlOption = any>
