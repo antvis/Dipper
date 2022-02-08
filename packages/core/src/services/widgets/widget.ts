@@ -47,7 +47,7 @@ export default class BaseWidget<IOptions, IValue>
       {
         ...this.options,
         options: {
-          initData: this.configService.getWidgetsOptions(this.id),
+          data: this.configService.getWidgetsOptions(this.id),
           ...this.options.options,
         },
       },
