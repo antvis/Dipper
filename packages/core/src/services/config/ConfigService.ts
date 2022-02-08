@@ -90,4 +90,8 @@ export default class ConfigService
   reset() {
     this.isInited = false;
   }
+  // 全局参数
+  getGlobal() {
+    return this.config.global;
+  }
 }
