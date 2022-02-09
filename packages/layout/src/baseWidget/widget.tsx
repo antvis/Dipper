@@ -18,5 +18,5 @@ export const CustomBaseWidgets = (props: IWidgetProps) => {
 
   // TODO 状态更新
 
-  return <>{getWidget(props.type)(widget.current.getOptions())}</>;
+  return <>{getWidget(props.type)({ ...widget.current.getOptions(), widget: widget.current })}</>;
 };

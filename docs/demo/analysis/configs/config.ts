@@ -1,17 +1,15 @@
 import { IConfig, SingleSequentialColorScale } from '@antv/dipper';
 import { CityList } from './mock';
 export const config: Partial<IConfig> = {
-  viewData: {
-    global: {
-      filterData: [],
-      areaCode: '330100',
-      view: 'task',
-    },
-    widgets: {
-      citySelect: {
-        options: CityList,
-        value: ['330000', '330100'],
-      },
+  global: {
+    filterData: [],
+    areaCode: '330100',
+    view: 'task',
+  },
+  widgets: {
+    citySelect: {
+      options: CityList,
+      value: ['330000', '330100'],
     },
   },
   headerbar: {

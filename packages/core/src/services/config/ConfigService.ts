@@ -25,7 +25,7 @@ export default class ConfigService
   private isInited: boolean = false;
   init(config: Partial<IConfig> | undefined) {
     if (!this.isInited) {
-      this.config = mergeWith({}, defaultConfig, config, customizer);
+      this.config = mergeWith({}, defaultConfig, config);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
     }
     this.isInited = true;
@@ -71,21 +71,21 @@ export default class ConfigService
 
   // 设置组件结果值
   setWidgetsOptions(key: string, options: Record<string, any>) {
-    this.setConfig(`viewData.widgets.${key}.options`, options);
+    this.setConfig(`widgets.${key}.options`, options);
   }
 
   // 设置组件结果值
   setWidgetsValue(key: string, value: Record<string, any>) {
-    this.setConfig(`viewData.widgets.${key}.value`, value);
+    this.setConfig(`widgets.${key}.value`, value);
   }
   // 获取组件结果值
   getWidgetsValue(key: string) {
-    return this.getConfig(`viewData.widgets.${key}.value`);
+    return this.getConfig(`widgets.${key}.value`);
   }
 
   // 获取组件结果值
   getWidgetsOptions(key: string) {
-    return this.getConfig(`viewData.widgets.${key}.options`);
+    return this.getConfig(`widgets.${key}.options`);
   }
   reset() {
     this.isInited = false;
