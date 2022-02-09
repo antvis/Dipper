@@ -64,6 +64,14 @@ export function FilterUI({
   const onReset = useCallback(() => {
     form.resetFields();
   }, [form]);
+  const onFieldsChange = useCallback(() => {
+    if (showBottomBtn) {
+      return;
+    }
+
+    const formValue = form.getFieldsValue(true);
+    widget?.setValues({ [id]: { ...formValue } });
+  }, [widget, form]);
   const onFinish = useCallback(() => {
     const formValue = form.getFieldsValue(true);
     widget?.setValues({ [id]: { ...formValue } });
@@ -79,7 +87,8 @@ export function FilterUI({
       layout={layout}
       form={form}
       style={{ backgroundColor: '#fff' }}
-      onFieldsChange={onFinish}
+      onFieldsChange={onFieldsChange}
+      onFinish={onFinish}
     >
       <div className={styles['aoi-screen']}>
         {filterConfig.map((filter, index) =>
