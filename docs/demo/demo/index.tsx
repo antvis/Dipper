@@ -9,12 +9,6 @@ import {
 } from '@antv/dipper';
 import { Select, Button } from 'antd';
 import {
-  PieChart,
-  AreaChart,
-  LinesChart,
-  ColumnsChart,
-} from '@alipay/dipper-dubhe';
-import {
   multidimensionalChart,
   singleLineChart,
 } from '../analysis/configs/mock';
@@ -73,7 +67,7 @@ export default function RumbMap() {
                 display: true,
               },
             },
-            childrens: [
+            components: [
               {
                 display: true,
                 position: 'left',
