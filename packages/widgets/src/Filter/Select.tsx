@@ -1,20 +1,12 @@
 import { Select } from 'antd';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IWidgetProps } from '@antv/dipper-core';
-import { useWidgets } from '@antv/dipper-layout';
 
-export function DipperSelect({ id, type = 'select', options }: IWidgetProps) {
-  const { widget } = useWidgets(id || type);
-  useEffect(() => {
-    widget?.setValues(
-      options?.defaultValue || options?.options?.[0]?.value || '',
-    );
-  }, [widget]);
-
+export function DipperSelect({ widget }: IWidgetProps) {
   return (
     <Select
-      defaultValue={options?.defaultValue || options?.options?.[0]?.value || ''}
-      options={options?.options || []}
+      defaultValue={widget?.getValue()}
+      options={widget?.getOptions().options?.optionsData || []}
       bordered={false}
       style={{ width: 180 }}
       allowClear={false}

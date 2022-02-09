@@ -1,14 +1,13 @@
 import { Cascader } from 'antd';
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
-import { IWidgetProps } from '@antv/dipper-core';
+import { IWidget, IWidgetProps } from '@antv/dipper-core';
 
 export function CitySelect({
-  id,
-  type = 'CitySelect',
-  options,
   widget,
-}: IWidgetProps) {
+}: IWidgetProps & {
+  widget: IWidget;
+}) {
   return (
     <Cascader
       defaultValue={widget?.getValue() as Array<any>}
