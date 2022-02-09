@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-layout",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
