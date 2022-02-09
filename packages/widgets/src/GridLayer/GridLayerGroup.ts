@@ -240,7 +240,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
         .map((item: string | number) => {
           return {
             // @ts-ignore
-            value: item || this.options.fill.unkownName || '无',
+            value: item || '无',
             color: scale(item),
           };
         });

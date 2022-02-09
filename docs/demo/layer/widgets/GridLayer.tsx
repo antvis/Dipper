@@ -32,7 +32,7 @@ export default function GridLayer({
         },
         normal: {
           fillColor: {
-            field: 'id',
+            field: 'centerLng',
             value: [
               'rgb(247, 251, 255)',
               'rgb(222, 235, 247)',
@@ -44,6 +44,11 @@ export default function GridLayer({
               'rgb(8, 81, 156)',
               'rgb(8, 48, 107)',
             ],
+          },
+          scale: {
+            centerLng: {
+              type: 'quantile',
+            },
           },
           borderWidth: 1,
           borderColor: '#ffffff',
@@ -63,7 +68,7 @@ export default function GridLayer({
     setLayerGroup(gridLayerGroup);
 
     fetch(
-      'https://gw.alipayobjects.com/os/bmw-prod/955b43e4-21ef-42f4-a2b6-c08c843f5d18.json',
+      'https://gw.alipayobjects.com/os/bmw-prod/f270ef08-b2ac-49e5-8811-6837723cd4c3.json',
     )
       .then((res) => res.json())
       .then((geoJson: FeatureCollection) => {
