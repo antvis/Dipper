@@ -9,6 +9,7 @@ import {
   TYPES,
 } from '@antv/dipper-core';
 import { featureCollection } from '@turf/turf';
+import { isEqual } from 'lodash';
 
 export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
   const layerService = useInjection<ILayerService>(TYPES.LAYER_SYMBOL);
@@ -45,21 +46,16 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
 
   useEffect(() => {
     if (layerGroup) {
-      setSelectFeatures(layerGroup.selectFeatures ?? []);
+      if (!isEqual(layerGroup.selectFeatures, selectFeatures)) {
+        setSelectFeatures(layerGroup.selectFeatures ?? []);
+      }
       setLayerData(layerGroup.data);
-
       layerGroup?.on(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
-      layerGroup?.on(
-        LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
-        setSelectFeatures,
-      );
+      layerGroup?.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
     }
     return () => {
       layerGroup?.off(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
-      layerGroup?.off(
-        LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
-        setSelectFeatures,
-      );
+      layerGroup?.off(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
     };
   }, [layerGroup]);
 
@@ -74,115 +70,3 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
     updateProperties: (...args: any[]) => {},
   };
 };
-
-// export function useLayerGroup(name: string) {
-//   const layerService = useInjection<ILayerService>(TYPES.LAYER_SYMBOL);
-//   const [currentGroup, setLayerGroup] = useState<ILayerGroup>();
-//   const [currentSelectFeatures, setSelectFeatures] = useState<Feature[]>([]);
-//   const [currentHoverFeature, setHoverFeature] = useState<Feature | null>(null);
-//   useEffect(() => {
-//     const layerAdd = (e: ILayerEventTarget) => {
-//       if (e.type === 'add' && e.target?.name === name) {
-//         if (!currentGroup) {
-//           setLayerGroup(e.target);
-//         }
-//       }
-//     };
-//     if (layerService.getLayer(name)) {
-//       setLayerGroup(layerService.getLayer(name));
-//     } else {
-//       layerService.on(LayerEventEnum.LAYERCHANGE, layerAdd);
-//     }
-//     return () => {
-//       layerService.off(LayerEventEnum.LAYERCHANGE, layerAdd);
-//     };
-//   }, []);
-//
-//   useEffect(() => {
-//     if (currentGroup) {
-//       setSelectFeatures(currentGroup.getSelectFeatures?.() || []);
-//     }
-//   }, [currentGroup]);
-//
-//   useEffect(() => {
-//     const onSelectFeature = (features: any[]) => {
-//       setSelectFeatures(features);
-//     };
-//     const onHoverFeature = (feature: any) => {
-//       setHoverFeature(feature);
-//     };
-//     if (currentGroup) {
-//       currentGroup.on(
-//         LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
-//         onSelectFeature,
-//       );
-//       currentGroup.on(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, onHoverFeature);
-//     }
-//     return () => {
-//       if (currentGroup) {
-//         currentGroup.off(
-//           LayerGroupEventEnum.SELECT_FEATURE_CHANGE,
-//           onSelectFeature,
-//         );
-//         currentGroup.off(
-//           LayerGroupEventEnum.HOVER_FEATURE_CHANGE,
-//           onHoverFeature,
-//         );
-//       }
-//     };
-//   }, [currentGroup]);
-//
-//   const updateProperties = useCallback(
-//     (feature: Feature, properties: Record<string, any>) => {
-//       // 检索选中网格信息
-//       setSelectFeatures((list: any[] = []) => {
-//         const newList = [...list];
-//         const targetIndex = newList?.findIndex(
-//           (item) => feature.properties?.id === item.feature.properties.id,
-//         );
-//         if (Array.isArray(newList) && targetIndex > -1) {
-//           newList[targetIndex].feature.properties = Object.assign(
-//             newList[targetIndex].feature.properties,
-//             properties,
-//           );
-//         }
-//         return newList;
-//       });
-//
-//       // 检索hover网格信息
-//       setHoverFeature((item: any) => {
-//         if (item) {
-//           const newItem = { ...item };
-//           newItem.feature.properties = Object.assign(
-//             newItem.feature.properties,
-//             properties,
-//           );
-//           return newItem;
-//         }
-//         return item;
-//       });
-//
-//       // 修改source网格信息
-//       // @ts-ignore TODO  数据更新方式修改
-//       const geoJson = currentGroup?.source?.originData as FeatureCollection;
-//       const targetIndex = geoJson.features.findIndex(
-//         (item: Feature) => feature.properties?.id === item.properties?.id,
-//       );
-//       if (targetIndex > -1) {
-//         geoJson.features[targetIndex].properties = Object.assign(
-//           geoJson.features[targetIndex].properties,
-//           properties,
-//         );
-//         currentGroup?.updateSource(geoJson);
-//       }
-//     },
-//     [currentGroup],
-//   );
-//
-//   return {
-//     currentGroup,
-//     updateProperties,
-//     selectFeatures: currentSelectFeatures,
-//     hoverFeature: currentHoverFeature,
-//   };
-// }

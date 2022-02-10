@@ -181,8 +181,10 @@ export default abstract class LayerGroup<T = any>
   }
 
   public setSelectFeatures(features: IFeature[]) {
-    this.selectFeatures = features;
-    this.emit(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, features);
+    if (this.selectFeatures.length !== features.length || features.length) {
+      this.selectFeatures = features;
+      this.emit(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, features);
+    }
   }
 
   public removeLayer(layer: ILayer) {
