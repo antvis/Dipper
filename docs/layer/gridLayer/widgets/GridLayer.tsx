@@ -23,6 +23,10 @@ export default function GridLayer({
 
   const { selectFeatures } = useLayerGroup('grid');
 
+  useEffect(() => {
+    console.log(selectFeatures);
+  }, [selectFeatures]);
+
   useMount(() => {
     const gridLayerGroup = new GridLayerGroup({
       name: 'grid',
@@ -53,6 +57,7 @@ export default function GridLayer({
           borderWidth: 1,
           borderColor: '#ffffff',
         },
+        multipleSelect: true,
       },
     });
 

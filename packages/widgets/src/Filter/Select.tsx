@@ -3,10 +3,13 @@ import React from 'react';
 import { IWidgetProps } from '@antv/dipper-core';
 
 export function DipperSelect({ widget }: IWidgetProps) {
+  const options = widget?.getOptions().options || {};
   return (
     <Select
       defaultValue={widget?.getValue()}
-      options={widget?.getOptions().options?.optionsData || []}
+      options={options.optionsData || []}
+      showSearch={options.showSearch}
+      placeholder={options.placeholder}
       bordered={false}
       style={{ width: 180 }}
       allowClear={false}
