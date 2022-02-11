@@ -57,6 +57,7 @@ export default function GridLayer({
           borderWidth: 1,
           borderColor: '#ffffff',
         },
+        multipleSelect: true,
       },
     });
 

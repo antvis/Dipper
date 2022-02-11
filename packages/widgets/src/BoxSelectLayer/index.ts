@@ -1,10 +1,15 @@
-import { LayerGroup, TYPES, ILayerService } from '@antv/dipper-core';
+import {
+  LayerGroup,
+  TYPES,
+  ILayerService,
+  ILayerGroupOptions,
+} from '@antv/dipper-core';
 import { cloneDeep, debounce } from 'lodash';
 import { PolygonLayer } from '@antv/l7';
 import { isPressing } from '@antv/dipper-core';
 import { bbox, bboxPolygon, featureCollection, lineString } from '@turf/turf';
 
-export interface IBoxSelectLayerGroupOptions {
+export interface IBoxSelectLayerGroupOptions extends ILayerGroupOptions {
   zIndex: number;
   color: string;
   size: number;
