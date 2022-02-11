@@ -42,7 +42,7 @@ import {
   MockLayers,
 } from './util';
 import * as mock from './util/mock';
-import { initWidgets } from '../layer/widgets';
+import { initWidgets } from '../../layer/gridLayer/widgets';
 
 const { RangePicker } = DatePicker;
 
