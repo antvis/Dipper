@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLayerService, MarkerLayerGroup } from '@antv/dipper';
+import { IMarkerItemProps } from '@antv/dipper-widgets/src';
 
 interface IDataItem {
   src: string;
@@ -26,9 +27,20 @@ const data: IDataItem[] = [
   },
 ];
 
-const MarkerItem: React.FC<IDataItem> = (props) => {
-  console.log(props);
-  return <></>;
+const MarkerItem: React.FC<IMarkerItemProps<IDataItem>> = ({
+  data,
+  index,
+  select,
+}) => {
+  return (
+    <img
+      src={data.src}
+      style={{ width: select ? 50 : 30, height: select ? 55 : 35 }}
+      onClick={() => {
+        console.log('click');
+      }}
+    />
+  );
 };
 
 const MarkerLayer: React.FC = () => {
@@ -36,13 +48,16 @@ const MarkerLayer: React.FC = () => {
 
   useEffect(() => {
     const markerLayerGroup = new MarkerLayerGroup<IDataItem>({
-      item: (data) => MarkerItem,
+      name: 'gridLayer',
+      options: {
+        component: MarkerItem,
+      },
     });
     layerService.addLayer(markerLayerGroup);
     markerLayerGroup.setData(data);
   }, []);
 
-  return <div></div>;
+  return <></>;
 };
 
 export default MarkerLayer;

@@ -1,6 +1,9 @@
 import React from 'react';
-import { LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
+import { IFeature, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
 import { MarkerLayer, Marker, ILayer } from '@antv/l7';
+import ReactDOM from 'react-dom';
+import { point } from '@turf/turf';
+import { isEqual } from 'lodash';
 
 export interface IMarkerItemProps<T = any> {
   data: T;
@@ -9,20 +12,28 @@ export interface IMarkerItemProps<T = any> {
 }
 
 export interface IMarkerLayerGroupProps<T> {
-  item: React.FC<IMarkerItemProps<T>> | React.Component<IMarkerItemProps<T>>;
+  component: React.FC<IMarkerItemProps<T>>;
+  lngField: string;
+  latField: string;
 }
 
 const EmptyMarkerItem: React.FC = () => <></>;
+
 export class MarkerLayerGroup<T = any> extends LayerGroup<
+  // @ts-ignore
   IMarkerLayerGroupProps<T>
 > {
+  data: T[] = [];
+
   get markerLayer() {
     return this.getLayers()[0] as unknown as MarkerLayer;
   }
 
   getDefaultOptions() {
     return {
-      item: EmptyMarkerItem,
+      component: EmptyMarkerItem,
+      lngField: 'lng',
+      latField: 'lat',
     };
   }
 
@@ -31,7 +42,7 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
     this.addLayer(markerLayer as unknown as ILayer);
   }
 
-  setData(data: any) {
+  setData(data: T[]) {
     this.data = data;
 
     this.updateMarkers();
@@ -42,7 +53,74 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
     this.emit(LayerGroupEventEnum.DATA_UPDATE, data);
   }
 
-  updateMarkers() {
+  async updateMarkers() {
+    this.scene?.removeMarkerLayer(this.markerLayer);
     this.markerLayer.clear();
+    const Component = this.options.component;
+    const selectFeature = this.selectFeatures[0];
+    for (let index = 0; index < this.data.length; index++) {
+      const item = this.data[index];
+      // @ts-ignore
+      const lng = +item[this.options.lngField] as any;
+      // @ts-ignore
+      const lat = +item[this.options.latField] as any;
+      const el = document.createElement('div');
+      this.initMarkerEvent(el, index);
+      await this.renderAsync(
+        <Component
+          data={item}
+          index={index}
+          select={isEqual(selectFeature?.feature.properties, item)}
+        />,
+        el,
+      );
+      const marker = new Marker({
+        element: el,
+      }).setLnglat({
+        lng,
+        lat,
+      });
+
+      this.markerLayer.addMarker(marker);
+    }
+    this.scene?.addMarkerLayer(this.markerLayer);
+  }
+
+  initMarkerEvent(el: HTMLElement, index: number) {
+    el.addEventListener('click', (e) => {
+      if (
+        isEqual(this.data[index], this.selectFeatures[0]?.feature.properties)
+      ) {
+        this.setSelectFeatures([]);
+      } else {
+        this.setSelectFeatures([this.newIFeature(e, index)]);
+      }
+      this.updateMarkers();
+    });
+  }
+
+  newIFeature(e: MouseEvent, index: number) {
+    const item = this.data[index];
+    // @ts-ignore
+    const lng = +item[this.options.lngField] as any;
+    // @ts-ignore
+    const lat = +item[this.options.latField] as any;
+    const pointFeature = point([lng, lat], item);
+    const feature: IFeature = {
+      feature: pointFeature,
+      featureId: index,
+      target: e,
+      lngLat: {
+        lng,
+        lat,
+      },
+    };
+    return feature;
+  }
+
+  renderAsync(element: any, container: HTMLElement) {
+    return new Promise<void>((resolve) => {
+      ReactDOM.render(element, container, resolve);
+    });
   }
 }
