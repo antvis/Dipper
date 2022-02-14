@@ -2,7 +2,7 @@ import type { ILayer } from '@antv/l7';
 import EventEmitter from 'eventemitter3';
 import { Container, injectable } from 'inversify';
 import type { ILayerGroup, IFeature } from './ILayerService';
-import { Source } from '@antv/l7';
+import { Source, MarkerLayer } from '@antv/l7';
 import { BBox, FeatureCollection, featureCollection } from '@turf/turf';
 import { merge } from 'lodash';
 import { isPressing } from '../../utils/keyboard';
@@ -111,7 +111,11 @@ export default abstract class LayerGroup<
   public addLayer(layer: ILayer) {
     this.layers.push(layer);
     // 在layerService.addLayer()前的layer不会通过此处注册进scene中，而是在LayerService中的addLayer中完成注册
-    this.scene?.addLayer(layer);
+    if (layer instanceof MarkerLayer) {
+      this.scene?.addMarkerLayer(layer);
+    } else {
+      this.scene?.addLayer(layer);
+    }
   }
 
   public getLayer(name: string) {
