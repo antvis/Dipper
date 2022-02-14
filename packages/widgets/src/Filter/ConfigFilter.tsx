@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   Button,
   Checkbox,
   DatePicker,
   Form,
-  FormInstance,
   Input,
   InputNumber,
   Radio,
@@ -12,6 +11,7 @@ import {
 } from 'antd';
 import { FormLayout } from 'antd/es/form/Form';
 import styles from './index.less';
+import { IWidget } from '@antv/dipper-core';
 
 const { RangePicker } = DatePicker;
 
@@ -43,32 +43,52 @@ interface FilterSelect {
   value: string;
 }
 
-interface FilterUProps<T = any> {
-  form: FormInstance<T>;
-  onFinish: (val: any) => void;
+interface FilterUProps {
   filterConfig: FilterItemConfig[];
   filterSelects: FilterSelect[][];
+  id: string;
+  widget: IWidget;
   layout?: FormLayout;
-  bottomClass?: string;
-  onReset?: (val: any) => void;
   showBottomBtn?: boolean;
 }
 
 export function FilterUI({
-  form,
-  onFinish,
-  onReset,
   filterConfig,
   filterSelects,
   layout = 'inline',
   showBottomBtn = false,
+  id,
+  widget,
 }: FilterUProps) {
+  const [form] = Form.useForm();
+  const onReset = useCallback(() => {
+    form.resetFields();
+  }, [form]);
+  const onFieldsChange = useCallback(() => {
+    if (showBottomBtn) {
+      return;
+    }
+
+    const formValue = form.getFieldsValue(true);
+    widget?.setValues({ [id]: { ...formValue } });
+  }, [widget, form]);
+  const onFinish = useCallback(() => {
+    const formValue = form.getFieldsValue(true);
+    widget?.setValues({ [id]: { ...formValue } });
+  }, [widget, form]);
+
+  useEffect(() => {
+    widget?.setValues({
+      [id]: {},
+    });
+  }, [id, widget]);
   return (
     <Form
       layout={layout}
       form={form}
       style={{ backgroundColor: '#fff' }}
-      onFieldsChange={onFinish}
+      onFieldsChange={onFieldsChange}
+      onFinish={onFinish}
     >
       <div className={styles['aoi-screen']}>
         {filterConfig.map((filter, index) =>

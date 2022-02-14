@@ -39,6 +39,7 @@ export const getLayerFieldArgus = <T>(properties: ILayerFieldProperties<T>) => {
 export interface ILayerGroupOptions {
   hover?: false | any;
   active?: false | any;
+  multipleSelect?: boolean;
 }
 
 export interface ILayerGroupText {
@@ -66,7 +67,9 @@ export interface ILayerGroupProps<T = any> {
 }
 
 @injectable()
-export default abstract class LayerGroup<T = any>
+export default abstract class LayerGroup<
+    T extends ILayerGroupOptions = ILayerGroupOptions,
+  >
   extends EventEmitter<LayerGroupEventEnum>
   implements ILayerGroup
 {
@@ -142,12 +145,12 @@ export default abstract class LayerGroup<T = any>
   }
 
   public onClick = (e: IFeature) => {
-    const isPressShift = isPressing(16);
+    const isMultipleSelect = isPressing(16) && !!this.options.multipleSelect;
     const hasSelectFeature = this.selectFeatures.find(
       (item) => item.featureId === e.featureId,
     );
     if (hasSelectFeature) {
-      if (isPressShift) {
+      if (isMultipleSelect) {
         this.setSelectFeatures(
           [...this.selectFeatures].filter(
             (item) => item.featureId !== e.featureId,
@@ -158,7 +161,7 @@ export default abstract class LayerGroup<T = any>
       } else {
         this.setSelectFeatures([]);
       }
-    } else if (isPressShift) {
+    } else if (isMultipleSelect) {
       this.setSelectFeatures([...this.selectFeatures, e]);
     } else {
       this.setSelectFeatures([e]);
@@ -181,8 +184,10 @@ export default abstract class LayerGroup<T = any>
   }
 
   public setSelectFeatures(features: IFeature[]) {
-    this.selectFeatures = features;
-    this.emit(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, features);
+    if (this.selectFeatures.length !== features.length || features.length) {
+      this.selectFeatures = features;
+      this.emit(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, features);
+    }
   }
 
   public removeLayer(layer: ILayer) {

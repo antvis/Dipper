@@ -48,6 +48,7 @@ export const defaultGridLayerOptions: IGridLayerGroupOptions = {
   text: false,
   select: true,
   hover: true,
+  multipleSelect: false,
 };
 
 export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
@@ -194,6 +195,9 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
   }
 
   public boxSelect(bbox: BBox) {
+    if (!this.options.multipleSelect) {
+      return;
+    }
     const fillLayer = this.layers.find((layer) => layer.name === 'fill');
     if (fillLayer) {
       // @ts-ignore
