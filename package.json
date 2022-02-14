@@ -52,6 +52,7 @@
     "@antv/l7-maps": "^2.7.7",
     "@antv/l7-react": "^2.3.9",
     "@turf/turf": "^6.5.0",
+    "antd-mobile-icons": "^0.2.2",
     "classnames": "^2.3.1",
     "inversify-react": "^1.0.1"
   },
