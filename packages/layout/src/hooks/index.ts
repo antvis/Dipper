@@ -6,3 +6,4 @@ export * from './useDipperContainer';
 export * from './usePanelService';
 export * from './useWidgets';
 export * from './useWidgetsService';
+export * from './useFilterValue';
