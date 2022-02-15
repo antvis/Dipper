@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLayerService, MarkerLayerGroup } from '@antv/dipper';
 import { IMarkerItemProps } from '@antv/dipper-widgets/src';
+import { useLayerGroup } from '@antv/dipper-layout';
 
 interface IDataItem {
   src: string;
@@ -30,12 +31,18 @@ const data: IDataItem[] = [
 const MarkerItem: React.FC<IMarkerItemProps<IDataItem>> = ({
   data,
   index,
-  select,
+  // select,
 }) => {
+  const { selectFeatures } = useLayerGroup('markerLayer');
+  const isSelect = useMemo(
+    () => selectFeatures[0]?.featureId === index,
+    [selectFeatures, index],
+  );
+  console.log(isSelect);
   return (
     <img
       src={data.src}
-      style={{ width: select ? 50 : 30, height: select ? 55 : 35 }}
+      style={{ width: 30, height: 35 }}
       onClick={() => {
         console.log('click');
       }}
@@ -44,20 +51,24 @@ const MarkerItem: React.FC<IMarkerItemProps<IDataItem>> = ({
 };
 
 const MarkerLayer: React.FC = () => {
+  const [layerGroup, setLayerGroup] = useState<MarkerLayerGroup | null>(null);
   const { layerService } = useLayerService();
+  const [container, setContainer] = useState<any>(null);
 
   useEffect(() => {
     const markerLayerGroup = new MarkerLayerGroup<IDataItem>({
-      name: 'gridLayer',
+      name: 'markerLayer',
       options: {
         component: MarkerItem,
       },
     });
     layerService.addLayer(markerLayerGroup);
-    markerLayerGroup.setData(data);
+    const markerContainer = markerLayerGroup.setData(data);
+    setLayerGroup(markerLayerGroup);
+    setContainer(markerContainer);
   }, []);
 
-  return <></>;
+  return container;
 };
 
 export default MarkerLayer;

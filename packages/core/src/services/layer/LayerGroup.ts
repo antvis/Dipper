@@ -2,7 +2,7 @@ import type { ILayer } from '@antv/l7';
 import EventEmitter from 'eventemitter3';
 import { Container, injectable } from 'inversify';
 import type { ILayerGroup, IFeature } from './ILayerService';
-import { Source, MarkerLayer } from '@antv/l7';
+import { Source, MarkerLayer, Scene } from '@antv/l7';
 import { BBox, FeatureCollection, featureCollection } from '@turf/turf';
 import { merge } from 'lodash';
 import { isPressing } from '../../utils/keyboard';
@@ -85,7 +85,7 @@ export default abstract class LayerGroup<
   public selectFeatures: IFeature[] = [];
   public hoverFeature?: IFeature | null = null;
 
-  public get scene() {
+  public get scene(): Scene | undefined {
     return (
       this.container?.get(TYPES.SCENE_SYMBOL) as ISceneService | undefined
     )?.getScene();

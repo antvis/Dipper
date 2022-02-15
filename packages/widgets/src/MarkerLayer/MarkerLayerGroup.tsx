@@ -1,14 +1,13 @@
 import React from 'react';
 import { IFeature, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
-import { MarkerLayer, Marker, ILayer } from '@antv/l7';
+import { Marker, ILngLat } from '@antv/l7';
 import ReactDOM from 'react-dom';
 import { point } from '@turf/turf';
-import { isEqual } from 'lodash';
+import { FunctionComponentElement, ReactPortal } from 'react';
 
 export interface IMarkerItemProps<T = any> {
   data: T;
   index: number;
-  select: boolean;
 }
 
 export interface IMarkerLayerGroupProps<T> {
@@ -25,9 +24,15 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
 > {
   data: T[] = [];
 
-  get markerLayer() {
-    return this.getLayers()[0] as unknown as MarkerLayer;
+  markerList: Marker[] = [];
+
+  get selectFeature(): IFeature | null {
+    return this.selectFeatures[0] ?? null;
   }
+
+  // get markerLayer() {
+  //   return this.getLayers()[0] as unknown as MarkerLayer;
+  // }
 
   getDefaultOptions() {
     return {
@@ -37,74 +42,46 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
     };
   }
 
-  initLayerList() {
-    const markerLayer = new MarkerLayer();
-    this.addLayer(markerLayer as unknown as ILayer);
-  }
+  initLayerList() {}
 
-  setData(data: T[]) {
+  setData(data: T[]): FunctionComponentElement<{}> {
     this.data = data;
-
-    this.updateMarkers();
-
     this.setSelectFeatures([]);
     this.setHoverFeature(null);
     // 重置选中数据
     this.emit(LayerGroupEventEnum.DATA_UPDATE, data);
+    return this.updateMarkers();
   }
 
-  async updateMarkers() {
-    this.scene?.removeMarkerLayer(this.markerLayer);
-    this.markerLayer.clear();
+  updateMarkers() {
+    this.autoFillMarkerList();
+    const portalList: ReactPortal[] = [];
     const Component = this.options.component;
-    const selectFeature = this.selectFeatures[0];
     for (let index = 0; index < this.data.length; index++) {
       const item = this.data[index];
-      // @ts-ignore
-      const lng = +item[this.options.lngField] as any;
-      // @ts-ignore
-      const lat = +item[this.options.latField] as any;
       const el = document.createElement('div');
-      this.initMarkerEvent(el, index);
-      await this.renderAsync(
-        <Component
-          data={item}
-          index={index}
-          select={isEqual(selectFeature?.feature.properties, item)}
-        />,
-        el,
+      this.initMarkerEvent(el, item, index);
+      portalList.push(
+        ReactDOM.createPortal(<Component data={item} index={index} />, el),
       );
-      const marker = new Marker({
-        element: el,
-      }).setLnglat({
-        lng,
-        lat,
-      });
-
-      this.markerLayer.addMarker(marker);
+      const marker = this.markerList[index] as Marker;
+      marker.setElement(el).setLnglat(this.getMarkerLngLat(item));
     }
-    this.scene?.addMarkerLayer(this.markerLayer);
+    return React.createElement(React.Fragment, {}, portalList);
   }
 
-  initMarkerEvent(el: HTMLElement, index: number) {
+  initMarkerEvent(el: HTMLElement, item: T, index: number) {
     el.addEventListener('click', (e) => {
-      if (
-        isEqual(this.data[index], this.selectFeatures[0]?.feature.properties)
-      ) {
+      if (this.selectFeature?.featureId === index) {
         this.setSelectFeatures([]);
       } else {
-        this.setSelectFeatures([this.newIFeature(e, index)]);
+        this.setSelectFeatures([this.newIFeature(e, item, index)]);
       }
-      this.updateMarkers();
     });
   }
 
-  newIFeature(e: MouseEvent, index: number) {
-    const item = this.data[index];
-    // @ts-ignore
-    const lng = +item[this.options.lngField] as any;
-    // @ts-ignore
-    const lat = +item[this.options.latField] as any;
+  newIFeature(e: MouseEvent, item: T, index: number) {
+    const { lng, lat } = this.getMarkerLngLat(item);
     const pointFeature = point([lng, lat], item);
     const feature: IFeature = {
       feature: pointFeature,
@@ -118,9 +95,36 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
     return feature;
   }
 
-  renderAsync(element: any, container: HTMLElement) {
-    return new Promise<void>((resolve) => {
-      ReactDOM.render(element, container, resolve);
-    });
+  getMarkerLngLat(item: T) {
+    // @ts-ignore
+    const lng = +item[this.options.lngField] as any;
+    // @ts-ignore
+    const lat = +item[this.options.latField] as any;
+
+    if (Math.abs(lng) <= 180 && Math.abs(lat) <= 90) {
+      return {
+        lng,
+        lat,
+      } as ILngLat;
+    } else {
+      throw new Error('数据的经纬度信息有误');
+    }
+  }
+
+  /**
+   * 自动填充markerList直至data的长度
+   */
+  autoFillMarkerList() {
+    const length = this.data.length - this.markerList.length;
+    if (length > 0) {
+      for (let i = 0; i < length; i++) {
+        const marker = new Marker().setLnglat({
+          lng: 0,
+          lat: 0,
+        });
+        this.markerList.push(marker);
+        this.scene?.addMarker(marker);
+      }
+    }
   }
 }
