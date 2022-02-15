@@ -1,10 +1,10 @@
 .placeContent {
   width: 300px;
   height: 250px;
-  border-radius: 5px;
-  background: #fff;
   padding: 8px;
   overflow-y: scroll;
+  background: #fff;
+  border-radius: 5px;
 }
 
 .input {
@@ -13,8 +13,8 @@
 
 .poiList {
   height: 45px;
-  border-bottom: 1px solid #e2e2e2;
   padding: 5px;
+  border-bottom: 1px solid #e2e2e2;
 
   .list {
     display: flex;
@@ -28,10 +28,10 @@
   }
 
   .desc {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     width: 220px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 // :global {
@@ -42,6 +42,17 @@
 .searchlist {
   display: flex;
   flex-direction: column;
+  background: white;
+  .searchHeader {
+    display: flex;
+    align-items: center;
+    height: 32px;
+  }
+  .searchIcon {
+    height: 28px;
+    margin: 0 9px;
+    cursor: pointer;
+  }
   :global {
     .ant-input {
       border-color: #fff;
