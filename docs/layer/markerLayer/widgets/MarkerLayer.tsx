@@ -38,11 +38,10 @@ const MarkerItem: React.FC<IMarkerItemProps<IDataItem>> = ({
     () => selectFeatures[0]?.featureId === index,
     [selectFeatures, index],
   );
-  console.log(isSelect);
   return (
     <img
       src={data.src}
-      style={{ width: 30, height: 35 }}
+      style={{ width: isSelect ? 50 : 30, height: isSelect ? 55 : 35 }}
       onClick={() => {
         console.log('click');
       }}
