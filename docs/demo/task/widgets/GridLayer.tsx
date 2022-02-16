@@ -32,7 +32,7 @@ export function GridLayer() {
   const [geoData, setGeoData] = useState();
 
   const layerProps = useMemo(() => {
-    return layers.find((item: any) => item.type === 'gridLayer');
+    return layers?.find((item: any) => item.type === 'gridLayer');
   }, [layers]);
 
   const testData = {
@@ -78,6 +78,9 @@ export function GridLayer() {
 
   // 根据筛选器条件请求数据
   useEffect(() => {
+    if (!cityValue) {
+      return;
+    }
     // 可以根据业务需求配置接口
     fetch(
       `https://gw.alipayobjects.com/os/antvdemo/assets/dipper-city/${cityValue[1]}.json`,
@@ -99,37 +102,53 @@ export function GridLayer() {
       return;
     }
 
-    const color = ['#CFE1B9', '#B0C298', '#90A276', '#718355'];
-
     const layer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
-      options: layerProps?.options,
+      options: {
+        text: {
+          field: 'name',
+        },
+        normal: {
+          fillColor: {
+            field: 'unit_price',
+            value: ['#CFE1B9', '#B0C298', '#90A276', '#718355'],
+          },
+          scale: {
+            unit_price: {
+              type: 'quantile',
+            },
+          },
+          borderWidth: 1,
+          borderColor: '#ffffff',
+        },
+      },
     });
-    layerService.addLayer(layer);
 
-    layer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
-      // layer.getLegendItem().map((item) => {
-      //   if (Array.isArray(item.value)) {
-      //     return {
-      //       ...item,
-      //       value: item.value.map((v) => v.toFixed(2)),
-      //     };
-      //   } else {
-      //     return {
-      //       ...item,
-      //       value: item.value.toFixed(2),
-      //     };
-      //   }
-      // });
-      // updateLayerLegend(formatLegend(layer.getLegendItem()));
-    });
+    layerService.addLayer(layer);
+    //
+    // layer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
+    //   // layer.getLegendItem().map((item) => {
+    //   //   if (Array.isArray(item.value)) {
+    //   //     return {
+    //   //       ...item,
+    //   //       value: item.value.map((v) => v.toFixed(2)),
+    //   //     };
+    //   //   } else {
+    //   //     return {
+    //   //       ...item,
+    //   //       value: item.value.toFixed(2),
+    //   //     };
+    //   //   }
+    //   // });
+    //   // updateLayerLegend(formatLegend(layer.getLegendItem()));
+    // });
 
     // 更新图例
     // updateLayerLegend(formatLegend(layer.getLegendItem()));
 
     setGridLayer(layer);
-  }, [geoData]);
+  }, [geoData, cityValue]);
 
   return <></>;
 }
