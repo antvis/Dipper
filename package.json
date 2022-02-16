@@ -68,7 +68,7 @@
     "@umijs/test": "^3.0.5",
     "ahooks": "^3.1.5",
     "antd": "^4.18.3",
-    "antd-mobile": "^5.0.0-rc.25",
+    "antd-mobile": "^5.0.0-rc.27",
     "dumi": "^1.0.17",
     "father-build": "^1.17.2",
     "gh-pages": "^3.0.0",
