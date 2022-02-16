@@ -38,7 +38,7 @@ export const getLayerFieldArgus = <T>(properties: ILayerFieldProperties<T>) => {
 
 export interface ILayerGroupOptions {
   hover?: false | any;
-  active?: false | any;
+  select?: false | any;
   multipleSelect?: boolean;
 }
 
@@ -96,6 +96,7 @@ export default abstract class LayerGroup<
     this.name = name;
     this.data = data;
     this.options = merge({}, this.getDefaultOptions(), options);
+    console.log(this.options);
     this.source = new Source(featureCollection([]));
   }
 
@@ -129,23 +130,31 @@ export default abstract class LayerGroup<
   public boxSelect(bbox: BBox) {}
 
   public onLayerHover(layer: ILayer) {
-    layer.on('mouseenter', this.onMouseMove);
-    layer.on('mousemove', this.onMouseMove);
-    layer.on('mouseout', this.onMouseOut);
+    if (this.options.hover) {
+      layer.on('mouseenter', this.onMouseMove);
+      layer.on('mousemove', this.onMouseMove);
+      layer.on('mouseout', this.onMouseOut);
+    }
   }
 
   public offLayerHover(layer: ILayer) {
-    layer.off('mouseenter', this.onMouseMove);
-    layer.off('mousemove', this.onMouseMove);
-    layer.off('mouseout', this.onMouseOut);
+    if (this.options.hover) {
+      layer.off('mouseenter', this.onMouseMove);
+      layer.off('mousemove', this.onMouseMove);
+      layer.off('mouseout', this.onMouseOut);
+    }
   }
 
   public onLayerSelect(layer: ILayer) {
-    layer.on('click', this.onClick);
+    if (this.options.select) {
+      layer.on('click', this.onClick);
+    }
   }
 
   public offLayerSelect(layer: ILayer) {
-    layer.off('click', this.onClick);
+    if (this.options.select) {
+      layer.off('click', this.onClick);
+    }
   }
 
   public onClick = (e: IFeature) => {

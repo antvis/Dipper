@@ -60,9 +60,6 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
     if (normal?.borderWidth) {
       this.initLineLayer();
     }
-    if (text) {
-      this.initTextLayer();
-    }
     if (hover) {
       this.onLayerHover(fillLayer);
       this.initHoverLayer();
@@ -70,6 +67,9 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
     if (select) {
       this.onLayerSelect(fillLayer);
       this.initSelectLayer();
+    }
+    if (text) {
+      this.initTextLayer();
     }
   }
 
