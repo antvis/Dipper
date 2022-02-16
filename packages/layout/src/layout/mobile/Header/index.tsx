@@ -11,7 +11,6 @@ export default function AppHeader() {
   const { display, options } = globalConfig.headerbar || {};
   const components = getWidgetChildren(globalConfig.headerbar);
   const { headerstyle, logo, title } = options || {};
-  console.log(globalConfig.headerbar);
 
   return isDisplay(display) ? <NavBar back={null}>{title?.value}</NavBar> : <></>;
 }
