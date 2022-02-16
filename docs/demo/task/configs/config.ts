@@ -1,17 +1,15 @@
 import { IConfig, SingleSequentialColorScale } from '@antv/dipper';
 import { CityList } from './mock';
 export const config: Partial<IConfig> = {
-  viewData: {
-    global: {
-      filterData: [],
-      areaCode: '110000',
-      view: 'task',
-    },
-    widgets: {
-      citySelect: {
-        options: CityList,
-        value: ['110000', '110000'],
-      },
+  global: {
+    filterData: [],
+    areaCode: '110000',
+    view: 'task',
+  },
+  widgets: {
+    citySelect: {
+      options: CityList,
+      value: ['330000', '330100'],
     },
   },
   headerbar: {
@@ -158,19 +156,7 @@ export const config: Partial<IConfig> = {
   layers: [
     {
       type: 'gridLayer',
-      options: {
-        normal: {
-          fillColor: {
-            field: 'unit_price',
-            value: ['#CFE1B9', '#B0C298', '#90A276', '#718355'],
-          },
-        },
-        text: {
-          field: 'name',
-          size: 12,
-          color: '#000',
-        },
-      },
+      options: {},
     },
   ],
   legends: [],

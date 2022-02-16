@@ -4,7 +4,7 @@ import styles from './index.less';
 import * as loadsh from 'lodash';
 import { Amaps, AmapService } from '../service/amaps';
 import { useConfigService } from '@antv/dipper-layout';
-import { SearchOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
 // 高德Pios 参数
 export interface Pios {
@@ -62,21 +62,27 @@ export function SearchPlace(params: GeoMethods) {
 
   return (
     <div className={styles.searchlist}>
-      <div style={{ display: 'flex' }}>
+      <div className={styles.searchHeader}>
         <img
           src={searchicon}
           width="13"
           height="13"
-          style={{ height: 28 }}
+          className={styles.searchIcon}
           onClick={() => setInputShow(!inputShow)}
         />
         {inputShow && (
-          <Input
-            placeholder="请输入要搜索的地区"
-            onChange={onSearchKey}
-            className={styles.input}
-            size="small"
-          />
+          <>
+            <Input
+              placeholder="请输入要搜索的地区"
+              onChange={onSearchKey}
+              className={styles.input}
+              size="small"
+            />
+            <CloseCircleOutlined
+              style={{ margin: '0 4px' }}
+              onClick={() => setInputShow(!inputShow)}
+            />
+          </>
         )}
       </div>
       {Object.keys(pois).length ? (
