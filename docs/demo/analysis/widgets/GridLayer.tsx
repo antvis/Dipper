@@ -25,7 +25,7 @@ const formatLegend = (data: any[]) => {
     }
   });
 };
-export function GridLayer() {
+export function GridLayer({ options }: any) {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
   const { globalConfig, updateLegend, getWidgetsValue, setConfig } =
@@ -37,33 +37,33 @@ export function GridLayer() {
   const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 
-  const gridLayerProps = useMemo(() => {
-    return layers.find((item: any) => item.type === 'gridLayer');
-  }, [layers]);
+  // const gridLayerProps = useMemo(() => {
+  //   return layers.find((item: any) => item.type === 'gridLayer');
+  // }, [layers]);
 
-  const pointLayerProps = useMemo(() => {
-    return layers.find((item: any) => item.type === 'pointLayer');
-  }, [layers]);
-
-  const updateLayerLegend = (items: any[]) => {
-    updateLegend('gridLayerLegend', {
-      type: 'classifyColor',
-      display: true,
-      position: 'bottomleft',
-      options: {
-        title: '充电宝投放数量',
-        unkownName: gridLayerProps.options.unkownName,
-        items: items.map((item) => {
-          return {
-            color: item.color,
-            value: item.value.map((v) => {
-              return (v / 10000).toFixed(2);
-            }),
-          };
-        }),
-      },
-    });
-  };
+  // const pointLayerProps = useMemo(() => {
+  //   return layers.find((item: any) => item.type === 'pointLayer');
+  // }, [layers]);
+  //
+  // const updateLayerLegend = (items: any[]) => {
+  //   updateLegend('gridLayerLegend', {
+  //     type: 'classifyColor',
+  //     display: true,
+  //     position: 'bottomleft',
+  //     options: {
+  //       title: '充电宝投放数量',
+  //       unkownName: gridLayerProps.options.unkownName,
+  //       items: items.map((item) => {
+  //         return {
+  //           color: item.color,
+  //           value: item.value.map((v) => {
+  //             return (v / 10000).toFixed(2);
+  //           }),
+  //         };
+  //       }),
+  //     },
+  //   });
+  // };
 
   // 根据筛选器条件请求数据
   useEffect(() => {
@@ -118,40 +118,38 @@ export function GridLayer() {
     const gridLayer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
-      options: layerProps?.options,
+      options: {
+        text: {
+          field: 'name',
+        },
+        normal: {
+          fillColor: {
+            field: 'unit_price',
+            value: [
+              'rgb(247, 251, 255)',
+              'rgb(222, 235, 247)',
+              'rgb(198, 219, 239)',
+              'rgb(158, 202, 225)',
+              'rgb(107, 174, 214)',
+              'rgb(66, 146, 198)',
+              'rgb(33, 113, 181)',
+              'rgb(8, 81, 156)',
+              'rgb(8, 48, 107)',
+            ],
+          },
+          scale: {
+            unit_price: {
+              type: 'quantile',
+            },
+          },
+          borderWidth: 1,
+          borderColor: '#ffffff',
+        },
+        multipleSelect: true,
+      },
     });
 
-    // const pointLayer = new PointLayerGroup({
-    //   name: 'point',
-    //   data: {
-    //     ...geoData,
-    //     features: geoData.features.map((item) => centerOfMass(item)),
-    //   },
-    //   options: pointLayerProps.options,
-    // });
-
     layerService.addLayer(gridLayer);
-    // layerService.addLayer(pointLayer);
-
-    // gridLayer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
-    //   gridLayer.getLegendItem().map((item) => {
-    //     if (Array.isArray(item.value)) {
-    //       return {
-    //         ...item,
-    //         value: item.value.map((v) => v.toFixed(2)),
-    //       };
-    //     } else {
-    //       return {
-    //         ...item,
-    //         value: item.value.toFixed(2),
-    //       };
-    //     }
-    //   });
-    //   updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
-    // });
-    //
-    // // 更新图例
-    // updateLayerLegend(formatLegend(gridLayer.getLegendItem()));
 
     setGridLayer(gridLayer);
   }, [geoData]);
