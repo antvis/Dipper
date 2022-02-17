@@ -3,9 +3,10 @@ import Map from '../../Map';
 import MapControl from '../../MapControl';
 import Layer from '../../Layer';
 import { FloatingPanel } from 'antd-mobile';
-import type { IConfig, IPanel } from '@antv/dipper-core';
+import { getWidgetChildren, IConfig } from '@antv/dipper-core';
 import { Dipper } from '@antv/dipper-core';
 import { useDipperContainer, useConfigService } from '../../../hooks';
+import { LayoutContent } from '../../baseLayout';
 const anchors = [28, window.innerHeight * 0.4, window.innerHeight * 0.8];
 
 interface IContainerProps {
@@ -40,7 +41,16 @@ export function MapContainer({ children }: { children?: React.ReactNode }) {
       </Map>
       {/* <div style={{height:'200px'}}> */}
       <FloatingPanel style={{ zIndex: 10000 }} anchors={anchors}>
-        测试
+        <div
+          style={{
+            display: 'flex',
+            overflowY: 'auto',
+            flexDirection: 'column',
+            height: '100%',
+          }}
+        >
+          <LayoutContent items={getWidgetChildren(panel)} />
+        </div>
       </FloatingPanel>
       {/* </div> */}
 
