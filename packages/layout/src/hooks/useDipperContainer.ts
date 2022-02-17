@@ -9,6 +9,9 @@ export function useDipperContainer(cfg: IConfig | undefined): {
   const [sceneContainer, setSceneContainer] = useState<Dipper>();
   useEffect(() => {
     if (cfg) {
+      if (cfg.toolbar) {
+        cfg.toolbar = Array.isArray(cfg.toolbar) ? cfg.toolbar : [cfg.toolbar];
+      }
       const container = new Dipper(cfg) as Dipper;
       setSceneContainer(container);
     }

@@ -10,11 +10,17 @@ export default function MapToolbar() {
   const { toolbar } = globalConfig;
 
   // TODO 根据配置
-  return isDisplay(toolbar?.display) ? (
-    <div className={styles.appToolbar}>
-      <LayoutContent items={getWidgetChildren(toolbar as IWidgetProps)} />
-    </div>
-  ) : (
-    <></>
+  return (
+    <>
+      {toolbar?.map((i, index) =>
+        isDisplay(i?.display) ? (
+          <div className={styles.appToolbar} key={index}>
+            <LayoutContent items={getWidgetChildren(i as IWidgetProps)} />
+          </div>
+        ) : (
+          <></>
+        ),
+      )}
+    </>
   );
 }

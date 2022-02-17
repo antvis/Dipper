@@ -41,7 +41,7 @@ export interface IConfig {
     display?: boolean;
     components?: IWidgetProps[];
     children?: React.ReactNode;
-  };
+  }[];
   map: Partial<IMapConfig>;
   popup: {
     // 信息框
