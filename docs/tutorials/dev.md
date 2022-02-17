@@ -1,6 +1,7 @@
 ---
 title: 开发联调
 order: 1
+mobile: false
 ---
 
 Dipper 功能在不断迭代完善中，在业务开发过程可能需要修改或者优化相关代码，如何将 Dipper 和项目联动。

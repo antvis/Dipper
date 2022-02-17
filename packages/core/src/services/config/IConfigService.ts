@@ -6,6 +6,12 @@ import type {
 } from '../widgets/IWidgetsService';
 import type { IPanel } from '../panel/IPanelService';
 
+export interface IToolBar {
+  display?: boolean;
+  components?: IWidgetProps[];
+  children?: React.ReactNode;
+}
+
 export interface IConfig {
   widgets?: {
     [key: string]: {
@@ -37,11 +43,7 @@ export interface IConfig {
       }
     | false;
   panel: Partial<IPanel>;
-  toolbar: {
-    display?: boolean;
-    components?: IWidgetProps[];
-    children?: React.ReactNode;
-  }[];
+  toolbar: IToolBar[];
   map: Partial<IMapConfig>;
   popup: {
     // 信息框
