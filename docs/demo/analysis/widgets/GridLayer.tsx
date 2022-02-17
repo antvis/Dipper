@@ -104,7 +104,7 @@ export function GridLayer({ options }: any) {
         }
       });
     // 切换城市 高德地图方法
-    sceneService.getScene().map?.setCity(cityValue[1]);
+    sceneService.getScene()?.map?.setCity(cityValue[1]);
   }, [JSON.stringify(cityValue), brandValue]);
 
   useEffect(() => {
@@ -115,7 +115,7 @@ export function GridLayer({ options }: any) {
       gridLayer.setData(geoData);
       return;
     }
-    const gridLayer = new GridLayerGroup({
+    const newGridLayer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
       options: {
@@ -144,14 +144,15 @@ export function GridLayer({ options }: any) {
           },
           borderWidth: 1,
           borderColor: '#ffffff',
+          opacity: 0.5,
         },
         multipleSelect: true,
       },
     });
 
-    layerService.addLayer(gridLayer);
+    layerService.addLayer(newGridLayer);
 
-    setGridLayer(gridLayer);
+    setGridLayer(newGridLayer);
   }, [geoData]);
 
   useEffect(() => {
