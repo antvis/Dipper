@@ -79,7 +79,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
 
   initFillLayer() {
     const {
-      normal: { fillColor, scale },
+      normal: { fillColor, scale, ...style },
       autoFit = false,
     } = this.options;
 
@@ -92,7 +92,8 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       .source(this.data ?? featureCollection([]))
       // @ts-ignore
       .color(...getLayerFieldArgus(fillColor))
-      .shape('fill');
+      .shape('fill')
+      .style(style);
 
     if (scale) {
       // @ts-ignore
@@ -106,7 +107,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
 
   initLineLayer() {
     const {
-      normal: { borderColor, borderWidth },
+      normal: { borderColor, borderWidth, ...style },
     } = this.options;
 
     const borderLayer = new PolygonLayer();
@@ -116,17 +117,19 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       // @ts-ignore
       .color(...getLayerFieldArgus(borderColor))
       // @ts-ignore
-      .size(...getLayerFieldArgus(borderWidth));
+      .size(...getLayerFieldArgus(borderWidth))
+      // @ts-ignore
+      .style(style);
 
     borderLayer.setSource(this.source);
     this.addLayer(borderLayer);
   }
 
   initTextLayer() {
-    const { field, stroke, strokeWidth, weight, color, size } = merge(
+    const { field, color, size, ...style } = merge(
       defaultGridTextOptions,
       this.options.text,
-    );
+    ) as ILayerGroupText;
 
     const textLayer = new PolygonLayer()
       .shape(field || 'name', 'text')
@@ -134,22 +137,17 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       .size(...getLayerFieldArgus(size))
       // @ts-ignore
       .color(...getLayerFieldArgus(color))
-      .style({
-        // @ts-ignore
-        // fontWeight: weight,
-        stroke,
-        strokeWidth,
-        opacity: 1,
-      });
+      // @ts-ignore
+      .style(style);
     textLayer.setSource(this.source);
     this.addLayer(textLayer);
   }
 
   initHoverLayer() {
-    const { borderColor, borderWidth } = merge(
+    const { borderColor, borderWidth, ...style } = merge(
       defaultGridHoverOptions,
       this.options.hover,
-    );
+    ) as IGridLayerGroupStyle;
 
     const hoverLayer = new PolygonLayer();
     hoverLayer
@@ -158,7 +156,8 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       .color(...getLayerFieldArgus(borderColor))
       // @ts-ignore
       .size(...getLayerFieldArgus(borderWidth))
-      .source(featureCollection([]));
+      .source(featureCollection([]))
+      .style(style);
 
     this.addLayer(hoverLayer);
 
@@ -170,10 +169,10 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
   }
 
   initSelectLayer() {
-    const { borderColor, borderWidth } = merge(
+    const { borderColor, borderWidth, ...style } = merge(
       defaultGridSelectOptions,
       this.options.select,
-    );
+    ) as IGridLayerGroupStyle;
 
     const selectLayer = new PolygonLayer();
 
@@ -183,7 +182,8 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       .color(...getLayerFieldArgus(borderColor))
       // @ts-ignore
       .size(...getLayerFieldArgus(borderWidth))
-      .source(featureCollection([]));
+      .source(featureCollection([]))
+      .style(style);
 
     this.addLayer(selectLayer);
 

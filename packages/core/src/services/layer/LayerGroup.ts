@@ -47,8 +47,6 @@ export interface ILayerGroupText {
   color: ILayerFieldProperties<string>;
   size: ILayerFieldProperties<number>;
   weight: number;
-  stroke: string;
-  strokeWidth: number;
 }
 
 export const defaultGridTextOptions = {
