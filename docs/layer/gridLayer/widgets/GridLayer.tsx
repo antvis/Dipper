@@ -23,9 +23,9 @@ export default function GridLayer({
 
   const { selectFeatures } = useLayerGroup('grid');
 
-  useEffect(() => {
-    console.log(selectFeatures);
-  }, [selectFeatures]);
+  // useEffect(() => {
+  //   console.log(selectFeatures);
+  // }, [selectFeatures]);
 
   useMount(() => {
     const gridLayerGroup = new GridLayerGroup({
