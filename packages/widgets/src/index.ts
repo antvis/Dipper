@@ -19,3 +19,4 @@ export * from './Collapse';
 export * from './BoxSelectLayer';
 export * from './Filter/ConfigFilter';
 export * from './MarkerLayer/MarkerLayerGroup';
+export * from './PointLayer/PointLayerGroup';
