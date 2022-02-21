@@ -5,6 +5,10 @@ mobile: false
 
 # Layer 开发
 
+## PointLayer
+
+<code src="./pointLayer/index" compact="true"></code>
+
 ## MarkerLayer
 
 <code src="./markerLayer/index" compact="true"></code>

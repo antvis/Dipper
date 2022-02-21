@@ -38,7 +38,6 @@ const MarkerItem: React.FC<IMarkerItemProps<IDataItem>> = ({
     () => selectFeatures[0]?.featureId === index,
     [selectFeatures, index],
   );
-  console.log(isSelect);
   return (
     <img
       src={data.src}
