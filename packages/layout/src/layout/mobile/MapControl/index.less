@@ -1,0 +1,75 @@
+.legendControl,
+.rangeControl {
+  padding: 8px 12px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 12px;
+  line-height: 20px;
+  background: white;
+}
+
+.legendControl {
+  max-width: 300px;
+  padding: 12px;
+  .legendControlItem {
+    display: flex;
+    align-items: center;
+  }
+  .legendControlItem + .legendControlItem {
+    margin-top: 6px;
+  }
+  .legendControlColor {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    margin-right: 12px;
+  }
+  .legendControlName {
+    flex-shrink: 1;
+  }
+  .legendControlTitle {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+}
+
+.rangeControl {
+  width: 300px;
+  .rangeControlGroup {
+    position: relative;
+  }
+  .rangeControlItem {
+    display: flex;
+  }
+  .rangeControlItem + .rangeControlItem {
+    margin-top: 4px;
+  }
+  .rangeControlvalueList {
+    display: inline-flex;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  .rangeControlBar {
+    display: inline-flex;
+    flex-grow: 1;
+    align-items: center;
+  }
+  .rangeControlBarItem {
+    flex-grow: 1;
+    height: 14px;
+  }
+  .rangeControlBarItem + .rangeControlBarItem {
+    margin-left: 1px;
+  }
+  .rangeControlLabel {
+    flex-shrink: 0;
+  }
+}
+.l7-right {
+  right: 16px !important;
+}
+
+.panel-control {
+  position: absolute;
+  right: 20px;
+}

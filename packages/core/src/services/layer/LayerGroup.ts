@@ -94,7 +94,6 @@ export default abstract class LayerGroup<
     this.name = name;
     this.data = data;
     this.options = merge({}, this.getDefaultOptions(), options);
-    console.log(this.options);
     this.source = new Source(featureCollection([]));
   }
 
