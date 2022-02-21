@@ -4,9 +4,9 @@ hide: true
 
 # Layer 开发
 
-## PointLayer
+## ImageLayer
 
-<code src="./pointLayer/index" compact="true"></code>
+<code src="./imageLayer/index" compact="true"></code>
 
 ## MarkerLayer
 

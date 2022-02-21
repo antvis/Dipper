@@ -112,18 +112,30 @@ const ImageLayer: React.FC = () => {
               return name;
             },
           },
-          imgSize: 20,
+          imgSize: 10,
           text: 'm',
           textSize: 14,
           textStyle: {
             stroke: '#ffffff',
             strokeWidth: 2,
-            textOffset: [0, -50],
+            textOffset: [0, -40],
           },
         },
         select: {
-          imgSize: 30,
-          textStyle: [0, -60],
+          img: {
+            field: 's',
+            value: (name: string) => {
+              return name;
+            },
+          },
+          imgSize: 20,
+          text: 'm',
+          textSize: 0,
+          textStyle: {
+            stroke: '#ffffff',
+            strokeWidth: 2,
+            textOffset: [0, -100],
+          },
         },
         image: {
           海南: 'https://gw.alipayobjects.com/zos/basement_prod/604b5e7f-309e-40db-b95b-4fac746c5153.svg',
