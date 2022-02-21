@@ -1,5 +1,6 @@
 ---
 hide: true
+mobile: false
 ---
 
 # Layer 开发
