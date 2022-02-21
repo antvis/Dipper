@@ -107,7 +107,7 @@ export function BottomControl() {
     <FloatingPanel
       style={{ zIndex: 10000 }}
       anchors={anchors}
-      onHeightChange={onHeightChange}
+      // onHeightChange={onHeightChange}
       handleDraggingOfContent={false}
     >
       <div id="panel-control" className={styles['panel-control']} style={{ top: -(top + 13) }}>
