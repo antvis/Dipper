@@ -59,9 +59,8 @@ export default function RumbMap() {
   return (
     <div
       style={{
-        height: '667px',
-        width: '375px',
-        border: 'solid 2px rgb(245, 247, 250)',
+        height: '100vh',
+        width: '100%',
       }}
     >
       <DipperMobileContainer

@@ -12,5 +12,8 @@ export default defineConfig({
     // Google Analytics 代码，配置后会启用
     ga: 'G-CBX7JL1Q57',
   },
+  themeConfig: {
+    carrier: 'Dipper',
+  },
   // more config: https://d.umijs.org/config
 });

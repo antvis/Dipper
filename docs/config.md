@@ -2,6 +2,7 @@
 title: 配置项
 order: 2
 toc: menu
+mobile: false
 ---
 
 # Data 数据

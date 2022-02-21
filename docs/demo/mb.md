@@ -1,8 +1,9 @@
 ---
 group:
   title: 模板案例
+mobile: true
 ---
 
 ## 移动端模板
 
-<iframe style="border:1px solid #eee"  height='667px' width='375px' src='/Dipper/~demos/docs-mobile'>
+<code src="./mobile/index.tsx"></code>

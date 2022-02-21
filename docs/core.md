@@ -2,6 +2,7 @@
 title: 基础能力
 order: 3
 toc: menu
+mobile: false
 ---
 
 dipper-core 提供了一些框架共用的管理的能力方法。
