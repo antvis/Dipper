@@ -20,14 +20,14 @@ export const config: Partial<IConfig> = {
     children: [],
   },
   map: {
-    zoom: 10,
-    center: [120.153576, 30.287459],
+    zoom: 2,
+    center: [89.094725, 39.032152],
     pitch: 0,
     style: 'normal',
   },
   layers: [
     {
-      type: 'pointLayer',
+      type: 'imageLayer',
       options: {},
     },
   ],

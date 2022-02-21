@@ -3,8 +3,13 @@ import EventEmitter from 'eventemitter3';
 import { Container, injectable } from 'inversify';
 import type { ILayerGroup, IFeature } from './ILayerService';
 import { Source, MarkerLayer, Scene } from '@antv/l7';
-import { BBox, FeatureCollection, featureCollection } from '@turf/turf';
-import { merge } from 'lodash';
+import {
+  BBox,
+  Feature,
+  FeatureCollection,
+  featureCollection,
+} from '@turf/turf';
+import { isEqual, merge } from 'lodash';
 import { isPressing } from '../../utils/keyboard';
 import { TYPES } from '../../types';
 import { ISceneService } from '../scene/ISceneService';
@@ -214,6 +219,21 @@ export default abstract class LayerGroup<
     this.setHoverFeature(null);
     // 重置选中数据
     this.emit(LayerGroupEventEnum.DATA_UPDATE, data);
+  }
+
+  public setDataItem(featureId: number, newProperties: Record<string, any>) {
+    const source = this.layers[0]?.getSource();
+    if (source) {
+      const targetFeature = source.getFeatureById(featureId) as Feature | null;
+      const targetIndex = this.data.features.findIndex((item: Feature) =>
+        isEqual(item, targetFeature),
+      );
+      if (targetFeature && targetIndex > -1) {
+        Object.assign(targetFeature.properties, newProperties);
+        this.data.features[targetIndex] = targetFeature;
+        this.source.setData(this.data);
+      }
+    }
   }
 
   public show() {

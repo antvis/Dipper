@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useMount } from 'ahooks';
 import {
-  useSceneService,
-  useLayerService,
-  IGridLayerGroupOptions,
-  GridLayerGroup,
   BoxSelectLayerGroup,
+  GridLayerGroup,
+  IGridLayerGroupOptions,
   useLayerGroup,
-  // @ts-ignore
+  useLayerService,
+  useSceneService,
 } from '@antv/dipper';
 import { FeatureCollection } from '@turf/turf';
+import { LayerGroupEventEnum } from '@antv/dipper-core';
 
 export default function GridLayer({
   options,

@@ -25,6 +25,7 @@ export interface ILayerGroup extends EventEmitter {
   show: () => void;
   hide: () => void;
   setData: (data: any) => void;
+  setDataItem: (featureId: number, newProperties: any) => void;
   addLayer: (layer: ILayer) => void;
   removeLayer: (layer: ILayer) => void;
   getLayers: () => ILayer[];

@@ -1,6 +1,6 @@
 import { registerWidget } from '@antv/dipper-core';
-import PointLayer from './PointLayer';
+import ImageLayer from './ImageLayer';
 
 export function initWidgets() {
-  registerWidget('pointLayer', PointLayer);
+  registerWidget('imageLayer', ImageLayer);
 }
