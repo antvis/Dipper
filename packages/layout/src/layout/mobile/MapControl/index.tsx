@@ -14,19 +14,29 @@ const anchors = [100, window.innerHeight * 0.4, window.innerHeight * 0.8];
 
 export default function MapControl() {
   const { globalConfig } = useConfigService();
-  const { controls, legends = [], defaultcontrols } = globalConfig;
+  const { controls, legends = [], defaultcontrols, panel } = globalConfig;
   const controlGroupBy = useMemo(() => {
+    if (panel && panel.display) {
+      return groupBy(
+        controls?.filter(
+          (item) =>
+            isDisplay(item.display) && !['bottomleft', 'bottomright'].includes(item.position!),
+        ),
+        (c) => {
+          const defaultLayout = c.position === 'topleft' ? 'horizontal' : 'vertical';
+          return [c.position, c.layout || defaultLayout].join('-');
+        },
+      );
+    }
+
     return groupBy(
-      controls?.filter(
-        (item) =>
-          isDisplay(item.display) && !['bottomleft', 'bottomright'].includes(item.position!),
-      ),
+      controls?.filter((item) => isDisplay(item.display)),
       (c) => {
         const defaultLayout = c.position === 'topleft' ? 'horizontal' : 'vertical';
         return [c.position, c.layout || defaultLayout].join('-');
       },
     );
-  }, [controls]);
+  }, [controls, panel]);
 
   return (
     <>
@@ -79,19 +89,27 @@ export function BottomControl() {
     setTop(panel?.clientHeight ?? 0);
   }, []);
 
-  // const onHeightChange = useCallback((height: number, animating: boolean) => {
-  //   if (!scene.current) {
-  //     scene.current = sceneService.getScene()!;
-  //   }
-  //   if (!animating) {
-  //     scene.current.setCenter([120.09940087795259, 30.2639184071299], {
-  //       padding: [0, 0, -height, 0]
-  //     });
-  //   }
-  // }, [sceneService]);
+  const onHeightChange = useCallback(
+    (height: number, animating: boolean) => {
+      if (!scene.current) {
+        scene.current = sceneService.getScene()!;
+      }
+      if (!animating) {
+        scene.current.setCenter([120.09940087795259, 30.2639184071299], {
+          padding: [0, 0, -height, 0],
+        });
+      }
+    },
+    [sceneService],
+  );
 
-  return (
-    <FloatingPanel style={{ zIndex: 10000 }} anchors={anchors} handleDraggingOfContent={false}>
+  return panel && panel.display ? (
+    <FloatingPanel
+      style={{ zIndex: 10000 }}
+      anchors={anchors}
+      onHeightChange={onHeightChange}
+      handleDraggingOfContent={false}
+    >
       <div id="panel-control" className={styles['panel-control']} style={{ top: -(top + 13) }}>
         {Object.keys(controlGroupBy).map((position, index) => {
           return controlGroupBy[position].map((c, index) => (
@@ -110,5 +128,5 @@ export function BottomControl() {
         <LayoutContent items={getWidgetChildren(panel)} />
       </div>
     </FloatingPanel>
-  );
+  ) : null;
 }
