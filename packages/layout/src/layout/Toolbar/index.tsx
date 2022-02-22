@@ -12,9 +12,9 @@ export default function MapToolbar() {
   // TODO 根据配置
   return (
     <>
-      {toolbar?.map((i) =>
+      {toolbar?.map((i, index) =>
         isDisplay(i?.display) ? (
-          <div className={styles.appToolbar}>
+          <div className={styles.appToolbar} key={index}>
             {/* 左侧组件 */}
             <div style={{ display: 'flex' }}>
               <LayoutContent items={getAppContentItem(i as IWidgetProps, 'left')} />
@@ -24,9 +24,7 @@ export default function MapToolbar() {
               <LayoutContent items={getAppContentItem(i as IWidgetProps, 'right')} />
             </div>
           </div>
-        ) : (
-          <></>
-        ),
+        ) : null,
       )}
     </>
   );

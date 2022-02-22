@@ -47,12 +47,14 @@
     "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-card": "^1.18.24",
     "@antv/g2plot": "^2.3.39",
-    "@antv/l7": "^2.7.14",
+    "@antv/l7": "^2.7.19",
     "@antv/l7-draw": "^2.4.20",
     "@antv/l7-react": "^2.3.9",
     "@turf/turf": "^6.5.0",
     "classnames": "^2.3.1",
-    "inversify-react": "^1.0.1"
+    "dumi-theme-mobile": "^1.1.21",
+    "inversify-react": "^1.0.1",
+    "prettier": "^2.5.1"
   },
   "devDependencies": {
     "@ant-design/pro-card": "^1.18.24",

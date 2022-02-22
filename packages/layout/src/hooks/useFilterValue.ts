@@ -37,11 +37,12 @@ export function useFilterValue(components: IWidgetProps[], type: string) {
   }, [filterIds, widgetsService]);
 
   useEffect(() => {
-    const onValueChange = (e: any) => {
-      setFilterValue((prev) => ({ ...(prev || {}), ...e }));
-    };
     Object.keys(widgets).forEach((key) => {
       setFilterValue((prev) => ({ ...prev, [key]: widgets[key].getValue() }));
+      const onValueChange = (e: any) => {
+        console.log(e);
+        setFilterValue((prev) => ({ ...(prev || {}), [key]: e }));
+      };
       widgets[key]?.on(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
     });
   }, [widgets]);

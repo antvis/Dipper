@@ -30,10 +30,6 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
     return this.selectFeatures[0] ?? null;
   }
 
-  // get markerLayer() {
-  //   return this.getLayers()[0] as unknown as MarkerLayer;
-  // }
-
   getDefaultOptions() {
     return {
       component: EmptyMarkerItem,

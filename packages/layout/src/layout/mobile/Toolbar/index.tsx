@@ -17,9 +17,7 @@ export default function MapToolbar() {
           <div className={styles.appToolbar} key={index}>
             <LayoutContent items={getWidgetChildren(i as IWidgetProps)} />
           </div>
-        ) : (
-          <></>
-        ),
+        ) : null,
       )}
     </>
   );
