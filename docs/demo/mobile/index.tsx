@@ -75,7 +75,6 @@ export default function RumbMap() {
             },
             components: [],
           },
-          mapType: 'GaodeV2',
           toolbar: {
             display: true,
             components: [
