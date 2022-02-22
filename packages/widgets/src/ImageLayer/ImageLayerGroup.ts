@@ -1,5 +1,6 @@
 import {
   getLayerFieldArgus,
+  IFeature,
   ILayerFieldProperties,
   ILayerGroupOptions,
   LayerGroup,
@@ -82,7 +83,6 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
       if (select.text) {
         selectLayers.push(this.initTextLayer('selectText', selectOptions));
       }
-      unselectLayers.forEach((layer) => this.onLayerSelect(layer));
 
       this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
         const unselectData = featureCollection(this.unselectFeatures);
@@ -93,6 +93,9 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
         unselectLayers.forEach((layer) => layer.setData(unselectData));
         selectLayers.forEach((layer) => layer.setData(selectData));
       });
+      [...unselectLayers, ...selectLayers].forEach((layer) =>
+        this.onLayerSelect(layer),
+      );
     }
 
     this.on(LayerGroupEventEnum.DATA_UPDATE, () => {
@@ -100,6 +103,15 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
       selectLayers.forEach((layer) => layer.setData(featureCollection([])));
     });
   }
+
+  onClick = (e: IFeature) => {
+    const currentSelectFeature = this.selectFeatures[0]?.feature;
+    if (currentSelectFeature && isEqual(currentSelectFeature, e.feature)) {
+      this.setSelectFeatures([]);
+    } else {
+      this.setSelectFeatures([e]);
+    }
+  };
 
   initImageLayer(
     name: string,
