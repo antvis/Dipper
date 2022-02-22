@@ -34,6 +34,7 @@ export interface IImageLayerGroupOptions extends ILayerGroupOptions {
   normal: IImageLayerStyle;
   select: false | IImageLayerStyle;
   autoFit?: boolean;
+  uniqueKey: string;
 }
 
 export const defaultImageLayerStyle: IImageLayerStyle = {
@@ -53,13 +54,17 @@ export const defaultImageLayerOptions: IImageLayerGroupOptions = {
   normal: defaultImageLayerStyle,
   select: false,
   autoFit: true,
+  uniqueKey: 'id',
 };
 
 export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
   get unselectFeatures() {
+    const { uniqueKey } = this.options;
     return this.data.features.filter((feature: Feature) => {
-      return !this.selectFeatures.find((item) =>
-        isEqual(item.feature, feature),
+      return !this.selectFeatures.find(
+        (item) =>
+          item.feature.properties?.[uniqueKey] ===
+          feature.properties?.[uniqueKey],
       );
     });
   }
