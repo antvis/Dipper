@@ -75,6 +75,8 @@ export function BottomControl() {
   const scene = useRef<Scene>(null!);
   const { panel, controls } = globalConfig;
   const [top, setTop] = useState(0);
+  const { position } = useSceneService();
+  const [height, setHeight] = useState<number>(null!);
   const controlGroupBy = useMemo(() => {
     return groupBy(
       controls?.filter(
@@ -95,19 +97,26 @@ export function BottomControl() {
         scene.current = sceneService.getScene()!;
       }
       if (!animating) {
-        scene.current.setCenter([120.09940087795259, 30.2639184071299], {
-          padding: [0, 0, -height, 0],
-        });
+        setHeight(height);
       }
     },
-    [sceneService],
+    [sceneService, position],
   );
+
+  useEffect(() => {
+    if (!position || height == null) {
+      return;
+    }
+    scene.current.setCenter(position, {
+      padding: [0, 0, -height, 0],
+    });
+  }, [height, position]);
 
   return panel && panel.display ? (
     <FloatingPanel
       style={{ zIndex: 10000 }}
       anchors={anchors}
-      // onHeightChange={onHeightChange}
+      onHeightChange={onHeightChange}
       handleDraggingOfContent={false}
     >
       <div id="panel-control" className={styles['panel-control']} style={{ top: -(top + 13) }}>

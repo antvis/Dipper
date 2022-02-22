@@ -9,15 +9,21 @@ export function useSceneService() {
   const [scene, setScene] = useState<Scene | null>(() => {
     return sceneService.getScene() ?? null;
   });
+  const [position, setPosition] = useState<[number, number]>(null!);
 
   useEffect(() => {
-    sceneService.on('sceneChange', (newScene) => {
-      setScene(newScene);
-    });
+    sceneService.on(
+      'sceneChange',
+      ({ scene, position }: { scene: Scene; position: [number, number] }) => {
+        setScene(scene);
+        setPosition(position);
+      },
+    );
   }, [sceneService]);
 
   return {
     sceneService,
     scene,
+    position,
   };
 }
