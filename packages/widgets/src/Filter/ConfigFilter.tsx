@@ -50,6 +50,8 @@ interface FilterUProps {
   widget: IWidget;
   layout?: FormLayout;
   showBottomBtn?: boolean;
+  onConfirm?: () => void;
+  onReset?: () => void;
 }
 
 export function FilterUI({
@@ -59,10 +61,13 @@ export function FilterUI({
   showBottomBtn = false,
   id,
   widget,
+  onReset,
+  onConfirm,
 }: FilterUProps) {
   const [form] = Form.useForm();
-  const onReset = useCallback(() => {
+  const reset = useCallback(() => {
     form.resetFields();
+    onReset?.();
   }, [form]);
   const onFieldsChange = useCallback(() => {
     if (showBottomBtn) {
@@ -75,6 +80,7 @@ export function FilterUI({
   const onFinish = useCallback(() => {
     const formValue = form.getFieldsValue(true);
     widget?.setValues({ [id]: { ...formValue } });
+    onConfirm?.();
   }, [widget, form]);
 
   useEffect(() => {
@@ -165,7 +171,7 @@ export function FilterUI({
       {showBottomBtn ? (
         <div className={styles['aoi-buttonflex']}>
           <Form.Item>
-            <a onClick={onReset} style={{ marginRight: 10 }}>
+            <a onClick={reset} style={{ marginRight: 10 }}>
               一键清除
             </a>
             <Button type="primary" htmlType="submit">

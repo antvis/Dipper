@@ -94,6 +94,10 @@ export default abstract class LayerGroup<
     )?.getScene();
   }
 
+  get mainLayer() {
+    return this.layers[0];
+  }
+
   constructor({ name, data, options }: ILayerGroupProps<T>) {
     super();
     this.name = name;

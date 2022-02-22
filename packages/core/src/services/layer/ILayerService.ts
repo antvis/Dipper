@@ -10,7 +10,7 @@ export interface IFeature {
     lng: number;
     lat: number;
   };
-  target: MouseEvent;
+  target?: MouseEvent;
 }
 
 export interface ILayerEventTarget {

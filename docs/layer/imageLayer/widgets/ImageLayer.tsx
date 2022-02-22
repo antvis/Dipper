@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLayerService, MarkerLayerGroup } from '@antv/dipper';
 import { ImageLayerGroup } from '@antv/dipper-widgets/src';
+import { useLayerGroup } from '@antv/dipper-layout';
+import { useInterval } from 'ahooks';
 
 interface IDataItem {
   src: string;
@@ -100,10 +102,11 @@ const ImageLayer: React.FC = () => {
   const [layerGroup, setLayerGroup] = useState<MarkerLayerGroup | null>(null);
   const { layerService } = useLayerService();
   const [container, setContainer] = useState<any>(null);
+  const { setSelectFeatures } = useLayerGroup('imageLayer');
 
   useEffect(() => {
     const imageLayerGroup = new ImageLayerGroup({
-      name: 'pointLayer',
+      name: 'imageLayer',
       options: {
         normal: {
           img: {
@@ -146,6 +149,13 @@ const ImageLayer: React.FC = () => {
     layerService.addLayer(imageLayerGroup);
     imageLayerGroup.setData(data);
   }, []);
+
+  useInterval(() => {
+    setSelectFeatures(
+      [data.features[Math.floor(Math.random() * data.features.length)]],
+      'm',
+    );
+  }, 1000);
 
   return container;
 };

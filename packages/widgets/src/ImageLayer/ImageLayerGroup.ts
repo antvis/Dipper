@@ -16,9 +16,11 @@ import {
 import { ILayer, PointLayer } from '@antv/l7';
 
 export interface IImageLayerStyle {
-  img?: ILayerFieldProperties<string>;
+  img: ILayerFieldProperties<string>;
   imgSize?: number;
-  imgStyle?: any;
+  imgStyle?: {
+    [key: string]: any;
+  };
   text?: string;
   textColor?: ILayerFieldProperties<string>;
   textSize?: number;
@@ -35,6 +37,7 @@ export interface IImageLayerGroupOptions extends ILayerGroupOptions {
 }
 
 export const defaultImageLayerStyle: IImageLayerStyle = {
+  img: 'img',
   imgSize: 20,
   imgStyle: {},
   textColor: '#000000',
@@ -177,7 +180,5 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
 
   public getLegendItem() {
     return [];
-    // 先取默认图例
-    // return this.getLayer('fill')?.getLegendItems('color') || [];
   }
 }
