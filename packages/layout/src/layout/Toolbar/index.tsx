@@ -24,9 +24,7 @@ export default function MapToolbar() {
               <LayoutContent items={getAppContentItem(i as IWidgetProps, 'right')} />
             </div>
           </div>
-        ) : (
-          <></>
-        ),
+        ) : null,
       )}
     </>
   );
