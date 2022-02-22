@@ -130,11 +130,11 @@ const ImageLayer: React.FC = () => {
           },
           imgSize: 20,
           text: 'm',
-          textSize: 0,
+          textSize: 20,
           textStyle: {
             stroke: '#ffffff',
             strokeWidth: 2,
-            textOffset: [0, -100],
+            textOffset: [0, -40],
           },
         },
         image: {

@@ -5,8 +5,13 @@ import {
   LayerGroup,
   LayerGroupEventEnum,
 } from '@antv/dipper-core';
-import { cloneDeep, merge } from 'lodash';
-import { BBox, Feature, featureCollection } from '@turf/turf';
+import { cloneDeep, isEqual, merge } from 'lodash';
+import {
+  BBox,
+  Feature,
+  FeatureCollection,
+  featureCollection,
+} from '@turf/turf';
 import { ILayer, PointLayer } from '@antv/l7';
 
 export interface IImageLayerStyle {
@@ -48,10 +53,11 @@ export const defaultImageLayerOptions: IImageLayerGroupOptions = {
 
 export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
   get unselectFeatures() {
-    return this.data.features.filter(
-      (feature: Feature) =>
-        !this.selectFeatures.find((item) => item.feature === feature),
-    );
+    return this.data.features.filter((feature: Feature) => {
+      return !this.selectFeatures.find((item) =>
+        isEqual(item.feature, feature),
+      );
+    });
   }
 
   initLayerList() {
@@ -62,33 +68,32 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     const selectLayers: ILayer[] = [];
 
     if (normal.img) {
-      unselectLayers.push(this.initImageLayer(normal));
+      unselectLayers.push(this.initImageLayer('img', normal, this.data));
     }
     if (normal.text) {
-      unselectLayers.push(this.initTextLayer(normal));
+      unselectLayers.push(this.initTextLayer('text', normal, this.data));
     }
 
-    // if (select) {
-    //   const selectOptions = merge({}, defaultImageLayerStyle, select);
-    //   if (select.img) {
-    //     selectLayers.push(this.initImageLayer(selectOptions));
-    //   }
-    //   if (select.text) {
-    //     selectLayers.push(this.initTextLayer(selectOptions));
-    //   }
-    //   unselectLayers.forEach((layer) => this.onLayerSelect(layer));
-    //
-    //   this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
-    //     const unselectData = featureCollection(this.unselectFeatures);
-    //     const selectData = featureCollection(
-    //       this.selectFeatures.map((item) => item.feature),
-    //     );
-    //     debugger;
-    //
-    //     unselectLayers.forEach((layer) => layer.setData(unselectData));
-    //     selectLayers.forEach((layer) => layer.setData(selectData));
-    //   });
-    // }
+    if (select) {
+      const selectOptions = merge({}, defaultImageLayerStyle, select);
+      if (select.img) {
+        selectLayers.push(this.initImageLayer('selectImg', selectOptions));
+      }
+      if (select.text) {
+        selectLayers.push(this.initTextLayer('selectText', selectOptions));
+      }
+      unselectLayers.forEach((layer) => this.onLayerSelect(layer));
+
+      this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
+        const unselectData = featureCollection(this.unselectFeatures);
+        const selectData = featureCollection(
+          this.selectFeatures.map((item) => item.feature),
+        );
+
+        unselectLayers.forEach((layer) => layer.setData(unselectData));
+        selectLayers.forEach((layer) => layer.setData(selectData));
+      });
+    }
 
     this.on(LayerGroupEventEnum.DATA_UPDATE, () => {
       unselectLayers.forEach((layer) => layer.setData(this.data));
@@ -96,13 +101,17 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     });
   }
 
-  initImageLayer(style: IImageLayerStyle) {
+  initImageLayer(
+    name: string,
+    style: IImageLayerStyle,
+    data: FeatureCollection = featureCollection([]),
+  ) {
     const { img, imgSize, imgStyle } = style;
     const imageLayer = new PointLayer({
-      name: 'image',
+      name,
     });
     imageLayer
-      .source(this.data ?? featureCollection([]))
+      .source(data)
       // @ts-ignore
       .size(imgSize)
       // @ts-ignore
@@ -113,21 +122,23 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     return imageLayer;
   }
 
-  initTextLayer(style: IImageLayerStyle) {
-    const { text, textSize = 0, textStyle, textColor } = style;
+  initTextLayer(
+    name: string,
+    style: IImageLayerStyle,
+    data: FeatureCollection = featureCollection([]),
+  ) {
+    const { text, textSize = 0, textColor, textStyle } = style;
 
     const textLayer = new PointLayer({
-      name: 'text',
+      name,
     })
-      .source(this.data ?? featureCollection([]))
+      .source(data)
       .shape(text ?? '', 'text')
       // @ts-ignore
       .size(textSize)
       // @ts-ignore
       .color(...getLayerFieldArgus(textColor))
-      .style({
-        ...textStyle,
-      });
+      .style(textStyle);
 
     this.addLayer(textLayer);
     return textLayer;
