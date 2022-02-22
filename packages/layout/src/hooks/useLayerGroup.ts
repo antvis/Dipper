@@ -8,7 +8,7 @@ import {
   LayerEventEnum,
   TYPES,
 } from '@antv/dipper-core';
-import { featureCollection } from '@turf/turf';
+import { centerOfMass, coordAll, Feature, featureCollection } from '@turf/turf';
 import { isEqual } from 'lodash';
 
 export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
@@ -64,8 +64,31 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
     layerData,
     setLayerData,
     selectFeatures,
-    setSelectFeatures: (selectFeatures: IFeature[]) => {
-      layerGroup?.setSelectFeatures(selectFeatures);
+    setSelectFeatures: (selectFeatures: Feature[], uniqueKey = 'id') => {
+      if (layerGroup?.mainLayer) {
+        const source = layerGroup.mainLayer.getSource();
+        const featureIdList = selectFeatures.map((feature) => {
+          // @ts-ignore
+          return source.getFeatureId(uniqueKey, feature.properties[uniqueKey]);
+        });
+
+        // @ts-ignore
+        const newFeatureList: IFeature[] = selectFeatures.map((feature, index) => {
+          const [lng, lat] = coordAll(centerOfMass(feature))[0];
+          return {
+            feature,
+            featureId: featureIdList[index] ?? 0,
+            lngLat: {
+              lng,
+              lat,
+            },
+          };
+        });
+
+        layerGroup.setSelectFeatures(newFeatureList);
+      } else {
+        console.error('当期LayerGroup内实现的mainLayer有误');
+      }
     },
     updateProperties: (...args: any[]) => {},
   };
