@@ -75,12 +75,12 @@ export function Location() {
             field: 'circle',
           }}
           size={{
-            values: 7,
+            values: 10,
           }}
           style={{
             opacity: 1,
             strokeWidth: 4,
-            stroke: '#e2e2e2',
+            stroke: '#fff',
           }}
         />
       ) : null}

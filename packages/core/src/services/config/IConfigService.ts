@@ -44,6 +44,7 @@ export interface IConfig {
     | false;
   panel: Partial<IPanel>;
   toolbar: IToolBar[];
+  mapType?: 'GaodeV1' | 'GaodeV2' | 'MapBox' | 'Map';
   map: Partial<IMapConfig>;
   popup: {
     // 信息框

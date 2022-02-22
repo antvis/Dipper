@@ -12,6 +12,7 @@ export const config: Partial<IConfig> = {
       value: ['330000', '330100'],
     },
   },
+  mapType: 'GaodeV2',
   headerbar: {
     display: true,
     options: {
