@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useUnmount } from 'ahooks';
 import styles from './index.less';
 import { Provider } from 'inversify-react';
-import ToolBar from './Toolbar';
+import ToolBar from '../Toolbar';
 import type { IConfig } from '@antv/dipper-core';
 import DipperHeader from '../Header';
 import { Dipper } from '@antv/dipper-core';
 import { useDipperContainer } from '../../hooks';
 import type { Container } from 'inversify';
-import { MapContainer } from './Container';
+import { MapContainer } from '../MapContainer';
 
 interface IContainerProps {
   cfg: IConfig;

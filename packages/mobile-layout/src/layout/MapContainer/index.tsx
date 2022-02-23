@@ -1,7 +1,7 @@
 import React from 'react';
-import Map from '../../Map';
+import Map from '../Map';
 import MapControl, { BottomControl } from '../MapControl';
-import Layer from '../../Layer';
+import Layer from '../Layer';
 import styles from './index.less';
 export function MapContainer({ children }: { children?: React.ReactNode }) {
   return (

@@ -54,7 +54,7 @@
     "yorkie": "^2.0.0"
   },
   "peerDependencies": {
-    "@antv/l7": "^2.5.38",
+    "@antv/l7": "^2.7.21",
     "react": "^16.14.0 || ^17.0.0"
   },
   "publishConfig": {
