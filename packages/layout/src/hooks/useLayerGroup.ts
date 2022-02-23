@@ -59,12 +59,8 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
     };
   }, [layerGroup]);
 
-  return {
-    layerGroup,
-    layerData,
-    setLayerData,
-    selectFeatures,
-    setSelectFeatures: (selectFeatures: Feature[], uniqueKey = 'id') => {
+  const setSelectFeaturesCb = useCallback(
+    (selectFeatures: Feature[], uniqueKey = 'id') => {
       if (layerGroup?.mainLayer) {
         const source = layerGroup.mainLayer.getSource();
         const featureIdList = selectFeatures.map((feature) => {
@@ -90,6 +86,15 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
         console.error('当期LayerGroup内实现的mainLayer有误');
       }
     },
+    [layerGroup],
+  );
+
+  return {
+    layerGroup,
+    layerData,
+    setLayerData,
+    selectFeatures,
+    setSelectFeatures: setSelectFeaturesCb,
     updateProperties: (...args: any[]) => {},
   };
 };
