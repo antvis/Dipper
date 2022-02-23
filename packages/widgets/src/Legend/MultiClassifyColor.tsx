@@ -1,7 +1,6 @@
 import React from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
-import { useWidgets } from '@antv/dipper-layout';
 
 interface ILegendItem {
   colors: string[];
