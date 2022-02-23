@@ -11,6 +11,7 @@ import { FloatingPanel } from 'antd-mobile';
 import styles from './index.less';
 
 const anchors = [100, window.innerHeight * 0.4, window.innerHeight * 0.8];
+const THRESHOLD = window.innerHeight * 0.7;
 
 export default function MapControl() {
   const { globalConfig } = useConfigService();
@@ -77,6 +78,8 @@ export function BottomControl() {
   const [top, setTop] = useState(0);
   const { position } = useSceneService();
   const [height, setHeight] = useState<number>(null!);
+  const [showControl, setShowControl] = useState(true);
+
   const controlGroupBy = useMemo(() => {
     return groupBy(
       controls?.filter(
@@ -107,6 +110,13 @@ export function BottomControl() {
     if (!position || height == null) {
       return;
     }
+
+    if (Math.abs(height) > THRESHOLD) {
+      setShowControl(false);
+    } else if (Math.abs(height) < THRESHOLD) {
+      setShowControl(true);
+    }
+
     scene.current.setCenter(position, {
       padding: [0, 0, -height, 0],
     });
@@ -114,18 +124,24 @@ export function BottomControl() {
 
   return panel && panel.display ? (
     <FloatingPanel
-      style={{ zIndex: 10000 }}
       anchors={anchors}
       onHeightChange={onHeightChange}
       handleDraggingOfContent={false}
+      style={{
+        // @ts-ignore
+        '--header-height': '40px',
+        zIndex: 10000,
+      }}
     >
-      <div id="panel-control" className={styles['panel-control']} style={{ top: -(top + 13) }}>
-        {Object.keys(controlGroupBy).map((position, index) => {
-          return controlGroupBy[position].map((c, index) => (
-            <CustomBaseWidgets key={c.type + index} {...c} />
-          ));
-        })}
-      </div>
+      {showControl ? (
+        <div id="panel-control" className={styles['panel-control']} style={{ top: -(top + 13) }}>
+          {Object.keys(controlGroupBy).map((position, index) => {
+            return controlGroupBy[position].map((c, index) => (
+              <CustomBaseWidgets key={c.type + index} {...c} />
+            ));
+          })}
+        </div>
+      ) : null}
       <div
         style={{
           display: 'flex',

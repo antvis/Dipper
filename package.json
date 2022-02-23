@@ -47,7 +47,7 @@
     "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-card": "^1.18.24",
     "@antv/g2plot": "^2.3.39",
-    "@antv/l7": "^2.7.19",
+    "@antv/l7": "^2.7.20",
     "@antv/l7-draw": "^2.4.20",
     "@antv/l7-react": "^2.3.9",
     "@turf/turf": "^6.5.0",
