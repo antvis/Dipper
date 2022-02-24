@@ -20,6 +20,10 @@ export interface IConfig {
     };
   };
   global?: Record<string, any>;
+  l7Logo?: {
+    logoPosition?: string;
+    logoVisible?: boolean;
+  };
   headerbar:
     | {
         display?: boolean;
