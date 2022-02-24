@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -40,9 +40,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@antv/dipper-core": "^0.2.23",
-    "@antv/dipper-layout": "^0.2.23",
-    "@antv/dipper-widgets": "^0.2.23"
+    "@antv/dipper-core": "^0.2.24",
+    "@antv/dipper-layout": "^0.2.24",
+    "@antv/dipper-widgets": "^0.2.24"
   },
   "peerDependencies": {
     "@ant-design/icons": "^4.7.0",
