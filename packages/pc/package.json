@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-pc",
-  "version": "0.2.22",
+  "version": "0.2.24",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -37,8 +37,8 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-core": "^0.2.22",
-    "@antv/dipper-layout": "^0.2.22"
+    "@antv/dipper-core": "^0.2.24",
+    "@antv/dipper-layout": "^0.2.24"
  
   },
   "peerDependencies": {
@@ -50,7 +50,7 @@
     "antd-mobile-icons": "^0.2.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "@antv/dipper-layout": "^0.2.22"
+    "@antv/dipper-layout": "^0.2.24"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.1",
