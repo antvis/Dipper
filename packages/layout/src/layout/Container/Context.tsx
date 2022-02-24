@@ -26,11 +26,7 @@ export function DipperContainerContext({ cfg, children, onLoad }: IContainerProp
   }, []);
 
   return sceneContainer ? (
-    <>
-      {/* 
-        // @ts-ignore */}
-      <Provider container={sceneContainer?.getContainer() as Container}>{children}</Provider>
-    </>
+    <Provider container={sceneContainer?.getContainer() as Container}>{children}</Provider>
   ) : (
     <></>
   );
