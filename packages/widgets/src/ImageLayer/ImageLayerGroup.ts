@@ -101,9 +101,10 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
         unselectLayers.forEach((layer) => layer.setData(unselectData));
         selectLayers.forEach((layer) => layer.setData(selectData));
       });
-      [...unselectLayers, ...selectLayers].forEach((layer) =>
-        this.onLayerSelect(layer),
-      );
+      [...unselectLayers, ...selectLayers].forEach((layer) => {
+        this.onLayerSelect(layer);
+        layer.setBlend('normal');
+      });
     }
 
     this.on(LayerGroupEventEnum.DATA_UPDATE, () => {
