@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-widgets",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -36,8 +36,8 @@
     "README.md"
   ],
   "dependencies": {
-    "@antv/dipper-core": "^0.2.22",
-    "@antv/dipper-layout": "^0.2.22",
+    "@antv/dipper-core": "^0.2.23",
+    "@antv/dipper-layout": "^0.2.23",
     "@antv/l7-draw": "^2.4.18",
     "@types/d3-format": "^3.0.1",
     "classnames": "^2.3.1",
