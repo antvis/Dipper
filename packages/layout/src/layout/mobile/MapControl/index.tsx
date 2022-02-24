@@ -100,27 +100,18 @@ export function BottomControl() {
         scene.current = sceneService.getScene()!;
       }
       if (!animating) {
-        setHeight(height);
+        if (Math.abs(height) > THRESHOLD) {
+          setShowControl(false);
+        } else if (Math.abs(height) < THRESHOLD) {
+          setShowControl(true);
+        }
+        scene.current.setCenter(position, {
+          padding: [0, 0, -height, 0],
+        });
       }
     },
     [sceneService, position],
   );
-
-  useEffect(() => {
-    if (!position || height == null) {
-      return;
-    }
-
-    if (Math.abs(height) > THRESHOLD) {
-      setShowControl(false);
-    } else if (Math.abs(height) < THRESHOLD) {
-      setShowControl(true);
-    }
-
-    scene.current.setCenter(position, {
-      padding: [0, 0, -height, 0],
-    });
-  }, [height, position]);
 
   return panel && panel.display ? (
     <FloatingPanel
