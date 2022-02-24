@@ -1,9 +1,8 @@
 import { Layout } from 'antd';
 import React from 'react';
 import styles from './index.less';
-import { useConfigService } from '../../hooks';
-import { CustomBaseLayout } from '../baseLayout';
-import { getWidgetChildren, isDisplay } from '@antv/dipper-core';
+import { useConfigService, CustomBaseLayout } from '@antv/dipper-layout';
+import { getWidgetChildren, IWidgetProps, isDisplay } from '@antv/dipper-core';
 
 interface LogoDomProps {
   value?: string;

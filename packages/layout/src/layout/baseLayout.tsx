@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
-import { IWidgetProps, getWidgetChildren } from '@antv/dipper-core';
+import { IWidgetProps, getWidgetChildren, isDisplay } from '@antv/dipper-core';
 import { PositionName } from '@antv/l7';
 import { CustomControl } from '@antv/l7-react';
 import classNames from 'classnames';
 import BaseLayout from './base';
 import { useWidgetsService } from '../hooks';
 import { CustomBaseWidgets } from '../baseWidget/widget';
-import { isDisplay } from '../util/ui';
 import { Tabs } from 'antd';
 import style from './style.less';
 const { TabPane } = Tabs;

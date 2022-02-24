@@ -1,6 +1,12 @@
+---
+mobile: false
+---
+
+## Hello layout!
+
+```jsx
 import React, { useEffect, useState } from 'react';
-import { registerWidget } from '@antv/dipper';
-import { DipperMobileContainer } from '@antv/dipper-mobile';
+import { DipperMobileContainer, registerWidget } from '@antv/dipper';
 import { Button, SearchBar, Space, Radio, Tabs, Dropdown } from 'antd-mobile';
 import { ArrowDownCircleOutline, DownOutline } from 'antd-mobile-icons';
 const searchBar = () => {
@@ -60,8 +66,9 @@ export default function RumbMap() {
   return (
     <div
       style={{
-        height: '100vh',
-        width: '100%',
+        height: '667px',
+        width: '375px',
+        border: 'solid 2px rgb(245, 247, 250)',
       }}
     >
       <DipperMobileContainer
@@ -90,3 +97,4 @@ export default function RumbMap() {
     </div>
   );
 }
+```

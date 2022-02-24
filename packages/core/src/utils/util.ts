@@ -10,3 +10,4 @@ export const getWidgetChildren = (items: any): IWidgetProps[] => {
     return [];
   }
 };
+export const isDisplay = (display?: any) => display !== false;

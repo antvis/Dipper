@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
-import { useUnmount } from 'ahooks';
 import { Layout } from 'antd';
 import styles from './index.less';
-import { Provider } from 'inversify-react';
 import DipperHeader from '../Header';
 import ToolBar from '../Toolbar';
 import { MapContainer } from './MapContainer';
-import { DipperContainerContext } from './Context';
+import { DipperContainerContext } from '@antv/dipper-layout';
 import type { IConfig } from '@antv/dipper-core';
 import { Dipper } from '@antv/dipper-core';
 

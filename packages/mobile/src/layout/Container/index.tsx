@@ -1,7 +1,6 @@
 import React from 'react';
-import Map from '../../Map';
+import { Map, Layer } from '@antv/dipper-layout';
 import MapControl, { BottomControl } from '../MapControl';
-import Layer from '../../Layer';
 import styles from './index.less';
 export function MapContainer({ children }: { children?: React.ReactNode }) {
   return (

@@ -1,10 +1,9 @@
 import React, { ReactElement, useMemo } from 'react';
+import { isDisplay } from '@antv/dipper-core';
 import { Control, CustomControl } from '@antv/l7-react';
 import type { IControlOption, PositionName } from '@antv/l7';
-import { isDisplay } from '@antv/dipper-core';
-import { useConfigService } from '../../hooks';
-import { AppMapControlContent } from '../baseLayout';
-import { CustomBaseWidgets } from '../../baseWidget/widget';
+import { useConfigService, AppMapControlContent, CustomBaseWidgets } from '@antv/dipper-layout';
+
 import { groupBy } from 'lodash';
 
 export default function MapControl() {

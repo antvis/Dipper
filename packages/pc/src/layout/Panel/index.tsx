@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import styles from './index.less';
 import ToggleButton from './ToggleButton';
-import { usePanelService } from '../../hooks';
-import { LayoutContent } from '../baseLayout';
+import { LayoutContent, usePanelService } from '@antv/dipper-layout';
 import { IPanel, getWidgetChildren, isDisplay } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
 

@@ -1,12 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { isDisplay } from '../../../util/ui';
+import {
+  useConfigService,
+  AppMapControlContent,
+  LayoutContent,
+  useSceneService,
+  CustomBaseWidgets,
+} from '@antv/dipper-layout';
 import { Control, CustomControl } from '@antv/l7-react';
 import type { IControlOption, PositionName, Scene } from '@antv/l7';
-import { useConfigService, useSceneService } from '../../../hooks';
-import { AppMapControlContent, LayoutContent } from '../../baseLayout';
-import { CustomBaseWidgets } from '../../../baseWidget/widget';
 import { groupBy } from 'lodash';
-import { getWidgetChildren } from '@antv/dipper-core';
+import { getWidgetChildren, isDisplay } from '@antv/dipper-core';
 import { FloatingPanel } from 'antd-mobile';
 import styles from './index.less';
 

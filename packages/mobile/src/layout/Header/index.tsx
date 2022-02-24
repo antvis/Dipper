@@ -1,9 +1,7 @@
 import React from 'react';
 import styles from './index.less';
-import { useConfigService } from '../../../hooks';
-import { CustomBaseLayout } from '../../baseLayout';
-import { isDisplay } from '../../../util/ui';
-import { getWidgetChildren, IWidgetProps } from '@antv/dipper-core';
+import { useConfigService, CustomBaseLayout } from '@antv/dipper-layout';
+import { getWidgetChildren, IWidgetProps, isDisplay } from '@antv/dipper-core';
 
 import { NavBar } from 'antd-mobile';
 export default function AppHeader() {

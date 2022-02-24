@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './index.less';
-import { useConfigService } from '../../hooks';
-import { LayoutContent } from '../baseLayout';
-import { getAppContentItem } from '../../util/ui';
+import { useConfigService, LayoutContent, getAppContentItem } from '@antv/dipper-layout';
 import { IWidgetProps, isDisplay } from '@antv/dipper-core';
 
 export default function MapToolbar() {

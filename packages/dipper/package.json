@@ -41,7 +41,7 @@
   "license": "MIT",
   "dependencies": {
     "@antv/dipper-core": "^0.2.22",
-    "@antv/dipper-layout": "^0.2.22",
+    "@antv/dipper-pc": "^0.2.22",
     "@antv/dipper-widgets": "^0.2.22"
   },
   "peerDependencies": {

@@ -1,5 +1,5 @@
 {
-  "name": "@antv/dipper-layout",
+  "name": "@antv/dipper-pc",
   "version": "0.2.22",
   "scripts": {
     "clean": "rimraf dist",
@@ -37,7 +37,9 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-core": "^0.2.22"
+    "@antv/dipper-core": "^0.2.22",
+    "@antv/dipper-layout": "^0.2.22"
+ 
   },
   "peerDependencies": {
     "@antv/l7": "^2.5.40",
@@ -47,7 +49,8 @@
     "antd-mobile": "^5.0.0-rc.25",
     "antd-mobile-icons": "^0.2.2",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "@antv/dipper-layout": "^0.2.22"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.1",

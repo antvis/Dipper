@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
-import { useUnmount } from 'ahooks';
-import { Layout } from 'antd';
 import styles from './index.less';
-import { Provider } from 'inversify-react';
-import DipperHeader from '../Header';
-import ToolBar from '../Toolbar';
-import { MapContainer } from './MapContainer';
-import { DipperContainerContext } from './Context';
+import ToolBar from './Toolbar';
 import type { IConfig } from '@antv/dipper-core';
+import DipperHeader from './Header';
 import { Dipper } from '@antv/dipper-core';
+import { DipperContainerContext } from '@antv/dipper-layout';
+import { MapContainer } from './Container';
 
 interface IContainerProps {
   cfg: IConfig;
@@ -16,19 +13,18 @@ interface IContainerProps {
   children?: React.ReactNode;
 }
 
-export default function DipperContainer({ cfg, children, onLoad }: IContainerProps) {
+export default function DipperMobileContainer({ cfg, children, onLoad }: IContainerProps) {
   return (
     <DipperContainerContext cfg={cfg} onLoad={onLoad}>
-      <Layout className={styles.pageMap}>
+      <div className={styles.pageMap}>
         {/* 导航栏 */}
         <DipperHeader />
 
         {/* 导航栏工具条 */}
         <ToolBar />
-
         {/* 地图区域 */}
         <MapContainer>{children}</MapContainer>
-      </Layout>
+      </div>
     </DipperContainerContext>
   );
 }
