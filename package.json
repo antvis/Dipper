@@ -54,7 +54,8 @@
     "classnames": "^2.3.1",
     "dumi-theme-mobile": "^1.1.21",
     "inversify-react": "^1.0.1",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "react-error-boundary": "^3.1.4"
   },
   "devDependencies": {
     "@ant-design/pro-card": "^1.18.24",

@@ -1,0 +1,108 @@
+.appPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: white;
+}
+
+.appPanelHeader {
+  //display: flex;
+  flex-shrink: 1;
+  margin: 24px;
+  line-height: 24px;
+  .appPanelHeaderTitle {
+    flex-shrink: 1;
+    margin-bottom: 0;
+    overflow: hidden;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: bold;
+    font-size: 16px;
+    white-space: normal;
+    text-overflow: ellipsis;
+  }
+  .appPanelHeaderEditIcon {
+    margin-left: 9px;
+    color: #8c8c8c;
+  }
+}
+
+.appPanelContent {
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 100%;
+  overflow: auto;
+  :global {
+    .ant-tabs-content,
+    .ant-tabs {
+      height: 100%;
+      overflow: auto;
+    }
+    .ant-tabs-nav-wrap {
+      padding: 0 24px;
+    }
+    form,
+    .ant-spin-nested-loading,
+    .ant-spin-container,
+    .ant-formily-layout {
+      height: 100%;
+    }
+
+    form {
+      padding: 0 24px;
+    }
+  }
+}
+
+.appPanelContentWithoutTabs {
+  :global {
+    .ant-tabs-nav {
+      display: none !important;
+    }
+  }
+}
+
+.toggleButton {
+  @toggle-width: 16px;
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  &.left {
+    top: 50%;
+    left: -@toggle-width;
+    width: @toggle-width;
+    height: 64px;
+    border-radius: 4px 0 0 4px;
+  }
+  &.right {
+    top: 50%;
+    left: -@toggle-width;
+    width: @toggle-width;
+    height: 64px;
+    border-radius: 0 4px 4px 0;
+  }
+  &.bottom {
+    top: -@toggle-width;
+    left: 50%;
+    width: 64px;
+    height: @toggle-width;
+    border-radius: 4px 0;
+  }
+  &.top {
+    bottom: -@toggle-width;
+    left: 50%;
+    width: 64px;
+    height: @toggle-width;
+    border-radius: 0 4px;
+  }
+  .toggleButtonIcon {
+    color: #a6a5a6;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+}
