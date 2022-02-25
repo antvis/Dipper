@@ -3,6 +3,7 @@ import { AMapScene, AMapSceneV2, Popup, MapboxScene, MapScene } from '@antv/l7-r
 import type {} from '@antv/l7-react';
 import styles from './index.less';
 import { useSceneService, useConfigService } from '../../hooks';
+import { PositionName } from '@antv/l7';
 
 interface IProps {
   children?: JSX.Element;
@@ -12,7 +13,7 @@ export default function AppMap({ children }: IProps) {
   const { sceneService } = useSceneService();
   const { globalConfig } = useConfigService();
   const [isLoaded, setLoaded] = useState(false);
-  const { map, mapType, popup } = globalConfig;
+  const { map, mapType, popup, l7Logo } = globalConfig;
   const getMap = (type = 'GaodeV1') => {
     const content = () => {
       return (
@@ -38,7 +39,8 @@ export default function AppMap({ children }: IProps) {
           className={styles.appMap}
           map={map!}
           option={{
-            logoPosition: 'bottomright',
+            logoPosition: (l7Logo?.logoPosition || 'bottomright') as PositionName,
+            logoVisible: l7Logo?.logoVisible ?? true,
           }}
           onSceneLoaded={mapLoaded}
         >

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { DipperMobileContainer, registerWidget } from '@antv/dipper';
+import { registerWidget } from '@antv/dipper';
+import { DipperMobileContainer } from '@antv/dipper-mobile';
 import { Button, SearchBar, Space, Radio, Tabs, Dropdown } from 'antd-mobile';
 import { ArrowDownCircleOutline, DownOutline } from 'antd-mobile-icons';
 const searchBar = () => {

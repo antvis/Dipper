@@ -1,7 +1,5 @@
 import { IWidgetProps, getWidgetChildren } from '@antv/dipper-core';
 
-export const isDisplay = (display?: any) => display !== false;
-
 type Position = 'left' | 'right' | 'center';
 
 // 获取AppContent children
