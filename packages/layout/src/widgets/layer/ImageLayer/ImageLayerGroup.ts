@@ -7,12 +7,7 @@ import {
   LayerGroupEventEnum,
 } from '@antv/dipper-core';
 import { cloneDeep, isEqual, merge } from 'lodash';
-import {
-  BBox,
-  Feature,
-  FeatureCollection,
-  featureCollection,
-} from '@turf/turf';
+import { BBox, Feature, FeatureCollection, featureCollection } from '@turf/turf';
 import { ILayer, PointLayer } from '@antv/l7';
 
 export interface IImageLayerStyle {
@@ -62,9 +57,7 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     const { uniqueKey } = this.options;
     return this.data.features.filter((feature: Feature) => {
       return !this.selectFeatures.find(
-        (item) =>
-          item.feature.properties?.[uniqueKey] ===
-          feature.properties?.[uniqueKey],
+        (item) => item.feature.properties?.[uniqueKey] === feature.properties?.[uniqueKey],
       );
     });
   }
@@ -94,9 +87,7 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
 
       this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
         const unselectData = featureCollection(this.unselectFeatures);
-        const selectData = featureCollection(
-          this.selectFeatures.map((item) => item.feature),
-        );
+        const selectData = featureCollection(this.selectFeatures.map((item) => item.feature));
 
         unselectLayers.forEach((layer) => layer.setData(unselectData));
         selectLayers.forEach((layer) => layer.setData(selectData));

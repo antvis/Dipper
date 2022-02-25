@@ -1,9 +1,4 @@
-import {
-  LayerGroup,
-  TYPES,
-  ILayerService,
-  ILayerGroupOptions,
-} from '@antv/dipper-core';
+import { LayerGroup, TYPES, ILayerService, ILayerGroupOptions } from '@antv/dipper-core';
 import { cloneDeep, debounce } from 'lodash';
 import { PolygonLayer } from '@antv/l7';
 import { isPressing } from '@antv/dipper-core';
@@ -100,9 +95,7 @@ export class BoxSelectLayerGroup extends LayerGroup<IBoxSelectLayerGroupOptions>
         ...e.pixel,
       };
       this.updateBoxFeature();
-      const layerService = this.container?.get(TYPES.LAYER_SYMBOL) as
-        | ILayerService
-        | undefined;
+      const layerService = this.container?.get(TYPES.LAYER_SYMBOL) as ILayerService | undefined;
 
       if (layerService) {
         const { x: startX, y: startY } = this.startPoint;

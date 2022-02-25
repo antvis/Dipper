@@ -162,9 +162,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
     this.addLayer(hoverLayer);
 
     this.on(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, () => {
-      hoverLayer.setData(
-        featureCollection(this.hoverFeature ? [this.hoverFeature.feature] : []),
-      );
+      hoverLayer.setData(featureCollection(this.hoverFeature ? [this.hoverFeature.feature] : []));
     });
   }
 
@@ -188,9 +186,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
     this.addLayer(selectLayer);
 
     this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
-      selectLayer.setData(
-        featureCollection(this.selectFeatures.map((item) => item.feature)),
-      );
+      selectLayer.setData(featureCollection(this.selectFeatures.map((item) => item.feature)));
     });
   }
 
