@@ -104,4 +104,4 @@ export default function RumbMap() {
 }
 ```
 
-<API hideTitle src='../../packages/mobile/src/layout/Container/index.tsx'></API>
+<API hideTitle src='../../packages/mobile/src/layout/index.tsx'></API>
