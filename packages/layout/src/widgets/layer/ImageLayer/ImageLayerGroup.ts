@@ -10,12 +10,15 @@ import { cloneDeep, isEqual, merge } from 'lodash';
 import { BBox, Feature, FeatureCollection, featureCollection } from '@turf/turf';
 import { ILayer, PointLayer } from '@antv/l7';
 
-export interface IImageLayerStyle {
+export interface IImageLayerImageStyle {
   img: ILayerFieldProperties<string>;
   imgSize?: number;
   imgStyle?: {
     [key: string]: any;
   };
+}
+
+export interface IImageLayerStyle extends IImageLayerImageStyle {
   text?: string;
   textColor?: ILayerFieldProperties<string>;
   textSize?: number;
@@ -27,7 +30,7 @@ export interface IImageLayerStyle {
 export interface IImageLayerGroupOptions extends ILayerGroupOptions {
   image: Record<string, string>;
   normal: IImageLayerStyle;
-  select: false | IImageLayerStyle;
+  select: false | IImageLayerImageStyle;
   autoFit?: boolean;
   uniqueKey: string;
 }
@@ -53,15 +56,6 @@ export const defaultImageLayerOptions: IImageLayerGroupOptions = {
 };
 
 export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
-  get unselectFeatures() {
-    const { uniqueKey } = this.options;
-    return this.data.features.filter((feature: Feature) => {
-      return !this.selectFeatures.find(
-        (item) => item.feature.properties?.[uniqueKey] === feature.properties?.[uniqueKey],
-      );
-    });
-  }
-
   initLayerList() {
     const { normal, select } = this.options;
     this.initImage();
@@ -78,18 +72,10 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
 
     if (select) {
       const selectOptions = merge({}, defaultImageLayerStyle, select);
-      if (select.img) {
-        selectLayers.push(this.initImageLayer('selectImg', selectOptions));
-      }
-      if (select.text) {
-        selectLayers.push(this.initTextLayer('selectText', selectOptions));
-      }
+      selectLayers.push(this.initImageLayer('selectImg', selectOptions));
 
       this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
-        const unselectData = featureCollection(this.unselectFeatures);
         const selectData = featureCollection(this.selectFeatures.map((item) => item.feature));
-
-        unselectLayers.forEach((layer) => layer.setData(unselectData));
         selectLayers.forEach((layer) => layer.setData(selectData));
       });
       [...unselectLayers, ...selectLayers].forEach((layer) => {
