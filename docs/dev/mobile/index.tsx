@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { registerWidget } from '@antv/dipper';
-import { DipperMobileContainer } from '@antv/dipper-mobile';
-import { Button, SearchBar, Space, Radio, Tabs, Dropdown } from 'antd-mobile';
-import { ArrowDownCircleOutline, DownOutline } from 'antd-mobile-icons';
+import React from 'react';
+import { registerWidget, DipperMobileContainer } from '@antv/dipper-mobile';
+import { SearchBar, Tabs, Dropdown } from 'antd-mobile';
 const searchBar = () => {
   return <SearchBar placeholder="请输入内容" />;
 };

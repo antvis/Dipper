@@ -1,8 +1,9 @@
 ---
 title: 配置项
 order: 2
-toc: menu
 mobile: false
+group:
+  title: API
 ---
 
 # Data 数据
@@ -146,7 +147,7 @@ controls 配置示例
 
 ```
 
-<code src='./demo/control.tsx'>
+<code src='../demo/control.tsx'>
 
 ## defaultcontrols
 

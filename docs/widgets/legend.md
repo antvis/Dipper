@@ -2,7 +2,7 @@
 title: 图例
 order: 2
 group:
-  title: 组件
+  title: 基础组件
 ---
 
 ## 图例

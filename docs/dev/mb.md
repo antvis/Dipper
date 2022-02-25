@@ -1,6 +1,6 @@
 ---
 group:
-  title: 模板案例
+  title: 开发示例
 mobile: true
 ---
 

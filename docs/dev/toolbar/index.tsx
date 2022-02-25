@@ -30,7 +30,6 @@ import {
   SettingOutlined,
   UpOutlined,
 } from '@ant-design/icons';
-// import { Pie, PieConfig } from '@alipay/tech-vis';
 import styles from './styles.less';
 import {
   fakePromise,
@@ -42,7 +41,6 @@ import {
   MockLayers,
 } from './util';
 import * as mock from './util/mock';
-import { initWidgets } from '../../layer/gridLayer/widgets';
 
 const { RangePicker } = DatePicker;
 
