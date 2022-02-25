@@ -1,7 +1,9 @@
 ---
 title: Hooks
-order: 4
-toc: menu
+order: 1
+group:
+  title: API
+  order: 3
 mobile: false
 ---
 
@@ -21,7 +23,7 @@ dipper 全局配置
 
 ### setConfig
 
-    更新 config 方法
+    更新 config方法
 
 参数：
 

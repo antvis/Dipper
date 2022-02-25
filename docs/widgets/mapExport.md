@@ -1,8 +1,9 @@
 ---
 title: 地图导出
 order: 2
+mobile: false
 group:
-  title: 组件
+  title: 基础组件
 ---
 
 ## 地图导出组件 exportMap

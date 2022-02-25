@@ -4,15 +4,8 @@ import ToolBar from './Toolbar';
 import type { IConfig } from '@antv/dipper-core';
 import DipperHeader from './Header';
 import { Dipper } from '@antv/dipper-core';
-import { DipperContainerContext } from '@antv/dipper-layout';
+import { DipperContainerContext, IContainerProps } from '@antv/dipper-layout';
 import { MapContainer } from './Container';
-
-interface IContainerProps {
-  cfg: IConfig;
-  onLoad?: (sceneContainer: Dipper) => void;
-  children?: React.ReactNode;
-}
-
 export default function DipperMobileContainer({ cfg, children, onLoad }: IContainerProps) {
   return (
     <DipperContainerContext cfg={cfg} onLoad={onLoad}>

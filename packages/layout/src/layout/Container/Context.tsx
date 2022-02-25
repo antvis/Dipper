@@ -6,9 +6,12 @@ import { Dipper } from '@antv/dipper-core';
 import { useDipperContainer } from '../../hooks';
 import type { Container } from 'inversify';
 
-interface IContainerProps {
+export interface IContainerProps {
+  /** 布局根容器，初始化化上下文 */
   cfg: IConfig;
-  onLoad?: (sceneContainer: Dipper) => void;
+  /** 回调函数 */
+  onLoad?: (sceneContainer: Dipper) => void; //
+  /** 子组件 */
   children?: React.ReactNode;
 }
 
