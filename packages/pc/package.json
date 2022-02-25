@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-pc",
-  "version": "0.2.25",
+  "version": "0.2.26",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -37,8 +37,8 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-core": "^0.2.25",
-    "@antv/dipper-layout": "^0.2.25"
+    "@antv/dipper-core": "^0.2.26",
+    "@antv/dipper-layout": "^0.2.26"
   },
   "peerDependencies": {
     "@antv/dipper-layout": "^0.2.24",
