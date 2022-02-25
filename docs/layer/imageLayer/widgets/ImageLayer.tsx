@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useLayerService, MarkerLayerGroup } from '@antv/dipper';
-import { ImageLayerGroup } from '@antv/dipper-widgets/src';
-import { useLayerGroup } from '@antv/dipper-layout';
-import { useInterval } from 'ahooks';
-
+import {
+  useLayerService,
+  MarkerLayerGroup,
+  ImageLayerGroup,
+  useLayerGroup,
+} from '@antv/dipper';
 interface IDataItem {
   src: string;
   id: string;
