@@ -7,7 +7,7 @@ import {
   LayerGroupEventEnum,
 } from '@antv/dipper-core';
 import { cloneDeep, isEqual, merge } from 'lodash';
-import { BBox, Feature, FeatureCollection, featureCollection } from '@turf/turf';
+import { BBox, FeatureCollection, featureCollection } from '@turf/turf';
 import { ILayer, PointLayer } from '@antv/l7';
 
 export interface IImageLayerImageStyle {
