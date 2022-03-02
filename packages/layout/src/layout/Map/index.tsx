@@ -6,6 +6,7 @@ import { useSceneService, useConfigService } from '../../hooks';
 import { PositionName } from '@antv/l7';
 
 interface IProps {
+  /** 地图子组件 */
   children?: JSX.Element;
 }
 

@@ -3,7 +3,8 @@ title: 通用配置
 toc: menu
 order: 0
 group:
-  title: 组件
+  title: 基础组件
+  order: 4
 ---
 
 ### 组件使用

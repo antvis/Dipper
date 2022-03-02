@@ -144,7 +144,7 @@ export function GridLayer({ options }: any) {
           },
           borderWidth: 1,
           borderColor: '#ffffff',
-          opacity: 0.5,
+          opacity: 1,
         },
         multipleSelect: true,
       },

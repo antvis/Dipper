@@ -11,7 +11,7 @@ import { Select, Button } from 'antd';
 import {
   multidimensionalChart,
   singleLineChart,
-} from '../analysis/configs/mock';
+} from '../../demo/analysis/configs/mock';
 const { Option } = Select;
 
 const demo = (props: IWidgetProps) => {

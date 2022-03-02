@@ -15,5 +15,6 @@ export default defineConfig({
   themeConfig: {
     carrier: 'Dipper',
   },
+  locales: [['zh-CN', '中文']],
   // more config: https://d.umijs.org/config
 });

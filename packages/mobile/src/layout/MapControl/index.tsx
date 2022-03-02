@@ -79,8 +79,7 @@ export function BottomControl() {
   const scene = useRef<Scene>(null!);
   const { panel, controls } = globalConfig;
   const [top, setTop] = useState(0);
-  const { position } = useSceneService();
-  const [height, setHeight] = useState<number>(null!);
+  const prevHeight = useRef(0);
   const [showControl, setShowControl] = useState(true);
 
   const controlGroupBy = useMemo(() => {
@@ -108,12 +107,22 @@ export function BottomControl() {
         } else if (Math.abs(height) < THRESHOLD) {
           setShowControl(true);
         }
-        scene.current.setCenter(position, {
-          padding: [0, 0, -height, 0],
+        const { lng, lat } = scene.current.getCenter();
+        if (height === prevHeight.current) {
+          return;
+        }
+        scene.current.setCenter([lng, lat], {
+          padding: [
+            0,
+            0,
+            Math.abs(prevHeight.current - height) * (height > prevHeight.current ? -1 : 1),
+            0,
+          ],
         });
+        prevHeight.current = height;
       }
     },
-    [sceneService, position],
+    [sceneService],
   );
 
   return panel && panel.display ? (
@@ -127,15 +136,17 @@ export function BottomControl() {
         zIndex: 10000,
       }}
     >
-      {showControl ? (
-        <div id="panel-control" className={styles['panel-control']} style={{ top: -(top + 13) }}>
-          {Object.keys(controlGroupBy).map((position, index) => {
-            return controlGroupBy[position].map((c, index) => (
-              <CustomBaseWidgets key={c.type + index} {...c} />
-            ));
-          })}
-        </div>
-      ) : null}
+      <div
+        id="panel-control"
+        className={styles['panel-control']}
+        style={{ top: -(top + 13), display: showControl ? 'block' : 'none' }}
+      >
+        {Object.keys(controlGroupBy).map((position, index) => {
+          return controlGroupBy[position].map((c, index) => (
+            <CustomBaseWidgets key={c.type + index} {...c} />
+          ));
+        })}
+      </div>
       <div
         style={{
           display: 'flex',
