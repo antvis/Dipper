@@ -27,7 +27,7 @@ export const config: Partial<IConfig> = {
   },
   layers: [
     {
-      type: 'imageLayer',
+      type: 'pointLayer',
       options: {},
     },
   ],

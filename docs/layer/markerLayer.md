@@ -5,4 +5,4 @@ mobile: false
 
 # MarkerLayer 标记图层
 
-<code src="./markerLayer/index" compact="true"></code>
+<code src="./demo/markerLayer/index" compact="true"></code>
