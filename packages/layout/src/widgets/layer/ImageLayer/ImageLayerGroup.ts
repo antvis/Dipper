@@ -107,6 +107,7 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     const { img, imgSize, imgStyle } = style;
     const imageLayer = new PointLayer({
       name,
+      layerType: 'image',
     });
     imageLayer
       .source(data)
