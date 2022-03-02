@@ -5,4 +5,4 @@ mobile: false
 
 # ImageLayer 图片图层
 
-<code src="./imageLayer/index" compact="true"></code>
+<code src="./demo/imageLayer/index" compact="true"></code>
