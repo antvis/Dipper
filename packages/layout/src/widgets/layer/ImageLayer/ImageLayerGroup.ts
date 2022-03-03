@@ -32,7 +32,6 @@ export interface IImageLayerGroupOptions extends ILayerGroupOptions {
   normal: IImageLayerStyle;
   select: false | IImageLayerStyle;
   autoFit?: boolean;
-  uniqueKey: string;
 }
 
 export const defaultImageLayerStyle: IImageLayerStyle = {
@@ -52,7 +51,6 @@ export const defaultImageLayerOptions: IImageLayerGroupOptions = {
   normal: defaultImageLayerStyle,
   select: false,
   autoFit: true,
-  uniqueKey: 'id',
 };
 
 export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
@@ -161,11 +159,5 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     if (this.options.autoFit) {
       this.layers[0].fitBounds();
     }
-  }
-
-  public boxSelect(bbox: BBox) {}
-
-  public getLegendItem() {
-    return [];
   }
 }

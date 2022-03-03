@@ -77,18 +77,27 @@ export default abstract class LayerGroup<
   implements ILayerGroup
 {
   protected layers: ILayer[] = [];
+
   protected visible = true;
 
-  public name: string;
-  public data: any;
-  public options: T;
-  public source: Source;
-  public container?: Container;
+  /**
+   * 当前LayerGroup的唯一id
+   */
+  name: string;
 
-  public selectFeatures: IFeature[] = [];
-  public hoverFeature?: IFeature | null = null;
+  data: any;
 
-  public get scene(): Scene | undefined {
+  options: T;
+
+  source: Source;
+
+  container?: Container;
+
+  selectFeatures: IFeature[] = [];
+
+  hoverFeature?: IFeature | null = null;
+
+  get scene(): Scene | undefined {
     return (
       this.container?.get(TYPES.SCENE_SYMBOL) as ISceneService | undefined
     )?.getScene();
@@ -106,16 +115,15 @@ export default abstract class LayerGroup<
     this.source = new Source(featureCollection([]));
   }
 
-  // 会被LayerService调用
-  public setContainer(container: Container) {
+  setContainer(container: Container) {
     this.container = container;
   }
 
-  public abstract initLayerList(): void;
+  abstract initLayerList(): void;
 
-  public abstract getDefaultOptions(): T;
+  abstract getDefaultOptions(): T;
 
-  public addLayer(layer: ILayer) {
+  addLayer(layer: ILayer) {
     this.layers.push(layer);
     // 在layerService.addLayer()前的layer不会通过此处注册进scene中，而是在LayerService中的addLayer中完成注册
     if (layer instanceof MarkerLayer) {
@@ -125,17 +133,15 @@ export default abstract class LayerGroup<
     }
   }
 
-  public getLayer(name: string) {
+  getLayer(name: string) {
     return this.layers.find((l) => l.name === name);
   }
 
-  public getLayers() {
+  getLayers() {
     return this.layers;
   }
 
-  public boxSelect(bbox: BBox) {}
-
-  public onLayerHover(layer: ILayer) {
+  onLayerHover(layer: ILayer) {
     if (this.options.hover) {
       layer.on('mouseenter', this.onMouseMove);
       layer.on('mousemove', this.onMouseMove);
@@ -143,7 +149,7 @@ export default abstract class LayerGroup<
     }
   }
 
-  public offLayerHover(layer: ILayer) {
+  offLayerHover(layer: ILayer) {
     if (this.options.hover) {
       layer.off('mouseenter', this.onMouseMove);
       layer.off('mousemove', this.onMouseMove);
@@ -151,19 +157,19 @@ export default abstract class LayerGroup<
     }
   }
 
-  public onLayerSelect(layer: ILayer) {
+  onLayerSelect(layer: ILayer) {
     if (this.options.select) {
       layer.on('click', this.onClick);
     }
   }
 
-  public offLayerSelect(layer: ILayer) {
+  offLayerSelect(layer: ILayer) {
     if (this.options.select) {
       layer.off('click', this.onClick);
     }
   }
 
-  public onClick = (e: IFeature) => {
+  onClick = (e: IFeature) => {
     const isMultipleSelect = isPressing(16) && !!this.options.multipleSelect;
     const hasSelectFeature = this.selectFeatures.find(
       (item) => item.featureId === e.featureId,
@@ -187,35 +193,39 @@ export default abstract class LayerGroup<
     }
   };
 
-  public onMouseMove = (e: IFeature) => {
+  onMouseMove = (e: IFeature) => {
     if (e.featureId !== this.hoverFeature?.featureId) {
       this.setHoverFeature(e);
     }
   };
 
-  public onMouseOut = () => {
+  onMouseOut = () => {
     this.setHoverFeature(null);
   };
 
-  public setHoverFeature(feature?: IFeature | null) {
+  setHoverFeature(feature?: IFeature | null) {
     this.hoverFeature = feature;
     this.emit(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, feature);
   }
 
-  public setSelectFeatures(features: IFeature[]) {
+  setSelectFeatures(features: IFeature[]) {
     if (this.selectFeatures.length !== features.length || features.length) {
       this.selectFeatures = features;
       this.emit(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, features);
     }
   }
 
-  public removeLayer(layer: ILayer) {
+  removeLayer(layer: ILayer) {
     const layerIndex = this.layers.findIndex((l) => l.id === layer.id);
     this.layers.splice(layerIndex, 1);
     this.scene?.removeLayer(layer);
   }
 
-  public setData(data: any) {
+  /**
+   * 更新数据
+   * @param data
+   */
+  setData(data: any) {
     this.data = data;
     this.source.setData(data);
 
@@ -225,7 +235,7 @@ export default abstract class LayerGroup<
     this.emit(LayerGroupEventEnum.DATA_UPDATE, data);
   }
 
-  public setDataItem(featureId: number, newProperties: Record<string, any>) {
+  setDataItem(featureId: number, newProperties: Record<string, any>) {
     const source = this.layers[0]?.getSource();
     if (source) {
       const targetFeature = source.getFeatureById(featureId) as Feature | null;
@@ -240,22 +250,69 @@ export default abstract class LayerGroup<
     }
   }
 
-  public show() {
+  setDataItemByKey(
+    key: string,
+    value: any,
+    newProperties: Record<string, any>,
+  ) {
+    this.data.features.find((feature: Feature) => {
+      if (feature.properties?.[key] === value) {
+        Object.assign(feature.properties, newProperties);
+        this.source.setData(this.data);
+      }
+    });
+  }
+
+  /**
+   * 显示所有图层
+   */
+  show() {
     this.layers.forEach((layer) => layer.show());
     this.visible = true;
     this.emit(LayerGroupEventEnum.VISIBLE_CHANGE, true);
   }
 
-  public hide() {
+  hide() {
     this.layers.forEach((layer) => layer.hide());
     this.visible = false;
     this.emit(LayerGroupEventEnum.VISIBLE_CHANGE, false);
   }
-  public destroy() {
+
+  destroy() {
     this.layers.forEach((layer) => layer.destroy());
     this.emit(LayerGroupEventEnum.DESTROY);
   }
-  public getLegendItem(): any[] {
+
+  boxSelect(bbox: BBox) {
+    if (!this.options.multipleSelect) {
+      return;
+    }
+    const mainLayer = this.mainLayer;
+    if (mainLayer) {
+      // @ts-ignore
+      mainLayer.boxSelect(bbox, (e) => {
+        if (this.selectFeatures.length === e.length) {
+          return;
+        }
+        const newSelectFeatures: IFeature[] = (Array.from(e) ? e : []).map(
+          ({ pickedFeatureIdx: featureId, ...feature }: any) => {
+            return {
+              featureId,
+              feature,
+            };
+          },
+        );
+        if (
+          newSelectFeatures.map((item) => item.featureId).join(',') !==
+          this.selectFeatures.map((item) => item.featureId).join(',')
+        ) {
+          this.setSelectFeatures(newSelectFeatures);
+        }
+      });
+    }
+  }
+
+  getLegendItem(): any[] {
     return [];
   }
 }
