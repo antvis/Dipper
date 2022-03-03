@@ -30,7 +30,7 @@ export interface IImageLayerStyle extends IImageLayerImageStyle {
 export interface IImageLayerGroupOptions extends ILayerGroupOptions {
   image: Record<string, string>;
   normal: IImageLayerStyle;
-  select: false | IImageLayerImageStyle;
+  select: false | IImageLayerStyle;
   autoFit?: boolean;
   uniqueKey: string;
 }
@@ -73,6 +73,9 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     if (select) {
       const selectOptions = merge({}, defaultImageLayerStyle, select);
       selectLayers.push(this.initImageLayer('selectImg', selectOptions));
+      if (select.text) {
+        selectLayers.push(this.initTextLayer('selectText', selectOptions));
+      }
 
       this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
         const selectData = featureCollection(this.selectFeatures.map((item) => item.feature));
