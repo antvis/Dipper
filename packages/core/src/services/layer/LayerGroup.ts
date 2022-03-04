@@ -80,9 +80,6 @@ export default abstract class LayerGroup<
 
   protected visible = true;
 
-  /**
-   * 当前LayerGroup的唯一id
-   */
   name: string;
 
   data: any;
@@ -228,6 +225,10 @@ export default abstract class LayerGroup<
   setData(data: any) {
     this.data = data;
     this.source.setData(data);
+
+    if (this.mainLayer && this.mainLayer?.getSource() !== this.source) {
+      this.mainLayer.setData(data);
+    }
 
     this.setSelectFeatures([]);
     this.setHoverFeature(null);
