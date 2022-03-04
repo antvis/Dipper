@@ -1,10 +1,8 @@
 ---
-title: 填充图
-order: 4
-hide: true
-group:
-  title: 图层组件
+mobile: false
 ---
+
+# GridLayer 填充图
 
 ## 填充图
 
@@ -39,3 +37,5 @@ group:
 图层销毁
 
 ### 事件
+
+<code src="./demo/gridLayer" />

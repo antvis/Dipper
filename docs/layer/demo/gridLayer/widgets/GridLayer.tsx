@@ -36,6 +36,18 @@ export default function GridLayer({
         },
         normal: {
           fillColor: {
+            value: '#ffffff',
+          },
+          scale: {
+            centerLng: {
+              type: 'quantile',
+            },
+          },
+          style: {
+            opacity: 0,
+          },
+          borderWidth: 1,
+          borderColor: {
             field: 'centerLng',
             value: [
               'rgb(247, 251, 255)',
@@ -49,13 +61,6 @@ export default function GridLayer({
               'rgb(8, 48, 107)',
             ],
           },
-          scale: {
-            centerLng: {
-              type: 'quantile',
-            },
-          },
-          borderWidth: 1,
-          borderColor: '#ffffff',
         },
         multipleSelect: true,
       },
