@@ -1,5 +1,5 @@
 import type EventEmitter from 'eventemitter3';
-import type { IMapConfig, IPopupOption } from '@antv/l7';
+import type { IMapConfig, IPopupOption, ISceneConfig } from '@antv/l7';
 import type {
   IWidgetProps,
   IControlWidgetsProps,
@@ -12,18 +12,20 @@ export interface IToolBar {
   children?: React.ReactNode;
 }
 
-export interface IConfig {
+export interface IBaseConfig {
+  scene: Partial<Omit<ISceneConfig, 'map'>>;
+  mapType?: 'GaodeV1' | 'GaodeV2' | 'MapBox' | 'Map';
+  map: Partial<IMapConfig>;
+  global?: Record<string, any>;
   widgets?: {
     [key: string]: {
       options?: Record<string, any> | Record<string, any>[]; // 初始化数据
       value?: Record<string, any> | Record<string, any>[]; // 结果数据
     };
   };
-  global?: Record<string, any>;
-  l7Logo?: {
-    logoPosition?: string;
-    logoVisible?: boolean;
-  };
+}
+
+export interface IConfig extends IBaseConfig {
   headerbar:
     | {
         display?: boolean;
@@ -48,8 +50,6 @@ export interface IConfig {
     | false;
   panel: Partial<IPanel>;
   toolbar: IToolBar[];
-  mapType?: 'GaodeV1' | 'GaodeV2' | 'MapBox' | 'Map';
-  map: Partial<IMapConfig>;
   popup: {
     // 信息框
     display?: boolean; // 是否显示
@@ -74,9 +74,9 @@ export interface IConfig {
 }
 
 export interface IConfigService extends EventEmitter {
-  config: Partial<IConfig>;
+  config: Partial<IBaseConfig & any>;
   reset: () => void;
-  init: (config: Partial<IConfig> | undefined) => void;
+  init: (config: Partial<IBaseConfig & any> | undefined) => void;
   setConfig: (field: string, value: any) => void;
   getConfig: (key: string) => any;
   updateLegend: (id: string, value: any) => void;

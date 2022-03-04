@@ -3,7 +3,6 @@ import { AMapScene, AMapSceneV2, Popup, MapboxScene, MapScene } from '@antv/l7-r
 import type {} from '@antv/l7-react';
 import styles from './index.less';
 import { useSceneService, useConfigService } from '../../hooks';
-import { PositionName } from '@antv/l7';
 
 interface IProps {
   /** 地图子组件 */
@@ -14,7 +13,7 @@ export default function AppMap({ children }: IProps) {
   const { sceneService } = useSceneService();
   const { globalConfig } = useConfigService();
   const [isLoaded, setLoaded] = useState(false);
-  const { map, mapType, popup, l7Logo } = globalConfig;
+  const { map, mapType, popup, scene } = globalConfig;
   const getMap = (type = 'GaodeV1') => {
     const content = () => {
       return (
@@ -36,15 +35,7 @@ export default function AppMap({ children }: IProps) {
     };
     if (type === 'GaodeV2') {
       return (
-        <AMapSceneV2
-          className={styles.appMap}
-          map={map!}
-          option={{
-            logoPosition: (l7Logo?.logoPosition || 'bottomright') as PositionName,
-            logoVisible: l7Logo?.logoVisible ?? true,
-          }}
-          onSceneLoaded={mapLoaded}
-        >
+        <AMapSceneV2 className={styles.appMap} map={map!} option={scene} onSceneLoaded={mapLoaded}>
           {content()}
         </AMapSceneV2>
       );
@@ -52,41 +43,20 @@ export default function AppMap({ children }: IProps) {
 
     if (type === 'Map') {
       return (
-        <MapScene
-          className={styles.appMap}
-          map={map!}
-          option={{
-            logoPosition: 'bottomright',
-          }}
-          onSceneLoaded={mapLoaded}
-        >
+        <MapScene className={styles.appMap} map={map!} option={scene} onSceneLoaded={mapLoaded}>
           {content()}
         </MapScene>
       );
     }
     if (type === 'MapBox') {
       return (
-        <MapboxScene
-          className={styles.appMap}
-          map={map!}
-          option={{
-            logoPosition: 'bottomright',
-          }}
-          onSceneLoaded={mapLoaded}
-        >
+        <MapboxScene className={styles.appMap} map={map!} option={scene} onSceneLoaded={mapLoaded}>
           {content()}
         </MapboxScene>
       );
     }
     return (
-      <AMapScene
-        className={styles.appMap}
-        map={map!}
-        option={{
-          logoPosition: 'bottomright',
-        }}
-        onSceneLoaded={mapLoaded}
-      >
+      <AMapScene className={styles.appMap} map={map!} option={scene} onSceneLoaded={mapLoaded}>
         {content()}
       </AMapScene>
     );
