@@ -22,6 +22,8 @@ export interface IGridLayerGroupOptions extends ILayerGroupOptions {
   normal: IGridLayerGroupStyle & {
     fillColor: ILayerFieldProperties<string>;
     scale?: ILayerScale;
+    style?: Record<string, any>;
+    borderStyle?: Record<string, any>;
   };
   autoFit?: boolean;
   text: boolean | ILayerGroupText;
@@ -44,6 +46,8 @@ export const defaultGridLayerOptions: IGridLayerGroupOptions = {
     fillColor: '#1990FF',
     borderColor: '#1990FF',
     borderWidth: 0,
+    style: {},
+    borderStyle: {},
   },
   text: false,
   select: true,
@@ -79,7 +83,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
 
   initFillLayer() {
     const {
-      normal: { fillColor, scale, ...style },
+      normal: { fillColor, scale, style, ...otherStyle },
       autoFit = false,
     } = this.options;
 
@@ -93,7 +97,10 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       // @ts-ignore
       .color(...getLayerFieldArgus(fillColor))
       .shape('fill')
-      .style(style);
+      .style({
+        ...otherStyle,
+        ...style,
+      });
 
     if (scale) {
       // @ts-ignore
@@ -107,7 +114,7 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
 
   initLineLayer() {
     const {
-      normal: { borderColor, borderWidth, ...style },
+      normal: { borderColor, borderWidth, borderStyle, ...otherStyle },
     } = this.options;
 
     const borderLayer = new PolygonLayer();
@@ -119,7 +126,10 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
       // @ts-ignore
       .size(...getLayerFieldArgus(borderWidth))
       // @ts-ignore
-      .style(style);
+      .style({
+        ...otherStyle,
+        ...borderStyle,
+      });
 
     borderLayer.setSource(this.source);
     this.addLayer(borderLayer);
