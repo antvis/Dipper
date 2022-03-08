@@ -249,6 +249,7 @@ export default abstract class LayerGroup<
         }
         this.data.features[targetIndex] = targetFeature;
         this.source.setData(this.data);
+        this.emit(LayerGroupEventEnum.DATA_UPDATE, this.data);
       }
     }
   }
@@ -264,6 +265,7 @@ export default abstract class LayerGroup<
           Object.assign(feature.properties, newProperties);
         }
         this.source.setData(this.data);
+        this.emit(LayerGroupEventEnum.DATA_UPDATE, this.data);
       }
     });
   }
