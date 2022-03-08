@@ -244,7 +244,9 @@ export default abstract class LayerGroup<
         isEqual(item, targetFeature),
       );
       if (targetFeature && targetIndex > -1) {
-        Object.assign(targetFeature.properties, newProperties);
+        if (targetFeature.properties) {
+          Object.assign(targetFeature.properties, newProperties);
+        }
         this.data.features[targetIndex] = targetFeature;
         this.source.setData(this.data);
       }
@@ -258,7 +260,9 @@ export default abstract class LayerGroup<
   ) {
     this.data.features.find((feature: Feature) => {
       if (feature.properties?.[key] === value) {
-        Object.assign(feature.properties, newProperties);
+        if (feature.properties) {
+          Object.assign(feature.properties, newProperties);
+        }
         this.source.setData(this.data);
       }
     });

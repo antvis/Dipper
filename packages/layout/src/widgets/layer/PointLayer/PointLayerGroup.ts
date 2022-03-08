@@ -7,9 +7,8 @@ import {
   LayerGroupEventEnum,
 } from '@antv/dipper-core';
 import { Feature, featureCollection } from '@turf/turf';
-import { PointLayer } from '@antv/l7';
+import { PointLayer, ILayerConfig } from '@antv/l7';
 import { merge } from 'lodash';
-import { ILayerConfig } from '_@antv_l7-core@2.7.30@@antv/l7-core';
 
 export interface IPointLayerStyle {
   size: ILayerFieldProperties<number>;
