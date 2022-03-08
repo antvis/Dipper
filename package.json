@@ -25,7 +25,7 @@
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
   "gitHooks": {
-    "pre-commit": "echo %PATH%"
+    "pre-commit": "lint-staged && yarn run build"
   },
   "workspaces": [
     "packages/*"
