@@ -1,120 +1,100 @@
 import { useInjection } from 'inversify-react';
-
-import type {
-  ILayerGroup,
+import { useEffect, useState, useCallback } from 'react';
+import {
+  IFeature,
+  LayerGroup,
+  LayerGroupEventEnum,
   ILayerService,
-  ILayerEventTarget,
+  LayerEventEnum,
+  TYPES,
 } from '@antv/dipper-core';
+import { centerOfMass, coordAll, Feature, featureCollection } from '@turf/turf';
+import { isEqual } from 'lodash';
 
-import { LayerGroupEventEnum, LayerEventEnum, TYPES } from '@antv/dipper-core';
-import { useCallback, useEffect, useState } from 'react';
-import type { Feature, FeatureCollection } from '@turf/turf';
-
-export function useLayerGroup(name: string) {
+export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
   const layerService = useInjection<ILayerService>(TYPES.LAYER_SYMBOL);
-  const [currentGroup, setLayerGroup] = useState<ILayerGroup>();
-  const [currentSelectFeatures, setSelectFeatures] = useState<Feature[]>([]);
-  const [currentHoverFeature, setHoverFeature] = useState<Feature | null>(null);
-  useEffect(() => {
-    const layerAdd = (e: ILayerEventTarget) => {
-      if (e.type === 'add' && e.target?.name === name) {
-        if (!currentGroup) {
-          setLayerGroup(e.target);
-        }
+  const [layerGroup, setLayerGroup] = useState<LayerGroup | null>(null);
+
+  const [layerData, setLayerData] = useState(featureCollection([]));
+  const [selectFeatures, setSelectFeatures] = useState<IFeature[]>([]);
+
+  const getLayerGroup = useCallback(() => {
+    if (typeof targetLayer === 'string') {
+      const targetLayerGroup = layerService.getLayer(targetLayer) as LayerGroup;
+      if (targetLayerGroup) {
+        setLayerGroup(targetLayerGroup);
       }
+    } else if (targetLayer instanceof Object) {
+      setLayerGroup(targetLayer as LayerGroup);
+    } else if (targetLayer) {
+      console.warn('未找到指定LayerGroup');
+    }
+  }, [targetLayer, layerService]);
+
+  useEffect(() => {
+    layerService.on(LayerEventEnum.LAYERCHANGE, () => getLayerGroup());
+    return () => {
+      layerService.off(LayerEventEnum.LAYERCHANGE, () => getLayerGroup());
     };
-    if (layerService.getLayer(name)) {
-      setLayerGroup(layerService.getLayer(name));
-    } else {
-      layerService.on(LayerEventEnum.LAYERCHANGE, layerAdd);
+  }, [getLayerGroup]);
+
+  useEffect(() => {
+    if (targetLayer) {
+      getLayerGroup();
+    }
+  }, [targetLayer, getLayerGroup]);
+
+  useEffect(() => {
+    if (layerGroup) {
+      if (!isEqual(layerGroup.selectFeatures, selectFeatures)) {
+        setSelectFeatures(layerGroup.selectFeatures ?? []);
+      }
+      setLayerData(layerGroup.data);
+      layerGroup?.on(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
+      layerGroup?.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
     }
     return () => {
-      layerService.off(LayerEventEnum.LAYERCHANGE, layerAdd);
+      layerGroup?.off(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
+      layerGroup?.off(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
     };
-  }, []);
+  }, [layerGroup]);
 
-  useEffect(() => {
-    if (currentGroup) {
-      setSelectFeatures(currentGroup.getSelectFeatures?.() || []);
-    }
-  }, [currentGroup]);
+  const setSelectFeaturesCb = useCallback(
+    (selectFeatures: Feature[], uniqueKey = 'id') => {
+      if (layerGroup?.mainLayer) {
+        const source = layerGroup.mainLayer.getSource();
+        const featureIdList = selectFeatures.map((feature) => {
+          // @ts-ignore
+          return source.getFeatureId(uniqueKey, feature.properties[uniqueKey]);
+        });
 
-  useEffect(() => {
-    const onSelectFeature = (features: any[]) => {
-      setSelectFeatures(features);
-    };
-    const onHoverFeature = (feature: any) => {
-      setHoverFeature(feature);
-    };
-    if (currentGroup) {
-      currentGroup.on(LayerGroupEventEnum.SELECTFEATURECHANGE, onSelectFeature);
-      currentGroup.on(LayerGroupEventEnum.HOVERFEATURECHANGE, onHoverFeature);
-    }
-    return () => {
-      if (currentGroup) {
-        currentGroup.off(
-          LayerGroupEventEnum.SELECTFEATURECHANGE,
-          onSelectFeature,
-        );
-        currentGroup.off(
-          LayerGroupEventEnum.HOVERFEATURECHANGE,
-          onHoverFeature,
-        );
-      }
-    };
-  }, [currentGroup]);
+        // @ts-ignore
+        const newFeatureList: IFeature[] = selectFeatures.map((feature, index) => {
+          const [lng, lat] = coordAll(centerOfMass(feature))[0];
+          return {
+            feature,
+            featureId: featureIdList[index] ?? 0,
+            lngLat: {
+              lng,
+              lat,
+            },
+          };
+        });
 
-  const updateProperties = useCallback(
-    (feature: Feature, properties: Record<string, any>) => {
-      // 检索选中网格信息
-      setSelectFeatures((list: any[] = []) => {
-        const newList = [...list];
-        const targetIndex = newList?.findIndex(
-          (item) => feature.properties?.id === item.feature.properties.id,
-        );
-        if (Array.isArray(newList) && targetIndex > -1) {
-          newList[targetIndex].feature.properties = Object.assign(
-            newList[targetIndex].feature.properties,
-            properties,
-          );
-        }
-        return newList;
-      });
-
-      // 检索hover网格信息
-      setHoverFeature((item: any) => {
-        if (item) {
-          const newItem = { ...item };
-          newItem.feature.properties = Object.assign(
-            newItem.feature.properties,
-            properties,
-          );
-          return newItem;
-        }
-        return item;
-      });
-
-      // 修改source网格信息
-      // @ts-ignore TODO  数据更新方式修改
-      const geoJson = currentGroup?.source?.originData as FeatureCollection;
-      const targetIndex = geoJson.features.findIndex(
-        (item: Feature) => feature.properties?.id === item.properties?.id,
-      );
-      if (targetIndex > -1) {
-        geoJson.features[targetIndex].properties = Object.assign(
-          geoJson.features[targetIndex].properties,
-          properties,
-        );
-        currentGroup?.updateSource(geoJson);
+        layerGroup.setSelectFeatures(newFeatureList);
+      } else {
+        console.error('当期LayerGroup内实现的mainLayer有误');
       }
     },
-    [currentGroup],
+    [layerGroup],
   );
 
   return {
-    currentGroup,
-    updateProperties,
-    selectFeatures: currentSelectFeatures,
-    hoverFeature: currentHoverFeature,
+    layerGroup,
+    layerData,
+    setLayerData,
+    selectFeatures,
+    setSelectFeatures: setSelectFeaturesCb,
+    updateProperties: (...args: any[]) => {},
   };
-}
+};

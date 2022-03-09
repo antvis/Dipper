@@ -1,4 +1,4 @@
-const WIDGETS: Record<string, React.FC> = {};
+const WIDGETS: Record<string, (props: any) => JSX.Element> = {};
 export function getWidget(type: string) {
   if (!WIDGETS[type]) {
     console.warn(`未注册组件：${type}`);
@@ -9,3 +9,7 @@ export function getWidget(type: string) {
 export const registerWidget = (type: string, components: any): void => {
   WIDGETS[type] = components;
 };
+
+export function getAllWidgets() {
+  return WIDGETS;
+}

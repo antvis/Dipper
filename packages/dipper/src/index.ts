@@ -1,6 +1,7 @@
 export * from '@antv/dipper-core';
-export * from '@antv/dipper-layout';
+export * from '@antv/dipper-pc';
 export * from '@antv/dipper-widgets';
+
 import { registerWidget } from '@antv/dipper-core';
 import {
   CitySelect,
@@ -13,8 +14,11 @@ import {
   SearchPlace,
   MapStyle,
   Map2Image,
+  DipperCollapse,
+  DipperSelect,
 } from '@antv/dipper-widgets';
-registerWidget('citySelect', CitySelect);
+registerWidget('cityselect', CitySelect);
+registerWidget('select', DipperSelect);
 registerWidget('panelTabContent', PanelTabcontent);
 registerWidget('navibar', NavBar);
 registerWidget('classifyColor', ClassifyColor);
@@ -24,3 +28,4 @@ registerWidget('mapStyle', MapStyle);
 registerWidget('location', Location);
 registerWidget('searchPlaces', SearchPlace);
 registerWidget('exportMap', Map2Image);
+registerWidget('collapse', DipperCollapse);

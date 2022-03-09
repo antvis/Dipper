@@ -13,7 +13,8 @@ export default class SceneService
 {
   private config: Partial<IConfig> = {};
   public scene: Scene | undefined;
-  public container: Container | undefined = undefined;
+  public container!: Container;
+  public position: [number, number] | undefined;
 
   @inject(TYPES.CONFIG_SYMBOL)
   protected configService!: IConfigService;
@@ -28,13 +29,22 @@ export default class SceneService
     return this.config as IConfig;
   }
 
+  getPosition() {
+    return this.position;
+  }
+
+  setPosition(position: [number, number]) {
+    this.position = position;
+    this.emit('sceneChange', { position, scene: this.scene });
+  }
+
   getScene() {
     return this.scene;
   }
 
   setScene(scene: Scene) {
     this.scene = scene;
-    this.emit('sceneChange', scene);
+    this.emit('sceneChange', { scene, position: this.position });
   }
   destroy() {
     this.scene?.destroy();

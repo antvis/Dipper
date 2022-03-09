@@ -8,6 +8,8 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
+import { FeatureCollection } from '@turf/turf';
+
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
     if (Array.isArray(item.value)) {
@@ -23,40 +25,45 @@ const formatLegend = (data: any[]) => {
     }
   });
 };
-export function GridLayer() {
+export function GridLayer({ options }: any) {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const { globalConfig, updateLegend, getWidgetsValue,setConfig } = useConfigService();
+  const { globalConfig, updateLegend, getWidgetsValue, setConfig } =
+    useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const cityValue = getWidgetsValue('citySelect');
   const brandValue = getWidgetsValue('brand');
-  const [geoData, setGeoData] = useState();
+  const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 
-  const layerProps = useMemo(() => {
-    return layers.find((item: any) => item.type === 'gridLayer');
-  }, [layers]);
+  // const gridLayerProps = useMemo(() => {
+  //   return layers.find((item: any) => item.type === 'gridLayer');
+  // }, [layers]);
 
-  const updateLayerLegend = (items: any[]) => {
-    updateLegend('gridLayerLegend', {
-      type: 'classifyColor',
-      display: true,
-      position: 'bottomleft',
-      options: {
-        title: '充电宝投放数量',
-        unkownName: layerProps.options.unkownName,
-        items: items.map((item) => {
-          return {
-            color: item.color,
-            value: item.value.map((v) => {
-              return (v / 10000).toFixed(2);
-            }),
-          };
-        }),
-      },
-    });
-  };
+  // const pointLayerProps = useMemo(() => {
+  //   return layers.find((item: any) => item.type === 'pointLayer');
+  // }, [layers]);
+  //
+  // const updateLayerLegend = (items: any[]) => {
+  //   updateLegend('gridLayerLegend', {
+  //     type: 'classifyColor',
+  //     display: true,
+  //     position: 'bottomleft',
+  //     options: {
+  //       title: '充电宝投放数量',
+  //       unkownName: gridLayerProps.options.unkownName,
+  //       items: items.map((item) => {
+  //         return {
+  //           color: item.color,
+  //           value: item.value.map((v) => {
+  //             return (v / 10000).toFixed(2);
+  //           }),
+  //         };
+  //       }),
+  //     },
+  //   });
+  // };
 
   // 根据筛选器条件请求数据
   useEffect(() => {
@@ -97,7 +104,7 @@ export function GridLayer() {
         }
       });
     // 切换城市 高德地图方法
-    sceneService.getScene().map?.setCity(cityValue[1]);
+    sceneService.getScene()?.map?.setCity(cityValue[1]);
   }, [JSON.stringify(cityValue), brandValue]);
 
   useEffect(() => {
@@ -108,47 +115,57 @@ export function GridLayer() {
       gridLayer.setData(geoData);
       return;
     }
-    const layer = new GridLayerGroup({
+    const newGridLayer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
-      options: layerProps.options,
+      options: {
+        text: {
+          field: 'name',
+        },
+        normal: {
+          fillColor: {
+            field: 'unit_price',
+            value: [
+              'rgb(247, 251, 255)',
+              'rgb(222, 235, 247)',
+              'rgb(198, 219, 239)',
+              'rgb(158, 202, 225)',
+              'rgb(107, 174, 214)',
+              'rgb(66, 146, 198)',
+              'rgb(33, 113, 181)',
+              'rgb(8, 81, 156)',
+              'rgb(8, 48, 107)',
+            ],
+          },
+          scale: {
+            unit_price: {
+              type: 'quantile',
+            },
+          },
+          borderWidth: 1,
+          borderColor: '#ffffff',
+          opacity: 1,
+        },
+        multipleSelect: true,
+      },
     });
-    layerService.addLayer(layer);
 
-    layer.on(LayerGroupEventEnum.DATAUPDATE, () => {
-      layer.getLegendItem().map((item) => {
-        if (Array.isArray(item.value)) {
-          return {
-            ...item,
-            value: item.value.map((v) => v.toFixed(2)),
-          };
-        } else {
-          return {
-            ...item,
-            value: item.value.toFixed(2),
-          };
-        }
-      });
-      updateLayerLegend(formatLegend(layer.getLegendItem()));
-    });
+    layerService.addLayer(newGridLayer);
 
-    // 更新图例
-    updateLayerLegend(formatLegend(layer.getLegendItem()));
-
-    setGridLayer(layer);
+    setGridLayer(newGridLayer);
   }, [geoData]);
 
   useEffect(() => {
     if (selectFeatures.length) {
       // TODO 报错
-      setConfig(`panel.children.1.display`, false);
-      setConfig(`panel.children.2.display`, true);
-      // setConfig(`panel.children.${findIdMeshchart}.display`, false)
+      setConfig(`panel.childrens.1.display`, false);
+      setConfig(`panel.childrens.2.display`, true);
+      // setConfig(`panel.childrens.${findIdMeshchart}.display`, false)
     } else {
-      setConfig(`panel.children.1.display`, true);
-      setConfig(`panel.children.2.display`, false);
+      setConfig(`panel.childrens.1.display`, true);
+      setConfig(`panel.childrens.2.display`, false);
     }
-  }, [JSON.stringify(selectFeatures)])
+  }, [JSON.stringify(selectFeatures)]);
 
   return <></>;
 }

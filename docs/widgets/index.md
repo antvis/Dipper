@@ -3,7 +3,8 @@ title: 通用配置
 toc: menu
 order: 0
 group:
-  title: 组件
+  title: 基础组件
+  order: 4
 ---
 
 ### 组件使用
@@ -53,7 +54,7 @@ group:
 
 组件内部配置信息
 
-#### children 可选
+#### childrens 可选
 
 子组件 数据格式
 
@@ -69,7 +70,7 @@ group:
       width: 360,
     },
     position: 'right',
-    children: [
+    childrens: [
       {
         display: true,
         type: 'meshName',

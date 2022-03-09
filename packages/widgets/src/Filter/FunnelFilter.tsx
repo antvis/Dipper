@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from '@alipay/bigfish/react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './index.less';
-import { DownOutlined } from '@alipay/bigfish/icons';
-import { Button, Dropdown, Input } from '@alipay/bigfish/antd';
-import classnames from '@alipay/bigfish/util/classnames';
-import { cloneDeep } from '@alipay/bigfish/util/lodash';
+import { Button, Dropdown, Input } from 'antd';
+import classnames from 'classnames';
+import { cloneDeep } from 'lodash';
 import { useConfigService } from '@antv/dipper';
+import { DownOutlined } from '@ant-design/icons';
 
 function FunnelFilter({ condition, type, event }: any) {
   // const { defaultOpen = false } = options || {};

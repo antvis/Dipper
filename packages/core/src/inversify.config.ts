@@ -4,11 +4,11 @@ import { TYPES } from './types';
 import type { ISceneService } from './services/scene/ISceneService';
 import type { ILayerService } from './services/layer/ILayerService';
 import type { IConfigService } from './services/config/IConfigService';
-import type { IControlService } from './/services/control/IControlService';
+import type { IWidgetsService } from './services/widgets/IWidgetsService';
 import SceneService from './services/scene/SceneService';
 import LayerService from './services/layer/LayerService';
 import ConfigService from './services/config/ConfigService';
-import ControlService from './services/control/ControlService';
+import WidgetsService from './services/widgets/WidgetsService';
 import type { IPanelService } from './services/panel/IPanelService';
 import PanelService from './services/panel/PanelService';
 
@@ -31,8 +31,8 @@ export default function createContainer() {
     .inSingletonScope();
 
   container
-    .bind<IControlService>(TYPES.CONTROL_SYMBOL)
-    .to(ControlService)
+    .bind<IWidgetsService>(TYPES.WIDGETS_SYMBOL)
+    .to(WidgetsService)
     .inSingletonScope();
 
   container

@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper",
-  "version": "0.0.19",
+  "version": "0.2.30",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -40,17 +40,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@antv/dipper-core": "^0.0.19",
-    "@antv/dipper-layout": "^0.0.19",
-    "@antv/dipper-widgets": "^0.0.19"
+    "@antv/dipper-core": "^0.2.30",
+    "@antv/dipper-pc": "^0.2.30",
+    "@antv/dipper-widgets": "^0.2.30"
   },
   "peerDependencies": {
     "@ant-design/icons": "^4.7.0",
     "@antv/l7": "^2.5.40",
     "@antv/l7-maps": "^2.5.40",
-    "antd": "^4.16.13",
     "react": "^16.14.0",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.14.0"
   },
   "devDependencies": {
     "@umijs/test": "^3.0.5",
@@ -60,5 +59,6 @@
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.1",
     "yorkie": "^2.0.0"
-  }
+  },
+  "gitHead": "0ab188cbbd501a91226dbec5c59a197bf4336e9c"
 }

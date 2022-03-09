@@ -1,26 +1,26 @@
 import { IConfig, SingleSequentialColorScale } from '@antv/dipper';
 import { CityList } from './mock';
 export const config: Partial<IConfig> = {
-  viewData: {
-    global: {
-      filterData: [],
-      areaCode: '330100',
-      view: 'task',
-    },
-    widgets: {
-      citySelect: {
-        options: CityList,
-        value: ['330000', '330100'],
-      },
+  global: {
+    filterData: [],
+    areaCode: '330100',
+    view: 'task',
+  },
+  widgets: {
+    citySelect: {
+      options: CityList,
+      value: ['330000', '330100'],
     },
   },
   headerbar: {
     display: true,
-    title: {
-      value: '数据分析',
-      display: true,
+    options: {
+      title: {
+        value: '数据分析',
+        display: true,
+      },
     },
-    children: [
+    components: [
       {
         display: true,
         position: 'left',
@@ -51,7 +51,7 @@ export const config: Partial<IConfig> = {
       width: 426,
     },
     position: 'right',
-    children: [
+    components: [
       {
         display: true,
         type: 'meshName',
@@ -66,7 +66,7 @@ export const config: Partial<IConfig> = {
         display: true,
         type: 'panelTabContent',
         title: '所有网格',
-        children: [
+        components: [
           {
             display: true,
             type: 'mesh_indicator',
@@ -82,7 +82,7 @@ export const config: Partial<IConfig> = {
   },
   toolbar: {
     display: false,
-    children: [],
+    components: [],
   },
   map: {
     zoom: 10,
@@ -138,22 +138,7 @@ export const config: Partial<IConfig> = {
   layers: [
     {
       type: 'gridLayer',
-      options: {
-        label: {
-          field: 'name',
-          size: 12,
-          color: '#000',
-        },
-        fill: {
-          field: 'unit_price',
-          color: ['#A9D3FF', '#82B1FF', '#6294FF', '#457BFF', '#2962FF'],
-          bandNum: 5,
-          scale: {
-            type: 'quantile',
-          },
-          unknownName: '无类型',
-        },
-      },
+      options: {},
     },
   ],
   legends: [],

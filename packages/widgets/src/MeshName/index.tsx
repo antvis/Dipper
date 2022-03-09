@@ -43,25 +43,6 @@ export function MeshName() {
     });
     setEdit(false);
   }, [JSON.stringify(selectFeatures)]);
-
-  useEffect(() => {
-    const amaps = new Amaps<number>({ serviceMethod: '' });
-    getLayerArea(amaps);
-  }, [selectFeatures]);
-
-  const getLayerArea = useCallback(
-    async (amaps: any) => {
-      let area = 0;
-      if (!selectFeatures.length) return;
-      (selectFeatures || []).forEach(async (item: any) => {
-        const points = item.feature.geometry.coordinates;
-        await amaps.ringArea(points[0], 'km²');
-        area = amaps.getResult();
-      });
-    },
-    [selectFeatures],
-  );
-
   // select more meshname 编辑 网格名称
   const EditMeshName = () => {
     return (

@@ -1,5 +1,5 @@
 import type EventEmitter from 'eventemitter3';
-import type { IWidgetProps } from '../interface';
+import type { IWidgetProps } from '../widgets/IWidgetsService';
 
 export interface IPanel {
   display: boolean;
@@ -15,7 +15,8 @@ export interface IPanel {
     opened?: boolean;
     style?: React.CSSProperties;
   }>;
-  children?: IWidgetProps[];
+  children?: React.ReactNode;
+  components?: IWidgetProps[];
 }
 
 export interface IPanelService extends EventEmitter {

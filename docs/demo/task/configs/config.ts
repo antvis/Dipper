@@ -1,26 +1,26 @@
 import { IConfig, SingleSequentialColorScale } from '@antv/dipper';
 import { CityList } from './mock';
 export const config: Partial<IConfig> = {
-  viewData: {
-    global: {
-      filterData: [],
-      areaCode: '110000',
-      view: 'task',
-    },
-    widgets: {
-      citySelect: {
-        options: CityList,
-        value: ['110000', '110000'],
-      },
+  global: {
+    filterData: [],
+    areaCode: '110000',
+    view: 'task',
+  },
+  widgets: {
+    citySelect: {
+      options: CityList,
+      value: ['330000', '330100'],
     },
   },
   headerbar: {
     display: true,
-    title: {
-      value: 'XX 管理地图地图',
-      display: true,
+    options: {
+      title: {
+        value: 'XX 管理地图地图',
+        display: true,
+      },
     },
-    children: [
+    components: [
       {
         display: true,
         position: 'left',
@@ -35,7 +35,6 @@ export const config: Partial<IConfig> = {
   },
   panel: {
     display: true,
-
     position: 'right',
     options: {
       enableToggle: true,
@@ -43,7 +42,7 @@ export const config: Partial<IConfig> = {
       opened: true,
       width: 426,
     },
-    children: [
+    components: [
       {
         display: true,
         type: 'meshName',
@@ -157,22 +156,7 @@ export const config: Partial<IConfig> = {
   layers: [
     {
       type: 'gridLayer',
-      options: {
-        label: {
-          field: 'name',
-          size: 12,
-          color: '#000',
-        },
-
-        fill: {
-          field: 'unit_price',
-          color: ['#CFE1B9', '#B0C298', '#90A276', '#718355'],
-          unknownName: '无类型',
-          scale: {
-            type: 'quantile',
-          },
-        },
-      },
+      options: {},
     },
   ],
   legends: [],

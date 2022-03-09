@@ -17,8 +17,6 @@ export default class LayerService
 {
   protected layerStore: LayerType[] = [];
 
-  // private container: Container | undefined = undefined;
-
   @inject(TYPES.SCENE_SYMBOL)
   protected sceneService!: ISceneService;
 
@@ -26,15 +24,21 @@ export default class LayerService
     return this.layerStore.find((layer) => layer.name === name) as LayerType;
   }
 
-  getLayerSource(name: string){
-    const layerProerty = this.layerStore.find((layer) => layer.name === name) as LayerType;
-    return layerProerty?.data
+  getLayers() {
+    return this.layerStore;
+  }
+
+  getLayerSource(name: string) {
+    const layerProerty = this.layerStore.find(
+      (layer) => layer.name === name,
+    ) as LayerType;
+    return layerProerty?.data;
   }
 
   addLayer(layer: LayerType) {
     this.layerStore.push(layer);
-    layer.setContainer(this.sceneService?.container as Container);
-    layer.init();
+    layer.setContainer(this.sceneService.container);
+    layer.initLayerList();
     this.emit(LayerEventEnum.LAYERCHANGE, {
       type: 'add',
       target: layer,

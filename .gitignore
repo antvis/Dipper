@@ -6,6 +6,7 @@
 /yarn-error.log
 /yarn.lock
 /package-lock.json
+/packages/component/node_modules
 
 # production
 /dist
@@ -25,3 +26,5 @@
 /.idea
 lerna-debug.log
 /.history
+
+/packages/*/dist

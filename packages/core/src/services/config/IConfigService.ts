@@ -1,42 +1,55 @@
 import type EventEmitter from 'eventemitter3';
-import type { IMapConfig, IPopupOption } from '@antv/l7';
-import type { IWidgetProps, ControlPostions } from '../interface';
+import type { IMapConfig, IPopupOption, ISceneConfig } from '@antv/l7';
+import type {
+  IWidgetProps,
+  IControlWidgetsProps,
+} from '../widgets/IWidgetsService';
 import type { IPanel } from '../panel/IPanelService';
 
-export interface IConfig {
-  viewData: {
-    global?: Record<string, any>;
-    widgets?: {
-      [key: string]: {
-        options?: Record<string, any> | Record<string, any>[]; // 初始化数据
-        value?: Record<string, any> | Record<string, any>[]; // 结果数据
-      };
+export interface IToolBar {
+  display?: boolean;
+  components?: IWidgetProps[];
+  children?: React.ReactNode;
+}
+
+export interface IBaseConfig {
+  scene: Partial<Omit<ISceneConfig, 'map'>>;
+  mapType?: 'GaodeV1' | 'GaodeV2' | 'MapBox' | 'Map';
+  map: Partial<IMapConfig>;
+  global?: Record<string, any>;
+  widgets?: {
+    [key: string]: {
+      options?: Record<string, any> | Record<string, any>[]; // 初始化数据
+      value?: Record<string, any> | Record<string, any>[]; // 结果数据
     };
   };
-  headerbar: {
-    display?: boolean;
-    headerstyle?: React.CSSProperties;
-    url: string;
-    logo?: Partial<{
-      display: boolean;
-      value: string;
-      style: React.CSSProperties;
-      href: string;
-    }>;
-    title: Partial<{
-      value: string;
-      display: boolean;
-      style: React.CSSProperties;
-    }>;
-    children?: IWidgetProps[];
-  };
+}
+
+export interface IConfig extends IBaseConfig {
+  headerbar:
+    | {
+        display?: boolean;
+        options: {
+          headerstyle?: React.CSSProperties;
+          logo?: Partial<{
+            display: boolean;
+            value: string;
+            style: React.CSSProperties;
+            href: string;
+          }>;
+          title: Partial<{
+            url?: string;
+            value: string;
+            display: boolean;
+            style: React.CSSProperties;
+          }>;
+        };
+        components?: IWidgetProps[];
+        children?: React.ReactNode;
+      }
+    | false;
   panel: Partial<IPanel>;
-  toolbar: {
-    display: boolean;
-    children: IWidgetProps[];
-  };
-  headerWidgets?: IWidgetProps[]; // 导航栏配置
-  map: Partial<IMapConfig>;
+  toolbar: IToolBar[];
   popup: {
     // 信息框
     display?: boolean; // 是否显示
@@ -50,7 +63,7 @@ export interface IConfig {
         };
     children?: React.ReactNode;
   };
-  controls: IWidgetProps[]; // 自定义组件配置
+  controls: IControlWidgetsProps[]; // 自定义组件配置
   defaultcontrols: IWidgetProps[]; // 地图自带组件
   legends: IWidgetProps[];
   layers: {
@@ -61,15 +74,15 @@ export interface IConfig {
 }
 
 export interface IConfigService extends EventEmitter {
-  config: Partial<IConfig>;
+  config: Partial<IBaseConfig & any>;
   reset: () => void;
-  init: (config: Partial<IConfig> | undefined) => void;
+  init: (config: Partial<IBaseConfig & any> | undefined) => void;
   setConfig: (field: string, value: any) => void;
   getConfig: (key: string) => any;
   updateLegend: (id: string, value: any) => void;
   updateControl: (type: string, value: any) => void;
   setWidgetsOptions: (key: string, options: Record<string, any>) => void;
-  getWidgetsValue: (key: string) => Record<string, any>;
+  getWidgetsValue: (key: string) => Record<string, any> | undefined;
   setWidgetsValue: (key: string, options: Record<string, any>) => void;
-  getWidgetsOptions: (key: string) => Record<string, any>;
+  getWidgetsOptions: (key: string) => Record<string, any> | undefined;
 }
