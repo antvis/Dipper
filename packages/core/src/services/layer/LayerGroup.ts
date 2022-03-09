@@ -77,24 +77,18 @@ export default abstract class LayerGroup<
   implements ILayerGroup
 {
   protected layers: ILayer[] = [];
-
   protected visible = true;
 
-  name: string;
+  public name: string;
+  public data: any;
+  public options: T;
+  public source: Source;
+  public container?: Container;
 
-  data: any;
+  public selectFeatures: IFeature[] = [];
+  public hoverFeature?: IFeature | null = null;
 
-  options: T;
-
-  source: Source;
-
-  container?: Container;
-
-  selectFeatures: IFeature[] = [];
-
-  hoverFeature?: IFeature | null = null;
-
-  get scene(): Scene | undefined {
+  public get scene(): Scene | undefined {
     return (
       this.container?.get(TYPES.SCENE_SYMBOL) as ISceneService | undefined
     )?.getScene();
@@ -112,15 +106,16 @@ export default abstract class LayerGroup<
     this.source = new Source(featureCollection([]));
   }
 
-  setContainer(container: Container) {
+  // 会被LayerService调用
+  public setContainer(container: Container) {
     this.container = container;
   }
 
-  abstract initLayerList(): void;
+  public abstract initLayerList(): void;
 
-  abstract getDefaultOptions(): T;
+  public abstract getDefaultOptions(): T;
 
-  addLayer(layer: ILayer) {
+  public addLayer(layer: ILayer) {
     this.layers.push(layer);
     // 在layerService.addLayer()前的layer不会通过此处注册进scene中，而是在LayerService中的addLayer中完成注册
     if (layer instanceof MarkerLayer) {
@@ -130,15 +125,17 @@ export default abstract class LayerGroup<
     }
   }
 
-  getLayer(name: string) {
+  public getLayer(name: string) {
     return this.layers.find((l) => l.name === name);
   }
 
-  getLayers() {
+  public getLayers() {
     return this.layers;
   }
 
-  onLayerHover(layer: ILayer) {
+  public boxSelect(bbox: BBox) {}
+
+  public onLayerHover(layer: ILayer) {
     if (this.options.hover) {
       layer.on('mouseenter', this.onMouseMove);
       layer.on('mousemove', this.onMouseMove);
@@ -146,7 +143,7 @@ export default abstract class LayerGroup<
     }
   }
 
-  offLayerHover(layer: ILayer) {
+  public offLayerHover(layer: ILayer) {
     if (this.options.hover) {
       layer.off('mouseenter', this.onMouseMove);
       layer.off('mousemove', this.onMouseMove);
@@ -154,19 +151,19 @@ export default abstract class LayerGroup<
     }
   }
 
-  onLayerSelect(layer: ILayer) {
+  public onLayerSelect(layer: ILayer) {
     if (this.options.select) {
       layer.on('click', this.onClick);
     }
   }
 
-  offLayerSelect(layer: ILayer) {
+  public offLayerSelect(layer: ILayer) {
     if (this.options.select) {
       layer.off('click', this.onClick);
     }
   }
 
-  onClick = (e: IFeature) => {
+  public onClick = (e: IFeature) => {
     const isMultipleSelect = isPressing(16) && !!this.options.multipleSelect;
     const hasSelectFeature = this.selectFeatures.find(
       (item) => item.featureId === e.featureId,
@@ -190,45 +187,37 @@ export default abstract class LayerGroup<
     }
   };
 
-  onMouseMove = (e: IFeature) => {
+  public onMouseMove = (e: IFeature) => {
     if (e.featureId !== this.hoverFeature?.featureId) {
       this.setHoverFeature(e);
     }
   };
 
-  onMouseOut = () => {
+  public onMouseOut = () => {
     this.setHoverFeature(null);
   };
 
-  setHoverFeature(feature?: IFeature | null) {
+  public setHoverFeature(feature?: IFeature | null) {
     this.hoverFeature = feature;
     this.emit(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, feature);
   }
 
-  setSelectFeatures(features: IFeature[]) {
+  public setSelectFeatures(features: IFeature[]) {
     if (this.selectFeatures.length !== features.length || features.length) {
       this.selectFeatures = features;
       this.emit(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, features);
     }
   }
 
-  removeLayer(layer: ILayer) {
+  public removeLayer(layer: ILayer) {
     const layerIndex = this.layers.findIndex((l) => l.id === layer.id);
     this.layers.splice(layerIndex, 1);
     this.scene?.removeLayer(layer);
   }
 
-  /**
-   * 更新数据
-   * @param data
-   */
-  setData(data: any) {
+  public setData(data: any) {
     this.data = data;
     this.source.setData(data);
-
-    if (this.mainLayer && this.mainLayer?.getSource() !== this.source) {
-      this.mainLayer.setData(data);
-    }
 
     this.setSelectFeatures([]);
     this.setHoverFeature(null);
@@ -236,7 +225,7 @@ export default abstract class LayerGroup<
     this.emit(LayerGroupEventEnum.DATA_UPDATE, data);
   }
 
-  setDataItem(featureId: number, newProperties: Record<string, any>) {
+  public setDataItem(featureId: number, newProperties: Record<string, any>) {
     const source = this.layers[0]?.getSource();
     if (source) {
       const targetFeature = source.getFeatureById(featureId) as Feature | null;
@@ -244,82 +233,29 @@ export default abstract class LayerGroup<
         isEqual(item, targetFeature),
       );
       if (targetFeature && targetIndex > -1) {
-        if (targetFeature.properties) {
-          Object.assign(targetFeature.properties, newProperties);
-        }
+        Object.assign(targetFeature.properties, newProperties);
         this.data.features[targetIndex] = targetFeature;
         this.source.setData(this.data);
-        this.emit(LayerGroupEventEnum.DATA_UPDATE, this.data);
       }
     }
   }
 
-  setDataItemByKey(
-    key: string,
-    value: any,
-    newProperties: Record<string, any>,
-  ) {
-    this.data.features.find((feature: Feature) => {
-      if (feature.properties?.[key] === value) {
-        if (feature.properties) {
-          Object.assign(feature.properties, newProperties);
-        }
-        this.source.setData(this.data);
-        this.emit(LayerGroupEventEnum.DATA_UPDATE, this.data);
-      }
-    });
-  }
-
-  /**
-   * 显示所有图层
-   */
-  show() {
+  public show() {
     this.layers.forEach((layer) => layer.show());
     this.visible = true;
     this.emit(LayerGroupEventEnum.VISIBLE_CHANGE, true);
   }
 
-  hide() {
+  public hide() {
     this.layers.forEach((layer) => layer.hide());
     this.visible = false;
     this.emit(LayerGroupEventEnum.VISIBLE_CHANGE, false);
   }
-
-  destroy() {
+  public destroy() {
     this.layers.forEach((layer) => layer.destroy());
     this.emit(LayerGroupEventEnum.DESTROY);
   }
-
-  boxSelect(bbox: BBox) {
-    if (!this.options.multipleSelect) {
-      return;
-    }
-    const mainLayer = this.mainLayer;
-    if (mainLayer) {
-      // @ts-ignore
-      mainLayer.boxSelect(bbox, (e) => {
-        if (this.selectFeatures.length === e.length) {
-          return;
-        }
-        const newSelectFeatures: IFeature[] = (Array.from(e) ? e : []).map(
-          ({ pickedFeatureIdx: featureId, ...feature }: any) => {
-            return {
-              featureId,
-              feature,
-            };
-          },
-        );
-        if (
-          newSelectFeatures.map((item) => item.featureId).join(',') !==
-          this.selectFeatures.map((item) => item.featureId).join(',')
-        ) {
-          this.setSelectFeatures(newSelectFeatures);
-        }
-      });
-    }
-  }
-
-  getLegendItem(): any[] {
+  public getLegendItem(): any[] {
     return [];
   }
 }
