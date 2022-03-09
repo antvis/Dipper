@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { PointLayerGroup } from '@antv/dipper';
 import { useLayerService } from '@antv/dipper-layout';
+import CustomLayerGroup from './CustomLayerGroup';
 
 interface IProps {}
 
@@ -42,28 +42,23 @@ const data = {
   ],
 };
 
-const PointLayer: React.FC<IProps> = () => {
+const Layer: React.FC<IProps> = () => {
   const { layerService } = useLayerService();
 
   useEffect(() => {
-    const pointLayerGroup = new PointLayerGroup({
-      name: 'point',
-      options: {
-        normal: {},
-        hover: {
-          color: 'yellow',
-        },
-        select: {},
-        autoFit: true,
-        multipleSelect: true,
-      },
+    const customLayerGroup = new CustomLayerGroup({
+      name: 'custom',
+      options: {},
     });
-    pointLayerGroup.setData(data);
 
-    layerService.addLayer(pointLayerGroup);
+    layerService.addLayer(customLayerGroup);
+
+    setTimeout(() => {
+      customLayerGroup.setData(data);
+    }, 1000);
   }, []);
 
   return <div>123456</div>;
 };
 
-export default PointLayer;
+export default Layer;

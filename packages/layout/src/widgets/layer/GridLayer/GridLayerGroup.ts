@@ -200,35 +200,6 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
     });
   }
 
-  public boxSelect(bbox: BBox) {
-    if (!this.options.multipleSelect) {
-      return;
-    }
-    const fillLayer = this.layers.find((layer) => layer.name === 'fill');
-    if (fillLayer) {
-      // @ts-ignore
-      fillLayer.boxSelect(bbox, (e) => {
-        if (this.selectFeatures.length === e.length) {
-          return;
-        }
-        const newSelectFeatures: IFeature[] = (Array.from(e) ? e : []).map(
-          ({ pickedFeatureIdx: featureId, ...feature }: any) => {
-            return {
-              featureId,
-              feature,
-            };
-          },
-        );
-        if (
-          newSelectFeatures.map((item) => item.featureId).join(',') !==
-          this.selectFeatures.map((item) => item.featureId).join(',')
-        ) {
-          this.setSelectFeatures(newSelectFeatures);
-        }
-      });
-    }
-  }
-
   public getLegendItem() {
     // 先取默认图例
     return this.getLayer('fill')?.getLegendItems('color') || [];
