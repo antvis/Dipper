@@ -19,6 +19,7 @@ export interface IPointLayerStyle {
 
 export interface IPointLayerGroupOptions extends ILayerGroupOptions {
   normal: IPointLayerStyle;
+  hover: false | IPointLayerStyle;
   select: false | IPointLayerStyle;
   autoFit: boolean;
   multipleSelect: boolean;
@@ -31,14 +32,20 @@ export const defaultPointLayerStyle: IPointLayerStyle = {
   style: {},
 };
 
-export const defaultPointLayerSelectStyle: IPointLayerStyle = {
+export const defaultPointLayerHoverStyle: IPointLayerStyle = {
   ...defaultPointLayerStyle,
   size: 15,
   color: '#0000ff',
 };
 
+export const defaultPointLayerSelectStyle: IPointLayerStyle = {
+  ...defaultPointLayerStyle,
+  color: '#ffff00',
+};
+
 export const defaultPointLayerOptions: IPointLayerGroupOptions = {
   normal: defaultPointLayerStyle,
+  hover: false,
   select: false,
   autoFit: false,
   multipleSelect: false,
@@ -54,14 +61,24 @@ export class PointLayerGroup extends LayerGroup<IPointLayerGroupOptions> {
   }
 
   initLayerList() {
-    const { normal, select, autoFit } = this.options;
+    const { normal, hover, select, autoFit } = this.options;
     const pointLayer = this.initPointLayer({ name: 'point', autoFit }, normal);
     pointLayer.setData(this.data ?? featureCollection([]));
 
+    if (hover) {
+      this.onLayerHover(pointLayer);
+      const mergeHoverOptions = merge({}, defaultPointLayerHoverStyle, hover);
+      const selectLayer = this.initPointLayer({ name: 'hover' }, mergeHoverOptions);
+      this.on(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, () => {
+        selectLayer.setData(
+          featureCollection(this.hoverFeature ? [this.hoverFeature.feature] : []),
+        );
+      });
+    }
     if (select) {
       this.onLayerSelect(pointLayer);
       const mergeSelectOptions = merge({}, defaultPointLayerSelectStyle, select);
-      const selectLayer = this.initPointLayer({ name: 'point' }, mergeSelectOptions);
+      const selectLayer = this.initPointLayer({ name: 'select' }, mergeSelectOptions);
       this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
         selectLayer.setData(featureCollection(this.selectFeatures.map((item) => item.feature)));
       });

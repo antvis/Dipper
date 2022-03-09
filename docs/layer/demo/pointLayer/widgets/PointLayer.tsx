@@ -50,6 +50,9 @@ const PointLayer: React.FC<IProps> = () => {
       name: 'point',
       options: {
         normal: {},
+        hover: {
+          color: 'yellow',
+        },
         select: {},
         autoFit: true,
         multipleSelect: true,
