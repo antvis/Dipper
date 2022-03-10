@@ -83,8 +83,8 @@ export default function GridLayer({
       },
     });
 
-    layerService.addLayer(gridLayerGroup);
-    layerService.addLayer(boxSelectLayerGroup);
+    layerService.addLayerGroup(gridLayerGroup);
+    layerService.addLayerGroup(boxSelectLayerGroup);
     setLayerGroup(gridLayerGroup);
 
     fetch(

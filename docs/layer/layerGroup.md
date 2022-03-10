@@ -23,7 +23,7 @@ export default () => {
       name: 'point',
     });
     // 将layerGroup实例注册进layerService中，图层才算是添加到地图中
-    layerService.addLayer(pointLayerGroup);
+    layerService.addLayerGroup(pointLayerGroup);
   }, []);
 
   return <></>;
@@ -128,7 +128,7 @@ class CustomLayerGroup extends LayerGroup<ICustomLayerOptions> {
 
 | 名称              | 说明                                                                                               | 类型                                                                                                                                                                        |
 | ----------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| initLayerList     | 抽象方法，在 layerService.addLayer 传入 LayerGroup 实例时调用，用于初始化图层                      | () => void                                                                                                                                                                  |
+| initLayerList     | 抽象方法，在 layerService.addLayerGroup 传入 LayerGroup 实例时调用，用于初始化图层                      | () => void                                                                                                                                                                  |
 | getDefaultOptions | 抽象方法，获取默认构造器参数，最终会与实例化时的 options 进行深合并                                | T                                                                                                                                                                           |
 | addLayer          | 将 L7 Layer 添加至 LayerGroup 中                                                                   | (layer: ILayer) => void                                                                                                                                                     |
 | getLayer          | 传入 layer 的 name 搜索并返回对应的 Layer                                                          | (name: string) => ILayer \| undefined                                                                                                                                       |

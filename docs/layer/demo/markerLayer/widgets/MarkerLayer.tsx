@@ -61,7 +61,7 @@ const MarkerLayer: React.FC = () => {
         component: MarkerItem,
       },
     });
-    layerService.addLayer(markerLayerGroup);
+    layerService.addLayerGroup(markerLayerGroup);
     const markerContainer = markerLayerGroup.setData(data);
     setLayerGroup(markerLayerGroup);
     setContainer(markerContainer);

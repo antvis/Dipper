@@ -150,7 +150,7 @@ export function GridLayer({ options }: any) {
       },
     });
 
-    layerService.addLayer(newGridLayer);
+    layerService.addLayerGroup(newGridLayer);
 
     setGridLayer(newGridLayer);
   }, [geoData]);

@@ -73,7 +73,7 @@ const PointLayer: React.FC<IProps> = () => {
     });
     pointLayerGroup.setData(data);
 
-    layerService.addLayer(pointLayerGroup);
+    layerService.addLayerGroup(pointLayerGroup);
   }, []);
 
   return <div>123456</div>;

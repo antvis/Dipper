@@ -51,7 +51,7 @@ const Layer: React.FC<IProps> = () => {
       options: {},
     });
 
-    layerService.addLayer(customLayerGroup);
+    layerService.addLayerGroup(customLayerGroup);
 
     setTimeout(() => {
       customLayerGroup.setData(data);

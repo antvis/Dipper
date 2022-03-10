@@ -76,4 +76,14 @@ setConfig('');
 
 ## useLayerGroup
 
-图层
+用于获取目标 `LayerGroup` 上的一些常用数据和方法，可以传入实例化 `LayerGroup` 时的 `name` 字段或者传入 `LayerGroup`实例自身来完成 hook 的调用
+
+```tsx|pure
+// 初始化 LayerGroup
+const pointLayerGroup = new PointLayerGroup({
+  name: 'point'
+});
+
+layerService.addLayerGroup(pointLayerGroup)
+
+```
