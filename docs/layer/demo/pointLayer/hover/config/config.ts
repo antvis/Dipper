@@ -13,7 +13,12 @@ export const config: Partial<IConfig> = {
     },
   },
   panel: {
-    display: false,
+    display: true,
+    components: [
+      {
+        type: 'myPanel'
+      }
+    ]
   },
   toolbar: {
     display: false,
@@ -27,7 +32,7 @@ export const config: Partial<IConfig> = {
   },
   layers: [
     {
-      type: 'pointLayer',
+      type: 'hoverPointLayer',
       options: {},
     },
   ],
