@@ -12,7 +12,7 @@ import { useLayerGroup } from '@antv/dipper-layout';
 import { Amaps } from '../service/amaps';
 
 export function MeshName() {
-  const { selectFeatures, updateProperties } = useLayerGroup('grid');
+  const { selectFeatures } = useLayerGroup('grid');
   const [edit, setEdit] = useState(false);
   const ref = useRef(null);
 
@@ -38,8 +38,6 @@ export function MeshName() {
         ...item?.feature?.properties,
         name: value,
       };
-      // @ts-ignore
-      updateProperties(item?.feature, properties);
     });
     setEdit(false);
   }, [JSON.stringify(selectFeatures)]);

@@ -107,7 +107,9 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
 
   const setHoverFeatureCb = useCallback(
     (newHoverFeature: Feature | null, uniqueKey = 'id') => {
-      layerGroup?.setHoverFeature(newHoverFeature ? getIFeatureList([newHoverFeature], uniqueKey)[0] ?? null : null);
+      layerGroup?.setHoverFeature(
+        newHoverFeature ? getIFeatureList([newHoverFeature], uniqueKey)[0] ?? null : null,
+      );
     },
     [getIFeatureList],
   );
@@ -120,6 +122,5 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
     setSelectFeatures: setSelectFeaturesCb,
     hoverFeature,
     setHoverFeature: setHoverFeatureCb,
-    updateProperties: (...args: any[]) => {},
   };
 };

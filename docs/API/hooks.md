@@ -78,12 +78,24 @@ setConfig('');
 
 用于获取目标 `LayerGroup` 上的一些常用数据和方法，可以传入实例化 `LayerGroup` 时的 `name` 字段或者传入 `LayerGroup`实例自身来完成 hook 的调用
 
-```tsx|pure
+```tsx | pure
 // 初始化 LayerGroup
 const pointLayerGroup = new PointLayerGroup({
-  name: 'point'
+  name: 'point',
 });
 
-layerService.addLayerGroup(pointLayerGroup)
+layerService.addLayerGroup(pointLayerGroup);
 
+//
+export default () => {
+  const {
+    layerGroup, // LayerGroup 实例
+    layerData, // 图层GeoJson数据
+    setLayerData, // 设置图层GeoJson数据
+    selectFeatures, // 选中网格数组Features
+    setSelectFeatures, // 设置选中Features
+    hoverFeature, // 悬停网格
+    setHoverFeature, // 设置悬停的网格
+  } = useLayerGroup('point');
+};
 ```
