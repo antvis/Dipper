@@ -215,27 +215,37 @@ export default abstract class LayerGroup<
     this.scene?.removeLayer(layer);
   }
 
-  public setData(data: any) {
+  public setData(data: any, clear = true) {
     this.data = data;
     this.source.setData(data);
 
-    this.setSelectFeatures([]);
-    this.setHoverFeature(null);
+    if (clear) {
+      this.setSelectFeatures([]);
+      this.setHoverFeature(null);
+    }
+
     // 重置选中数据
     this.emit(LayerGroupEventEnum.DATA_UPDATE, data);
   }
 
-  public setDataItem(featureId: number, newProperties: Record<string, any>) {
+  public setDataItem(
+    featureId: number,
+    newProperties: Record<string, any>,
+    uniqueKey?: string,
+  ) {
     const source = this.layers[0]?.getSource();
     if (source) {
       const targetFeature = source.getFeatureById(featureId) as Feature | null;
-      const targetIndex = this.data.features.findIndex((item: Feature) =>
-        isEqual(item, targetFeature),
-      );
+      const targetIndex = this.data.features.findIndex((item: Feature) => {
+        return uniqueKey
+          ? item.properties?.[uniqueKey] ===
+              targetFeature?.properties?.[uniqueKey]
+          : isEqual(item, targetFeature);
+      });
       if (targetFeature && targetIndex > -1) {
         Object.assign(targetFeature.properties, newProperties);
         this.data.features[targetIndex] = targetFeature;
-        this.source.setData(this.data);
+        this.setData(this.data, false);
       }
     }
   }
