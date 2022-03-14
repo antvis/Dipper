@@ -1,7 +1,7 @@
 import { Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
-import * as loadsh from 'lodash';
+import { debounce } from 'lodash';
 import { Amaps, AmapService } from '../service/amaps';
 import { useConfigService } from '@antv/dipper-layout';
 import { CloseCircleOutlined } from '@ant-design/icons';
@@ -39,7 +39,7 @@ export function SearchPlace(params: GeoMethods) {
     setMap(amaps);
   }, []);
 
-  const delayedChange = loadsh.debounce(async (searchKey: string) => {
+  const delayedChange = debounce(async (searchKey: string) => {
     if (searchKey === '') return setPois([]);
     map?.searchPlaces(searchKey);
     // 延时取值 first result is undefined
