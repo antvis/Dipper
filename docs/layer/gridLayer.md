@@ -1,5 +1,8 @@
 ---
+title: 填充图
 mobile: false
+group:
+  title: 图层组件
 ---
 # GridLayer 填充图
 
