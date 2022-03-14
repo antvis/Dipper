@@ -10,7 +10,7 @@ interface IProps {
 }
 
 function PanelHeader({ title }: IProps) {
-  const { selectFeatures, updateProperties } = useLayerGroup('grid');
+  const { selectFeatures } = useLayerGroup('grid');
   const titles = useMemo(() => {
     if (selectFeatures?.length === 1) {
       // @ts-ignore

@@ -146,7 +146,7 @@ const ImageLayer: React.FC = () => {
         uniqueKey: 'id',
       },
     });
-    layerService.addLayer(imageLayerGroup);
+    layerService.addLayerGroup(imageLayerGroup);
     imageLayerGroup.setData(data);
   }, []);
 

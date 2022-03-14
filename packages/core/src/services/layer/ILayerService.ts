@@ -44,4 +44,6 @@ export interface ILayerService extends EventEmitter {
   getLayerSource: (name: string) => any;
   addLayer: (layer: LayerType) => void;
   removeLayer: (id: string) => void;
+  addLayerGroup: (layer: LayerType) => void;
+  removeLayerGroup: (id: string) => void;
 }

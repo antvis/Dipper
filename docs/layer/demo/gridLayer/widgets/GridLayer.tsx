@@ -9,7 +9,6 @@ import {
   useSceneService,
 } from '@antv/dipper';
 import { FeatureCollection } from '@turf/turf';
-import { LayerGroupEventEnum } from '@antv/dipper-core';
 
 export default function GridLayer({
   options,
@@ -36,7 +35,18 @@ export default function GridLayer({
         },
         normal: {
           fillColor: {
-            value: '#ffffff',
+            field: 'centerLng',
+            value: [
+              'rgb(247, 251, 255)',
+              'rgb(222, 235, 247)',
+              'rgb(198, 219, 239)',
+              'rgb(158, 202, 225)',
+              'rgb(107, 174, 214)',
+              'rgb(66, 146, 198)',
+              'rgb(33, 113, 181)',
+              'rgb(8, 81, 156)',
+              'rgb(8, 48, 107)',
+            ],
           },
           scale: {
             centerLng: {
@@ -44,7 +54,7 @@ export default function GridLayer({
             },
           },
           style: {
-            opacity: 0,
+            opacity: 0.5,
           },
           borderWidth: 1,
           borderColor: {
@@ -73,8 +83,8 @@ export default function GridLayer({
       },
     });
 
-    layerService.addLayer(gridLayerGroup);
-    layerService.addLayer(boxSelectLayerGroup);
+    layerService.addLayerGroup(gridLayerGroup);
+    layerService.addLayerGroup(boxSelectLayerGroup);
     setLayerGroup(gridLayerGroup);
 
     fetch(

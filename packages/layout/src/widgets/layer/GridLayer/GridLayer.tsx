@@ -14,7 +14,7 @@ const GridLayer: React.FC<GridLayerProps> = ({ data, ...props }) => {
 
   useEffect(() => {
     const gridLayerGroup = new GridLayerGroup(props);
-    layerService.addLayer(gridLayerGroup);
+    layerService.addLayerGroup(gridLayerGroup);
     setLayerGroup(gridLayerGroup);
   }, []);
 

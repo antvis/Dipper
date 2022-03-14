@@ -8,9 +8,10 @@ const { TabPane } = Tabs;
 
 interface ContentProps {
   items: IWidgetProps[];
+  onChange: (value: string) => void;
 }
 
-export function AppTabsContent({ items }: ContentProps) {
+export function AppTabsContent({ items, onChange }: ContentProps) {
   const [currentOperate, setCurrentOperate] = useState('');
 
   const displayItems = useMemo(
@@ -23,6 +24,10 @@ export function AppTabsContent({ items }: ContentProps) {
       setCurrentOperate(items[0].type); // TODO 去掉了Title
     }
   }, [JSON.stringify(displayItems)]);
+
+  useEffect(() => {
+    onChange(currentOperate);
+  }, [currentOperate]);
 
   return (
     <Tabs

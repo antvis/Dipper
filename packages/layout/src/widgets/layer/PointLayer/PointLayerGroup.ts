@@ -34,13 +34,13 @@ export const defaultPointLayerStyle: IPointLayerStyle = {
 
 export const defaultPointLayerHoverStyle: IPointLayerStyle = {
   ...defaultPointLayerStyle,
-  size: 15,
-  color: '#0000ff',
+  color: '#ffff00',
 };
 
 export const defaultPointLayerSelectStyle: IPointLayerStyle = {
   ...defaultPointLayerStyle,
-  color: '#ffff00',
+  size: 15,
+  color: '#0000ff',
 };
 
 export const defaultPointLayerOptions: IPointLayerGroupOptions = {

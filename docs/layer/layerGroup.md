@@ -23,12 +23,19 @@ export default () => {
       name: 'point',
     });
     // 将layerGroup实例注册进layerService中，图层才算是添加到地图中
-    layerService.addLayer(pointLayerGroup);
+    layerService.addLayerGroup(pointLayerGroup);
   }, []);
 
   return <></>;
 };
 ```
+
+## 悬停与选中
+
+在 Dipper 中经常会与图层中的 `Feature` (元素) 进行互动，常见的交互方式有两种：悬停和选中。
+
++ 悬停：表示鼠标悬浮在图层中的某个 `Feature` 上，通常会需要高亮当前Feature，或者在弹出弹框展示 `Feature` 信息。
++ 选中：表示
 
 ## 开发自定义图层
 
@@ -121,7 +128,7 @@ class CustomLayerGroup extends LayerGroup<ICustomLayerOptions> {
 
 | 名称              | 说明                                                                                               | 类型                                                                                                                                                                        |
 | ----------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| initLayerList     | 抽象方法，在 layerService.addLayer 传入 LayerGroup 实例时调用，用于初始化图层                      | () => void                                                                                                                                                                  |
+| initLayerList     | 抽象方法，在 layerService.addLayerGroup 传入 LayerGroup 实例时调用，用于初始化图层                      | () => void                                                                                                                                                                  |
 | getDefaultOptions | 抽象方法，获取默认构造器参数，最终会与实例化时的 options 进行深合并                                | T                                                                                                                                                                           |
 | addLayer          | 将 L7 Layer 添加至 LayerGroup 中                                                                   | (layer: ILayer) => void                                                                                                                                                     |
 | getLayer          | 传入 layer 的 name 搜索并返回对应的 Layer                                                          | (name: string) => ILayer \| undefined                                                                                                                                       |

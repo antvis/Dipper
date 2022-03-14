@@ -16,6 +16,7 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
   const [layerGroup, setLayerGroup] = useState<LayerGroup | null>(null);
 
   const [layerData, setLayerData] = useState(featureCollection([]));
+  const [hoverFeature, setHoverFeature] = useState<IFeature | null>(null);
   const [selectFeatures, setSelectFeatures] = useState<IFeature[]>([]);
 
   const getLayerGroup = useCallback(() => {
@@ -49,18 +50,26 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
       if (!isEqual(layerGroup.selectFeatures, selectFeatures)) {
         setSelectFeatures(layerGroup.selectFeatures ?? []);
       }
+      if (hoverFeature?.featureId !== layerGroup.hoverFeature?.featureId) {
+        setHoverFeature(layerGroup.hoverFeature ?? null);
+      }
       setLayerData(layerGroup.data);
       layerGroup?.on(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
+      layerGroup?.on(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, setHoverFeature);
       layerGroup?.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
     }
     return () => {
       layerGroup?.off(LayerGroupEventEnum.DATA_UPDATE, setLayerData);
       layerGroup?.off(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, setSelectFeatures);
+      layerGroup?.off(LayerGroupEventEnum.HOVER_FEATURE_CHANGE, setHoverFeature);
     };
   }, [layerGroup]);
 
-  const setSelectFeaturesCb = useCallback(
-    (selectFeatures: Feature[], uniqueKey = 'id') => {
+  const getIFeatureList = useCallback(
+    (features: Feature[], uniqueKey = 'id') => {
+      if (features.length) {
+        return [] as IFeature[];
+      }
       if (layerGroup?.mainLayer) {
         const source = layerGroup.mainLayer.getSource();
         const featureIdList = selectFeatures.map((feature) => {
@@ -69,9 +78,10 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
         });
 
         // @ts-ignore
-        const newFeatureList: IFeature[] = selectFeatures.map((feature, index) => {
+        return selectFeatures.map((feature, index) => {
           const [lng, lat] = coordAll(centerOfMass(feature))[0];
-          return {
+          const iFeature: IFeature = {
+            // @ts-ignore
             feature,
             featureId: featureIdList[index] ?? 0,
             lngLat: {
@@ -79,14 +89,29 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
               lat,
             },
           };
+          return iFeature;
         });
-
-        layerGroup.setSelectFeatures(newFeatureList);
       } else {
-        console.error('当期LayerGroup内实现的mainLayer有误');
+        throw new Error('当期LayerGroup内实现的mainLayer有误');
       }
     },
     [layerGroup],
+  );
+
+  const setSelectFeaturesCb = useCallback(
+    (newSelectFeatures: Feature[], uniqueKey = 'id') => {
+      layerGroup?.setSelectFeatures(getIFeatureList(newSelectFeatures, uniqueKey));
+    },
+    [getIFeatureList],
+  );
+
+  const setHoverFeatureCb = useCallback(
+    (newHoverFeature: Feature | null, uniqueKey = 'id') => {
+      layerGroup?.setHoverFeature(
+        newHoverFeature ? getIFeatureList([newHoverFeature], uniqueKey)[0] ?? null : null,
+      );
+    },
+    [getIFeatureList],
   );
 
   return {
@@ -95,6 +120,7 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
     setLayerData,
     selectFeatures,
     setSelectFeatures: setSelectFeaturesCb,
-    updateProperties: (...args: any[]) => {},
+    hoverFeature,
+    setHoverFeature: setHoverFeatureCb,
   };
 };
