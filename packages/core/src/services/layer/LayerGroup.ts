@@ -219,6 +219,10 @@ export default abstract class LayerGroup<
     this.data = data;
     this.source.setData(data);
 
+    if (this.source !== this.mainLayer.getSource()) {
+      this.mainLayer?.setData?.(this.data);
+    }
+
     if (clear) {
       this.setSelectFeatures([]);
       this.setHoverFeature(null);
