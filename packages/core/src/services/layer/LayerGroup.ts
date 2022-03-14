@@ -219,8 +219,8 @@ export default abstract class LayerGroup<
     this.data = data;
     this.source.setData(data);
 
-    if (this.source !== this.mainLayer.getSource()) {
-      this.mainLayer?.setData?.(this.data);
+    if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
+      this.mainLayer.setData(this.data);
     }
 
     if (clear) {
