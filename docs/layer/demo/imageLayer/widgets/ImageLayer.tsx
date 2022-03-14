@@ -122,13 +122,6 @@ const ImageLayer: React.FC = () => {
             },
           },
           imgSize: 10,
-          text: 'm',
-          textSize: 14,
-          textStyle: {
-            stroke: '#ffffff',
-            strokeWidth: 2,
-            textOffset: [0, -40],
-          },
         },
         select: {
           img: {
@@ -153,7 +146,7 @@ const ImageLayer: React.FC = () => {
         uniqueKey: 'id',
       },
     });
-    layerService.addLayer(imageLayerGroup);
+    layerService.addLayerGroup(imageLayerGroup);
     imageLayerGroup.setData(data);
   }, []);
 

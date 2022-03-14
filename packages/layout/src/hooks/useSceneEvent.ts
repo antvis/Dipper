@@ -6,9 +6,9 @@ export function useSceneEvent(eventName: string, callback: (params: any) => any)
   const { scene } = useSceneService();
   const cb = useMemoizedFn(callback);
   useEffect(() => {
-    scene?.on(eventName, callback);
+    scene?.on(eventName, cb);
     return () => {
-      scene?.off(eventName, callback);
+      scene?.off(eventName, cb);
     };
   }, [scene, cb, eventName]);
 }

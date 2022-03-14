@@ -12,6 +12,8 @@ export interface IWidgetProps<P = any> {
   title?: string;
   position?: string;
   display?: boolean;
+  placeholder?: string;
+  showSearch?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
   children?:
     | JSX.Element

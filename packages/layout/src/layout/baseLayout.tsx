@@ -2,13 +2,9 @@ import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { IWidgetProps, getWidgetChildren, isDisplay } from '@antv/dipper-core';
 import { PositionName } from '@antv/l7';
 import { CustomControl } from '@antv/l7-react';
-import classNames from 'classnames';
 import BaseLayout from './base';
 import { useWidgetsService } from '../hooks';
 import { CustomBaseWidgets } from '../baseWidget/widget';
-import { Tabs } from 'antd';
-import style from './style.less';
-const { TabPane } = Tabs;
 
 interface ContentProps {
   items: IWidgetProps[];
@@ -24,39 +20,6 @@ export const LayoutContent = ({ items }: ContentProps) => {
     </React.Fragment>
   );
 };
-
-export function AppTabsContent({ items }: ContentProps) {
-  const [currentOperate, setCurrentOperate] = useState('');
-
-  const displayItems = useMemo(() => items.filter((item) => isDisplay(item.display)), [items]);
-
-  useEffect(() => {
-    if (items.length !== 0) {
-      setCurrentOperate(items[0].type); // TODO 去掉了Title
-    }
-  }, [JSON.stringify(displayItems)]);
-
-  return (
-    <Tabs
-      key="tab"
-      activeKey={currentOperate}
-      onChange={setCurrentOperate}
-      type="card"
-      className={classNames({
-        [style.titleTop]: true,
-        [style.hideTop]: displayItems.length <= 1,
-      })}
-    >
-      {displayItems.map((tab: IWidgetProps) => {
-        return (
-          <TabPane tab={tab?.options?.title} key={tab.type} className={style.tabPanel}>
-            <CustomBaseLayout type={tab.type} components={getWidgetChildren(tab)} />
-          </TabPane>
-        );
-      })}
-    </Tabs>
-  );
-}
 
 export const AppMapControlContent = ({ items }: ContentProps) => {
   return (

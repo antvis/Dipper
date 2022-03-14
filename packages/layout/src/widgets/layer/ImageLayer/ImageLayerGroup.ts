@@ -7,7 +7,7 @@ import {
   LayerGroupEventEnum,
 } from '@antv/dipper-core';
 import { cloneDeep, isEqual, merge } from 'lodash';
-import { BBox, Feature, FeatureCollection, featureCollection } from '@turf/turf';
+import { BBox, FeatureCollection, featureCollection } from '@turf/turf';
 import { ILayer, PointLayer } from '@antv/l7';
 
 export interface IImageLayerImageStyle {
@@ -30,9 +30,8 @@ export interface IImageLayerStyle extends IImageLayerImageStyle {
 export interface IImageLayerGroupOptions extends ILayerGroupOptions {
   image: Record<string, string>;
   normal: IImageLayerStyle;
-  select: false | IImageLayerImageStyle;
+  select: false | IImageLayerStyle;
   autoFit?: boolean;
-  uniqueKey: string;
 }
 
 export const defaultImageLayerStyle: IImageLayerStyle = {
@@ -52,7 +51,6 @@ export const defaultImageLayerOptions: IImageLayerGroupOptions = {
   normal: defaultImageLayerStyle,
   select: false,
   autoFit: true,
-  uniqueKey: 'id',
 };
 
 export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
@@ -73,6 +71,9 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     if (select) {
       const selectOptions = merge({}, defaultImageLayerStyle, select);
       selectLayers.push(this.initImageLayer('selectImg', selectOptions));
+      if (select.text) {
+        selectLayers.push(this.initTextLayer('selectText', selectOptions));
+      }
 
       this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
         const selectData = featureCollection(this.selectFeatures.map((item) => item.feature));
@@ -107,6 +108,7 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     const { img, imgSize, imgStyle } = style;
     const imageLayer = new PointLayer({
       name,
+      layerType: 'fillImage',
     });
     imageLayer
       .source(data)
@@ -157,11 +159,5 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     if (this.options.autoFit) {
       this.layers[0].fitBounds();
     }
-  }
-
-  public boxSelect(bbox: BBox) {}
-
-  public getLegendItem() {
-    return [];
   }
 }

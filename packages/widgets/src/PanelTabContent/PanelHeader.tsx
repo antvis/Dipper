@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Tooltip, Typography } from 'antd';
-import { useConfigService, useLayerGroup } from '@antv/dipper-layout';
+import { useLayerGroup } from '@antv/dipper-layout';
+import styles from './index.less';
 
 const { Paragraph } = Typography;
 
@@ -9,7 +10,7 @@ interface IProps {
 }
 
 function PanelHeader({ title }: IProps) {
-  const { selectFeatures, updateProperties } = useLayerGroup('grid');
+  const { selectFeatures } = useLayerGroup('grid');
   const titles = useMemo(() => {
     if (selectFeatures?.length === 1) {
       // @ts-ignore

@@ -125,7 +125,7 @@ export function GridLayer() {
       },
     });
 
-    layerService.addLayer(layer);
+    layerService.addLayerGroup(layer);
     //
     // layer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
     //   // layer.getLegendItem().map((item) => {

@@ -53,4 +53,12 @@ export default class LayerService
       type: 'remove',
     });
   }
+
+  addLayerGroup(layer: LayerType) {
+    this.addLayer(layer);
+  }
+
+  removeLayerGroup(name: string) {
+    this.removeLayer(name);
+  }
 }
