@@ -29,12 +29,13 @@ export enum LayerGroupEventEnum {
 
 export type ILayerFieldProperties<T> =
   | T
-  | { field: string; value: T | ((field: string) => T) };
+  | T[]
+  | { field: string; value: T | T[] | ((field: string) => T) };
 
 export type ILayerScale = IScaleOptions | [string, IScale];
 
 export const getLayerFieldArgus = <T>(properties: ILayerFieldProperties<T>) => {
-  if (properties instanceof Object) {
+  if (properties instanceof Object && !Array.isArray(properties)) {
     const { field, value } = properties;
     return [field, value];
   }
