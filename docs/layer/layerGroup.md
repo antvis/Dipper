@@ -34,8 +34,8 @@ export default () => {
 
 在 Dipper 中经常会与图层中的 `Feature` (元素) 进行互动，常见的交互方式有两种：悬停和选中。
 
-+ 悬停：表示鼠标悬浮在图层中的某个 `Feature` 上，通常会需要高亮当前Feature，或者在弹出弹框展示 `Feature` 信息。
-+ 选中：表示
+- 悬停：表示鼠标悬浮在图层中的某个 `Feature` 上，通常会需要高亮当前 Feature，或者在弹出弹框展示 `Feature` 信息。
+- 选中：表示
 
 ## 开发自定义图层
 
@@ -128,7 +128,7 @@ class CustomLayerGroup extends LayerGroup<ICustomLayerOptions> {
 
 | 名称              | 说明                                                                                               | 类型                                                                                                                                                                        |
 | ----------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| initLayerList     | 抽象方法，在 layerService.addLayerGroup 传入 LayerGroup 实例时调用，用于初始化图层                      | () => void                                                                                                                                                                  |
+| initLayerList     | 抽象方法，在 layerService.addLayerGroup 传入 LayerGroup 实例时调用，用于初始化图层                 | () => void                                                                                                                                                                  |
 | getDefaultOptions | 抽象方法，获取默认构造器参数，最终会与实例化时的 options 进行深合并                                | T                                                                                                                                                                           |
 | addLayer          | 将 L7 Layer 添加至 LayerGroup 中                                                                   | (layer: ILayer) => void                                                                                                                                                     |
 | getLayer          | 传入 layer 的 name 搜索并返回对应的 Layer                                                          | (name: string) => ILayer \| undefined                                                                                                                                       |
@@ -172,4 +172,32 @@ pointLayerGroup.on(
     console.log(selectFeatures);
   },
 );
+```
+
+## 通用接口
+
+### ILayerFieldProperties
+
+#### 说明
+
+该接口主要针对在 Dipper 中需要动态设置到 L7 中的 `color`、`shape`、`size`等可能设置为静态或者根据字段动态映射的值，通过泛型`T` 传入对应字段的 `TypeScript` 基础类型，如：shape -> string, size -> number。
+
+#### 接口定义
+
+```ts
+export type ILayerFieldProperties<T> =
+  | T
+  | T[]
+  | { field: string; value: T | T[] | ((field: string) => T) };
+```
+
+#### 使用
+
+```ts
+import { ILayerFieldProperties } from '@antv/dipper-core/src';
+
+export interface ICustomLayerOptions {
+  color: ILayerFieldProperties<string>;
+  size: ILayerFieldProperties<number>;
+}
 ```
