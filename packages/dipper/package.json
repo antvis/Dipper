@@ -49,7 +49,8 @@
     "@antv/l7": "^2.5.40",
     "@antv/l7-maps": "^2.5.40",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@umijs/test": "^3.0.5",

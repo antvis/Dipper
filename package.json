@@ -65,6 +65,7 @@
     "@umijs/fabric": "^2.10.1",
     "@umijs/plugin-analytics": "^0.2.2",
     "@umijs/test": "^3.0.5",
+    "lodash": "^4.17.21",
     "ahooks": "^3.1.5",
     "antd": "^4.18.3",
     "antd-mobile": "^5.1.0",

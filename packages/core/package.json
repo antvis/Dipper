@@ -55,6 +55,7 @@
   },
   "peerDependencies": {
     "@antv/l7": "^2.5.38",
+    "lodash": "^4.17.21",
     "react": "^16.14.0 || ^17.0.0"
   },
   "publishConfig": {
