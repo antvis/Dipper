@@ -1,6 +1,6 @@
 import React from 'react';
 import { IFeature, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
-import { Marker, ILngLat } from '@antv/l7';
+import { Marker, ILngLat, IMarkerOption } from '@antv/l7';
 import ReactDOM from 'react-dom';
 import { point } from '@turf/turf';
 import { FunctionComponentElement, ReactPortal } from 'react';
@@ -14,6 +14,7 @@ export interface IMarkerLayerGroupProps<T> {
   component: React.FC<IMarkerItemProps<T>>;
   lngField: string;
   latField: string;
+  markerOption: Partial<IMarkerOption>;
 }
 
 const EmptyMarkerItem: React.FC = () => <></>;
@@ -35,6 +36,7 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
       component: EmptyMarkerItem,
       lngField: 'lng',
       latField: 'lat',
+      markerOption: {},
     };
   }
 
@@ -114,7 +116,7 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
     const length = this.data.length - this.markerList.length;
     if (length > 0) {
       for (let i = 0; i < length; i++) {
-        const marker = new Marker().setLnglat({
+        const marker = new Marker(this.options.markerOption).setLnglat({
           lng: 0,
           lat: 0,
         });
