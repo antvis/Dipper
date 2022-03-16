@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-mobile",
-  "version": "0.2.31",
+  "version": "0.2.32",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -37,8 +37,8 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-core": "0.2.31",
-    "@antv/dipper-layout": "0.2.31"
+    "@antv/dipper-core": "0.2.32",
+    "@antv/dipper-layout": "0.2.32"
   },
   "peerDependencies": {
     "@antv/dipper-layout": "^0.2.24",
@@ -46,8 +46,8 @@
     "@antv/l7-maps": "^2.5.40",
     "@antv/l7-react": "^2.3.9",
     "antd-mobile": "^5.0.0-rc.25",
-    "react": "^16.14.0",
     "lodash": "^4.17.21",
+    "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
   "devDependencies": {
