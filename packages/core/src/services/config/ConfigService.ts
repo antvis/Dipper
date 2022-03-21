@@ -13,6 +13,7 @@ function customizer(obj: any, src: any) {
 
 export enum ConfigEventEnum {
   'CONFIG_CHANGE' = 'configchange',
+  'GLOBAL_CHANGE' = 'globalchange',
 }
 
 @injectable()
@@ -92,6 +93,10 @@ export default class ConfigService
   }
   // 全局参数
   getGlobal() {
-    return this.config.global;
+    return this.config?.global || {};
+  }
+  // 设置全局参数
+  setGlobal(key: string, value: any) {
+    this.setConfig(`global.${key}`, value);
   }
 }

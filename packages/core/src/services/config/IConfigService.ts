@@ -85,4 +85,6 @@ export interface IConfigService extends EventEmitter {
   getWidgetsValue: (key: string) => Record<string, any> | undefined;
   setWidgetsValue: (key: string, options: Record<string, any>) => void;
   getWidgetsOptions: (key: string) => Record<string, any> | undefined;
+  getGlobal(): Record<string, any> | undefined;
+  setGlobal(key: string, value: any): void;
 }

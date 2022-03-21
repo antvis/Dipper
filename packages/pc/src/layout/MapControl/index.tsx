@@ -13,8 +13,8 @@ export default function MapControl() {
     return groupBy(
       controls?.filter((item: any) => isDisplay(item.display)),
       (c) => {
-        const defaultLayout = c.position === 'topleft' ? 'horizontal' : 'vertical';
-        return [c.position, c.layout || defaultLayout].join('-');
+        const defaultLayout = (c.position || 'topleft') === 'topleft' ? 'horizontal' : 'vertical';
+        return [c.position || 'topleft', c.layout || defaultLayout].join('-');
       },
     );
   }, [controls]);
@@ -30,7 +30,6 @@ export default function MapControl() {
         })}
       {Object.keys(controlGroupBy).map((key: string) => {
         const [position, layout] = key.split('-');
-
         const flexDirection = layout === 'horizontal' ? 'row' : 'column';
         return (
           <CustomControl

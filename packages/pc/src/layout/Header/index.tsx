@@ -73,7 +73,7 @@ export default function AppHeader() {
         ) : null}
         <CustomBaseLayout
           type="header-left"
-          components={components?.filter((c) => c.position === 'left') || []}
+          components={components?.filter((c) => c.position === 'left' || !c.position) || []}
         />
       </div>
       <CustomBaseLayout

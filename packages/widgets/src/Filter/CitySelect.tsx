@@ -13,7 +13,7 @@ export function CitySelect({
       defaultValue={widget?.getValue() as Array<any>}
       style={{ width: 180 }}
       bordered={false}
-      options={(widget?.getOptions().options?.optionsData as Array<any>) || []}
+      options={(widget?.getOptions().options?.data as Array<any>) || []}
       allowClear={false}
       onChange={(e: any) => {
         widget?.setValues(e);

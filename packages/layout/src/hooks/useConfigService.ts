@@ -5,10 +5,14 @@ import { useEffect, useState } from 'react';
 export function useConfigService() {
   const configService = useInjection<IConfigService>(TYPES.CONFIG_SYMBOL);
   const [globalConfig, setCfg] = useState<Partial<IConfig>>(configService.config);
+  const [global, setGlobalCfg] = useState(configService.getGlobal() || {});
 
   useEffect(() => {
     configService.on(ConfigEventEnum.CONFIG_CHANGE, (cfg: any) => {
       setCfg(cfg);
+    });
+    configService.on(ConfigEventEnum.GLOBAL_CHANGE, (cfg: any) => {
+      setGlobalCfg(cfg.global);
     });
   }, []);
 
@@ -40,8 +44,14 @@ export function useConfigService() {
     return configService.getWidgetsValue(key);
   };
 
+  const setGlobal = (key: string, value: any) => {
+    return configService.setGlobal(key, value);
+  };
+
   return {
     globalConfig,
+    global,
+    setGlobal,
     setConfig,
     updateLegend,
     updateControl,

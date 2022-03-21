@@ -19,6 +19,7 @@ export function DipperContainerContext<T = any>({ cfg, children, onLoad }: ICont
   const { sceneContainer } = useDipperContainer<T>(cfg);
   useUnmount(() => {
     if (sceneContainer) {
+      console.log('销毁');
       sceneContainer.destroy();
     }
   });

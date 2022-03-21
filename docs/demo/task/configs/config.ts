@@ -8,7 +8,7 @@ export const config: Partial<IConfig> = {
   },
   widgets: {
     citySelect: {
-      options: CityList,
+      options: { data: CityList },
       value: ['330000', '330100'],
     },
   },
