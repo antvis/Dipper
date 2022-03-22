@@ -609,7 +609,7 @@ export default function DipperContainer({
 
 ```tsx
 import React from 'react';
-import { DipperContainerContext,MapContainer } from '@antv/dipper';
+import { DipperContainerContext, MapContainer } from '@antv/dipper';
 
 export default () => {
   return (
@@ -621,7 +621,7 @@ export default () => {
       }}
     >
       <div style={{ height: '300px' }}>
-        <MapContainer /> }
+        <MapContainer />
       </div>
     </DipperContainerContext>
   );
