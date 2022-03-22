@@ -1,6 +1,6 @@
 ---
 title: 配置项
-order: 2
+order: 4
 mobile: false
 group:
   title: API

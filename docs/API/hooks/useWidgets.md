@@ -2,7 +2,7 @@
 title: useWidgets
 order: 1
 group:
-  title: API
-  order: 5
+  title: Hooks
+  order: 4
 mobile: false
 ---

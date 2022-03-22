@@ -2,7 +2,7 @@
 title: useSceneService
 order: 1
 group:
-  title: API
-  order: 2
+  title: Hooks
+  order: 4
 mobile: false
 ---

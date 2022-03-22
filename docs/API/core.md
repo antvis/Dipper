@@ -4,6 +4,7 @@ toc: menu
 mobile: false
 group:
   title: API
+  order: 3
 ---
 
 dipper-core 提供了一些框架共用的管理的能力方法。

@@ -3,7 +3,9 @@ title: 填充图
 mobile: false
 group:
   title: 图层组件
+  order: 5
 ---
+
 # GridLayer 填充图
 
 填充图主要用展示，区域类，网格类的面状数据的可视化展示。

@@ -2,8 +2,8 @@
 title: useConfigService
 order: 1
 group:
-  title: API
-  order: 1
+  title: Hooks
+  order: 4
 mobile: false
 ---
 

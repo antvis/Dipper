@@ -2,7 +2,7 @@
 title: useLayerGroup
 order: 1
 group:
-  title: API
-  order: 3
+  title: Hooks
+  order: 4
 mobile: false
 ---

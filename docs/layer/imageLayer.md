@@ -1,5 +1,8 @@
 ---
 mobile: false
+group:
+  title: 图层组件
+  order: 5
 ---
 
 # ImageLayer 图片图层
