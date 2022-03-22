@@ -38,7 +38,7 @@ export default () => {
  * defaultShowCode: true
  */
 import React from 'react';
-import { DipperContainerContext, Map } from '@antv/dipper-layout';
+import { DipperContainerContext, MapContainer } from '@antv/dipper';
 
 export default () => {
   return (
@@ -49,9 +49,7 @@ export default () => {
         },
       }}
     >
-      <div style={{ height: '500px' }}>
-        <Map />
-      </div>
+      <div style={{ height: '300px' }}>{MapContainer && <MapContainer />}</div>
     </DipperContainerContext>
   );
 };

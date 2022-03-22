@@ -1,24 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Layout } from 'antd';
 import MapControl from '../MapControl';
 import Panel from '../Panel';
 import type { IConfig, IPanel } from '@antv/dipper-core';
-import { Dipper } from '@antv/dipper-core';
 import { useConfigService, Map, Layer } from '@antv/dipper-layout';
+import styles from './index.less';
 
 const { Content } = Layout;
-
-interface IContainerProps {
-  cfg: IConfig;
-  children?: React.ReactNode;
-  onLoad?: (sceneContainer: Dipper) => void;
-}
 
 export function MapContainer({ children }: { children?: React.ReactNode }) {
   const { globalConfig } = useConfigService();
   const { panel } = globalConfig;
   return (
     <Content
+      className={styles.antLayoutContentMap}
       style={{
         flexDirection: panel?.position === 'bottom' || panel?.position === 'top' ? 'column' : 'row',
       }}

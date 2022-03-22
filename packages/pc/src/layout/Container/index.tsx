@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import styles from './index.less';
 import DipperHeader from '../Header';
 import ToolBar from '../Toolbar';
-import { MapContainer } from './MapContainer';
+import { MapContainer } from '../MapContianer';
 import { IConfig } from '@antv/dipper-core';
 import { DipperContainerContext, IContainerProps } from '@antv/dipper-layout';
 export default function DipperContainer({ cfg, children, onLoad }: IContainerProps<IConfig>) {

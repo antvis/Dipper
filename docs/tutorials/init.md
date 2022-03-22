@@ -27,7 +27,7 @@ import { DipperContainer, IConfig } from '@antv/dipper';
 
 export default function Map() {
   return (
-    <div style={{ height: '500px' }}>
+    <div style={{ height: '350px' }}>
       <DipperContainer cfg={{}} />
     </div>
   );
@@ -140,7 +140,7 @@ import { DipperContainer, IConfig } from '@antv/dipper';
 
 export default function Map() {
   return (
-    <div style={{ height: '500px' }}>
+    <div style={{ height: '350px' }}>
       <DipperContainer
         cfg={{
           headerbar: {
@@ -237,7 +237,7 @@ export default function Map() {
   registerWidget('controlPosition', ControlPosition);
 
   return (
-    <div style={{ height: '500px' }}>
+    <div style={{ height: '350px' }}>
       <DipperContainer
         cfg={{
           headerbar: {
@@ -576,4 +576,54 @@ export function CitySelect({
 
 ## 高级教程
 
-## 自定义布局
+### 自定义布局
+
+Dipper 提供了默认布局，默认布局并不能满足所有的业务场景，这样我们就有自定义了布局。
+
+首先看一下默认的布局
+
+```tsx pure
+export default function DipperContainer({
+  cfg,
+  children,
+  onLoad,
+}: IContainerProps<IConfig>) {
+  return (
+    <DipperContainerContext cfg={cfg} onLoad={onLoad}>
+      <Layout className={styles.pageMap}>
+        {/* 导航栏 */}
+        <DipperHeader />
+
+        {/* 导航栏工具条 */}
+        <ToolBar />
+
+        {/* 地图区域 */}
+        <MapContainer>{children}</MapContainer>
+      </Layout>
+    </DipperContainerContext>
+  );
+}
+```
+
+其实布局很简单，Dipper 会提供了 `DipperContainerContext`组件，实例化的空容器，容器内部组件可添加任意组件。
+
+```tsx
+import React from 'react';
+import { DipperContainerContext,MapContainer } from '@antv/dipper';
+
+export default () => {
+  return (
+    <DipperContainerContext
+      cfg={{
+        map: {
+          mapStyle: 'dark',
+        },
+      }}
+    >
+      <div style={{ height: '300px' }}>
+        <MapContainer /> }
+      </div>
+    </DipperContainerContext>
+  );
+};
+```
