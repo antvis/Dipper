@@ -2,9 +2,13 @@ import { useConfigService } from '../../hooks';
 import React from 'react';
 import { LayoutContent } from '../baseLayout';
 
-export default function AppLayerControl() {
-  const { globalConfig } = useConfigService();
-  const { layers = [] } = globalConfig;
-
+export default function AppLayerControl({
+  layers,
+}: {
+  layers: {
+    type: string;
+    options: any;
+  }[];
+}) {
   return <LayoutContent items={layers} />;
 }

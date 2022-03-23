@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUnmount } from 'ahooks';
 import { Provider } from 'inversify-react';
 import type { IBaseConfig } from '@antv/dipper-core';
@@ -17,6 +17,7 @@ export interface IContainerProps<T = any> {
 
 export function DipperContainerContext<T = any>({ cfg, children, onLoad }: IContainerProps<T>) {
   const { sceneContainer } = useDipperContainer<T>(cfg);
+  const [isLoaded, setLoaded] = useState(false);
   useUnmount(() => {
     if (sceneContainer) {
       sceneContainer.destroy();
@@ -26,7 +27,7 @@ export function DipperContainerContext<T = any>({ cfg, children, onLoad }: ICont
     if (sceneContainer && onLoad) {
       onLoad(sceneContainer);
     }
-  }, []);
+  }, [sceneContainer]);
 
   return sceneContainer ? (
     <Provider container={sceneContainer?.getContainer() as Container}>{children}</Provider>

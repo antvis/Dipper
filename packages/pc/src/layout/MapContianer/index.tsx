@@ -1,16 +1,24 @@
 import React from 'react';
 import { Layout } from 'antd';
-import MapControl from '../MapControl';
+import MapControl from '../MapControls';
 import Panel from '../Panel';
-import type { IConfig, IPanel } from '@antv/dipper-core';
+import type { IConfig, IPanel, IControlWidgetsProps } from '@antv/dipper-core';
 import { useConfigService, Map, Layer } from '@antv/dipper-layout';
 import styles from './index.less';
 
 const { Content } = Layout;
+export interface IMapProps {
+  panel?: Partial<IPanel>;
+  layers?: {
+    type: string;
+    options: any;
+  }[];
+  controls?: IControlWidgetsProps[]; // 自定义组件配置
+  children?: React.ReactNode;
+}
 
-export function MapContainer({ children }: { children?: React.ReactNode }) {
-  const { globalConfig } = useConfigService();
-  const { panel } = globalConfig;
+export function MapContainer(mapProps: IMapProps) {
+  const { panel, controls, layers, children } = mapProps;
   return (
     <Content
       className={styles.antLayoutContentMap}
@@ -22,10 +30,9 @@ export function MapContainer({ children }: { children?: React.ReactNode }) {
       <Map>
         <>
           {/* 地图控件 图例、比例尺 */}
-          <MapControl />
+          <MapControl controls={controls || []} />
           {/* 添加图层 */}
-          <Layer />
-
+          <Layer layers={layers || []} />
           {/* 自定义内容 */}
           {children}
         </>

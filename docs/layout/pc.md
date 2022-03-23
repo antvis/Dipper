@@ -10,6 +10,10 @@ group:
 
 ### 通用布局
 
+Dipper 目前规范了一套默认的布局模式，组织和规范各个组件的交互联动
+
+![Dipper 应用布局](https://gw.alipayobjects.com/mdn/rms_23a451/afts/img/A*So9xQZWYzGUAAAAAAAAAAAAAARQnAQ)
+
 ```tsx
 /**
  *
@@ -43,3 +47,5 @@ export default function DipperMap() {
 ```
 
 <API hideTitle src='../../packages/pc/src/layout/Container/index.tsx'></API>
+
+### 布局组件

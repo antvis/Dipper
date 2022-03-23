@@ -7,7 +7,7 @@ group:
 mobile: false
 ---
 
-dipper 针对 React 技术栈对核心 Service 进行了 hooks 封装，在 React 组件中使用更便捷
+useConfigService Dipper 配置管理
 
 ## useConfigService
 

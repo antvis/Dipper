@@ -74,7 +74,7 @@ import { DipperContainer, IConfig } from '@antv/dipper';
 export default function RumbMap() {
   return (
     <div style={{ height: '500px' }}>
-      <DipperContainer cfg={{}} />
+      <DipperContainer cfg={{}}>1222</DipperContainer>
     </div>
   );
 }

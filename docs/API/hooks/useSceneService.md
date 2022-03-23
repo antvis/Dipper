@@ -6,3 +6,7 @@ group:
   order: 4
 mobile: false
 ---
+
+## useSceneService
+
+地图场景管理服务

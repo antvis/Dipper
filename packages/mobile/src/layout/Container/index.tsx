@@ -11,7 +11,7 @@ export function MapContainer({ children }: { children?: React.ReactNode }) {
           {/* 地图控件 图例、比例尺 */}
           <MapControl />
           {/* 添加图层 */}
-          <Layer />
+          <Layer layers={[]} />
 
           {/* 自定义内容 */}
           {children}

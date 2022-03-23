@@ -1,14 +1,12 @@
 import React, { ReactElement, useMemo } from 'react';
-import { isDisplay, IWidgetProps } from '@antv/dipper-core';
-import { Control, CustomControl } from '@antv/l7-react';
-import type { IControlOption, PositionName } from '@antv/l7';
-import { useConfigService, AppMapControlContent, CustomBaseWidgets } from '@antv/dipper-layout';
+import { isDisplay, IWidgetProps, IControlWidgetsProps } from '@antv/dipper-core';
+import { CustomControl } from '@antv/l7-react';
+import type { PositionName } from '@antv/l7';
+import { CustomBaseWidgets } from '@antv/dipper-layout';
 
 import { groupBy } from 'lodash';
 
-export default function MapControl(ctr: IWidgetProps[]) {
-  const { globalConfig } = useConfigService();
-  const { controls, legends = [], defaultcontrols } = globalConfig;
+export default function MapControls({ controls }: { controls: IControlWidgetsProps[] }) {
   const controlGroupBy = useMemo(() => {
     return groupBy(
       controls?.filter((item: any) => isDisplay(item.display)),
@@ -21,13 +19,6 @@ export default function MapControl(ctr: IWidgetProps[]) {
 
   return (
     <>
-      {defaultcontrols
-        ?.filter((item: any) => isDisplay(item.display))
-        .map((item: any, index: number) => {
-          const key = `${item.type}${index}`;
-          const { position } = item as IControlOption;
-          return <Control key={key} type={item.type} position={position} {...item.options} />;
-        })}
       {Object.keys(controlGroupBy).map((key: string) => {
         const [position, layout] = key.split('-');
         const flexDirection = layout === 'horizontal' ? 'row' : 'column';
@@ -43,8 +34,6 @@ export default function MapControl(ctr: IWidgetProps[]) {
           </CustomControl>
         );
       })}
-      {/* 添加图例 */}
-      <AppMapControlContent items={legends} />
     </>
   );
 }
