@@ -4,6 +4,7 @@ import { IWidgetProps } from '@antv/dipper-core';
 
 export function DipperSelect({ widget }: IWidgetProps) {
   const options = widget?.getOptions();
+  
   return (
     <Select
       defaultValue={widget?.getValue()}
@@ -16,6 +17,7 @@ export function DipperSelect({ widget }: IWidgetProps) {
       onChange={(e: any) => {
         widget?.setValues(e);
       }}
+      {...(options?.options ?? {})}
     />
   );
 }
