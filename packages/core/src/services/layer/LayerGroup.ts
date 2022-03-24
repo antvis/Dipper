@@ -29,12 +29,13 @@ export enum LayerGroupEventEnum {
 
 export type ILayerFieldProperties<T> =
   | T
-  | { field: string; value: T | ((field: string) => T) };
+  | T[]
+  | { field: string; value: T | T[] | ((field: string) => T) };
 
 export type ILayerScale = IScaleOptions | [string, IScale];
 
 export const getLayerFieldArgus = <T>(properties: ILayerFieldProperties<T>) => {
-  if (properties instanceof Object) {
+  if (properties instanceof Object && !Array.isArray(properties)) {
     const { field, value } = properties;
     return [field, value];
   }
@@ -215,27 +216,41 @@ export default abstract class LayerGroup<
     this.scene?.removeLayer(layer);
   }
 
-  public setData(data: any) {
+  public setData(data: any, clear = true) {
     this.data = data;
     this.source.setData(data);
 
-    this.setSelectFeatures([]);
-    this.setHoverFeature(null);
+    if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
+      this.mainLayer.setData(this.data);
+    }
+
+    if (clear) {
+      this.setSelectFeatures([]);
+      this.setHoverFeature(null);
+    }
+
     // 重置选中数据
     this.emit(LayerGroupEventEnum.DATA_UPDATE, data);
   }
 
-  public setDataItem(featureId: number, newProperties: Record<string, any>) {
+  public setDataItem(
+    featureId: number,
+    newProperties: Record<string, any>,
+    uniqueKey?: string,
+  ) {
     const source = this.layers[0]?.getSource();
     if (source) {
       const targetFeature = source.getFeatureById(featureId) as Feature | null;
-      const targetIndex = this.data.features.findIndex((item: Feature) =>
-        isEqual(item, targetFeature),
-      );
+      const targetIndex = this.data.features.findIndex((item: Feature) => {
+        return uniqueKey
+          ? item.properties?.[uniqueKey] ===
+              targetFeature?.properties?.[uniqueKey]
+          : isEqual(item, targetFeature);
+      });
       if (targetFeature && targetIndex > -1) {
         Object.assign(targetFeature.properties, newProperties);
         this.data.features[targetIndex] = targetFeature;
-        this.source.setData(this.data);
+        this.setData(this.data, false);
       }
     }
   }

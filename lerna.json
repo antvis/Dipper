@@ -1,20 +1,12 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "version": "0.2.31",
+  "packages": ["packages/*"],
+  "version": "0.2.32",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
     "publish": {
-      "ignoreChanges": [
-        "*.md"
-      ],
-      "allowBranch": [
-        "master",
-        "docs",
-        "feat_v_0.2"
-      ],
+      "ignoreChanges": ["*.md"],
+      "allowBranch": ["master", "docs", "feat_v_0.2"],
       "message": "chore: publish"
     }
   }

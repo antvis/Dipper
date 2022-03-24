@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-core",
-  "version": "0.2.31",
+  "version": "0.2.32",
   "scripts": {
     "start": "dumi dev",
     "clean": "rimraf dist",
