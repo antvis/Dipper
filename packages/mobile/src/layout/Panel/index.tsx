@@ -26,9 +26,14 @@ export function MapPanel() {
 
   const controlGroupBy = useMemo(() => {
     return groupBy(
-      controls?.filter(
-        (item) => isDisplay(item.display) && ['bottomright', 'bottomleft'].includes(item.position!),
-      ),
+      controls
+        ?.filter(
+          (item) =>
+            isDisplay(item.display) && ['bottomright', 'bottomleft'].includes(item.position!),
+        )
+        .filter((item) => {
+          return ['zoom', 'scale', 'layers'].indexOf(item.type) === -1;
+        }),
       (c) => c.position,
     );
   }, [controls]);
@@ -84,7 +89,11 @@ export function MapPanel() {
         style={{ top: -(top + 13), display: showControl ? 'block' : 'none' }}
       >
         {/* 底部控件需要和滑块联动 */}
-        <BaseControl controlGroupBy={controlGroupBy}></BaseControl>
+        {Object.keys(controlGroupBy).map((position, index) => {
+          return controlGroupBy[position].map((c, index) => (
+            <CustomBaseWidgets key={c.type + index} {...c} />
+          ));
+        })}
       </div>
       <div
         style={{

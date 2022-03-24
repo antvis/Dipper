@@ -19,7 +19,8 @@ export default function MapControl() {
       return groupBy(
         controls?.filter(
           (item) =>
-            isDisplay(item.display) && !['bottomleft', 'bottomright'].includes(item.position!),
+            (isDisplay(item.display) && !['bottomleft', 'bottomright'].includes(item.position!)) ||
+            ['zoom', 'scale', 'layers'].indexOf(item.type) !== -1,
         ),
         (c) => {
           const defaultLayout = c.position === 'topleft' ? 'horizontal' : 'vertical';
