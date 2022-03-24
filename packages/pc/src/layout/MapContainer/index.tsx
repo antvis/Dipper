@@ -2,8 +2,8 @@ import React from 'react';
 import { Layout } from 'antd';
 import MapControl from '../MapControls';
 import Panel from '../Panel';
-import type { IConfig, IPanel, IControlWidgetsProps } from '@antv/dipper-core';
-import { useConfigService, Map, Layer } from '@antv/dipper-layout';
+import type { IPanel, IControlWidgetsProps } from '@antv/dipper-core';
+import { Map, Layer } from '@antv/dipper-layout';
 import styles from './index.less';
 
 const { Content } = Layout;
@@ -19,6 +19,7 @@ export interface IMapProps {
 
 export function MapContainer(mapProps: IMapProps) {
   const { panel, controls, layers, children } = mapProps;
+
   return (
     <Content
       className={styles.antLayoutContentMap}

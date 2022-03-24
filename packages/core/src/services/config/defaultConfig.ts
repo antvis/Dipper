@@ -44,8 +44,6 @@ export const defaultConfig: Partial<IConfig> = {
       position: 'bottomright',
       type: 'location',
     },
-  ],
-  defaultcontrols: [
     {
       type: 'zoom',
       position: 'bottomright',
