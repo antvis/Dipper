@@ -11,11 +11,26 @@ export interface IToolBar {
   components?: IWidgetProps[];
   children?: React.ReactNode;
 }
-
-export interface IBaseConfig {
+export interface IPopupProps {
+  display?: boolean; // 是否显示
+  enable?: boolean; // 是否生效
+  options?: Partial<IPopupOption>;
+  lngLat?:
+    | number[]
+    | {
+        lng: number;
+        lat: number;
+      };
+  children?: React.ReactNode;
+}
+export interface IMapProps {
   scene: Partial<Omit<ISceneConfig, 'map'>>;
   mapType?: 'GaodeV1' | 'GaodeV2' | 'MapBox' | 'Map';
   map: Partial<IMapConfig>;
+  popup: IPopupProps;
+  children?: JSX.Element;
+}
+export interface IBaseConfig extends IMapProps {
   global?: Record<string, any>;
   widgets?: {
     [key: string]: {
@@ -50,21 +65,7 @@ export interface IConfig extends IBaseConfig {
     | false;
   panel: Partial<IPanel>;
   toolbar: IToolBar[];
-  popup: {
-    // 信息框
-    display?: boolean; // 是否显示
-    enable?: boolean; // 是否生效
-    options?: Partial<IPopupOption>;
-    lngLat?:
-      | number[]
-      | {
-          lng: number;
-          lat: number;
-        };
-    children?: React.ReactNode;
-  };
   controls: IControlWidgetsProps[]; // 自定义组件配置
-  defaultcontrols: IWidgetProps[]; // 地图自带组件
   legends: IWidgetProps[];
   layers: {
     type: string;
