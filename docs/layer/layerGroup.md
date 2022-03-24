@@ -173,3 +173,31 @@ pointLayerGroup.on(
   },
 );
 ```
+
+## 通用接口
+
+### ILayerFieldProperties
+
+#### 说明
+
+该接口主要针对在 Dipper 中需要动态设置到 L7 中的 `color`、`shape`、`size`等可能设置为静态或者根据字段动态映射的值，通过泛型`T` 传入对应字段的 `TypeScript` 基础类型，如：shape -> string, size -> number。
+
+#### 接口定义
+
+```ts
+export type ILayerFieldProperties<T> =
+  | T
+  | T[]
+  | { field: string; value: T | T[] | ((field: string) => T) };
+```
+
+#### 使用
+
+```ts
+import { ILayerFieldProperties } from '@antv/dipper-core/src';
+
+export interface ICustomLayerOptions {
+  color: ILayerFieldProperties<string>;
+  size: ILayerFieldProperties<number>;
+}
+```

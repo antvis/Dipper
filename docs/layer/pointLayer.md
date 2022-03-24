@@ -15,8 +15,24 @@ mobile: false
 
 <code src="./demo/pointLayer/hover/index" compact="true"></code>
 
-# 构造器传参
+# API
 
-| 名称 | 说明                       | 类型   | 默认值 |
-| ---- | -------------------------- | ------ | ------ |
-| name | layerGroup 的唯一 id，必填 | string | -      |
+## 构造器传参
+
+| 名称           | 说明                                            | 类型                                           | 默认值                                          |
+| -------------- | ----------------------------------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| name           | layerGroup 的唯一 id，必填                      | string                                         | -                                               |
+| normal         | 正常展示状态下的样式                            | [IPointLayerStyle](#IPointLayerStyle)          | { size: 10, color: '#ff0000', shape: 'circle' } |
+| hover          | 是否开启悬停，以及开启时悬停状态下的样式        | false \| [IPointLayerStyle](#IPointLayerStyle) | false                                           |
+| select         | 是否开启选中，以及开启时选中状态下的样式        | false \| [IPointLayerStyle](#IPointLayerStyle) | false                                           |
+| autoFit        | 设置数据后，自动填充展示图层至全屏（缩放+位移） | boolean                                        | false                                           |
+| multipleSelect | 是否开启多选                                    | boolean                                        | false                                           |
+
+## IPointLayerStyle
+
+| 名称  | 类型                          |
+| ----- | ----------------------------- |
+| size  | ILayerFieldProperties<number> |
+| color | ILayerFieldProperties<string> |
+| shape | ILayerFieldProperties<string> |
+| style | any                           |
