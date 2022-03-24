@@ -2,9 +2,9 @@ import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { IWidgetProps, getWidgetChildren, isDisplay } from '@antv/dipper-core';
 import { PositionName } from '@antv/l7';
 import { CustomControl } from '@antv/l7-react';
-import BaseLayout from './base';
+import BaseLayout from './Base';
 import { useWidgetsService } from '../hooks';
-import { CustomBaseWidgets } from '../baseWidget/widget';
+import { CustomBaseWidgets } from '../BaseWidget';
 
 interface ContentProps {
   items: IWidgetProps[];

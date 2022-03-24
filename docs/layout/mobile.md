@@ -88,6 +88,12 @@ export default function RumbMap() {
             },
             components: [],
           },
+          map: {
+            zoom: 3,
+          },
+          panel: {
+            display: true,
+          },
           toolbar: {
             display: true,
             components: [

@@ -1,14 +1,9 @@
 ---
 mobile: false
-<<<<<<< HEAD
 group:
   title: 图层组件
   order: 5
 ---
-
-# GridLayer 填充图
-
-## =======
 
 # GridLayerGroup 填充图
 
