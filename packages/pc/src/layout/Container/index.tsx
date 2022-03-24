@@ -9,11 +9,11 @@ import { DipperContainerContext, IContainerProps, useConfigService } from '@antv
 
 const Content: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { globalConfig } = useConfigService();
-  const { panel, layers, controls } = globalConfig;
+  const { panel, layers, controls, toolbar } = globalConfig;
   return (
     <Layout className={styles.pageMap}>
       <DipperHeader {...(globalConfig?.headerbar as IHeaderProps)} />
-      <ToolBar />
+      <ToolBar toolbars={toolbar || []} />
       <MapContainer {...{ panel, layers, controls }}>{children}</MapContainer>
     </Layout>
   );

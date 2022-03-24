@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './index.less';
 import ToolBar from './Toolbar';
-import type { IConfig } from '@antv/dipper-core';
 import DipperHeader from './Header';
-import { Dipper } from '@antv/dipper-core';
 import { DipperContainerContext, IContainerProps } from '@antv/dipper-layout';
 import { MapContainer } from './Container';
 export default function DipperMobileContainer({ cfg, children, onLoad }: IContainerProps) {

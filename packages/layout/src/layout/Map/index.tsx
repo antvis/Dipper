@@ -4,12 +4,7 @@ import type {} from '@antv/l7-react';
 import styles from './index.less';
 import { useSceneService, useConfigService } from '../../hooks';
 
-interface IProps {
-  /** 地图子组件 */
-  children?: JSX.Element;
-}
-
-export default function AppMap({ children }: IProps) {
+export default function AppMap({ children }: { children?: JSX.Element }) {
   const { sceneService } = useSceneService();
   const { globalConfig } = useConfigService();
   const [isLoaded, setLoaded] = useState(false);
