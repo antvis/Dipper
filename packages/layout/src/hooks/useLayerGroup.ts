@@ -67,18 +67,18 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
 
   const getIFeatureList = useCallback(
     (features: Feature[], uniqueKey = 'id') => {
-      if (features.length) {
+      if (!features.length) {
         return [] as IFeature[];
       }
       if (layerGroup?.mainLayer) {
         const source = layerGroup.mainLayer.getSource();
-        const featureIdList = selectFeatures.map((feature) => {
+        const featureIdList = features.map((feature) => {
           // @ts-ignore
           return source.getFeatureId(uniqueKey, feature.properties[uniqueKey]);
         });
 
         // @ts-ignore
-        return selectFeatures.map((feature, index) => {
+        return features.map((feature, index) => {
           const [lng, lat] = coordAll(centerOfMass(feature))[0];
           const iFeature: IFeature = {
             // @ts-ignore
@@ -100,7 +100,8 @@ export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
 
   const setSelectFeaturesCb = useCallback(
     (newSelectFeatures: Feature[], uniqueKey = 'id') => {
-      layerGroup?.setSelectFeatures(getIFeatureList(newSelectFeatures, uniqueKey));
+      const newFeatures = getIFeatureList(newSelectFeatures, uniqueKey);
+      layerGroup?.setSelectFeatures(newFeatures);
     },
     [getIFeatureList],
   );
