@@ -18,7 +18,7 @@ export interface IMapContainerProps {
 }
 
 export function MapContainer(mapProps: IMapContainerProps) {
-  const { panel, controls, layers, children } = mapProps;
+  const { panel = {}, controls, layers, children } = mapProps;
 
   return (
     <Content
