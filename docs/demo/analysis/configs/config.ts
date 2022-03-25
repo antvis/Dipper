@@ -31,15 +31,15 @@ export const config: Partial<IConfig> = {
           action: 'queryArea',
         },
       },
-      {
-        display: false,
-        position: 'right',
-        type: 'publishbar',
-        event: {
-          actionType: 'map',
-          action: 'publish',
-        },
-      },
+      // {
+      //   display: false,
+      //   position: 'right',
+      //   type: 'publishbar',
+      //   event: {
+      //     actionType: 'map',
+      //     action: 'publish',
+      //   },
+      // },
     ],
   },
   panel: {
@@ -118,6 +118,12 @@ export const config: Partial<IConfig> = {
       type: 'searchPlaces',
       layout: 'horizontal',
       title: '地区搜索',
+    },
+    {
+      display: true,
+      position: 'topleft',
+      type: 'select',
+      options: {},
     },
   ],
   defaultcontrols: [
