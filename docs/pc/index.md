@@ -148,7 +148,7 @@ controls 配置示例
 
 ```
 
-<code src='../demo/control.tsx'>
+<!-- <code src='../demo/control.tsx'> -->
 
 ## 地图默认组件
 

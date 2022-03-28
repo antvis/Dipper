@@ -609,9 +609,24 @@ export default function DipperContainer({
 
 其实布局很简单，Dipper 会提供了 `DipperContainerContext`组件，实例化的空容器，容器内部组件可添加任意组件。
 
-```tsx
+```tsx pure
 import React from 'react';
 import { DipperContainerContext, MapContainer } from '@antv/dipper';
+
+const Content: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { globalConfig } = useConfigService();
+  const { panel, layers, controls, toolbar, scene, mapType, map, popup } =
+    globalConfig;
+  return (
+    <Layout style={{ height: '300px' }}>
+      <MapContainer
+        {...{ panel, layers, controls, scene, mapType, map, popup }}
+      >
+        {children}
+      </MapContainer>
+    </Layout>
+  );
+};
 
 export default () => {
   return (
@@ -622,9 +637,7 @@ export default () => {
         },
       }}
     >
-      <div style={{ height: '300px' }}>
-        <MapContainer />
-      </div>
+      <Content />
     </DipperContainerContext>
   );
 };
