@@ -1,50 +1,18 @@
-# Dipper
+<img src="https://gw.alipayobjects.com/zos/antfincdn/R8sN%24GNdh6/language.svg" width="18"> [English](./README.en-US.md) | 简体中文
 
-地理分析应用开发框架
+<h1 align="center">Dipper</h1>
 
-L7-Powered Geospatial analysis application development framework
+<div align="center">
 
-[github Dipper](https://github.com/antvis/dipper)
+[![Version](https://badgen.net/npm/v/@antv/dipper)](https://npmjs.com/@antv/dipper)
+![Status](https://badgen.net/github/status/antvis/Dipper)
 
-### 新增加 LIB
+基于 <a href="https://github.com/antvis/L7">L7</a> 的地图应用研发框架。
 
-packages 目录下新建目录名,在新建目录下执行创建项目
+<p align="center">
+  <a href="https://antv.vision/dipper">网站</a> •
+  <a href="https://antv.vision/dipper/guide">快速开始</a> •
+  <a href="https://antv.vision/dipper/pc">示例</a>
+</p>
 
-`yarn create @umijs/dumi-lib`
-
-## TODO list
-
-### 功能池
-
-## widgets
-
-- [] 导出地图图片
-- [] 属性表
-- [] 数据查看
-- [] 图层列表
-- [] 绘制组件
-- [] 选择组件
-- [] 书签
-- [] 卷帘
-- [] 数据面板
-- [] 测量
-- [] 书签
-
-# 发布
-
-- 切换到发布分支
-
-  lerna 配置限定了发布的分支，需要切换到可发布的分支进行发布， [可发布分支查看](./lerna.json)
-
-- 生成版本号
-  执行版本生成命令，选择版本号
-
-```bash
-yarn run version:prerelease
-```
-
-- 发布版本
-
-```bash
-yarn  run release
-```
+<div>
