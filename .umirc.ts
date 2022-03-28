@@ -1,5 +1,7 @@
 import { defineConfig } from 'dumi';
+
 const logo = 'https://antv-2018.alipay.com/assets/image/icon/l7.svg';
+
 export default defineConfig({
   title: 'Dipper',
   mode: 'site',
@@ -33,6 +35,14 @@ export default defineConfig({
   ],
   favicon: logo,
   logo,
+  mode: 'site',
+  navs: [
+    null,
+    {
+      title: 'GitHub',
+      path: 'https://github.com/antvis/Dipper',
+    },
+  ],
   outputPath: 'docs-dist',
   publicPath: '/Dipper/',
   base: '/Dipper/',
