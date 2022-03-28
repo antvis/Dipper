@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { AMapScene, AMapSceneV2, Popup, MapboxScene, MapScene } from '@antv/l7-react';
 import type {} from '@antv/l7-react';
 import styles from './index.less';
+import { IMapProps } from '@antv/dipper-core';
 import { useSceneService, useConfigService } from '../../hooks';
 
-export default function AppMap({ children }: { children?: JSX.Element }) {
+export default function AppMap({ map, mapType, popup, scene, children }: IMapProps) {
   const { sceneService } = useSceneService();
-  const { globalConfig } = useConfigService();
+  // const { globalConfig } = useConfigService();
   const [isLoaded, setLoaded] = useState(false);
-  const { map, mapType, popup, scene } = globalConfig;
+  // const { map, mapType, popup, scene } = globalConfig;
   const getMap = (type = 'GaodeV1') => {
     const content = () => {
       return (

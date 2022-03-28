@@ -1,7 +1,6 @@
 ---
 title: 简介
 order: 0
-toc: menu
 mobile: false
 ---
 

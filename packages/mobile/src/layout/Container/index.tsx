@@ -3,26 +3,26 @@ import { Map, Layer } from '@antv/dipper-layout';
 import MapControl from '../MapControl';
 import { MapPanel } from '../Panel';
 import { SceneContext } from '@antv/l7-react';
-import type { IPanel, IControlWidgetsProps } from '@antv/dipper-core';
+import type { IPanel, IControlWidgetsProps, IMapProps } from '@antv/dipper-core';
 import { useSceneService } from '@antv/dipper-layout';
 import styles from './index.less';
-export interface IMapContainerProps {
+
+export interface IMapContainerProps extends IMapProps {
   panel?: Partial<IPanel>;
   layers?: {
     type: string;
     options: any;
   }[];
   controls?: IControlWidgetsProps[]; // 自定义组件配置
-  children?: React.ReactNode;
 }
 
-export function MapContainer(mapProps: IMapContainerProps) {
-  const { panel, controls, layers, children } = mapProps;
+export function MapContainer(mapContainerProps: IMapContainerProps) {
+  const { panel, controls, layers, children, ...mapProps } = mapContainerProps;
   const { scene } = useSceneService();
   return (
     <div className={styles.pageMap}>
       {/* 地图 */}
-      <Map>
+      <Map {...mapProps}>
         <>
           {/* 地图控件 图例、比例尺 */}
           <MapControl />

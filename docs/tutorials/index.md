@@ -1,10 +1,7 @@
 ---
 title: Dipper 入门
-order: 5
+order: 0
 mobile: false
-group:
-  title: 教程
-  order: 10
 ---
 
 ## 初始化

@@ -56,5 +56,3 @@ export default () => {
 ```
 
 <API hideTitle src='../../packages/layout/src/layout/Map/index.tsx'></API>
-
-#### 组件容器 L

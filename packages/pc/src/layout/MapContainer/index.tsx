@@ -2,23 +2,24 @@ import React from 'react';
 import { Layout } from 'antd';
 import MapControl from '../MapControls';
 import Panel from '../Panel';
-import type { IPanel, IControlWidgetsProps } from '@antv/dipper-core';
+import type { IPanel, IControlWidgetsProps, IMapProps } from '@antv/dipper-core';
 import { Map, Layer } from '@antv/dipper-layout';
 import styles from './index.less';
 
 const { Content } = Layout;
-export interface IMapContainerProps {
+export interface IMapContainerProps extends IMapProps {
+  /**  地图右侧信息面板 */
   panel?: Partial<IPanel>;
+  /** 地图可视化图层组件 */
   layers?: {
     type: string;
     options: any;
   }[];
+  /** 地图控件图层 */
   controls?: IControlWidgetsProps[]; // 自定义组件配置
-  children?: React.ReactNode;
 }
-
-export function MapContainer(mapProps: IMapContainerProps) {
-  const { panel = {}, controls, layers, children } = mapProps;
+export function MapContainer(mapContainerProps: IMapContainerProps) {
+  const { panel = {}, controls, layers, children, ...mapProps } = mapContainerProps;
 
   return (
     <Content
@@ -28,7 +29,7 @@ export function MapContainer(mapProps: IMapContainerProps) {
       }}
     >
       {/* 地图 */}
-      <Map>
+      <Map {...mapProps}>
         <>
           {/* 地图控件 图例、比例尺 */}
           <MapControl controls={controls || []} />

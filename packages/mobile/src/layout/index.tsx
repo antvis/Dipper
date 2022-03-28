@@ -7,14 +7,14 @@ import { MapContainer } from './Container';
 
 const Content: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { globalConfig } = useConfigService();
-  const { panel, layers, controls, toolbar } = globalConfig;
+  const { panel, layers, controls, mapType, map, popup, toolbar } = globalConfig;
   return (
     <div className={styles.pageMap}>
       <DipperHeader />
       {/* 导航栏工具条 */}
       <ToolBar toolbars={toolbar || []} />
       {/* 地图区域 */}
-      <MapContainer>{children}</MapContainer>
+      <MapContainer {...{ panel, layers, controls, mapType, map, popup }}>{children}</MapContainer>
     </div>
   );
 };

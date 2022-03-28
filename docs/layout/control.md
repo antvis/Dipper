@@ -1,5 +1,5 @@
 ---
-title: 地图控件容器
+title: 地图组件
 order: 4
 toc: menu
 mobile: true
@@ -7,6 +7,10 @@ group:
   title: 布局组件
 ---
 
-地图控件是指放置在地图上方的组件，地图控件容器用来管理控制组件。
+## 地图组件
 
-<API hideTitle src='../../packages/pc/src/layout/MapControl/index.tsx'></API>
+## MapContainer
+
+Dipper 地图容器,用于初始化地图于地图相关的其他组件。
+
+<API src='../../packages/pc/src/layout/MapContainer/index.tsx'></API>

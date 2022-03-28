@@ -5,6 +5,7 @@ import type {
   IControlWidgetsProps,
 } from '../widgets/IWidgetsService';
 import type { IPanel } from '../panel/IPanelService';
+import { ReactElement } from 'react';
 
 export interface IToolBar {
   display?: boolean;
@@ -23,12 +24,18 @@ export interface IPopupProps {
       };
   children?: React.ReactNode;
 }
+
 export interface IMapProps {
-  scene: Partial<Omit<ISceneConfig, 'map'>>;
+  /** 地图场景配置项 */
+  scene?: Partial<Omit<ISceneConfig, 'map'>>;
+  /** 地图类型 */
   mapType?: 'GaodeV1' | 'GaodeV2' | 'MapBox' | 'Map';
-  map: Partial<IMapConfig>;
-  popup: IPopupProps;
-  children?: JSX.Element;
+  /** 地图配置项 */
+  map?: Partial<IMapConfig>;
+  /** 地图可视化信息框 */
+  popup?: IPopupProps;
+
+  children?: React.ReactNode;
 }
 export interface IBaseConfig extends IMapProps {
   global?: Record<string, any>;
