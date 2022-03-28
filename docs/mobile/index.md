@@ -1,9 +1,10 @@
 ---
 title: 布局
 mobile: true
+order: 0
 nav:
   title: 移动端
-  order: 6
+  order: 0
 ---
 
 ```tsx

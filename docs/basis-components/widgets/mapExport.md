@@ -5,6 +5,7 @@ order: 2
 mobile: false
 group:
   title: 地图组件
+  order: 4
 ---
 
 ## 地图导出组件 exportMap

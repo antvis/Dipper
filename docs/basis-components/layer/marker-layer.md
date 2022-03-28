@@ -7,4 +7,4 @@ group:
 
 # MarkerLayer 标记图层
 
-<code src="./demo/markerLayer/index" compact="true"></code>
+<code src="./demo/marker-layer/index" compact="true"></code>

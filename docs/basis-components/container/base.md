@@ -1,13 +1,15 @@
 ---
-title: 布局组件
-order: 4
+title: 容器组件
+order: 1
 toc: content
 mobile: false
 group:
-  title: 布局组件
+  title: 容器组件
 ---
 
-### 布局容器 DipperContainerContext
+什么是容器组件，容器组件能干什么，常见的容器组件，详见各模版的容器组件
+
+### 容器组件 DipperContainerContext
 
 容器组件，初始 Dipper 实例
 
@@ -29,9 +31,9 @@ export default () => {
 
 <API hideTitle src='../../../packages/layout/src/layout/Container/Context.tsx'></API>
 
-### 地图组件
+<!-- ### 地图组件
 
-### 使用地图组件
+### 使用地图组件 -->
 
 <!-- ```tsx
 /**
@@ -56,6 +58,6 @@ export default () => {
 };
 ``` -->
 
-<API hideTitle src='../../../packages/layout/src/layout/Map/index.tsx'></API>
+<!-- <API hideTitle src='../../../packages/layout/src/layout/Map/index.tsx'></API> -->
 
-#### 组件容器
+<!-- #### 组件容器 -->

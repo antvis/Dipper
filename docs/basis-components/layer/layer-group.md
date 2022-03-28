@@ -46,7 +46,7 @@ export default () => {
 
 ### 自定义图层实例
 
-<code src="./demo/layerGroup/index" compact="true"></code>
+<code src="./demo/layer-group/index" compact="true"></code>
 
 自定义图层的代码可以查看 **widgets/CustomLayerGroup.ts** 文件
 

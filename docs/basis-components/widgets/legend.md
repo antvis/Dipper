@@ -4,6 +4,7 @@ toc: content
 order: 2
 group:
   title: 地图组件
+  order: 4
 ---
 
 ## 图例

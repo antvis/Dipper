@@ -12,11 +12,11 @@ group:
 
 ## 设置颜色和形状
 
-<code src="./demo/pointLayer/color/index" compact="true"></code>
+<code src="./demo/point-layer/color/index" compact="true"></code>
 
 ## 选中和悬停示例
 
-<code src="./demo/pointLayer/hover/index" compact="true"></code>
+<code src="./demo/point-layer/hover/index" compact="true"></code>
 
 # API
 

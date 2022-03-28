@@ -7,4 +7,4 @@ group:
 
 # ImageLayer 图片图层
 
-<code src="./demo/imageLayer/index" compact="true"></code>
+<code src="./demo/image-layer/index" compact="true"></code>

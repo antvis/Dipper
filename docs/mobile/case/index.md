@@ -2,7 +2,7 @@
 title: 数据查询
 mobile: true
 group:
-  title: 数据查询
+  title: 案例
 nav:
   title: 移动端
   order: 6
