@@ -11,7 +11,7 @@ export default class BaseWidget<IOptions, IValue>
   extends EventEmitter
   implements IWidget<IOptions, IValue>
 {
-  private options: IWidgetProps = {
+  private props: IWidgetProps = {
     type: 'base',
   };
   private values: Partial<IValue> | any;
@@ -30,7 +30,7 @@ export default class BaseWidget<IOptions, IValue>
   constructor(props: IWidgetProps<IOptions>) {
     super();
     this.id = props.id || props.type;
-    this.options = Object.assign({}, props);
+    this.props = Object.assign({}, props);
   }
 
   public setContainer(container: Container) {
@@ -42,13 +42,14 @@ export default class BaseWidget<IOptions, IValue>
     this.widgetsService = this.contianer.get(
       TYPES.WIDGETS_SYMBOL,
     ) as IWidgetsService;
-    this.options = Object.assign(
+    this.props = Object.assign(
       {},
       {
-        ...this.options,
+        ...this.props, // props chan'd
         options: {
-          optionsData: this.configService.getWidgetsOptions(this.id),
-          ...this.options.options,
+          optionsData: this.configService.getWidgetsOptions(this.id), // 兼容历史版本
+          ...this.configService.getWidgetsOptions(this.id),
+          ...this.props.options,
         },
       },
     );
@@ -58,7 +59,7 @@ export default class BaseWidget<IOptions, IValue>
   public init() {}
 
   getOptions(): IWidgetProps<IOptions> {
-    return this.options;
+    return this.props;
   }
 
   getValue(): Partial<IValue> {
@@ -78,8 +79,8 @@ export default class BaseWidget<IOptions, IValue>
   }
 
   setOptions(option: Partial<IWidgetProps<IOptions>>) {
-    this.options = Object.assign({}, this.options, option);
-    this.emit(WidgetsEventEnum.OPTIONT_CHANGE, this.options);
+    this.props = Object.assign({}, this.props, option);
+    this.emit(WidgetsEventEnum.OPTIONT_CHANGE, this.props);
   }
 
   setValues(values: Partial<IValue>) {

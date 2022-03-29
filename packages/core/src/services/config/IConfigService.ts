@@ -5,17 +5,39 @@ import type {
   IControlWidgetsProps,
 } from '../widgets/IWidgetsService';
 import type { IPanel } from '../panel/IPanelService';
+import { ReactElement } from 'react';
 
 export interface IToolBar {
   display?: boolean;
   components?: IWidgetProps[];
   children?: React.ReactNode;
 }
+export interface IPopupProps {
+  display?: boolean; // 是否显示
+  enable?: boolean; // 是否生效
+  options?: Partial<IPopupOption>;
+  lngLat?:
+    | number[]
+    | {
+        lng: number;
+        lat: number;
+      };
+  children?: React.ReactNode;
+}
 
-export interface IBaseConfig {
-  scene: Partial<Omit<ISceneConfig, 'map'>>;
+export interface IMapProps {
+  /** 地图场景配置项 */
+  scene?: Partial<Omit<ISceneConfig, 'map'>>;
+  /** 地图类型 */
   mapType?: 'GaodeV1' | 'GaodeV2' | 'MapBox' | 'Map';
-  map: Partial<IMapConfig>;
+  /** 地图配置项 */
+  map?: Partial<IMapConfig>;
+  /** 地图可视化信息框 */
+  popup?: IPopupProps;
+
+  children?: React.ReactNode;
+}
+export interface IBaseConfig extends IMapProps {
   global?: Record<string, any>;
   widgets?: {
     [key: string]: {
@@ -50,21 +72,7 @@ export interface IConfig extends IBaseConfig {
     | false;
   panel: Partial<IPanel>;
   toolbar: IToolBar[];
-  popup: {
-    // 信息框
-    display?: boolean; // 是否显示
-    enable?: boolean; // 是否生效
-    options?: Partial<IPopupOption>;
-    lngLat?:
-      | number[]
-      | {
-          lng: number;
-          lat: number;
-        };
-    children?: React.ReactNode;
-  };
   controls: IControlWidgetsProps[]; // 自定义组件配置
-  defaultcontrols: IWidgetProps[]; // 地图自带组件
   legends: IWidgetProps[];
   layers: {
     type: string;
@@ -85,4 +93,6 @@ export interface IConfigService extends EventEmitter {
   getWidgetsValue: (key: string) => Record<string, any> | undefined;
   setWidgetsValue: (key: string, options: Record<string, any>) => void;
   getWidgetsOptions: (key: string) => Record<string, any> | undefined;
+  getGlobal(): Record<string, any> | undefined;
+  setGlobal(key: string, value: any): void;
 }

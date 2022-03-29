@@ -45,7 +45,8 @@
     "@antv/l7-react": "^2.3.9",
     "lodash": "^4.17.21",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.1",

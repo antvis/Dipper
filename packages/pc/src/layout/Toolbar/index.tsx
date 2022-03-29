@@ -1,16 +1,15 @@
 import React from 'react';
 import styles from './index.less';
 import { useConfigService, LayoutContent, getAppContentItem } from '@antv/dipper-layout';
-import { IWidgetProps, isDisplay } from '@antv/dipper-core';
+import { IWidgetProps, isDisplay, IToolBar } from '@antv/dipper-core';
 
-export default function MapToolbar() {
-  const { globalConfig } = useConfigService();
-  const { toolbar } = globalConfig;
+export default function MapToolbar({ toolbars }: { toolbars: IToolBar[] | IToolBar }) {
+  const bars = Array.isArray(toolbars) ? toolbars : [toolbars];
 
   // TODO 根据配置
   return (
     <>
-      {toolbar?.map((i, index) =>
+      {bars?.map((i, index) =>
         isDisplay(i?.display) ? (
           <div className={styles.appToolbar} key={index}>
             {/* 左侧组件 */}

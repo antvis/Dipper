@@ -48,6 +48,7 @@
     "antd-mobile": "^5.0.0-rc.25",
     "lodash": "^4.17.21",
     "react": "^16.14.0",
+    "lodash": "^4.17.21",
     "react-dom": "^16.14.0"
   },
   "devDependencies": {

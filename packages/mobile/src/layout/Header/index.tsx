@@ -7,8 +7,7 @@ import { NavBar } from 'antd-mobile';
 export default function AppHeader() {
   const { globalConfig } = useConfigService();
   const { display, options } = globalConfig.headerbar || {};
-  const components = getWidgetChildren(globalConfig.headerbar);
-  const { headerstyle, logo, title } = options || {};
+  const { title } = options || {};
 
   return isDisplay(display) ? <NavBar back={null}>{title?.value}</NavBar> : <></>;
 }

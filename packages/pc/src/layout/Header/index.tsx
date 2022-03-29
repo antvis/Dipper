@@ -47,10 +47,30 @@ export function TitleDom({ style, url, value }: TitleDomProps) {
 
 const { Header } = Layout;
 
-export default function AppHeader() {
-  const { globalConfig } = useConfigService();
-  const { display, options } = globalConfig.headerbar || {};
-  const components = getWidgetChildren(globalConfig.headerbar);
+export interface IHeaderProps {
+  display?: boolean;
+  options: {
+    headerstyle?: React.CSSProperties;
+    logo?: Partial<{
+      display: boolean;
+      value: string;
+      style: React.CSSProperties;
+      href: string;
+    }>;
+    title: Partial<{
+      url?: string;
+      value: string;
+      display: boolean;
+      style: React.CSSProperties;
+    }>;
+  };
+  components?: IWidgetProps[];
+  children?: React.ReactNode;
+}
+
+export default function AppHeader(props: IHeaderProps) {
+  const { display, options } = props || {};
+  const components = getWidgetChildren(props);
   const { headerstyle, logo, title } = options || {};
 
   return isDisplay(display) ? (
@@ -73,7 +93,7 @@ export default function AppHeader() {
         ) : null}
         <CustomBaseLayout
           type="header-left"
-          components={components?.filter((c) => c.position === 'left') || []}
+          components={components?.filter((c) => c.position === 'left' || !c.position) || []}
         />
       </div>
       <CustomBaseLayout
