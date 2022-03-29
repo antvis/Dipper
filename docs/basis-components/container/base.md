@@ -29,7 +29,7 @@ export default () => {
 };
 ``` -->
 
-<API hideTitle src='../../../packages/layout/src/layout/Container/Context.tsx'></API>
+<API hideTitle src='@antv/dipper-layout/src/layout/Container/Context.tsx'></API>
 
 <!-- ### 地图组件
 
@@ -58,6 +58,6 @@ export default () => {
 };
 ``` -->
 
-<!-- <API hideTitle src='../../../packages/layout/src/layout/Map/index.tsx'></API> -->
+<!-- <API hideTitle src='@antv/dipper-layout/src/layout/Map/index.tsx'></API> -->
 
 <!-- #### 组件容器 -->

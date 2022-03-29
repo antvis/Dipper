@@ -110,4 +110,4 @@ export default function RumbMap() {
 }
 ```
 
-<API hideTitle src='../../packages/mobile/src/layout/index.tsx'></API>
+<API hideTitle src='@antv/dipper-mobile/src/layout/index.tsx'></API>

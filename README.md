@@ -10,9 +10,9 @@
 基于 <a href="https://github.com/antvis/L7">L7</a> 的地图应用研发框架。
 
 <p align="center">
-  <a href="https://antv.vision/dipper">网站</a> •
-  <a href="https://antv.vision/dipper/guide">快速开始</a> •
-  <a href="https://antv.vision/dipper/pc">示例</a>
+  <a href="https://dipper.antv.vision">网站</a> •
+  <a href="https://dipper.antv.vision/guide">快速开始</a> •
+  <a href="https://dipper.antv.vision/pc">示例</a>
 </p>
 
 <div>
