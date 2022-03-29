@@ -5,6 +5,7 @@ import { debounce } from 'lodash';
 import { Amaps, AmapService } from '../service/amaps';
 import { useConfigService } from '@antv/dipper-layout';
 import { CloseCircleOutlined } from '@ant-design/icons';
+import { IWidgetProps } from '@antv/dipper-core';
 
 // 高德Pios 参数
 export interface Pios {
@@ -17,13 +18,13 @@ export interface Pios {
   typecode: string;
 }
 
-interface GeoMethods {
+interface GeoMethods extends IWidgetProps {
   serviceMethod?: string;
 }
 
 export function SearchPlace(params: GeoMethods) {
-  const { serviceMethod = 'Autocomplete' } = params;
-  const { setWidgetsOptions, setWidgetsValue } = useConfigService();
+  const { serviceMethod = 'Autocomplete', widget } = params;
+
   const [pois, setPois] = useState<Pios[]>([]);
   const icon =
     'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*sbq2TI9VDwYAAAAAAAAAAAAAARQnAQ';
@@ -55,9 +56,9 @@ export function SearchPlace(params: GeoMethods) {
 
   // 选择地区
   const onSelectPlace = (item: Pios) => {
+    widget?.setValues(item);
+    widget?.setOptions({ options: pois });
     // set search place
-    setWidgetsValue('placeList', item);
-    setWidgetsOptions('placeList', pois);
   };
 
   return (

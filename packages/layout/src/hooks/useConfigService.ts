@@ -28,20 +28,20 @@ export function useConfigService() {
     return configService.updateControl(type, value);
   };
 
-  const setWidgetsOptions = (key: string, options: Record<string, any>) => {
-    return configService.setWidgetsOptions(key, options);
+  const setWidgetsInitOptions = (key: string, options: Record<string, any>) => {
+    return configService.setWidgetsInitOptions(key, options);
   };
 
-  const setWidgetsValue = (key: string, options: Record<string, any>) => {
-    return configService.setWidgetsValue(key, options);
+  const setWidgetsInitValue = (key: string, options: Record<string, any>) => {
+    return configService.setWidgetsInitValue(key, options);
   };
 
-  const getWidgetsOptions = (key: string) => {
-    return configService.getWidgetsOptions(key);
+  const getWidgetsInitOptions = (key: string) => {
+    return configService.getWidgetsInitOptions(key);
   };
 
-  const getWidgetsValue = (key: string) => {
-    return configService.getWidgetsValue(key);
+  const getWidgetsInitValue = (key: string) => {
+    return configService.getWidgetsInitValue(key);
   };
 
   const setGlobalData = (key: string, value: any) => {
@@ -55,10 +55,10 @@ export function useConfigService() {
     setConfig,
     updateLegend,
     updateControl,
-    setWidgetsOptions,
-    getWidgetsOptions,
-    setWidgetsValue,
-    getWidgetsValue,
+    setWidgetsInitOptions,
+    getWidgetsInitOptions,
+    setWidgetsInitValue,
+    getWidgetsInitValue,
     configService,
   };
 }

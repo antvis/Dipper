@@ -71,21 +71,21 @@ export default class ConfigService
   }
 
   // 设置组件结果值
-  setWidgetsOptions(key: string, options: Record<string, any>) {
+  setWidgetsInitOptions(key: string, options: Record<string, any>) {
     this.setConfig(`widgets.${key}.options`, options);
   }
 
   // 设置组件结果值
-  setWidgetsValue(key: string, value: Record<string, any>) {
+  setWidgetsInitValue(key: string, value: Record<string, any>) {
     this.setConfig(`widgets.${key}.value`, value);
   }
   // 获取组件结果值
-  getWidgetsValue(key: string) {
+  getWidgetsInitValue(key: string) {
     return this.getConfig(`widgets.${key}.value`);
   }
 
   // 获取组件结果值
-  getWidgetsOptions(key: string) {
+  getWidgetsInitOptions(key: string) {
     return this.getConfig(`widgets.${key}.options`);
   }
   reset() {
