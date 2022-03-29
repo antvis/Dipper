@@ -10,9 +10,9 @@
 Geospatial analysis application development framework based on <a href="https://github.com/antvis/L7">L7</a>.
 
 <p align="center">
-  <a href="https://antv.vision/dipper">Website</a> •
-  <a href="https://antv.vision/dipper/guide">Quick Start</a> •
-  <a href="https://antv.vision/dipper/pc">Example</a>
+  <a href="https://dipper.antv.vision">Website</a> •
+  <a href="https://dipper.antv.vision/guide">Quick Start</a> •
+  <a href="https://dipper.antv.vision/pc">Example</a>
 </p>
 
 <div>
