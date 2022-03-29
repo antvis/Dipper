@@ -38,6 +38,7 @@ export interface IMapProps {
   children?: React.ReactNode;
 }
 export interface IBaseConfig extends IMapProps {
+  // 全局数据，一般用于在 Dipper 框架中组件数据共享
   global?: Record<string, any>;
   widgets?: {
     [key: string]: {
@@ -93,6 +94,6 @@ export interface IConfigService extends EventEmitter {
   getWidgetsValue: (key: string) => Record<string, any> | undefined;
   setWidgetsValue: (key: string, options: Record<string, any>) => void;
   getWidgetsOptions: (key: string) => Record<string, any> | undefined;
-  getGlobal(): Record<string, any> | undefined;
-  setGlobal(key: string, value: any): void;
+  getGlobalData(): Record<string, any> | undefined;
+  setGlobalData(data: Record<string, any>): void;
 }

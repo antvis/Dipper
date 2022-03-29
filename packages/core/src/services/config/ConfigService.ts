@@ -88,15 +88,25 @@ export default class ConfigService
   getWidgetsOptions(key: string) {
     return this.getConfig(`widgets.${key}.options`);
   }
+
   reset() {
     this.isInited = false;
   }
-  // 全局参数
-  getGlobal() {
+
+  // 获取全局数据
+  getGlobalData() {
     return this.config?.global || {};
   }
-  // 设置全局参数
-  setGlobal(key: string, value: any) {
-    this.setConfig(`global.${key}`, value);
+
+  // 设置全局数据
+  setGlobalData(data: Record<string, any>) {
+    const global = this.config?.global || {};
+
+    this.config = updateConfigsField(
+      this.config,
+      `global`,
+      mergeWith(global, data),
+    );
+    this.emit(ConfigEventEnum.GLOBAL_CHANGE, this.config);
   }
 }

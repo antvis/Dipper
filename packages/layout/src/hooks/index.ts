@@ -1,4 +1,5 @@
 export * from './useConfigService';
+export * from './useGlobalModel';
 export * from './useLayerGroup';
 export * from './useSceneService';
 export * from './useLayerService';
