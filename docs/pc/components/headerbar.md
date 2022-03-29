@@ -37,4 +37,4 @@ group:
  }
 ```
 
-<API hideTitle src='../../../packages/pc/src/layout/Header/index.tsx'></API>
+<API hideTitle src='@antv/dipper-pc/src/layout/Header/index.tsx'></API>

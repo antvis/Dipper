@@ -46,7 +46,7 @@ export default function DipperMap() {
 }
 ```
 
-<API hideTitle src='../../packages/pc/src/layout/Container/index.tsx'></API>
+<API hideTitle src='@antv/dipper-pc/src/layout/Container/index.tsx'></API>
 
 ## headerbar
 

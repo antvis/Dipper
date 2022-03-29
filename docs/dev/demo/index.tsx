@@ -8,19 +8,27 @@ import {
   CustomBaseWidgets,
 } from '@antv/dipper';
 import { Select, Button } from 'antd';
-import {
-  multidimensionalChart,
-  singleLineChart,
-} from '../../demo/analysis/configs/mock';
 const { Option } = Select;
 
 const demo = (props: IWidgetProps) => {
+  const { setGlobalData, globalData } = useConfigService();
   // 状态维护
-  return <Button value="测试">测试</Button>;
+  return (
+    <Button
+      value="测试"
+      onClick={() => {
+        setGlobalData('add', 1);
+      }}
+    >
+      测试
+    </Button>
+  );
 };
 
 const ControlPosition = () => {
-  const { updateControl } = useConfigService();
+  const { globalData, updateControl, configService } = useConfigService();
+  console.log('get globalData: ', globalData);
+
   return (
     <Select
       defaultValue="topleft"
@@ -71,9 +79,16 @@ export default function RumbMap() {
               {
                 display: true,
                 position: 'left',
-                title: '选择城市',
+                title: '测试1',
                 type: 'demo',
                 id: '2',
+              },
+              {
+                display: true,
+                position: 'left',
+                title: '测试2',
+                type: 'controlPosition',
+                id: '3',
               },
             ],
           },
