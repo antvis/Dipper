@@ -11,7 +11,7 @@ interface IInitData {
 }
 
 export default function LayerDemo() {
-  const [mapConfig, setMapConfig] = useState<IConfig<IInitData>>();
+  const [mapConfig, setMapConfig] = useState<IConfig>();
   // 初始化相关数据
 
   useEffect(() => {
@@ -20,8 +20,8 @@ export default function LayerDemo() {
   }, []);
 
   return (
-    <div style={{ height: '100vh' }}>
-      <DipperContainer<IInitData> cfg={mapConfig!} />
+    <div style={{ height: '300px' }}>
+      <DipperContainer cfg={mapConfig!} />
     </div>
   );
 }

@@ -58,22 +58,12 @@ export default function RumbMap() {
   return (
     <div
       style={{
-        height: '100vh',
+        height: '300px',
         width: '100%',
       }}
     >
       <DipperMobileContainer
         cfg={{
-          headerbar: {
-            display: false,
-            options: {
-              title: {
-                value: 'XX 管理地图地图',
-                display: true,
-              },
-            },
-            components: [],
-          },
           toolbar: {
             display: true,
             components: [
