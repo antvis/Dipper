@@ -1,22 +1,17 @@
 ---
 title: 基础 API
-toc: menu
+order: 0
+toc: content
 mobile: false
-group:
-  title: config
-  order: 3
 nav:
   title: 基础配置
   order: 2
 ---
 
-<!-- dipper-core 提供了一些框架共用的管理的能力方法。 -->
+TODO
 
-## DipperContainer
-
-Dipper 容器对象，复杂应用初始化和相关服务的管理
-
-React 中可以通过
+- 组件注册
+- 获取组件信息
 
 ## ConfigSerice
 

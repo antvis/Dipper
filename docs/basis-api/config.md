@@ -1,35 +1,18 @@
 ---
-title: 配置项
-order: 4
+title: 配置
+order: 1
+toc: content
 mobile: false
-group:
-  title: config
 nav:
-  title: 基础配置
-  order: 2
+  title: PC 端
+  order: 5
 ---
 
-# 基础配置
+TODO:
 
-应用初始化和运行时的数据管理
+- config 内容
 
-## viewData
-
-### global
-
-管理和存储一些全局配置
-
-### widgets
-
-管理和存储组件数据
-
-# 布局配置
-
-Dipper 目前规范了一套默认的布局模式，组织和规范各个组件的交互联动
-
-![Dipper 应用布局](https://gw.alipayobjects.com/mdn/rms_23a451/afts/img/A*So9xQZWYzGUAAAAAAAAAAAAAARQnAQ)
-
-## Widget
+<!-- ## Widget
 
 dipper 配置项围绕 Widget,每个 Widgets 是个组件，同时也可以包含子组件。
 
@@ -48,7 +31,7 @@ export interface IWidgetProps {
 ```
 
 - options
-  扩展可选配置项，主要是组件内部自身的配置
+  扩展可选配置项，主要是组件内部自身的配置 -->
 
 ## headerbar
 

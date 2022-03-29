@@ -1,31 +1,31 @@
 {
   "private": true,
   "name": "dipper",
-  "version": "1.0.0",
   "scripts": {
-    "clean": "lerna run clean",
     "start": "dumi dev",
+    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "clean": "lerna run clean",
+    "sync": "lerna run sync",
+    "link": "lerna exec -- yarn link",
+    "unlink": "lerna exec -- yarn unlink",
     "docs:build": "dumi build",
-    "version": "lerna version --force-publish --conventional-commits --exact --no-changelog",
-    "version:prerelease": "lerna version --force-publish --conventional-prerelease",
-    "prerelease": "yarn build",
-    "release": "lerna publish from-package --registry https://registry.npmjs.org/ --force-publish && lerna run sync",
     "docs:deploy": "gh-pages -d docs-dist",
     "build": "yarn clean && lerna run build",
     "build-watch": "yarn clean && lerna run watch",
-    "deploy": "npm run docs:build && npm run docs:deploy",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "test": "umi-test",
-    "sync": "lerna run sync",
-    "test:coverage": "umi-test --coverage",
-    "link": "lerna exec -- yarn link",
-    "unlink": "lerna exec -- yarn unlink"
+    "deploy": "yarn run docs:build && yarn run docs:deploy",
+    "version": "lerna version --force-publish --conventional-commits --exact --no-changelog",
+    "version:prerelease": "lerna version --force-publish --conventional-prerelease",
+    "prerelease": "yarn build",
+    "release-beta": "yarn run prerelease && lerna publish --dist-tag beta",
+    "release": "lerna publish from-package --registry https://registry.npmjs.org/ --force-publish && lerna run sync"
   },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
   "gitHooks": {
-    "pre-commit": "lint-staged && yarn run build"
+    "pre-commit": "lint-staged"
   },
   "workspaces": [
     "packages/*"
@@ -53,12 +53,9 @@
     "@turf/turf": "^6.5.0",
     "classnames": "^2.3.1",
     "dumi-theme-mobile": "^1.1.21",
-    "inversify-react": "^1.0.1",
-    "prettier": "^2.5.1"
+    "inversify-react": "^1.0.1"
   },
   "devDependencies": {
-    "@ant-design/pro-card": "^1.18.24",
-    "@turf/turf": "^6.5.0",
     "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.178",
     "@types/react": "^16.14.2",

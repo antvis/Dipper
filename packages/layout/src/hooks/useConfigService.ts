@@ -48,6 +48,10 @@ export function useConfigService() {
     return configService.setGlobal(key, value);
   };
 
+  const setGlobalData = (key: string, value: any) => {
+    return configService.setGlobal(key, value);
+  };
+
   return {
     globalConfig,
     globalData,
