@@ -2,7 +2,7 @@
 order: 1
 mobile: false
 group:
-  title: 图层组件
+  title: 图层
   order: 5
 ---
 

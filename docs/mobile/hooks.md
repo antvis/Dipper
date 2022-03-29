@@ -2,7 +2,7 @@
 title: Hooks
 order: 4
 toc: content
-mobile: false
+mobile: true
 ---
 
 TODO
