@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-layout",
-  "version": "0.2.33",
+  "version": "0.3.0-beta.1",
   "scripts": {
     "clean": "rimraf dist",
     "start": "dumi dev",
@@ -37,7 +37,7 @@
     ]
   },
   "dependencies": {
-    "@antv/dipper-core": "0.2.33"
+    "@antv/dipper-core": "0.3.0-beta.1"
   },
   "peerDependencies": {
     "@antv/l7": "^2.5.40",
@@ -45,8 +45,7 @@
     "@antv/l7-react": "^2.3.9",
     "lodash": "^4.17.21",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "lodash": "^4.17.21"
+    "react-dom": "^16.14.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.1",
