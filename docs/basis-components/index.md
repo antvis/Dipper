@@ -11,7 +11,6 @@ nav:
 
 Dipper 里组件分为
 
-- 布局组件：HeaderBar 等
+- 布局组件：HeaderBar、ToolBar 等
 - 容器组件：DipperContainer 等
-- 图层组件：GridLayer 等
-- 地图组件：Zoom 等
+- 地图组件：MapContainer、Zoom 等

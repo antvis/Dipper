@@ -2,7 +2,7 @@
 title: 配置
 order: 1
 toc: content
-mobile: false
+mobile: true
 ---
 
 TODO

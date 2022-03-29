@@ -1,4 +1,16 @@
-## headerbar
+---
+title: Headerbar
+order: 1
+toc: content
+mobile: false
+group:
+  title: 组件
+  order: 5
+---
+
+## Headerbar
+
+<Badge>布局组件</Badge>
 
 头部导航配置、支持设置 Logo、Title、子组件
 
@@ -25,4 +37,4 @@
  }
 ```
 
-<API hideTitle src='../../packages/pc/src/layout/Header/index.tsx'></API>
+<API hideTitle src='../../../packages/pc/src/layout/Header/index.tsx'></API>
