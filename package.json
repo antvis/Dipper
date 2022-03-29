@@ -2,12 +2,12 @@
   "private": true,
   "name": "dipper",
   "scripts": {
-    "clean": "lerna run clean",
     "start": "dumi dev",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
-    "sync": "lerna run sync",
     "test:coverage": "umi-test --coverage",
+    "clean": "lerna run clean",
+    "sync": "lerna run sync",
     "link": "lerna exec -- yarn link",
     "unlink": "lerna exec -- yarn unlink",
     "docs:build": "dumi build",
@@ -25,7 +25,7 @@
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
   "gitHooks": {
-    "pre-commit": "lint-staged && yarn run build"
+    "pre-commit": "lint-staged"
   },
   "workspaces": [
     "packages/*"
