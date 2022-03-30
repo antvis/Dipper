@@ -6,28 +6,26 @@ import {
   useWidgets,
   IWidgetProps,
   CustomBaseWidgets,
+  useGlobalModel,
 } from '@antv/dipper';
 import { Select, Button } from 'antd';
 const { Option } = Select;
 
 const demo = (props: IWidgetProps) => {
-  const { setGlobalData, globalData } = useConfigService();
-  // 状态维护
+  const [, setGlobalData] = useGlobalModel();
+
   return (
-    <Button
-      value="测试"
-      onClick={() => {
-        setGlobalData('add', 1);
-      }}
-    >
+    <Button value="测试" onClick={() => setGlobalData({ a: 1 })}>
       测试
     </Button>
   );
 };
 
 const ControlPosition = () => {
-  const { globalData, updateControl, configService } = useConfigService();
-  console.log('get globalData: ', globalData);
+  const { updateControl } = useConfigService();
+  const [globalData] = useGlobalModel();
+
+  console.log('globalData: ', globalData);
 
   return (
     <Select
@@ -79,16 +77,16 @@ export default function RumbMap() {
               {
                 display: true,
                 position: 'left',
-                title: '测试1',
+                title: '1',
                 type: 'demo',
-                id: '2',
+                id: '1',
               },
               {
                 display: true,
                 position: 'left',
-                title: '测试2',
+                title: '2',
                 type: 'controlPosition',
-                id: '3',
+                id: '2',
               },
             ],
           },
