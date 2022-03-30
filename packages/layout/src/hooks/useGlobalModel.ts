@@ -1,6 +1,6 @@
 import { useInjection } from 'inversify-react';
-import { ConfigEventEnum, IConfigService, TYPES, IConfig } from '@antv/dipper-core';
 import { useEffect, useState, useCallback } from 'react';
+import { ConfigEventEnum, IConfigService, TYPES } from '@antv/dipper-core';
 
 export function useGlobalModel() {
   const configService = useInjection<IConfigService>(TYPES.CONFIG_SYMBOL);
