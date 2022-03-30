@@ -47,7 +47,7 @@ export default class BaseWidget<IOptions, IValue>
       {
         ...this.props, // props chan'd
         options: {
-          optionsData: this.configService.getWidgetsInitOptions(this.id), // 兼容历史版本
+          optionsdata: this.configService.getWidgetsInitOptions(this.id), // 兼容历史版本
           ...this.configService.getWidgetsInitOptions(this.id),
           ...this.props.options,
         },

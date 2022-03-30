@@ -41,7 +41,7 @@
     "@antv/dipper-layout": "0.3.0-beta.1"
   },
   "peerDependencies": {
-    "@antv/dipper-layout": "^0.2.24",
+    "@antv/dipper-layout": "^0.3.0-beta.1",
     "@antv/l7": "^2.5.40",
     "@antv/l7-maps": "^2.5.40",
     "@antv/l7-react": "^2.3.9",
