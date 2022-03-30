@@ -86,7 +86,7 @@ export default function RumbMap() {
                 position: 'left',
                 title: '2',
                 type: 'controlPosition',
-                id: '3',
+                id: '2',
               },
             ],
           },
