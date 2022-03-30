@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import EventEmitter from 'eventemitter3';
-import type { IConfigService, IConfig } from './IConfigService';
+import type { IConfigService, IConfig, GlobalModel } from './IConfigService';
 import { get, mergeWith } from 'lodash';
 import { updateConfigsField } from '../../utils/';
 import { defaultConfig } from './defaultConfig';
@@ -94,12 +94,12 @@ export default class ConfigService
   }
 
   // 获取全局数据
-  getGlobalData() {
+  getGlobalData(): GlobalModel {
     return this.config?.global || {};
   }
 
   // 设置全局数据
-  setGlobalData(data: Record<string, any>) {
+  setGlobalData(data: GlobalModel) {
     const global = this.config?.global || {};
 
     this.config = updateConfigsField(

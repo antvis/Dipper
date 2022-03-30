@@ -6,21 +6,27 @@ import {
   useWidgets,
   IWidgetProps,
   CustomBaseWidgets,
+  useGlobalModel,
 } from '@antv/dipper';
 import { Select, Button } from 'antd';
-import {
-  multidimensionalChart,
-  singleLineChart,
-} from '../../demo/analysis/configs/mock';
 const { Option } = Select;
 
 const demo = (props: IWidgetProps) => {
-  // 状态维护
-  return <Button value="测试">测试</Button>;
+  const [, setGlobalData] = useGlobalModel();
+
+  return (
+    <Button value="测试" onClick={() => setGlobalData({ a: 1 })}>
+      测试
+    </Button>
+  );
 };
 
 const ControlPosition = () => {
   const { updateControl } = useConfigService();
+  const [globalData] = useGlobalModel();
+
+  console.log('globalData: ', globalData);
+
   return (
     <Select
       defaultValue="topleft"
@@ -71,9 +77,16 @@ export default function RumbMap() {
               {
                 display: true,
                 position: 'left',
-                title: '选择城市',
+                title: '1',
                 type: 'demo',
-                id: '2',
+                id: '1',
+              },
+              {
+                display: true,
+                position: 'left',
+                title: '2',
+                type: 'controlPosition',
+                id: '3',
               },
             ],
           },
