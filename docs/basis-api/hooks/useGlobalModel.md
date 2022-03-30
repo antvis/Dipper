@@ -11,13 +11,19 @@ mobile: false
 
 ## API
 
-```ts pure
+```tsx pure
 import { useGlobalModel } from '@antv/dipper';
 
 const [globalData, setGlobalData] = useGlobalModel();
+
+setGlobalData({ count: 1 });
+// globalData => { count: 1 }
+
+setGlobalData({ add: 2 });
+// globalData => { count: 1, add: 2 }
 ```
 
 | 参数          | 说明         | 类型                                  | 默认值 |
 | ------------- | ------------ | ------------------------------------- | ------ |
-| globalData    | 获取全局数据 |                                       |
+| globalData    | 获取全局数据 | `Record<string, any>`                 | `{}`   |
 | setGlobalData | 设置全局数据 | `(data: Record<string, any>) => void` |
