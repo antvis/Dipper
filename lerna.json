@@ -6,8 +6,9 @@
   "command": {
     "publish": {
       "ignoreChanges": ["*.md"],
-      "allowBranch": ["master", "docs", "feat_v_0.2"],
-      "message": "chore: publish"
+      "allowBranch": ["master", "docs"],
+      "message": "chore: publish %s",
+      "registry": "https://registry.npmjs.org"
     }
   }
 }

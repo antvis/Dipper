@@ -1,27 +1,15 @@
-# dipper
+<h1 align="center">Dipper</h1>
 
-## Getting Started
+<div align="center">
 
-Install dependencies,
+[![Version](https://badgen.net/npm/v/@antv/dipper)](https://npmjs.com/@antv/dipper) ![Status](https://badgen.net/github/status/antvis/Dipper)
 
-```bash
-$ npm i
-```
+Geospatial analysis application development framework based on <a href="https://github.com/antvis/L7">L7</a>.
 
-Start the dev server,
+<p align="center">
+  <a href="https://dipper.antv.vision">Website</a> •
+  <a href="https://dipper.antv.vision/guide">Quick Start</a> •
+  <a href="https://dipper.antv.vision/pc">Example</a>
+</p>
 
-```bash
-$ npm start
-```
-
-Build documentation,
-
-```bash
-$ npm run docs:build
-```
-
-Build library via `father-build`,
-
-```bash
-$ npm run build
-```
+<div>

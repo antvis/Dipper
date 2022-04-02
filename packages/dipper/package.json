@@ -1,20 +1,6 @@
 {
   "name": "@antv/dipper",
   "version": "0.3.0-beta.6",
-  "scripts": {
-    "clean": "rimraf dist",
-    "start": "dumi dev",
-    "docs:build": "dumi build",
-    "docs:deploy": "gh-pages -d docs-dist",
-    "build": "father-build",
-    "watch": "father-build --watch",
-    "deploy": "npm run docs:build && npm run docs:deploy",
-    "release": "npm run build && npm publish",
-    "prettier": "prettier --write \"src/**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "test": "umi-test",
-    "sync": "tnpm sync",
-    "test:coverage": "umi-test --coverage"
-  },
   "files": [
     "dist",
     "lib",
@@ -24,21 +10,28 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+  "scripts": {
+    "clean": "rimraf dist",
+    "prettier": "prettier --write \"src/*.{tsx,ts,less,md,json}\"",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "build": "yarn clean && father-build",
+    "watch": "yarn clean && father-build --watch"
   },
-  "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
-      "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
-    ]
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "antv",
+    "l7",
+    "dipper"
+  ],
   "license": "MIT",
+  "homepage": "https://github.com/antvis/Dipper#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/Dipper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antvis/Dipper/issues"
+  },
   "dependencies": {
     "@antv/dipper-core": "0.3.0-beta.6",
     "@antv/dipper-pc": "0.3.0-beta.6",
@@ -50,17 +43,12 @@
     "@antv/l7-maps": "^2.5.40",
     "lodash": "^4.17.21",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "lodash": "^4.17.21"
+    "react-dom": "^16.14.0"
   },
   "devDependencies": {
-    "@umijs/test": "^3.0.5",
-    "dumi": "^1.0.17",
-    "father-build": "^1.17.2",
-    "gh-pages": "^3.0.0",
-    "lint-staged": "^10.0.7",
-    "prettier": "^2.2.1",
-    "yorkie": "^2.0.0"
+    "father-build": "^1.17.2"
   },
-  "gitHead": "0ab188cbbd501a91226dbec5c59a197bf4336e9c"
+  "publishConfig": {
+    "access": "public"
+  }
 }

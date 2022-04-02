@@ -1,84 +1,71 @@
 {
   "private": true,
   "name": "dipper",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "start": "dumi dev",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "test": "umi-test",
-    "test:coverage": "umi-test --coverage",
-    "clean": "lerna run clean",
-    "sync": "lerna run sync",
+    "watch": "lerna run watch",
+    "lint:ts": "eslint packages docs --ext .ts,.tsx",
+    "lint:style": "stylelint --fix \"packages/**/*.less\"",
+    "lint-fix": "eslint packages docs --fix --cache --ext .ts,.tsx --format=pretty && npm run lint:style",
+    "prettier": "lerna run prettier",
     "link": "lerna exec -- yarn link",
     "unlink": "lerna exec -- yarn unlink",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
-    "build": "yarn clean && lerna run build",
-    "build-watch": "yarn clean && lerna run watch",
     "deploy": "yarn run docs:build && yarn run docs:deploy",
+    "build": "lerna run build",
     "version": "lerna version --force-publish --conventional-commits --exact --no-changelog",
-    "version:prerelease": "lerna version --force-publish --conventional-prerelease",
+    "version-pre": "lerna version --force-publish --conventional-prerelease",
     "prerelease": "yarn build",
-    "release-beta": "yarn run prerelease && lerna publish --dist-tag beta",
-    "release": "lerna publish from-package --registry https://registry.npmjs.org/ --force-publish && lerna run sync"
+    "release": "lerna publish from-package --force-publish",
+    "release-beta": "yarn run prerelease && lerna publish --dist-tag beta from-package --force-publish"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+  "dependencies": {
+    "@antv/g2plot": "^2.3.39",
+    "@antv/l7": "^2.7.30",
+    "@antv/l7-draw": "^2.4.20",
+    "@antv/l7-react": "^2.3.9"
   },
-  "workspaces": [
-    "packages/*"
-  ],
-  "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
-      "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
-    ]
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^12.1.2",
+    "@types/jest": "^27.0.3",
+    "@types/lodash": "^4.14.178",
+    "@types/react": "^16.14.2",
+    "@umijs/fabric": "^2.10.1",
+    "@umijs/plugin-analytics": "^0.2.2",
+    "@umijs/test": "^3.0.5",
+    "dumi": "^1.0.17",
+    "dumi-theme-mobile": "^1.1.21",
+    "father-build": "^1.17.2",
+    "gh-pages": "^3.0.0",
+    "husky": "^7.0.4",
+    "jest": "^27.3.1",
+    "lerna": "^4.0.0",
+    "lint-staged": "^12.3.7",
+    "mockjs": "^1.1.0",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typedoc": "^0.22.12"
   },
   "peerDependencies": {
     "antd": "^4.16.13",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
-  "dependencies": {
-    "@ant-design/icons": "^4.7.0",
-    "@ant-design/pro-card": "^1.18.24",
-    "@antv/g2plot": "^2.3.39",
-    "@antv/l7": "^2.7.30",
-    "@antv/l7-draw": "^2.4.20",
-    "@antv/l7-react": "^2.3.9",
-    "@turf/turf": "^6.5.0",
-    "classnames": "^2.3.1",
-    "dumi-theme-mobile": "^1.1.21",
-    "inversify-react": "^1.0.1"
-  },
-  "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "@types/lodash": "^4.14.178",
-    "@types/react": "^16.14.2",
-    "@umijs/fabric": "^2.10.1",
-    "@umijs/plugin-analytics": "^0.2.2",
-    "@umijs/test": "^3.0.5",
-    "lodash": "^4.17.21",
-    "ahooks": "^3.1.5",
-    "antd": "^4.18.3",
-    "antd-mobile": "^5.8.0",
-    "antd-mobile-icons": "^0.2.2",
-    "dumi": "^1.0.17",
-    "dumi-theme-mobile": "^1.1.21",
-    "father-build": "^1.17.2",
-    "gh-pages": "^3.0.0",
-    "jest": "^27.3.1",
-    "lerna": "^4.0.0",
-    "lerna-ci": "^0.0.8",
-    "lint-staged": "^10.0.7",
-    "mockjs": "^1.1.0",
-    "prettier": "^2.2.1",
-    "rimraf": "^3.0.2",
-    "typedoc": "^0.22.12",
-    "yorkie": "^2.0.0"
+  "lint-staged": {
+    "*.less": "stylelint --fix",
+    "*.{ts,tsx}": "yarn run lint:ts",
+    "*.{less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
   }
 }
