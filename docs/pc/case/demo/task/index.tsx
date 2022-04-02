@@ -11,7 +11,7 @@ interface IInitData {
 }
 
 export default function RumbMap() {
-  const [mapConfig, setMapConfig] = useState<IConfig<IInitData>>();
+  const [mapConfig, setMapConfig] = useState<IConfig>();
   // 初始化相关数据
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function RumbMap() {
 
   return (
     <div style={{ height: '100vh' }}>
-      <DipperContainer<IInitData> cfg={mapConfig!} />
+      <DipperContainer cfg={mapConfig!} />
     </div>
   );
 }

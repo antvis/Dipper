@@ -47,13 +47,13 @@ export default class BaseWidget<IOptions, IValue>
       {
         ...this.props, // props chan'd
         options: {
-          optionsData: this.configService.getWidgetsOptions(this.id), // 兼容历史版本
-          ...this.configService.getWidgetsOptions(this.id),
+          optionsdata: this.configService.getWidgetsInitOptions(this.id), // 兼容历史版本
+          ...this.configService.getWidgetsInitOptions(this.id),
           ...this.props.options,
         },
       },
     );
-    this.values = this.configService.getWidgetsValue(this.id);
+    this.values = this.configService.getWidgetsInitValue(this.id);
   }
 
   public init() {}

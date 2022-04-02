@@ -472,7 +472,6 @@ useWidgets 方法可以根据传入的组件`id`或者`type`获取对应组件�
 ```tsx pure
 import { IWidget, IWidgetProps } from '@antv/dipper';
 const CitySelect = ({ widget }: IWidgetProps) => {
-  const { setWidgetsValue } = useConfigService();
   return (
     <Select
       defaultValue="topleft"

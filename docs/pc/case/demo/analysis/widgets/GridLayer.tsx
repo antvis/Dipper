@@ -28,8 +28,7 @@ const formatLegend = (data: any[]) => {
 export function GridLayer({ options }: any) {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const { globalConfig, updateLegend, getWidgetsValue, setConfig } =
-    useConfigService();
+  const { globalConfig, updateLegend, setConfig } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const { widgetsValue: cityValue } = useWidgets('citySelect');

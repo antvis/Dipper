@@ -6,7 +6,6 @@ import type { PositionName } from '@antv/l7';
 import { useConfigService } from '@antv/dipper-layout';
 
 export const Draw = (props: IWidgetProps) => {
-  const { setWidgetsValue } = useConfigService();
   const scene = useSceneValue();
   useEffect(() => {
     const drawControl = new DrawControl(scene, {
@@ -25,7 +24,7 @@ export const Draw = (props: IWidgetProps) => {
     scene.addControl(drawControl);
 
     drawControl.on('draw.create', (e) => {
-      setWidgetsValue('drawData', e);
+      props.widget?.setValues({ drawData: e });
     });
   }, []);
 

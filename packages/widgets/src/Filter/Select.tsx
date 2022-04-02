@@ -8,7 +8,7 @@ export function DipperSelect({ widget }: IWidgetProps) {
   return (
     <Select
       defaultValue={widget?.getValue()}
-      options={options?.options?.optionsData || []}
+      options={options?.options?.optionsdata || []}
       showSearch={options?.showSearch}
       placeholder={options?.placeholder}
       bordered={false}

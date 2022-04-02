@@ -1,15 +1,13 @@
 import { Select } from 'antd';
 import React from 'react';
-import { useConfigService } from '@antv/dipper';
+import { useConfigService, IWidgetProps } from '@antv/dipper';
 import { brandOption } from '../configs/mock';
 
 const { Option } = Select;
 
-export const Filter = () => {
-  const { setWidgetsValue } = useConfigService();
-
+export const Filter = ({ widgets }: IWidgetProps) => {
   const onBrandChange = (e: any) => {
-    setWidgetsValue('brand', e);
+    widgets.setValues({ brand: e });
   };
 
   return (

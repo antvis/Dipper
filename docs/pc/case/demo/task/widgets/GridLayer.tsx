@@ -5,8 +5,7 @@ import {
   useLayerService,
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
-import { GridLayerGroup } from '@antv/dipper';
-import { Container } from 'inversify';
+import { GridLayerGroup, useWidgets } from '@antv/dipper';
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
     if (Array.isArray(item.value)) {
@@ -25,10 +24,10 @@ const formatLegend = (data: any[]) => {
 export function GridLayer() {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const { globalConfig, updateLegend, getWidgetsValue } = useConfigService();
+  const { globalConfig, updateLegend } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
-  const cityValue = getWidgetsValue('citySelect');
+  const { widgetsValue: cityValue } = useWidgets('citySelect');
   const [geoData, setGeoData] = useState();
 
   const layerProps = useMemo(() => {
