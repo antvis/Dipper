@@ -14,7 +14,7 @@ export default class BaseWidget<IOptions, IValue>
   private props: IWidgetProps = {
     type: 'base',
   };
-  private values: Partial<IValue> | any;
+  private value: Partial<IValue> | any;
   public id: string;
   private contianer!: Container;
 
@@ -53,7 +53,7 @@ export default class BaseWidget<IOptions, IValue>
         },
       },
     );
-    this.values = this.configService.getWidgetsInitValue(this.id);
+    this.value = this.configService.getWidgetsInitValue(this.id);
   }
 
   public init() {}
@@ -63,7 +63,7 @@ export default class BaseWidget<IOptions, IValue>
   }
 
   getValue(): Partial<IValue> {
-    return this.values;
+    return this.value;
   }
 
   show() {
@@ -78,14 +78,14 @@ export default class BaseWidget<IOptions, IValue>
     });
   }
 
-  setOptions(option: Partial<IWidgetProps<IOptions>>) {
-    this.props = Object.assign({}, this.props, option);
+  setOptions(options: Partial<IWidgetProps<IOptions>>) {
+    this.props = Object.assign({}, this.props, options);
     this.emit(WidgetsEventEnum.OPTIONT_CHANGE, this.props);
   }
 
-  setValues(values: Partial<IValue>) {
-    this.values = values;
-    this.emit(WidgetsEventEnum.VALUE_CHANGE, this.values);
+  setValue(value: Partial<IValue>) {
+    this.value = value;
+    this.emit(WidgetsEventEnum.VALUE_CHANGE, this.value);
   }
   destroy() {
     this.removeAllListeners();

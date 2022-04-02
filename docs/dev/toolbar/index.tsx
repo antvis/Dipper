@@ -4,7 +4,7 @@ import {
   registerWidget,
   PanelTabcontent,
   StatisticCards,
-  useWidgets,
+  useWidget,
   useLayerGroup,
 } from '@antv/dipper';
 import {
@@ -60,7 +60,7 @@ function useGetFilters(type) {
 }
 
 function Filters() {
-  const { widget } = useWidgets('headetFilter');
+  const { widget } = useWidget('headetFilter');
   const options1 = useGetFilters(1);
   const options2 = useGetFilters(2);
   const options3 = useGetFilters(3);
@@ -155,7 +155,7 @@ function Person() {
 registerWidget('perosn', Person);
 
 function StatisticCardsGroup(props) {
-  const { widgetsValue } = useWidgets('headetFilter');
+  const { widgetsValue } = useWidget('headetFilter');
   const [staticCards, setStaticCards] = useState<StaticCard[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {

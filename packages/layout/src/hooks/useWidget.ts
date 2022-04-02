@@ -5,11 +5,11 @@ import { useInjection } from 'inversify-react';
 import { TYPES, WidgetsEventEnum } from '@antv/dipper-core';
 import type { IWidgetsService } from '@antv/dipper-core';
 
-export function useWidgets(id: string) {
+export function useWidget(id: string) {
   const widgetsService = useInjection<IWidgetsService>(TYPES.WIDGETS_SYMBOL);
   const [widget, setWidget] = useState<IWidget>();
-  const [widgetsOptions, setWidgetsOptions] = useState<IWidgetProps>();
-  const [widgetsValue, setWidgetsValue] = useState<any>();
+  const [widgetOptions, setWidgetOptions] = useState<IWidgetProps>();
+  const [widgetValue, setWidgetValue] = useState<any>();
 
   useEffect(() => {
     const widgetsAdd = (newWidget: IWidget) => {
@@ -20,8 +20,8 @@ export function useWidgets(id: string) {
     const widget = widgetsService.getWidget(id);
     if (widget) {
       setWidget(widget as IWidget);
-      setWidgetsValue(widget.getValue());
-      setWidgetsOptions(widget.getOptions());
+      setWidgetValue(widget.getValue());
+      setWidgetOptions(widget.getOptions());
     } else {
       widgetsService.on(WidgetsServiceEnum.ADD, widgetsAdd);
     }
@@ -33,32 +33,45 @@ export function useWidgets(id: string) {
   useEffect(() => {
     if (widget) {
       const onValueChange = (e: any) => {
-        setWidgetsValue(e);
-      }
+        setWidgetValue(e);
+      };
       const onOptionsChange = (e: any) => {
-        setWidgetsOptions(e);
-      }
+        setWidgetOptions(e);
+      };
       widget?.on(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
       widget?.on(WidgetsEventEnum.OPTIONT_CHANGE, onOptionsChange);
       return () => {
         widget?.off(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
         widget?.off(WidgetsEventEnum.OPTIONT_CHANGE, onOptionsChange);
-      }
+      };
     }
   }, [widget]);
 
-  const setOption = (option: Partial<IWidgetProps<any>>) => {
-    return widget?.setOptions(option);
+  const setOptions = (options: Partial<IWidgetProps<any>>) => {
+    return widget?.setOptions(options);
   };
-  const setValues = (values: any) => {
-    return widget?.setValues(values);
+  const setValue = (values: any) => {
+    return widget?.setValue(values);
   };
 
   return {
-    widgetsOptions,
     widget,
-    widgetsValue,
-    setOption,
-    setValues,
+
+    widgetValue,
+    // 兼容旧 API
+    widgetsValue: widgetValue,
+    setValue,
+    // 兼容旧 API
+    setValues: setValue,
+
+    widgetOptions,
+    // 兼容旧 API
+    widgetsOptions: widgetOptions,
+    setOptions,
+    // 兼容旧 API
+    setOption: setOptions,
   };
 }
+
+// 兼容旧 API
+export const useWidgets = useWidget;

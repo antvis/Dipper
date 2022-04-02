@@ -5,7 +5,7 @@ import {
   useLayerService,
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
-import { GridLayerGroup, useWidgets } from '@antv/dipper';
+import { GridLayerGroup, useWidget } from '@antv/dipper';
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
     if (Array.isArray(item.value)) {
@@ -27,7 +27,7 @@ export function GridLayer() {
   const { globalConfig, updateLegend } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
-  const { widgetsValue: cityValue } = useWidgets('citySelect');
+  const { widgetsValue: cityValue } = useWidget('citySelect');
   const [geoData, setGeoData] = useState();
 
   const layerProps = useMemo(() => {

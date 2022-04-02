@@ -3,7 +3,7 @@ import {
   DipperContainer,
   registerWidget,
   useConfigService,
-  useWidgets,
+  useWidget,
   IWidgetProps,
   CustomBaseWidgets,
   useGlobalModel,
