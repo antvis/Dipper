@@ -7,6 +7,8 @@ group:
 mobile: false
 ---
 
+# useWidget
+
 `useWidget` 获取与更新组件数据
 
 ## API
@@ -16,13 +18,13 @@ import { useWidget } from '@antv/dipper';
 const { widget, widgetValue, setValue } = useWidget('select');
 ```
 
-## 参数
+### 参数
 
 | 参数 | 说明                  | 类型   | 默认值 |
 | ---- | --------------------- | ------ | ------ |
 | id   | 组件的 ID 或组件 type | string | 必选   |
 
-## 结果
+### 结果
 
 | 参数          | 说明                | 类型                     | 备注 |
 | ------------- | ------------------- | ------------------------ | ---- |
