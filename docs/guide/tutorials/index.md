@@ -460,7 +460,7 @@ useWidget 方法可以根据传入的组件`id`或者`type`获取对应组件值
 
 ```tsx pure
  import { useWidget } '@antv/dipper'
- const { widgetsValue,} = useWidget('citySelect');
+ const { widgetValue } = useWidget('citySelect');
 
 ```
 
@@ -519,8 +519,8 @@ interface IData {
 ### 全局数据
 
 ```tsx pure
-import { useSceneService } from '@antv/dipper';
-const { global, setGlobal } = useConfigService();
+import { useGlobalModel } from '@antv/dipper';
+const [globalData, setGlobalData] = useGlobalModel();
 ```
 
 ### Widgets 初始化数据

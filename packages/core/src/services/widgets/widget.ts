@@ -47,13 +47,13 @@ export default class BaseWidget<IOptions, IValue>
       {
         ...this.props, // props chan'd
         options: {
-          optionsdata: this.configService.getWidgetsInitOptions(this.id), // 兼容历史版本
-          ...this.configService.getWidgetsInitOptions(this.id),
+          optionsdata: this.configService.getWidgetInitOptions(this.id), // 兼容历史版本
+          ...this.configService.getWidgetInitOptions(this.id),
           ...this.props.options,
         },
       },
     );
-    this.value = this.configService.getWidgetsInitValue(this.id);
+    this.value = this.configService.getWidgetInitValue(this.id);
   }
 
   public init() {}
@@ -69,6 +69,7 @@ export default class BaseWidget<IOptions, IValue>
 
   // 兼容旧 API
   setValues(value: Partial<IValue>) {
+    console.warn('请将 setValues 方法替换 setValue 使用');
     this.setValue(value);
   }
 

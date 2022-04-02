@@ -58,18 +58,14 @@ export function useWidget(id: string) {
     widget,
 
     widgetValue,
-    // 兼容旧 API
-    widgetsValue: widgetValue,
+    widgetsValue: widgetValue, // 兼容旧 API
     setValue,
-    // 兼容旧 API
-    setValues: setValue,
+    setValues: setValue, // 兼容旧 API
 
     widgetOptions,
-    // 兼容旧 API
-    widgetsOptions: widgetOptions,
+    widgetsOptions: widgetOptions, // 兼容旧 API
     setOptions,
-    // 兼容旧 API
-    setOption: setOptions,
+    setOption: setOptions, // 兼容旧 API
   };
 }
 
