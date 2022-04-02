@@ -15,14 +15,6 @@ export default defineConfig({
   resolve: {
     excludes: isProduction ? ['docs/dev'] : [],
   },
-  alias: {
-    '@antv/dipper-core': join(__dirname, 'packages', 'core'),
-    '@antv/dipper': join(__dirname, 'packages', 'dipper'),
-    '@antv/dipper-layout': join(__dirname, 'packages', 'layout'),
-    '@antv/dipper-mobile': join(__dirname, 'packages', 'mobile'),
-    '@antv/dipper-pc': join(__dirname, 'packages', 'pc'),
-    '@antv/dipper-widgets': join(__dirname, 'packages', 'widgets'),
-  },
   metas: [
     { name: 'keywords', content: 'dipper, Dipper, L7, AntV, AntV Dipper' },
     { name: 'description', content: '🌍 地理分析应用研发框架' },

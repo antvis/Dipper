@@ -1,5 +1,5 @@
 ---
-title: 基础 API
+title: API
 order: 0
 toc: content
 mobile: false
