@@ -56,7 +56,7 @@ export function SearchPlace(params: GeoMethods) {
 
   // 选择地区
   const onSelectPlace = (item: Pios) => {
-    widget?.setValues(item);
+    widget?.setValue(item);
     widget?.setOptions({ options: pois });
     // set search place
   };

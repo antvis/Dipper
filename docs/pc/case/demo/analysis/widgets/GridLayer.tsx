@@ -31,8 +31,8 @@ export function GridLayer({ options }: any) {
   const { globalConfig, updateLegend, setConfig } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
-  const { widgetsValue: cityValue } = useWidget('citySelect');
-  const { widgetsValue: brandValue } = useWidget('brand');
+  const { widgetValue: cityValue } = useWidget('citySelect');
+  const { widgetValue: brandValue } = useWidget('brand');
   const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 

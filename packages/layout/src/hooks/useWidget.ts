@@ -2,7 +2,7 @@ import { IWidget, WidgetsServiceEnum } from '@antv/dipper-core';
 import { useState, useEffect, useCallback } from 'react';
 import type { IWidgetProps } from '@antv/dipper-core';
 import { useInjection } from 'inversify-react';
-import { TYPES, WidgetsEventEnum } from '@antv/dipper-core';
+import { TYPES, WidgetEventEnum } from '@antv/dipper-core';
 import type { IWidgetsService } from '@antv/dipper-core';
 
 export function useWidget(id: string) {
@@ -38,11 +38,11 @@ export function useWidget(id: string) {
       const onOptionsChange = (e: any) => {
         setWidgetOptions(e);
       };
-      widget?.on(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
-      widget?.on(WidgetsEventEnum.OPTIONT_CHANGE, onOptionsChange);
+      widget?.on(WidgetEventEnum.VALUE_CHANGE, onValueChange);
+      widget?.on(WidgetEventEnum.OPTIONT_CHANGE, onOptionsChange);
       return () => {
-        widget?.off(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
-        widget?.off(WidgetsEventEnum.OPTIONT_CHANGE, onOptionsChange);
+        widget?.off(WidgetEventEnum.VALUE_CHANGE, onValueChange);
+        widget?.off(WidgetEventEnum.OPTIONT_CHANGE, onOptionsChange);
       };
     }
   }, [widget]);

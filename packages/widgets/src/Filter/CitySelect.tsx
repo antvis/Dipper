@@ -16,7 +16,7 @@ export function CitySelect({
       options={(widget?.getOptions().options?.data as Array<any>) || []}
       allowClear={false}
       onChange={(e: any) => {
-        widget?.setValues(e);
+        widget?.setValue(e);
       }}
       placeholder="选择城市"
     />

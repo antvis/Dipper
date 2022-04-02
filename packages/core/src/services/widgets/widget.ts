@@ -2,7 +2,7 @@ import EventEmitter from 'eventemitter3';
 import type { Container } from 'inversify';
 import { inject } from 'inversify';
 import type { IWidget, IWidgetsService, IWidgetProps } from './IWidgetsService';
-import { WidgetsEventEnum } from './IWidgetsService';
+import { WidgetEventEnum } from './IWidgetsService';
 import { ISceneService } from '../scene/ISceneService';
 import { IConfigService } from '../config/IConfigService';
 import { TYPES } from '../../types';
@@ -58,12 +58,27 @@ export default class BaseWidget<IOptions, IValue>
 
   public init() {}
 
+  getValue(): Partial<IValue> {
+    return this.value;
+  }
+
+  setValue(value: Partial<IValue>) {
+    this.value = value;
+    this.emit(WidgetEventEnum.VALUE_CHANGE, this.value);
+  }
+
+  // 兼容旧 API
+  setValues(value: Partial<IValue>) {
+    this.setValue(value);
+  }
+
   getOptions(): IWidgetProps<IOptions> {
     return this.props;
   }
 
-  getValue(): Partial<IValue> {
-    return this.value;
+  setOptions(options: Partial<IWidgetProps<IOptions>>) {
+    this.props = Object.assign({}, this.props, options);
+    this.emit(WidgetEventEnum.OPTIONT_CHANGE, this.props);
   }
 
   show() {
@@ -78,15 +93,6 @@ export default class BaseWidget<IOptions, IValue>
     });
   }
 
-  setOptions(options: Partial<IWidgetProps<IOptions>>) {
-    this.props = Object.assign({}, this.props, options);
-    this.emit(WidgetsEventEnum.OPTIONT_CHANGE, this.props);
-  }
-
-  setValue(value: Partial<IValue>) {
-    this.value = value;
-    this.emit(WidgetsEventEnum.VALUE_CHANGE, this.value);
-  }
   destroy() {
     this.removeAllListeners();
   }

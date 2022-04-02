@@ -46,7 +46,7 @@ export interface IWidget<IOptions = any, IValue = any> extends EventEmitter {
   destroy: () => void;
 }
 
-export enum WidgetsEventEnum {
+export enum WidgetEventEnum {
   'OPTIONT_CHANGE' = 'optionchange',
   'VALUE_CHANGE' = 'valuechange',
 }

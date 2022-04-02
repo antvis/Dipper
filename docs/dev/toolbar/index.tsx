@@ -77,7 +77,7 @@ function Filters() {
       area: [options2[0].value],
       industry: options3[0].value,
     });
-    widget.setValues({
+    widget.setValue({
       map: map || options1[0].value,
       area: [options2[0].value],
       industry: options3[0].value,
@@ -87,7 +87,7 @@ function Filters() {
   const onFieldsChange = useCallback(() => {
     const filterVal = form.getFieldsValue(true);
     setMap(filterVal.map);
-    widget.setValues(filterVal);
+    widget.setValue(filterVal);
   }, [widget]);
 
   return (

@@ -75,16 +75,16 @@ export function FilterUI({
     }
 
     const formValue = form.getFieldsValue(true);
-    widget?.setValues({ [id]: { ...formValue } });
+    widget?.setValue({ [id]: { ...formValue } });
   }, [widget, form]);
   const onFinish = useCallback(() => {
     const formValue = form.getFieldsValue(true);
-    widget?.setValues({ [id]: { ...formValue } });
+    widget?.setValue({ [id]: { ...formValue } });
     onConfirm?.();
   }, [widget, form]);
 
   useEffect(() => {
-    widget?.setValues({
+    widget?.setValue({
       [id]: {},
     });
   }, [id, widget]);

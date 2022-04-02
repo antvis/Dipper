@@ -7,7 +7,7 @@ const { Option } = Select;
 
 export const Filter = ({ widgets }: IWidgetProps) => {
   const onBrandChange = (e: any) => {
-    widgets.setValues({ brand: e });
+    widgets.setValue({ brand: e });
   };
 
   return (

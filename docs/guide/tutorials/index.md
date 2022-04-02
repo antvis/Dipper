@@ -567,7 +567,7 @@ export function CitySelect({
       options={(widget?.getOptions().options?.data as Array<any>) || []} // 初始值配置项
       allowClear={false}
       onChange={(e: any) => {
-        widget?.setValues(e); // 更新数据
+        widget?.setValue(e); // 更新数据
       }}
       placeholder="选择城市"
     />
