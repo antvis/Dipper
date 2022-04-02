@@ -7,9 +7,10 @@
   "scripts": {
     "start": "dumi dev",
     "watch": "lerna run watch",
+    "lint": "yarn run lint:ts && yarn run lint:style",
     "lint:ts": "eslint packages docs --ext .ts,.tsx",
-    "lint:style": "stylelint --fix \"packages/**/*.less\"",
-    "lint-fix": "eslint packages docs --fix --cache --ext .ts,.tsx --format=pretty && npm run lint:style",
+    "lint:style": "stylelint \"packages/**/*.less\"",
+    "lint-fix": "eslint packages docs --fix --cache --ext .ts,.tsx --format=pretty && stylelint --fix \"packages/**/*.less\"",
     "prettier": "lerna run prettier",
     "link": "lerna exec -- yarn link",
     "unlink": "lerna exec -- yarn unlink",
