@@ -1,6 +1,6 @@
 ---
 title: useWidgets
-order: 1
+order: 2
 group:
   title: Hooks
   order: 4

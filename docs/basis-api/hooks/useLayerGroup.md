@@ -1,6 +1,6 @@
 ---
 title: useLayerGroup
-order: 1
+order: 3
 group:
   title: Hooks
   order: 4
