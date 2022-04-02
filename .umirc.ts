@@ -1,4 +1,3 @@
-import { join } from 'path';
 import { defineConfig } from 'dumi';
 
 const logo = 'https://antv-2018.alipay.com/assets/image/icon/l7.svg';
@@ -14,14 +13,6 @@ export default defineConfig({
   outputPath: 'docs-dist',
   resolve: {
     excludes: isProduction ? ['docs/dev'] : [],
-  },
-  alias: {
-    '@antv/dipper-core': join(__dirname, 'packages', 'core'),
-    '@antv/dipper': join(__dirname, 'packages', 'dipper'),
-    '@antv/dipper-layout': join(__dirname, 'packages', 'layout'),
-    '@antv/dipper-mobile': join(__dirname, 'packages', 'mobile'),
-    '@antv/dipper-pc': join(__dirname, 'packages', 'pc'),
-    '@antv/dipper-widgets': join(__dirname, 'packages', 'widgets'),
   },
   metas: [
     { name: 'keywords', content: 'dipper, Dipper, L7, AntV, AntV Dipper' },
@@ -53,7 +44,8 @@ export default defineConfig({
   scripts: [
     'https://gw.alipayobjects.com/os/lib/react/17.0.1/umd/react.development.js',
     'https://gw.alipayobjects.com/os/lib/react-dom/17.0.1/umd/react-dom.development.js',
-    'https://gw.alipayobjects.com/os/lib/antd/4.16.13/dist/antd-with-locales.js',
+    // 'https://gw.alipayobjects.com/os/lib/antd/4.16.13/dist/antd-with-locales.js',
+    'https://gw.alipayobjects.com/os/lib/antd/4.19.4/dist/antd.js',
     /** lodash */
     'https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js',
   ],
