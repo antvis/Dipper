@@ -1,6 +1,6 @@
-import { IWidget, WidgetsServiceEnum } from '@antv/dipper-core';
-import { useState, useEffect, useCallback } from 'react';
-import type { IWidgetProps } from '@antv/dipper-core';
+import { useState, useEffect } from 'react';
+import { WidgetsServiceEnum } from '@antv/dipper-core';
+import type { IWidgetProps, IWidget } from '@antv/dipper-core';
 import { useInjection } from 'inversify-react';
 import { TYPES, WidgetEventEnum } from '@antv/dipper-core';
 import type { IWidgetsService } from '@antv/dipper-core';
@@ -17,11 +17,11 @@ export function useWidget(id: string) {
         setWidget(newWidget);
       }
     };
-    const widget = widgetsService.getWidget(id);
-    if (widget) {
-      setWidget(widget as IWidget);
-      setWidgetValue(widget.getValue());
-      setWidgetOptions(widget.getOptions());
+    const _widget = widgetsService.getWidget(id);
+    if (_widget) {
+      setWidget(_widget as IWidget);
+      setWidgetValue(_widget.getValue());
+      setWidgetOptions(_widget.getOptions());
     } else {
       widgetsService.on(WidgetsServiceEnum.ADD, widgetsAdd);
     }

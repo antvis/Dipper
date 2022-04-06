@@ -1,5 +1,6 @@
 import { useInjection } from 'inversify-react';
-import { ConfigEventEnum, IConfigService, TYPES, IConfig } from '@antv/dipper-core';
+import type { IConfigService, IConfig } from '@antv/dipper-core';
+import { ConfigEventEnum, TYPES } from '@antv/dipper-core';
 import { useEffect, useState } from 'react';
 
 export function useConfigService() {

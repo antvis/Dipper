@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import styles from './index.less';
 import ToggleButton from './ToggleButton';
 import { LayoutContent, usePanelService } from '@antv/dipper-layout';
-import { IPanel, getWidgetChildren, isDisplay } from '@antv/dipper-core';
+import type { IPanel } from '@antv/dipper-core';
+import { getWidgetChildren, isDisplay } from '@antv/dipper-core';
 import { isEqual } from 'lodash';
 
 function getStyle(position: string, opened: boolean, panelWidth: string | number) {

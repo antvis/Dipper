@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useUnmount } from 'ahooks';
 import { Provider } from 'inversify-react';
 import type { IBaseConfig } from '@antv/dipper-core';
-import { Dipper } from '@antv/dipper-core';
+import type { Dipper } from '@antv/dipper-core';
 import { useDipperContainer } from '../../hooks';
 import type { Container } from 'inversify';
 

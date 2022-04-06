@@ -1,6 +1,6 @@
 import { Select } from 'antd';
 import React from 'react';
-import { IWidgetProps } from '@antv/dipper-core';
+import type { IWidgetProps } from '@antv/dipper-core';
 
 export function DipperSelect({ widget }: IWidgetProps) {
   const options = widget?.getOptions();

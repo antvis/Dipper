@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Pie } from '@antv/g2plot';
-import { ChatData } from '../Bar';
+import type { ChatData } from '../Bar';
 
 export function PieChart({ data }: ChatData) {
   const id = useRef();

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLayerService, MarkerLayerGroup } from '@antv/dipper';
-import { IMarkerItemProps } from '@antv/dipper-widgets/src';
+import type { IMarkerItemProps } from '@antv/dipper-widgets/src';
 import { useLayerGroup } from '@antv/dipper-layout';
 
 interface IDataItem {
@@ -34,10 +34,7 @@ const MarkerItem: React.FC<IMarkerItemProps<IDataItem>> = ({
   // select,
 }) => {
   const { selectFeatures } = useLayerGroup('markerLayer');
-  const isSelect = useMemo(
-    () => selectFeatures[0]?.featureId === index,
-    [selectFeatures, index],
-  );
+  const isSelect = useMemo(() => selectFeatures[0]?.featureId === index, [selectFeatures, index]);
   return (
     <img
       src={data.src}

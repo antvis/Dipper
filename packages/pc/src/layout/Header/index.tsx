@@ -2,7 +2,8 @@ import { Layout } from 'antd';
 import React from 'react';
 import styles from './index.less';
 import { useConfigService, CustomBaseLayout } from '@antv/dipper-layout';
-import { getWidgetChildren, IWidgetProps, isDisplay } from '@antv/dipper-core';
+import type { IWidgetProps} from '@antv/dipper-core';
+import { getWidgetChildren, isDisplay } from '@antv/dipper-core';
 
 interface LogoDomProps {
   value?: string;
@@ -14,7 +15,7 @@ export function LogoDom({ value, style, href }: LogoDomProps) {
   const imgDom = <img src={value} style={style} />;
   if (href) {
     return (
-      <a href={href} target="_blank">
+      <a href={href} target="_blank" rel="noreferrer">
         {imgDom}
       </a>
     );

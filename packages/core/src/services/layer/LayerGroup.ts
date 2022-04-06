@@ -1,23 +1,17 @@
-import type { ILayer } from '@antv/l7';
+import type { ILayer, Scene } from '@antv/l7';
 import EventEmitter from 'eventemitter3';
-import { Container, injectable } from 'inversify';
+import type { Container } from 'inversify';
+import { injectable } from 'inversify';
 import type { ILayerGroup, IFeature } from './ILayerService';
-import { Source, MarkerLayer, Scene } from '@antv/l7';
-import {
-  BBox,
-  Feature,
-  FeatureCollection,
-  featureCollection,
-} from '@turf/turf';
+import { Source, MarkerLayer } from '@antv/l7';
+import type { BBox, Feature, FeatureCollection } from '@turf/turf';
+import { featureCollection } from '@turf/turf';
 import { isEqual, merge } from 'lodash';
 import { isPressing } from '../../utils/keyboard';
 import { TYPES } from '../../types';
-import { ISceneService } from '../scene/ISceneService';
-import { DeepPartial } from '../../utils';
-import {
-  IScale,
-  IScaleOptions,
-} from '@antv/l7-core/es/services/layer/IStyleAttributeService';
+import type { ISceneService } from '../scene/ISceneService';
+import type { DeepPartial } from '../../utils';
+import type { IScale, IScaleOptions } from '@antv/l7-core/es/services/layer/IStyleAttributeService';
 
 export enum LayerGroupEventEnum {
   VISIBLE_CHANGE = 'visibleChange',
@@ -71,9 +65,7 @@ export interface ILayerGroupProps<T = any> {
 }
 
 @injectable()
-export default abstract class LayerGroup<
-    T extends ILayerGroupOptions = ILayerGroupOptions,
-  >
+export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGroupOptions>
   extends EventEmitter<LayerGroupEventEnum>
   implements ILayerGroup
 {
@@ -90,9 +82,7 @@ export default abstract class LayerGroup<
   public hoverFeature?: IFeature | null = null;
 
   public get scene(): Scene | undefined {
-    return (
-      this.container?.get(TYPES.SCENE_SYMBOL) as ISceneService | undefined
-    )?.getScene();
+    return (this.container?.get(TYPES.SCENE_SYMBOL) as ISceneService | undefined)?.getScene();
   }
 
   get mainLayer() {
@@ -166,15 +156,11 @@ export default abstract class LayerGroup<
 
   public onClick = (e: IFeature) => {
     const isMultipleSelect = isPressing(16) && !!this.options.multipleSelect;
-    const hasSelectFeature = this.selectFeatures.find(
-      (item) => item.featureId === e.featureId,
-    );
+    const hasSelectFeature = this.selectFeatures.find((item) => item.featureId === e.featureId);
     if (hasSelectFeature) {
       if (isMultipleSelect) {
         this.setSelectFeatures(
-          [...this.selectFeatures].filter(
-            (item) => item.featureId !== e.featureId,
-          ),
+          [...this.selectFeatures].filter((item) => item.featureId !== e.featureId),
         );
       } else if (this.selectFeatures.length > 1) {
         this.setSelectFeatures([e]);
@@ -233,18 +219,13 @@ export default abstract class LayerGroup<
     this.emit(LayerGroupEventEnum.DATA_UPDATE, data);
   }
 
-  public setDataItem(
-    featureId: number,
-    newProperties: Record<string, any>,
-    uniqueKey?: string,
-  ) {
+  public setDataItem(featureId: number, newProperties: Record<string, any>, uniqueKey?: string) {
     const source = this.layers[0]?.getSource();
     if (source) {
       const targetFeature = source.getFeatureById(featureId) as Feature | null;
       const targetIndex = this.data.features.findIndex((item: Feature) => {
         return uniqueKey
-          ? item.properties?.[uniqueKey] ===
-              targetFeature?.properties?.[uniqueKey]
+          ? item.properties?.[uniqueKey] === targetFeature?.properties?.[uniqueKey]
           : isEqual(item, targetFeature);
       });
       if (targetFeature && targetIndex > -1) {

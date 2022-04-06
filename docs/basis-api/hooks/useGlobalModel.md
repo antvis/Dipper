@@ -30,7 +30,7 @@ setGlobalData((prevState) => ({ ...prevState, add: prevState.add + 1 }));
 
 ### 结果
 
-| 参数          | 说明         | 类型                                                                                                | 默认值 |
-| ------------- | ------------ | --------------------------------------------------------------------------------------------------- | ------ |
-| globalData    | 获取全局数据 | `Record<string, any>`                                                                               | `{}`   |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| globalData | 获取全局数据 | `Record<string, any>` | `{}` |
 | setGlobalData | 设置全局数据 | `(value: Record<string, any> ｜ ((prevState: Record<string, any>) => Record<string, any>)) => void` |

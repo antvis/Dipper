@@ -1,6 +1,7 @@
 import { Select } from 'antd';
 import React from 'react';
-import { useConfigService, IWidgetProps } from '@antv/dipper';
+import type { IWidgetProps } from '@antv/dipper';
+import { useConfigService } from '@antv/dipper';
 import { brandOption } from '../configs/mock';
 
 const { Option } = Select;

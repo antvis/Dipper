@@ -1,11 +1,14 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import type { FC } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Layout } from 'antd';
 import styles from './index.less';
-import DipperHeader, { IHeaderProps } from '../Header';
+import type { IHeaderProps } from '../Header';
+import DipperHeader from '../Header';
 import ToolBar from '../Toolbar';
 import { MapContainer } from '../MapContainer';
-import { IConfig } from '@antv/dipper-core';
-import { DipperContainerContext, IContainerProps, useConfigService } from '@antv/dipper-layout';
+import type { IConfig } from '@antv/dipper-core';
+import type { IContainerProps } from '@antv/dipper-layout';
+import { DipperContainerContext, useConfigService } from '@antv/dipper-layout';
 
 const Content: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { globalConfig } = useConfigService();

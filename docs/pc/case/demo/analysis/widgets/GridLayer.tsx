@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { GridLayerGroup, useWidget } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
-import { FeatureCollection } from '@turf/turf';
+import type { FeatureCollection } from '@turf/turf';
 
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
@@ -70,9 +70,7 @@ export function GridLayer({ options }: any) {
       return;
     }
     // 可以根据业务需求配置接口
-    fetch(
-      `https://gw.alipayobjects.com/os/antvdemo/assets/dipper-city/${cityValue[1]}.json`,
-    )
+    fetch(`https://gw.alipayobjects.com/os/antvdemo/assets/dipper-city/${cityValue[1]}.json`)
       .then((res) => res.json())
       .then((data) => {
         const geoDataList =
@@ -93,9 +91,7 @@ export function GridLayer({ options }: any) {
           const data =
             brandValue === '1'
               ? geoDataList
-              : geoDataList.filter(
-                  (item) => item.properties.brand_type === brandValue,
-                );
+              : geoDataList.filter((item) => item.properties.brand_type === brandValue);
           if (data.length) {
             // @ts-ignore
             setGeoData({ type: 'FeatureCollection', features: data });

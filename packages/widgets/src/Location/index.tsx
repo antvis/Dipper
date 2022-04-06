@@ -4,7 +4,8 @@ import { Button, message } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 import styles from './index.less';
 import { PointLayer } from '@antv/l7-react';
-import { Amaps, AmapService } from '../service/amaps';
+import type { AmapService } from '../service/amaps';
+import { Amaps } from '../service/amaps';
 interface Locations {
   longitude: number;
   latitude: number;

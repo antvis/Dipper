@@ -2,10 +2,11 @@ import { Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { debounce } from 'lodash';
-import { Amaps, AmapService } from '../service/amaps';
+import type { AmapService } from '../service/amaps';
+import { Amaps } from '../service/amaps';
 import { useConfigService } from '@antv/dipper-layout';
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { IWidgetProps } from '@antv/dipper-core';
+import type { IWidgetProps } from '@antv/dipper-core';
 
 // 高德Pios 参数
 export interface Pios {

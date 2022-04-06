@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
-import { IWidgetProps, getWidgetChildren, isDisplay } from '@antv/dipper-core';
-import { PositionName } from '@antv/l7';
+import type { IWidgetProps } from '@antv/dipper-core';
+import { getWidgetChildren, isDisplay } from '@antv/dipper-core';
+import type { PositionName } from '@antv/l7';
 import { CustomControl } from '@antv/l7-react';
 import BaseLayout from './Base';
 import { useWidgetsService } from '../hooks';

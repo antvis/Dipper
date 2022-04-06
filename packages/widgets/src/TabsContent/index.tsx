@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { IWidgetProps, isDisplay, getWidgetChildren } from '@antv/dipper-core';
+import type { IWidgetProps } from '@antv/dipper-core';
+import { isDisplay, getWidgetChildren } from '@antv/dipper-core';
 import { Tabs } from 'antd';
 import classNames from 'classnames';
 import style from './index.less';
@@ -14,10 +15,7 @@ interface ContentProps {
 export function AppTabsContent({ items, onChange }: ContentProps) {
   const [currentOperate, setCurrentOperate] = useState('');
 
-  const displayItems = useMemo(
-    () => items.filter((item) => isDisplay(item.display)),
-    [items],
-  );
+  const displayItems = useMemo(() => items.filter((item) => isDisplay(item.display)), [items]);
 
   useEffect(() => {
     if (items.length !== 0) {
@@ -42,15 +40,8 @@ export function AppTabsContent({ items, onChange }: ContentProps) {
     >
       {displayItems.map((tab: IWidgetProps) => {
         return (
-          <TabPane
-            tab={tab?.options?.title}
-            key={tab.type}
-            className={style.tabPanel}
-          >
-            <CustomBaseLayout
-              type={tab.type}
-              components={getWidgetChildren(tab)}
-            />
+          <TabPane tab={tab?.options?.title} key={tab.type} className={style.tabPanel}>
+            <CustomBaseLayout type={tab.type} components={getWidgetChildren(tab)} />
           </TabPane>
         );
       })}

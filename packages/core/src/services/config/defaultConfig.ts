@@ -1,4 +1,4 @@
-import { IConfig } from './IConfigService';
+import type { IConfig } from './IConfigService';
 export const defaultConfig: Partial<IConfig> = {
   headerbar: {
     display: true,

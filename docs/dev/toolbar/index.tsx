@@ -31,11 +31,12 @@ import {
   UpOutlined,
 } from '@ant-design/icons';
 import styles from './styles.less';
+import type {
+  StaticCard,
+  Option} from './util';
 import {
   fakePromise,
   MOCK_STATIC,
-  StaticCard,
-  Option,
   MOCK_SCREENRODI,
   MOCK,
   MockLayers,
@@ -45,9 +46,7 @@ import * as mock from './util/mock';
 const { RangePicker } = DatePicker;
 
 function useGetFilters(type) {
-  const [options, setOptions] = useState<{ label: string; value: string }[]>(
-    [],
-  );
+  const [options, setOptions] = useState<{ label: string; value: string }[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -99,11 +98,7 @@ function Filters() {
         <Cascader options={options2} bordered={false} />
       </Form.Item>
       <Form.Item name="industry">
-        <Select
-          options={options3}
-          showSearch={options3.length > 30}
-          bordered={false}
-        />
+        <Select options={options3} showSearch={options3.length > 30} bordered={false} />
       </Form.Item>
     </Form>
   );
@@ -116,7 +111,7 @@ function Title() {
     <>
       <div className={styles['main-title']}>万象台</div>
       <div className={styles['sub-title']}> · 城市洞察</div>
-      <div className={styles['split-line']}></div>
+      <div className={styles['split-line']} />
     </>
   );
 }
@@ -142,12 +137,7 @@ function Person() {
   return (
     <>
       <Avatar src={avatar} />
-      <Select
-        options={options}
-        value={post}
-        onChange={onPostChange}
-        bordered={false}
-      />
+      <Select options={options} value={post} onChange={onPostChange} bordered={false} />
       <SettingOutlined onClick={onSettingClick} />
     </>
   );
@@ -262,11 +252,11 @@ function CustomLegend() {
           AOI 筛选
           {visible ? <UpOutlined /> : <DownOutlined />}
         </div>
-        <div className={`${styles['aoi-filter']} ${styles['select']}`}>
+        <div className={`${styles['aoi-filter']} ${styles.select}`}>
           <Select placeholder="搜索网格名称/人员名称" showSearch />
         </div>
         <Popover trigger="click" content={Layers} placement="bottom">
-          <div className={`${styles['aoi-filter']} ${styles['icon']}`}>
+          <div className={`${styles['aoi-filter']} ${styles.icon}`}>
             <img
               src="https://gw.alipayobjects.com/zos/bmw-prod/1bd3ce6f-3c52-431d-8578-bd21baec0836.svg"
               height="13"

@@ -1,5 +1,5 @@
 import { isArray } from 'lodash';
-import { IWidgetProps } from '../services/widgets/IWidgetsService';
+import type { IWidgetProps } from '../services/widgets/IWidgetsService';
 
 export const getWidgetChildren = (items: any): IWidgetProps[] => {
   if (isArray(items.components) && items.components.length !== 0) {

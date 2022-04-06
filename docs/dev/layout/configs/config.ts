@@ -1,4 +1,4 @@
-import { IConfig } from '@antv/dipper';
+import type { IConfig } from '@antv/dipper';
 import { CityList } from './mock';
 export const config: Partial<IConfig> = {
   viewData: {

@@ -14,7 +14,7 @@ const MyPanel: React.FC<IProps> = () => {
     console.log(selectFeatures);
   }, [selectFeatures]);
 
-  return <div></div>;
+  return <div />;
 };
 
 export default MyPanel;

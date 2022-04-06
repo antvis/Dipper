@@ -1,5 +1,6 @@
 import React, { ReactElement, useMemo } from 'react';
-import { isDisplay, IWidgetProps } from '@antv/dipper-core';
+import type { IWidgetProps } from '@antv/dipper-core';
+import { isDisplay } from '@antv/dipper-core';
 import { Control, CustomControl } from '@antv/l7-react';
 import type { IControlOption, PositionName } from '@antv/l7';
 import { useConfigService, AppMapControlContent, CustomBaseWidgets } from '@antv/dipper-layout';

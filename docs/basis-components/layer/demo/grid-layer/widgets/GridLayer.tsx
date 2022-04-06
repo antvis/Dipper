@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useMount } from 'ahooks';
+import type { IGridLayerGroupOptions } from '@antv/dipper';
 import {
   BoxSelectLayerGroup,
   GridLayerGroup,
-  IGridLayerGroupOptions,
   useLayerGroup,
   useLayerService,
   useSceneService,
 } from '@antv/dipper';
-import { FeatureCollection } from '@turf/turf';
+import type { FeatureCollection } from '@turf/turf';
 
 export default function GridLayer({
   options,
@@ -87,9 +87,7 @@ export default function GridLayer({
     layerService.addLayerGroup(boxSelectLayerGroup);
     setLayerGroup(gridLayerGroup);
 
-    fetch(
-      'https://gw.alipayobjects.com/os/bmw-prod/f270ef08-b2ac-49e5-8811-6837723cd4c3.json',
-    )
+    fetch('https://gw.alipayobjects.com/os/bmw-prod/f270ef08-b2ac-49e5-8811-6837723cd4c3.json')
       .then((res) => res.json())
       .then((geoJson: FeatureCollection) => {
         gridLayerGroup.setData(geoJson);

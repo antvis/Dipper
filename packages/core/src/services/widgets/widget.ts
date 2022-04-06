@@ -3,8 +3,8 @@ import type { Container } from 'inversify';
 import { inject } from 'inversify';
 import type { IWidget, IWidgetsService, IWidgetProps } from './IWidgetsService';
 import { WidgetEventEnum } from './IWidgetsService';
-import { ISceneService } from '../scene/ISceneService';
-import { IConfigService } from '../config/IConfigService';
+import type { ISceneService } from '../scene/ISceneService';
+import type { IConfigService } from '../config/IConfigService';
 import { TYPES } from '../../types';
 
 export default class BaseWidget<IOptions, IValue>
@@ -36,12 +36,8 @@ export default class BaseWidget<IOptions, IValue>
   public setContainer(container: Container) {
     this.contianer = container;
     this.sceneService = this.contianer.get(TYPES.SCENE_SYMBOL) as ISceneService;
-    this.configService = this.contianer.get(
-      TYPES.CONFIG_SYMBOL,
-    ) as IConfigService;
-    this.widgetsService = this.contianer.get(
-      TYPES.WIDGETS_SYMBOL,
-    ) as IWidgetsService;
+    this.configService = this.contianer.get(TYPES.CONFIG_SYMBOL) as IConfigService;
+    this.widgetsService = this.contianer.get(TYPES.WIDGETS_SYMBOL) as IWidgetsService;
     this.props = Object.assign(
       {},
       {

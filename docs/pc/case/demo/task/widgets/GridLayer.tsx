@@ -81,9 +81,7 @@ export function GridLayer() {
       return;
     }
     // 可以根据业务需求配置接口
-    fetch(
-      `https://gw.alipayobjects.com/os/antvdemo/assets/dipper-city/${cityValue[1]}.json`,
-    )
+    fetch(`https://gw.alipayobjects.com/os/antvdemo/assets/dipper-city/${cityValue[1]}.json`)
       .then((res) => res.json())
       .then((data) => {
         setGeoData(data);

@@ -1,7 +1,7 @@
 import { useInjection } from 'inversify-react';
 import { TYPES } from '@antv/dipper-core';
 import type { ISceneService } from '@antv/dipper-core';
-import { Scene } from '@antv/l7';
+import type { Scene } from '@antv/l7';
 import { useEffect, useState } from 'react';
 
 export function useSceneService() {

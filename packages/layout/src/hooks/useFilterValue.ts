@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { IWidget, IWidgetProps, WidgetEventEnum, WidgetsServiceEnum } from '@antv/dipper-core';
+import type { IWidget, IWidgetProps} from '@antv/dipper-core';
+import { WidgetEventEnum, WidgetsServiceEnum } from '@antv/dipper-core';
 import { useWidgetsService } from './useWidgetsService';
 
 export function useFilterValue(components: IWidgetProps[], type: string) {

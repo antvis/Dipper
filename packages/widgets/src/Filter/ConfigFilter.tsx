@@ -1,17 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
-import {
-  Button,
-  Checkbox,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Select,
-} from 'antd';
-import { FormLayout } from 'antd/es/form/Form';
+import { Button, Checkbox, DatePicker, Form, Input, InputNumber, Radio, Select } from 'antd';
+import type { FormLayout } from 'antd/es/form/Form';
 import styles from './index.less';
-import { IWidget } from '@antv/dipper-core';
+import type { IWidget } from '@antv/dipper-core';
 
 const { RangePicker } = DatePicker;
 
@@ -99,70 +90,35 @@ export function FilterUI({
       <div className={styles['aoi-screen']}>
         {filterConfig.map((filter, index) =>
           filter.type === RelationFieldType.NUMBER ? (
-            <Form.Item
-              name={filter.name}
-              label={filter.label}
-              key={filter.name}
-            >
+            <Form.Item name={filter.name} label={filter.label} key={filter.name}>
               <InputNumber />
             </Form.Item>
           ) : filter.type === RelationFieldType.TEXT ? (
-            <Form.Item
-              name={filter.name}
-              label={filter.label}
-              key={filter.name}
-            >
-              <Input
-                addonBefore={filter.addOnBefore}
-                addonAfter={filter.addonAfter}
-              />
+            <Form.Item name={filter.name} label={filter.label} key={filter.name}>
+              <Input addonBefore={filter.addOnBefore} addonAfter={filter.addonAfter} />
             </Form.Item>
           ) : filter.type === RelationFieldType.SELECT ? (
-            <Form.Item
-              name={filter.name}
-              label={filter.label}
-              key={filter.name}
-            >
+            <Form.Item name={filter.name} label={filter.label} key={filter.name}>
               <Select options={filterSelects[index]} />
             </Form.Item>
           ) : filter.type === RelationFieldType.MULTI_SELECT ? (
-            <Form.Item
-              name={filter.name}
-              label={filter.label}
-              key={filter.name}
-            >
+            <Form.Item name={filter.name} label={filter.label} key={filter.name}>
               <Select mode="multiple" options={filterSelects[index]} />
             </Form.Item>
           ) : filter.type === RelationFieldType.DATE ? (
-            <Form.Item
-              name={filter.name}
-              label={filter.label}
-              key={filter.name}
-            >
+            <Form.Item name={filter.name} label={filter.label} key={filter.name}>
               <DatePicker />
             </Form.Item>
           ) : filter.type === RelationFieldType.RANGE_DATE ? (
-            <Form.Item
-              name={filter.name}
-              label={filter.label}
-              key={filter.name}
-            >
+            <Form.Item name={filter.name} label={filter.label} key={filter.name}>
               <RangePicker />
             </Form.Item>
           ) : filter.type === RelationFieldType.CHECK_BOX ? (
-            <Form.Item
-              name={filter.name}
-              label={filter.label}
-              key={filter.name}
-            >
+            <Form.Item name={filter.name} label={filter.label} key={filter.name}>
               <Checkbox.Group options={filterSelects[index]} />
             </Form.Item>
           ) : filter.type === RelationFieldType.RADIO ? (
-            <Form.Item
-              name={filter.name}
-              label={filter.label}
-              key={filter.name}
-            >
+            <Form.Item name={filter.name} label={filter.label} key={filter.name}>
               <Radio.Group options={filterSelects[index]} />
             </Form.Item>
           ) : null,

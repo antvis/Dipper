@@ -1,9 +1,11 @@
 import React from 'react';
-import { IFeature, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
-import { Marker, ILngLat } from '@antv/l7';
+import type { IFeature} from '@antv/dipper-core';
+import { LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
+import type { ILngLat } from '@antv/l7';
+import { Marker } from '@antv/l7';
 import ReactDOM from 'react-dom';
 import { point } from '@turf/turf';
-import { FunctionComponentElement, ReactPortal } from 'react';
+import type { FunctionComponentElement, ReactPortal } from 'react';
 
 export interface IMarkerItemProps<T = any> {
   data: T;
@@ -78,6 +80,7 @@ export class MarkerLayerGroup<T = any> extends LayerGroup<
     const { lng, lat } = this.getMarkerLngLat(item);
     const pointFeature = point([lng, lat], item);
     const feature: IFeature = {
+      // @ts-ignore
       feature: pointFeature,
       featureId: index,
       target: e,

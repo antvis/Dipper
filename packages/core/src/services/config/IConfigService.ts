@@ -1,11 +1,7 @@
 import type EventEmitter from 'eventemitter3';
 import type { IMapConfig, IPopupOption, ISceneConfig } from '@antv/l7';
-import type {
-  IWidgetProps,
-  IControlWidgetsProps,
-} from '../widgets/IWidgetsService';
+import type { IWidgetProps, IControlWidgetsProps } from '../widgets/IWidgetsService';
 import type { IPanel } from '../panel/IPanelService';
-import { ReactElement } from 'react';
 
 export interface IToolBar {
   display?: boolean;
@@ -44,12 +40,13 @@ export type GlobalModel = Record<string, any>;
 export interface IBaseConfig extends IMapProps {
   // 全局数据，一般用于在 Dipper 框架中组件数据共享
   global?: GlobalModel;
-  widgets?: {
-    [key: string]: {
+  widgets?: Record<
+    string,
+    {
       options?: Record<string, any> | Record<string, any>[]; // 初始化数据
       value?: Record<string, any> | Record<string, any>[]; // 结果数据
-    };
-  };
+    }
+  >;
 }
 
 export interface IConfig extends IBaseConfig {
@@ -94,10 +91,10 @@ export interface IConfigService extends EventEmitter {
   getConfig: (key: string) => any;
   updateLegend: (id: string, value: any) => void;
   updateControl: (type: string, value: any) => void;
-  getWidgetInitValue: (key: string) => Record<string, any> | undefined;
-  setWidgetInitValue: (key: string, options: Record<string, any>) => void;
-  setWidgetInitOptions: (key: string, options: Record<string, any>) => void;
-  getWidgetInitOptions: (key: string) => Record<string, any> | undefined;
-  getGlobalData(): GlobalModel;
-  setGlobalData(data: GlobalModel): void;
+  setWidgetsInitOptions: (key: string, options: Record<string, any>) => void;
+  getWidgetsInitValue: (key: string) => Record<string, any> | undefined;
+  setWidgetsInitValue: (key: string, options: Record<string, any>) => void;
+  getWidgetsInitOptions: (key: string) => Record<string, any> | undefined;
+  getGlobalData: () => GlobalModel;
+  setGlobalData: (data: GlobalModel) => void;
 }

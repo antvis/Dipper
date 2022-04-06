@@ -17,10 +17,7 @@ export enum ConfigEventEnum {
 }
 
 @injectable()
-export default class ConfigService
-  extends EventEmitter
-  implements IConfigService
-{
+export default class ConfigService extends EventEmitter implements IConfigService {
   public config!: Partial<IConfig>;
 
   private isInited: boolean = false;
@@ -102,11 +99,7 @@ export default class ConfigService
   setGlobalData(data: GlobalModel) {
     const global = this.config?.global || {};
 
-    this.config = updateConfigsField(
-      this.config,
-      `global`,
-      mergeWith(global, data),
-    );
+    this.config = updateConfigsField(this.config, `global`, mergeWith(global, data));
     this.emit(ConfigEventEnum.GLOBAL_CHANGE, this.config);
   }
 }
