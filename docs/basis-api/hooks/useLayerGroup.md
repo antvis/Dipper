@@ -7,7 +7,9 @@ group:
 mobile: false
 ---
 
-useLayerGroup 可视化图层
+# useLayerGroup
+
+`useLayerGroup` 获取与更新可视化图层
 
 ## API
 
@@ -16,13 +18,13 @@ import { useLayerGroup } from '@antv/dipper';
 const { selectFeatures, selectFeatures } = useLayerGroup('grid');
 ```
 
-## 参数
+### 参数
 
 | 参数 | 说明                                           | 类型   | 默认值 |
 | ---- | ---------------------------------------------- | ------ | ------ |
 | id   | layergroup 唯一标识 ID， 组件的 ID 或组件 type | string | (必选) |
 
-## 结果
+### 结果
 
 | 参数            | 说明           | 类型                                            | 备注 |
 | --------------- | -------------- | ----------------------------------------------- | ---- |

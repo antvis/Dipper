@@ -7,24 +7,22 @@ group:
 mobile: false
 ---
 
-useConfigService Dipper 容器配置管理服务
+# useConfigService
+
+`useConfigService` 获取 `Dipper` 容器配置管理数据
 
 ## API
 
 ```ts pure
 import { useConfigService } from '@antv/dipper';
-const { configService, globalConfig } = useConfigService();
+const { globalConfig, setConfig, updateControl } = useConfigService();
 ```
 
-## 参数
+### 结果
 
-无
-
-## 结果
-
-| 参数          | 说明                                                   | 类型                                 | 默认值 |
-| ------------- | ------------------------------------------------------ | ------------------------------------ | ------ |
-| configService | 服务实例                                               |                                      |
-| globalConfig  | 全量配置                                               |                                      |
-| setConfig     | 更新 config，path: 要设置的对象路径，value: 更新字段值 | `(path: string, value: any) => void` |
-| updateControl | 更新 Control 配置,支持`type`,`position`,`display` 属性 | `(type: string, value: any) => void` |
+| 参数          | 说明                                                       | 类型                                  | 默认值 |
+| ------------- | ---------------------------------------------------------- | ------------------------------------- | ------ |
+| configService | 服务实例                                                   |                                       |
+| globalConfig  | 全部的配置项                                               |                                       |
+| setConfig     | 更新 config，field 要更新的对象路径，value: 更新字段的值   | `(field: string, value: any) => void` |
+| updateControl | 更新 Control 配置，支持 `type`、`position`、`display` 属性 | `(type: string, value: any) => void`  |

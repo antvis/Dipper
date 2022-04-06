@@ -19,7 +19,7 @@ function PanelTabContent(props: IWidgetProps) {
         items={components || []}
         onChange={(e) => {
           // @ts-ignore
-          widget?.setValues(e);
+          widget?.setValue(e);
         }}
       />
     </div>

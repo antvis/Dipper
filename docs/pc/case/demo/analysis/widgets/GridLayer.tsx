@@ -6,7 +6,7 @@ import {
   useLayerGroup,
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
-import { GridLayerGroup, useWidgets } from '@antv/dipper';
+import { GridLayerGroup, useWidget } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
 import { FeatureCollection } from '@turf/turf';
 
@@ -31,8 +31,8 @@ export function GridLayer({ options }: any) {
   const { globalConfig, updateLegend, setConfig } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
-  const { widgetsValue: cityValue } = useWidgets('citySelect');
-  const { widgetsValue: brandValue } = useWidgets('brand');
+  const { widgetValue: cityValue } = useWidget('citySelect');
+  const { widgetValue: brandValue } = useWidget('brand');
   const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 

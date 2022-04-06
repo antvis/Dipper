@@ -412,7 +412,7 @@ dipper 提供了一系列 hooks 方便获取地图、图层的相关实例，或
 - useConfigService
 - useSceneService
 - useLayerGroup
-- useWidgets
+- useWidget
 - useDipperContainer
 
 ### 更新地图状态
@@ -456,11 +456,11 @@ const { scene} = useSceneService();
 
 同样 Dipper 提供了 hooks 来获取或者设置组件数据。
 
-useWidgets 方法可以根据传入的组件`id`或者`type`获取对应组件值
+useWidget 方法可以根据传入的组件`id`或者`type`获取对应组件值
 
 ```tsx pure
- import { useWidgets } '@antv/dipper'
- const { widgetsValue,} = useWidgets('citySelect');
+ import { useWidget } '@antv/dipper'
+ const { widgetValue } = useWidget('citySelect');
 
 ```
 
@@ -519,8 +519,8 @@ interface IData {
 ### 全局数据
 
 ```tsx pure
-import { useSceneService } from '@antv/dipper';
-const { global, setGlobal } = useConfigService();
+import { useGlobalModel } from '@antv/dipper';
+const [globalData, setGlobalData] = useGlobalModel();
 ```
 
 ### Widgets 初始化数据
@@ -567,7 +567,7 @@ export function CitySelect({
       options={(widget?.getOptions().options?.data as Array<any>) || []} // 初始值配置项
       allowClear={false}
       onChange={(e: any) => {
-        widget?.setValues(e); // 更新数据
+        widget?.setValue(e); // 更新数据
       }}
       placeholder="选择城市"
     />

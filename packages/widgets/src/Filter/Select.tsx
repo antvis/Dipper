@@ -15,7 +15,7 @@ export function DipperSelect({ widget }: IWidgetProps) {
       style={{ width: 180 }}
       allowClear={false}
       onChange={(e: any) => {
-        widget?.setValues(e);
+        widget?.setValue(e);
       }}
       {...(options?.options ?? {})}
     />

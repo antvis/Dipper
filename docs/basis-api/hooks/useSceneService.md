@@ -7,9 +7,9 @@ group:
 mobile: false
 ---
 
-## useSceneService
+# useSceneService
 
-地图场景管理服务
+`useSceneService` 获取地图的场景管理服务
 
 ## API
 
@@ -18,11 +18,7 @@ import { useSceneService } from '@antv/dipper';
 const { sceneService, scene } = useConfigService();
 ```
 
-## 参数
-
-无
-
-## 结果
+### 结果
 
 | 参数         | 说明                     | 类型  | 备注 |
 | ------------ | ------------------------ | ----- | ---- |

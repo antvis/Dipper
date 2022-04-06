@@ -4,7 +4,7 @@ import {
   registerWidget,
   PanelTabcontent,
   StatisticCards,
-  useWidgets,
+  useWidget,
   useLayerGroup,
 } from '@antv/dipper';
 import {
@@ -60,7 +60,7 @@ function useGetFilters(type) {
 }
 
 function Filters() {
-  const { widget } = useWidgets('headetFilter');
+  const { widget } = useWidget('headetFilter');
   const options1 = useGetFilters(1);
   const options2 = useGetFilters(2);
   const options3 = useGetFilters(3);
@@ -77,7 +77,7 @@ function Filters() {
       area: [options2[0].value],
       industry: options3[0].value,
     });
-    widget.setValues({
+    widget.setValue({
       map: map || options1[0].value,
       area: [options2[0].value],
       industry: options3[0].value,
@@ -87,7 +87,7 @@ function Filters() {
   const onFieldsChange = useCallback(() => {
     const filterVal = form.getFieldsValue(true);
     setMap(filterVal.map);
-    widget.setValues(filterVal);
+    widget.setValue(filterVal);
   }, [widget]);
 
   return (
@@ -155,7 +155,7 @@ function Person() {
 registerWidget('perosn', Person);
 
 function StatisticCardsGroup(props) {
-  const { widgetsValue } = useWidgets('headetFilter');
+  const { widgetsValue } = useWidget('headetFilter');
   const [staticCards, setStaticCards] = useState<StaticCard[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {

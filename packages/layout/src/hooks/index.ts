@@ -5,7 +5,7 @@ export * from './useSceneService';
 export * from './useLayerService';
 export * from './useDipperContainer';
 export * from './usePanelService';
-export * from './useWidgets';
+export * from './useWidget';
 export * from './useWidgetsService';
 export * from './useFilterValue';
 export * from './useSceneEvent';

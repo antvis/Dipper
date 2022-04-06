@@ -41,12 +41,12 @@ export interface IWidget<IOptions = any, IValue = any> extends EventEmitter {
   init: () => void;
   getOptions: () => IWidgetProps<IOptions>;
   getValue: () => Partial<IValue>;
-  setOptions: (option: Partial<IWidgetProps<IOptions>>) => void;
-  setValues: (values: Partial<IValue>) => void;
+  setOptions: (options: Partial<IWidgetProps<IOptions>>) => void;
+  setValue: (value: Partial<IValue>) => void;
   destroy: () => void;
 }
 
-export enum WidgetsEventEnum {
+export enum WidgetEventEnum {
   'OPTIONT_CHANGE' = 'optionchange',
   'VALUE_CHANGE' = 'valuechange',
 }

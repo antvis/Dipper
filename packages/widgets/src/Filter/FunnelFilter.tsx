@@ -3,13 +3,14 @@ import styles from './index.less';
 import { Button, Dropdown, Input } from 'antd';
 import classnames from 'classnames';
 import { cloneDeep } from 'lodash';
-import { useConfigService } from '@antv/dipper';
+import { useWidget } from '@antv/dipper';
 import { DownOutlined } from '@ant-design/icons';
 
 function FunnelFilter({ condition, type, event }: any) {
   // const { defaultOpen = false } = options || {};
   const [visible, setVisible] = useState(false);
-  const { setWidgetsOptions, setWidgetsValue } = useConfigService();
+  const { setOptions: setWidgetOptions, setValue: setWidgetValue } =
+    useWidget('filterData');
   const [conditionList, setConditionList] = useState<any[]>([]);
   useEffect(() => {
     setConditionList(
@@ -39,13 +40,13 @@ function FunnelFilter({ condition, type, event }: any) {
         .forEach((element: any) => {
           valuesObj[element.code] = element.value;
         });
-      setWidgetsValue('filterData', {
+      setWidgetValue({
         searchType: type,
         ...valuesObj,
         ...event,
       });
     },
-    [setWidgetsOptions],
+    [setWidgetOptions],
   );
 
   const onReset = useCallback(() => {
