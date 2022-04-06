@@ -1,4 +1,5 @@
-import { LayerGroup, ILayerGroupOptions } from '@antv/dipper';
+import type { ILayerGroupOptions } from '@antv/dipper';
+import { LayerGroup } from '@antv/dipper';
 import { cloneDeep } from 'lodash';
 import { PointLayer } from '@antv/l7';
 import { featureCollection } from '@turf/turf';
@@ -38,11 +39,7 @@ export default class CustomLayerGroup extends LayerGroup<ICustomLayerOptions> {
     const pointLayer = new PointLayer({
       autoFit: true,
     });
-    pointLayer
-      .source(featureCollection([]))
-      .shape('circle')
-      .color(color)
-      .size(size);
+    pointLayer.source(featureCollection([])).shape('circle').color(color).size(size);
 
     this.addLayer(pointLayer);
   }

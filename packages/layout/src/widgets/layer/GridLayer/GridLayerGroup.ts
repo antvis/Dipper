@@ -1,13 +1,15 @@
+import type {
+  ILayerGroupOptions,
+  ILayerFieldProperties,
+  ILayerGroupText,
+  ILayerScale,
+} from '@antv/dipper-core';
 import {
   LayerGroup,
-  ILayerGroupOptions,
   getLayerFieldArgus,
-  ILayerFieldProperties,
   LayerGroupEventEnum,
-  ILayerGroupText,
   defaultGridTextOptions,
   IFeature,
-  ILayerScale,
 } from '@antv/dipper-core';
 import { PolygonLayer } from '@antv/l7';
 import { cloneDeep, merge } from 'lodash';

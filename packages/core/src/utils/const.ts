@@ -11,7 +11,7 @@ export const ScatterColorScale = [
   '#5B8FF9',
 ];
 
-export const SingleSequentialColorScale: { [key: string]: string[] } = {
+export const SingleSequentialColorScale: Record<string, string[]> = {
   Blue: [
     '#D6EAFF',
     '#B3D9FF',
@@ -85,7 +85,7 @@ export const SingleSequentialColorScale: { [key: string]: string[] } = {
     '#521E0D',
   ],
 };
-export const BipolarColorScale: { [key: string]: string[] } = {
+export const BipolarColorScale: Record<string, string[]> = {
   CyanRed: [
     '#215B77',
     '#227BA2',
@@ -141,13 +141,13 @@ export const PartialSpectraColorScale = {
   ],
 };
 
-export function getColor(color: Array<string>, bandNum: number) {
+export function getColor(color: string[], bandNum: number) {
   if (color.length <= bandNum || bandNum < 1 || !Array.isArray(color)) {
     return color;
   }
 
   const step = (color.length - 2) / (bandNum - 1);
-  const result: Array<string> = [];
+  const result: string[] = [];
   result[0] = color[0];
   for (let i = 1; i < bandNum - 1; i += 1) {
     result[i] = color[Math.round(i * step)];

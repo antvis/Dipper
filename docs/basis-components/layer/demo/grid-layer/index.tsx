@@ -1,7 +1,8 @@
 import { initWidgets } from './widgets';
 import React, { useEffect, useState } from 'react';
 import { config } from './config/config';
-import { DipperContainer, IConfig } from '@antv/dipper';
+import type { IConfig } from '@antv/dipper';
+import { DipperContainer } from '@antv/dipper';
 
 interface IInitData {
   areaVOList: any[];

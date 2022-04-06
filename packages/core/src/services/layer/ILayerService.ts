@@ -1,5 +1,5 @@
 import type { ILayer, ISource } from '@antv/l7';
-import { BBox, Feature } from '@turf/turf';
+import type { BBox, Feature } from '@turf/turf';
 import type EventEmitter from 'eventemitter3';
 import type { Container } from 'inversify';
 
@@ -25,11 +25,7 @@ export interface ILayerGroup extends EventEmitter {
   show: () => void;
   hide: () => void;
   setData: (data: any, clear?: boolean) => void;
-  setDataItem: (
-    featureId: number,
-    newProperties: any,
-    uniqueKey?: string,
-  ) => void;
+  setDataItem: (featureId: number, newProperties: any, uniqueKey?: string) => void;
   addLayer: (layer: ILayer) => void;
   removeLayer: (layer: ILayer) => void;
   getLayers: () => ILayer[];

@@ -1,4 +1,5 @@
-import { IWidgetProps, getWidgetChildren } from '@antv/dipper-core';
+import type { IWidgetProps } from '@antv/dipper-core';
+import { getWidgetChildren } from '@antv/dipper-core';
 
 type Position = 'left' | 'right' | 'center';
 

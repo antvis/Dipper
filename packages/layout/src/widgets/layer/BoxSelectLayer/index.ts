@@ -1,4 +1,5 @@
-import { LayerGroup, TYPES, ILayerService, ILayerGroupOptions } from '@antv/dipper-core';
+import type { ILayerService, ILayerGroupOptions } from '@antv/dipper-core';
+import { LayerGroup, TYPES } from '@antv/dipper-core';
 import { cloneDeep, debounce } from 'lodash';
 import { PolygonLayer } from '@antv/l7';
 import { isPressing } from '@antv/dipper-core';

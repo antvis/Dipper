@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Line } from '@antv/g2plot';
-import { ChatData } from '../Bar';
+import type { ChatData } from '../Bar';
 import { Spin } from 'antd';
 
 export function LineCahrt({ data, loading }: ChatData) {

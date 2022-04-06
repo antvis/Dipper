@@ -1,8 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import type { FC } from 'react';
+import React, { useEffect } from 'react';
 import styles from './index.less';
 import ToolBar from './Toolbar';
 import DipperHeader from './Header';
-import { DipperContainerContext, IContainerProps, useConfigService } from '@antv/dipper-layout';
+import type { IContainerProps } from '@antv/dipper-layout';
+import { DipperContainerContext, useConfigService } from '@antv/dipper-layout';
 import { MapContainer } from './Container';
 
 const Content: FC<{ children: React.ReactNode }> = ({ children }) => {

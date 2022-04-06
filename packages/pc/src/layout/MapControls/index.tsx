@@ -1,5 +1,6 @@
 import React, { ReactElement, useMemo } from 'react';
-import { isDisplay, IWidgetProps, IControlWidgetsProps } from '@antv/dipper-core';
+import type { IControlWidgetsProps } from '@antv/dipper-core';
+import { isDisplay, IWidgetProps } from '@antv/dipper-core';
 import { CustomControl } from '@antv/l7-react';
 import type { IControlOption, PositionName } from '@antv/l7';
 import { CustomBaseWidgets, BaseControl } from '@antv/dipper-layout';
@@ -18,5 +19,5 @@ export default function MapControls({ controls }: { controls: IControlWidgetsPro
     );
   }, [controls]);
 
-  return <BaseControl controlGroupBy={controlGroupBy}></BaseControl>;
+  return <BaseControl controlGroupBy={controlGroupBy} />;
 }

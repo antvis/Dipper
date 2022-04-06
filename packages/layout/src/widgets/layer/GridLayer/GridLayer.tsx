@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { GridLayerGroup, IGridLayerGroupOptions } from './GridLayerGroup';
-import { ILayerGroupProps } from '@antv/dipper-core';
+import type { IGridLayerGroupOptions } from './GridLayerGroup';
+import { GridLayerGroup } from './GridLayerGroup';
+import type { ILayerGroupProps } from '@antv/dipper-core';
 import { useLayerService } from '../../../hooks';
-import { FeatureCollection, Polygon } from '@turf/turf';
+import type { FeatureCollection, Polygon } from '@turf/turf';
 
 export interface GridLayerProps extends Omit<ILayerGroupProps<IGridLayerGroupOptions>, 'data'> {
   data: FeatureCollection<Polygon>;

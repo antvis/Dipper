@@ -1,5 +1,5 @@
 import React from 'react';
-import { IControlWidgetsProps } from '@antv/dipper-core';
+import type { IControlWidgetsProps } from '@antv/dipper-core';
 import { CustomControl, Control } from '@antv/l7-react';
 import type { PositionName } from '@antv/l7';
 import { CustomBaseWidgets } from '../../BaseWidget';
@@ -9,9 +9,7 @@ type IControlProps = 'zoom' | 'scale' | 'layer';
 export default function BaseControl({
   controlGroupBy,
 }: {
-  controlGroupBy: {
-    [key: string]: IControlWidgetsProps[];
-  };
+  controlGroupBy: Record<string, IControlWidgetsProps[]>;
 }) {
   return (
     <>

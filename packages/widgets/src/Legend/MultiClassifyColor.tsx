@@ -10,7 +10,7 @@ interface ILegendItem {
 export interface IMultiClassLegendProps {
   items: ILegendItem[];
   title?: string;
-  values: Array<number | [number, number]>;
+  values: (number | [number, number])[];
 }
 
 export function MultiClassifyColor({ options, id, type }: IWidgetProps) {
@@ -44,9 +44,7 @@ export function MultiClassifyColor({ options, id, type }: IWidgetProps) {
             {Array.isArray(item) ? item[0] : item}
           </span>
         ))}
-        {Array.isArray(values[0]) && (
-          <span>{(values[values.length - 1] as number[])[1]}</span>
-        )}
+        {Array.isArray(values[0]) && <span>{(values[values.length - 1] as number[])[1]}</span>}
       </div>
     </div>
   );

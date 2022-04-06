@@ -1,4 +1,5 @@
-import React, { useEffect, useState, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal, Table } from 'antd';
 import { TableOutlined } from '@ant-design/icons';
 import styles from './index.less';
@@ -32,9 +33,7 @@ export function PropertyTable() {
     };
     const col: ColProps[] = [];
     if (geoSource) {
-      const geoProperty = (geoSource.features || []).map(
-        (ft: any) => ft.properties,
-      );
+      const geoProperty = (geoSource.features || []).map((ft: any) => ft.properties);
       geoProperty.forEach((props: Record<string, any>) => {
         Object.keys(props).forEach((key: string) => {
           const propertyKey = {
@@ -78,10 +77,7 @@ export function PropertyTable() {
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
       >
-        <Table
-          columns={tableProperty?.column}
-          dataSource={tableProperty?.dataSource}
-        />
+        <Table columns={tableProperty?.column} dataSource={tableProperty?.dataSource} />
       </Modal>
     </div>
   );

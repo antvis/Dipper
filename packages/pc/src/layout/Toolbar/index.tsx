@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './index.less';
 import { useConfigService, LayoutContent, getAppContentItem } from '@antv/dipper-layout';
-import { IWidgetProps, isDisplay, IToolBar } from '@antv/dipper-core';
+import type { IWidgetProps, IToolBar } from '@antv/dipper-core';
+import { isDisplay } from '@antv/dipper-core';
 
 export default function MapToolbar({ toolbars }: { toolbars: IToolBar[] | IToolBar }) {
   const bars = Array.isArray(toolbars) ? toolbars : [toolbars];

@@ -28,8 +28,7 @@ export const MapStyle = () => {
                   className={styles.mapStyleCard}
                   onClick={() => clickStype(item.value)}
                   style={{
-                    border:
-                      item.value === current ? '3px solid #1890ff' : 'none',
+                    border: item.value === current ? '3px solid #1890ff' : 'none',
                   }}
                 >
                   <img src={item.img} className={styles.mapImg} />
@@ -45,7 +44,7 @@ export const MapStyle = () => {
   return (
     <>
       <Dropdown overlay={menu} className={styles.mapStyleButton}>
-        <img src={Config.icon} title={Config.title}></img>
+        <img src={Config.icon} title={Config.title} />
       </Dropdown>
     </>
   );

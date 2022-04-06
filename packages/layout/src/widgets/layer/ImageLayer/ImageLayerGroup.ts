@@ -1,30 +1,22 @@
-import {
-  getLayerFieldArgus,
-  IFeature,
-  ILayerFieldProperties,
-  ILayerGroupOptions,
-  LayerGroup,
-  LayerGroupEventEnum,
-} from '@antv/dipper-core';
+import type { IFeature, ILayerFieldProperties, ILayerGroupOptions } from '@antv/dipper-core';
+import { getLayerFieldArgus, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
 import { cloneDeep, isEqual, merge } from 'lodash';
-import { BBox, FeatureCollection, featureCollection } from '@turf/turf';
-import { ILayer, PointLayer } from '@antv/l7';
+import type { FeatureCollection } from '@turf/turf';
+import { BBox, featureCollection } from '@turf/turf';
+import type { ILayer } from '@antv/l7';
+import { PointLayer } from '@antv/l7';
 
 export interface IImageLayerImageStyle {
   img: ILayerFieldProperties<string>;
   imgSize?: number;
-  imgStyle?: {
-    [key: string]: any;
-  };
+  imgStyle?: Record<string, any>;
 }
 
 export interface IImageLayerStyle extends IImageLayerImageStyle {
   text?: string;
   textColor?: ILayerFieldProperties<string>;
   textSize?: number;
-  textStyle?: {
-    [key: string]: any;
-  };
+  textStyle?: Record<string, any>;
 }
 
 export interface IImageLayerGroupOptions extends ILayerGroupOptions {

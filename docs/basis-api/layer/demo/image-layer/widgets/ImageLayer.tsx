@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {
-  useLayerService,
-  MarkerLayerGroup,
-  ImageLayerGroup,
-  useLayerGroup,
-} from '@antv/dipper';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import type { MarkerLayerGroup } from '@antv/dipper';
+import { useLayerService, ImageLayerGroup, useLayerGroup } from '@antv/dipper';
 interface IDataItem {
   src: string;
   id: string;

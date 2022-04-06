@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { IWidgetProps, IWidget, getWidget, BaseWidget } from '@antv/dipper-core';
+import type { IWidgetProps, IWidget } from '@antv/dipper-core';
+import { getWidget, BaseWidget } from '@antv/dipper-core';
 
 import { useWidgetsService } from '../hooks';
 

@@ -1,14 +1,10 @@
 import type { Container } from 'inversify';
 import createContainer from './inversify.config';
-import type {
-  IConfig,
-  IConfigService,
-  IBaseConfig,
-} from './services/config/IConfigService';
+import type { IConfig, IConfigService, IBaseConfig } from './services/config/IConfigService';
 import type { ISceneService } from './services/scene/ISceneService';
 import type { IPanelService } from './services/panel/IPanelService';
 import { TYPES } from './types';
-import { Scene } from '@antv/l7';
+import type { Scene } from '@antv/l7';
 
 export default class Dipper<T = any> {
   public sceneService: ISceneService;
@@ -17,12 +13,8 @@ export default class Dipper<T = any> {
   private container: Container;
   constructor(cfg: IBaseConfig & T) {
     this.container = createContainer();
-    const sceneService = this.container.get(
-      TYPES.SCENE_SYMBOL,
-    ) as ISceneService;
-    const configService = this.container.get(
-      TYPES.CONFIG_SYMBOL,
-    ) as IConfigService;
+    const sceneService = this.container.get(TYPES.SCENE_SYMBOL) as ISceneService;
+    const configService = this.container.get(TYPES.CONFIG_SYMBOL) as IConfigService;
     // const panelService = this.container.get(
     //   TYPES.PANEL_SYMBOL,
     // ) as IPanelService;

@@ -1,14 +1,9 @@
 import { useInjection } from 'inversify-react';
 import { useEffect, useState, useCallback } from 'react';
-import {
-  IFeature,
-  LayerGroup,
-  LayerGroupEventEnum,
-  ILayerService,
-  LayerEventEnum,
-  TYPES,
-} from '@antv/dipper-core';
-import { centerOfMass, coordAll, Feature, featureCollection } from '@turf/turf';
+import type { IFeature, LayerGroup, ILayerService } from '@antv/dipper-core';
+import { LayerGroupEventEnum, LayerEventEnum, TYPES } from '@antv/dipper-core';
+import type { Feature } from '@turf/turf';
+import { centerOfMass, coordAll, featureCollection } from '@turf/turf';
 import { isEqual } from 'lodash';
 
 export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
