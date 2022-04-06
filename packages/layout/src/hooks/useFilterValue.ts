@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { IWidget, IWidgetProps, WidgetsEventEnum, WidgetsServiceEnum } from '@antv/dipper-core';
+import type { IWidget, IWidgetProps} from '@antv/dipper-core';
+import { WidgetEventEnum, WidgetsServiceEnum } from '@antv/dipper-core';
 import { useWidgetsService } from './useWidgetsService';
 
 export function useFilterValue(components: IWidgetProps[], type: string) {
@@ -42,7 +43,7 @@ export function useFilterValue(components: IWidgetProps[], type: string) {
       const onValueChange = (e: any) => {
         setFilterValue((prev) => ({ ...(prev || {}), [key]: e }));
       };
-      widgets[key]?.on(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
+      widgets[key]?.on(WidgetEventEnum.VALUE_CHANGE, onValueChange);
     });
   }, [widgets]);
 

@@ -284,8 +284,7 @@ export default function Map() {
 
 ### 添加图层
 
-图层添加可以使用 Dipper 提供的图层组件、或者 L7React、L7Plot、L7 都可以。
-图层组件开发和普通组件开一样，需要现注册再使用，图层组件配置在图层对象中。
+图层添加可以使用 Dipper 提供的图层组件、或者 L7React、L7Plot、L7 都可以。图层组件开发和普通组件开一样，需要现注册再使用，图层组件配置在图层对象中。
 
 ```tsx pure
 import { AMapScene, LoadImage, PointLayer } from '@antv/l7-react';
@@ -412,7 +411,7 @@ dipper 提供了一系列 hooks 方便获取地图、图层的相关实例，或
 - useConfigService
 - useSceneService
 - useLayerGroup
-- useWidgets
+- useWidget
 - useDipperContainer
 
 ### 更新地图状态
@@ -456,18 +455,17 @@ const { scene} = useSceneService();
 
 同样 Dipper 提供了 hooks 来获取或者设置组件数据。
 
-useWidgets 方法可以根据传入的组件`id`或者`type`获取对应组件值
+useWidget 方法可以根据传入的组件`id`或者`type`获取对应组件值
 
 ```tsx pure
- import { useWidgets } '@antv/dipper'
- const { widgetsValue,} = useWidgets('citySelect');
+ import { useWidget } '@antv/dipper'
+ const { widgetValue } = useWidget('citySelect');
 
 ```
 
 ### 更新组件数据
 
-如果一个组件内部的状态外部需要使用，组件数据发生变化时就需要对数据更新，这样外部才能取到数据。
-比如城市选择器组件，城市更新需要调用 'widget.setValue' 方法更新数据。
+如果一个组件内部的状态外部需要使用，组件数据发生变化时就需要对数据更新，这样外部才能取到数据。比如城市选择器组件，城市更新需要调用 'widget.setValue' 方法更新数据。
 
 ```tsx pure
 import { IWidget, IWidgetProps } from '@antv/dipper';
@@ -519,14 +517,13 @@ interface IData {
 ### 全局数据
 
 ```tsx pure
-import { useSceneService } from '@antv/dipper';
-const { global, setGlobal } = useConfigService();
+import { useGlobalModel } from '@antv/dipper';
+const [globalData, setGlobalData] = useGlobalModel();
 ```
 
 ### Widgets 初始化数据
 
-在应用初始化的时候，有可能需要构造组件的初始化配置项，如默认值、或者选项列表，如何设置组件数据？
-两种方式：
+在应用初始化的时候，有可能需要构造组件的初始化配置项，如默认值、或者选项列表，如何设置组件数据？两种方式：
 
 - 1、初始化时在全局配置项配置，在组件内部中消费。
 - 2、组件内部独立获取或者配置数据
@@ -567,7 +564,7 @@ export function CitySelect({
       options={(widget?.getOptions().options?.data as Array<any>) || []} // 初始值配置项
       allowClear={false}
       onChange={(e: any) => {
-        widget?.setValues(e); // 更新数据
+        widget?.setValue(e); // 更新数据
       }}
       placeholder="选择城市"
     />
@@ -584,11 +581,7 @@ Dipper 提供了默认布局，默认布局并不能满足所有的业务场景�
 首先看一下默认的布局
 
 ```tsx pure
-export default function DipperContainer({
-  cfg,
-  children,
-  onLoad,
-}: IContainerProps<IConfig>) {
+export default function DipperContainer({ cfg, children, onLoad }: IContainerProps<IConfig>) {
   return (
     <DipperContainerContext cfg={cfg} onLoad={onLoad}>
       <Layout className={styles.pageMap}>
@@ -614,13 +607,10 @@ import { DipperContainerContext, MapContainer } from '@antv/dipper';
 
 const Content: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { globalConfig } = useConfigService();
-  const { panel, layers, controls, toolbar, scene, mapType, map, popup } =
-    globalConfig;
+  const { panel, layers, controls, toolbar, scene, mapType, map, popup } = globalConfig;
   return (
     <Layout style={{ height: '300px' }}>
-      <MapContainer
-        {...{ panel, layers, controls, scene, mapType, map, popup }}
-      >
+      <MapContainer {...{ panel, layers, controls, scene, mapType, map, popup }}>
         {children}
       </MapContainer>
     </Layout>

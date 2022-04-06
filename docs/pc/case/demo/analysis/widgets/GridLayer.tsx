@@ -6,9 +6,9 @@ import {
   useLayerGroup,
 } from '@antv/dipper';
 import React, { useEffect, useMemo, useState } from 'react';
-import { GridLayerGroup, useWidgets } from '@antv/dipper';
+import { GridLayerGroup, useWidget } from '@antv/dipper';
 import { randomNumBoth } from '../configs/mock';
-import { FeatureCollection } from '@turf/turf';
+import type { FeatureCollection } from '@turf/turf';
 
 const formatLegend = (data: any[]) => {
   return data.map((item) => {
@@ -31,8 +31,8 @@ export function GridLayer({ options }: any) {
   const { globalConfig, updateLegend, setConfig } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
-  const { widgetsValue: cityValue } = useWidgets('citySelect');
-  const { widgetsValue: brandValue } = useWidgets('brand');
+  const { widgetValue: cityValue } = useWidget('citySelect');
+  const { widgetValue: brandValue } = useWidget('brand');
   const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 
@@ -70,9 +70,7 @@ export function GridLayer({ options }: any) {
       return;
     }
     // 可以根据业务需求配置接口
-    fetch(
-      `https://gw.alipayobjects.com/os/antvdemo/assets/dipper-city/${cityValue[1]}.json`,
-    )
+    fetch(`https://gw.alipayobjects.com/os/antvdemo/assets/dipper-city/${cityValue[1]}.json`)
       .then((res) => res.json())
       .then((data) => {
         const geoDataList =
@@ -93,9 +91,7 @@ export function GridLayer({ options }: any) {
           const data =
             brandValue === '1'
               ? geoDataList
-              : geoDataList.filter(
-                  (item) => item.properties.brand_type === brandValue,
-                );
+              : geoDataList.filter((item) => item.properties.brand_type === brandValue);
           if (data.length) {
             // @ts-ignore
             setGeoData({ type: 'FeatureCollection', features: data });

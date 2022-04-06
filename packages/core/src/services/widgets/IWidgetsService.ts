@@ -15,11 +15,7 @@ export interface IWidgetProps<P = any> {
   placeholder?: string;
   showSearch?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
-  children?:
-    | JSX.Element
-    | JSX.Element[]
-    | Array<JSX.Element | undefined>
-    | React.FC;
+  children?: JSX.Element | JSX.Element[] | (JSX.Element | undefined)[] | React.FC;
   components?: IWidgetProps<P>[];
   event?: {
     actionType: string;
@@ -28,8 +24,7 @@ export interface IWidgetProps<P = any> {
   widget?: IWidget;
 }
 
-export interface IControlWidgetsProps<IControlOption = any>
-  extends IWidgetProps<IControlOption> {
+export interface IControlWidgetsProps<IControlOption = any> extends IWidgetProps<IControlOption> {
   layout?: 'horizontal' | 'vertical';
 }
 
@@ -41,12 +36,12 @@ export interface IWidget<IOptions = any, IValue = any> extends EventEmitter {
   init: () => void;
   getOptions: () => IWidgetProps<IOptions>;
   getValue: () => Partial<IValue>;
-  setOptions: (option: Partial<IWidgetProps<IOptions>>) => void;
-  setValues: (values: Partial<IValue>) => void;
+  setOptions: (options: Partial<IWidgetProps<IOptions>>) => void;
+  setValue: (value: Partial<IValue>) => void;
   destroy: () => void;
 }
 
-export enum WidgetsEventEnum {
+export enum WidgetEventEnum {
   'OPTIONT_CHANGE' = 'optionchange',
   'VALUE_CHANGE' = 'valuechange',
 }

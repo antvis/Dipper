@@ -24,7 +24,7 @@ export const Draw = (props: IWidgetProps) => {
     scene.addControl(drawControl);
 
     drawControl.on('draw.create', (e) => {
-      props.widget?.setValues({ drawData: e });
+      props.widget?.setValue({ drawData: e });
     });
   }, []);
 

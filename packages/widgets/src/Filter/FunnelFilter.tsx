@@ -3,18 +3,16 @@ import styles from './index.less';
 import { Button, Dropdown, Input } from 'antd';
 import classnames from 'classnames';
 import { cloneDeep } from 'lodash';
-import { useConfigService } from '@antv/dipper';
+import { useWidget } from '@antv/dipper';
 import { DownOutlined } from '@ant-design/icons';
 
 function FunnelFilter({ condition, type, event }: any) {
   // const { defaultOpen = false } = options || {};
   const [visible, setVisible] = useState(false);
-  const { setWidgetsOptions, setWidgetsValue } = useConfigService();
+  const { setOptions: setWidgetOptions, setValue: setWidgetValue } = useWidget('filterData');
   const [conditionList, setConditionList] = useState<any[]>([]);
   useEffect(() => {
-    setConditionList(
-      cloneDeep([...condition.filter_schema, ...condition.funnel_schema]),
-    );
+    setConditionList(cloneDeep([...condition.filter_schema, ...condition.funnel_schema]));
   }, [JSON.stringify(condition)]);
 
   const onItemChange = useCallback(
@@ -39,13 +37,13 @@ function FunnelFilter({ condition, type, event }: any) {
         .forEach((element: any) => {
           valuesObj[element.code] = element.value;
         });
-      setWidgetsValue('filterData', {
+      setWidgetValue({
         searchType: type,
         ...valuesObj,
         ...event,
       });
     },
-    [setWidgetsOptions],
+    [setWidgetOptions],
   );
 
   const onReset = useCallback(() => {
@@ -79,18 +77,12 @@ function FunnelFilter({ condition, type, event }: any) {
             <div className={styles.conditionName}>
               {item.name}
               {item.type === 'funnel' && (
-                <span style={{ marginLeft: 8, color: '#aaa', fontSize: 12 }}>
-                  筛选前X%
-                </span>
+                <span style={{ marginLeft: 8, color: '#aaa', fontSize: 12 }}>筛选前X%</span>
               )}
             </div>
             <Input
               value={item.value}
-              addonBefore={
-                item.relationOperator ? (
-                  <span>{item.relationOperator}</span>
-                ) : undefined
-              }
+              addonBefore={item.relationOperator ? <span>{item.relationOperator}</span> : undefined}
               placeholder={'0'}
               onChange={(e) => onItemChange(e.target.value, index)}
               allowClear
@@ -110,12 +102,7 @@ function FunnelFilter({ condition, type, event }: any) {
   );
 
   return (
-    <Dropdown
-      trigger={['click']}
-      visible={visible}
-      onVisibleChange={setVisible}
-      overlay={content}
-    >
+    <Dropdown trigger={['click']} visible={visible} onVisibleChange={setVisible} overlay={content}>
       <div
         className={classnames({
           [styles.funnelSelect]: true,

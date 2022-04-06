@@ -1,5 +1,6 @@
 import { useInjection } from 'inversify-react';
-import { ConfigEventEnum, IConfigService, TYPES, IConfig } from '@antv/dipper-core';
+import type { IConfigService, IConfig } from '@antv/dipper-core';
+import { ConfigEventEnum, TYPES } from '@antv/dipper-core';
 import { useEffect, useState } from 'react';
 
 export function useConfigService() {
@@ -24,20 +25,20 @@ export function useConfigService() {
     return configService.updateControl(type, value);
   };
 
-  const setWidgetsInitOptions = (key: string, options: Record<string, any>) => {
-    return configService.setWidgetsInitOptions(key, options);
+  const setWidgetInitOptions = (key: string, options: Record<string, any>) => {
+    return configService.setWidgetInitOptions(key, options);
   };
 
-  const setWidgetsInitValue = (key: string, options: Record<string, any>) => {
-    return configService.setWidgetsInitValue(key, options);
+  const setWidgetInitValue = (key: string, options: Record<string, any>) => {
+    return configService.setWidgetInitValue(key, options);
   };
 
-  const getWidgetsInitOptions = (key: string) => {
-    return configService.getWidgetsInitOptions(key);
+  const getWidgetInitOptions = (key: string) => {
+    return configService.getWidgetInitOptions(key);
   };
 
-  const getWidgetsInitValue = (key: string) => {
-    return configService.getWidgetsInitValue(key);
+  const getWidgetInitValue = (key: string) => {
+    return configService.getWidgetInitValue(key);
   };
 
   return {
@@ -45,10 +46,14 @@ export function useConfigService() {
     setConfig,
     updateLegend,
     updateControl,
-    setWidgetsInitOptions,
-    getWidgetsInitOptions,
-    setWidgetsInitValue,
-    getWidgetsInitValue,
+    getWidgetInitOptions,
+    getWidgetsInitOptions: getWidgetInitOptions, // 兼容旧 API
+    setWidgetInitOptions,
+    setWidgetsInitOptions: setWidgetInitOptions, // 兼容旧 API
+    getWidgetInitValue,
+    getWidgetsInitValue: getWidgetInitValue, // 兼容旧 API
+    setWidgetInitValue,
+    setWidgetsInitValue: setWidgetInitValue, // 兼容旧 API
     configService,
   };
 }

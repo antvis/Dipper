@@ -17,10 +17,7 @@ export enum ConfigEventEnum {
 }
 
 @injectable()
-export default class ConfigService
-  extends EventEmitter
-  implements IConfigService
-{
+export default class ConfigService extends EventEmitter implements IConfigService {
   public config!: Partial<IConfig>;
 
   private isInited: boolean = false;
@@ -71,21 +68,21 @@ export default class ConfigService
   }
 
   // 设置组件结果值
-  setWidgetsInitOptions(key: string, options: Record<string, any>) {
+  setWidgetInitOptions(key: string, options: Record<string, any>) {
     this.setConfig(`widgets.${key}.options`, options);
   }
 
   // 设置组件结果值
-  setWidgetsInitValue(key: string, value: Record<string, any>) {
+  setWidgetInitValue(key: string, value: Record<string, any>) {
     this.setConfig(`widgets.${key}.value`, value);
   }
   // 获取组件结果值
-  getWidgetsInitValue(key: string) {
+  getWidgetInitValue(key: string) {
     return this.getConfig(`widgets.${key}.value`);
   }
 
   // 获取组件结果值
-  getWidgetsInitOptions(key: string) {
+  getWidgetInitOptions(key: string) {
     return this.getConfig(`widgets.${key}.options`);
   }
 
@@ -102,11 +99,7 @@ export default class ConfigService
   setGlobalData(data: GlobalModel) {
     const global = this.config?.global || {};
 
-    this.config = updateConfigsField(
-      this.config,
-      `global`,
-      mergeWith(global, data),
-    );
+    this.config = updateConfigsField(this.config, `global`, mergeWith(global, data));
     this.emit(ConfigEventEnum.GLOBAL_CHANGE, this.config);
   }
 }

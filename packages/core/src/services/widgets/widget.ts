@@ -2,9 +2,9 @@ import EventEmitter from 'eventemitter3';
 import type { Container } from 'inversify';
 import { inject } from 'inversify';
 import type { IWidget, IWidgetsService, IWidgetProps } from './IWidgetsService';
-import { WidgetsEventEnum } from './IWidgetsService';
-import { ISceneService } from '../scene/ISceneService';
-import { IConfigService } from '../config/IConfigService';
+import { WidgetEventEnum } from './IWidgetsService';
+import type { ISceneService } from '../scene/ISceneService';
+import type { IConfigService } from '../config/IConfigService';
 import { TYPES } from '../../types';
 
 export default class BaseWidget<IOptions, IValue>
@@ -14,7 +14,7 @@ export default class BaseWidget<IOptions, IValue>
   private props: IWidgetProps = {
     type: 'base',
   };
-  private values: Partial<IValue> | any;
+  private value: Partial<IValue> | any;
   public id: string;
   private contianer!: Container;
 
@@ -36,34 +36,46 @@ export default class BaseWidget<IOptions, IValue>
   public setContainer(container: Container) {
     this.contianer = container;
     this.sceneService = this.contianer.get(TYPES.SCENE_SYMBOL) as ISceneService;
-    this.configService = this.contianer.get(
-      TYPES.CONFIG_SYMBOL,
-    ) as IConfigService;
-    this.widgetsService = this.contianer.get(
-      TYPES.WIDGETS_SYMBOL,
-    ) as IWidgetsService;
+    this.configService = this.contianer.get(TYPES.CONFIG_SYMBOL) as IConfigService;
+    this.widgetsService = this.contianer.get(TYPES.WIDGETS_SYMBOL) as IWidgetsService;
     this.props = Object.assign(
       {},
       {
         ...this.props, // props chan'd
         options: {
-          optionsdata: this.configService.getWidgetsInitOptions(this.id), // 兼容历史版本
-          ...this.configService.getWidgetsInitOptions(this.id),
+          optionsdata: this.configService.getWidgetInitOptions(this.id), // 兼容历史版本
+          ...this.configService.getWidgetInitOptions(this.id),
           ...this.props.options,
         },
       },
     );
-    this.values = this.configService.getWidgetsInitValue(this.id);
+    this.value = this.configService.getWidgetInitValue(this.id);
   }
 
   public init() {}
+
+  getValue(): Partial<IValue> {
+    return this.value;
+  }
+
+  setValue(value: Partial<IValue>) {
+    this.value = value;
+    this.emit(WidgetEventEnum.VALUE_CHANGE, this.value);
+  }
+
+  // 兼容旧 API
+  setValues(value: Partial<IValue>) {
+    console.warn('请将 setValues 方法替换 setValue 使用');
+    this.setValue(value);
+  }
 
   getOptions(): IWidgetProps<IOptions> {
     return this.props;
   }
 
-  getValue(): Partial<IValue> {
-    return this.values;
+  setOptions(options: Partial<IWidgetProps<IOptions>>) {
+    this.props = Object.assign({}, this.props, options);
+    this.emit(WidgetEventEnum.OPTIONT_CHANGE, this.props);
   }
 
   show() {
@@ -78,15 +90,6 @@ export default class BaseWidget<IOptions, IValue>
     });
   }
 
-  setOptions(option: Partial<IWidgetProps<IOptions>>) {
-    this.props = Object.assign({}, this.props, option);
-    this.emit(WidgetsEventEnum.OPTIONT_CHANGE, this.props);
-  }
-
-  setValues(values: Partial<IValue>) {
-    this.values = values;
-    this.emit(WidgetsEventEnum.VALUE_CHANGE, this.values);
-  }
   destroy() {
     this.removeAllListeners();
   }

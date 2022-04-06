@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import type {
-  IWidgetProps} from '@antv/dipper';
+import type { IWidgetProps } from '@antv/dipper';
 import {
   DipperContainer,
   registerWidget,
   useConfigService,
-  useWidgets,
+  useWidget,
   CustomBaseWidgets,
   useGlobalModel,
 } from '@antv/dipper';
