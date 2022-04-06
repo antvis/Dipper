@@ -22,7 +22,7 @@ export const singleLineChart = () => {
 
 // 条形图
 export const barChart = () => {
-  let xField = ['餐饮', '影院', '百货购物中心', '国内旅游', '医疗'];
+  const xField = ['餐饮', '影院', '百货购物中心', '国内旅游', '医疗'];
   const data = Mock.mock({
     'list|5': [
       {
@@ -54,9 +54,7 @@ export const multidimensionalChart = () => {
         return {
           xField: b,
           series: a,
-          yField: Number(
-            ((index + 1) * 10 + 20 * Math.random() + k * 20).toFixed(),
-          ),
+          yField: Number(((index + 1) * 10 + 20 * Math.random() + k * 20).toFixed()),
         };
       });
     })
@@ -111,9 +109,7 @@ export const brandRevenue = () => {
         return {
           xField: b,
           series: a,
-          yField: Number(
-            ((index + 1) * 10 + 30 * Math.random() + k * 20).toFixed(),
-          ),
+          yField: Number(((index + 1) * 10 + 30 * Math.random() + k * 20).toFixed()),
         };
       });
     })

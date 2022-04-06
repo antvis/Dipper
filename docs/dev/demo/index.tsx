@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import type {
+  IWidgetProps} from '@antv/dipper';
 import {
   DipperContainer,
   registerWidget,
   useConfigService,
   useWidgets,
-  IWidgetProps,
   CustomBaseWidgets,
   useGlobalModel,
 } from '@antv/dipper';
 import { Select, Button } from 'antd';
 const { Option } = Select;
 
-const demo = (props: IWidgetProps) => {
+const Demo = (props: IWidgetProps) => {
   const [, setGlobalData] = useGlobalModel();
 
   return (
@@ -58,7 +59,7 @@ const ControlPosition = () => {
 };
 
 registerWidget('controlPosition', ControlPosition);
-registerWidget('demo', demo);
+registerWidget('demo', Demo);
 
 export default function RumbMap() {
   return (

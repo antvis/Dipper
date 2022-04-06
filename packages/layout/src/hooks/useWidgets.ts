@@ -1,6 +1,6 @@
-import { IWidget, WidgetsServiceEnum } from '@antv/dipper-core';
-import { useState, useEffect, useCallback } from 'react';
-import type { IWidgetProps } from '@antv/dipper-core';
+import { WidgetsServiceEnum } from '@antv/dipper-core';
+import { useState, useEffect } from 'react';
+import type { IWidgetProps, IWidget } from '@antv/dipper-core';
 import { useInjection } from 'inversify-react';
 import { TYPES, WidgetsEventEnum } from '@antv/dipper-core';
 import type { IWidgetsService } from '@antv/dipper-core';
@@ -17,11 +17,11 @@ export function useWidgets(id: string) {
         setWidget(newWidget);
       }
     };
-    const widget = widgetsService.getWidget(id);
-    if (widget) {
-      setWidget(widget as IWidget);
-      setWidgetsValue(widget.getValue());
-      setWidgetsOptions(widget.getOptions());
+    const _widget = widgetsService.getWidget(id);
+    if (_widget) {
+      setWidget(_widget as IWidget);
+      setWidgetsValue(_widget.getValue());
+      setWidgetsOptions(_widget.getOptions());
     } else {
       widgetsService.on(WidgetsServiceEnum.ADD, widgetsAdd);
     }
@@ -34,16 +34,16 @@ export function useWidgets(id: string) {
     if (widget) {
       const onValueChange = (e: any) => {
         setWidgetsValue(e);
-      }
+      };
       const onOptionsChange = (e: any) => {
         setWidgetsOptions(e);
-      }
+      };
       widget?.on(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
       widget?.on(WidgetsEventEnum.OPTIONT_CHANGE, onOptionsChange);
       return () => {
         widget?.off(WidgetsEventEnum.VALUE_CHANGE, onValueChange);
         widget?.off(WidgetsEventEnum.OPTIONT_CHANGE, onOptionsChange);
-      }
+      };
     }
   }, [widget]);
 
