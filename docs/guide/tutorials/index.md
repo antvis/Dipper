@@ -13,7 +13,9 @@ nav:
 
 ### 安装依赖
 
-`npm i @antv/dipper`
+```bash
+npm i @antv/dipper
+```
 
 ### 初始化地图
 
@@ -164,7 +166,7 @@ export default function Map() {
 
 ### 添加一个组件
 
-Dipper 通过配置的放啊渲染组件，如何自定义一个组件。新增组件你可以和正常开发 React 组件一样的进行开发。
+Dipper 通过配置的渲染组件，如何自定义一个组件。新增组件你可以和正常开发 React 组件一样的进行开发。
 
 在地图右上角增加一个地图控件
 
@@ -197,16 +199,16 @@ const ControlPosition = () => {
 export default ControlPosition;
 ```
 
-上面我们完成了一个 Select 组件，如何渲染到地图中呢？
+上面我们完成了一个 `Select` 组件，如何渲染到地图中呢？
 
-首先我们需要使用`registerWidget`注册一个组件,注册组件需要为组件定义一个名字。
+首先我们需要使用 `registerWidget` 注册一个组件,注册组件需要为组件定义一个名字。
 
 ```tsx pure
 import { registerWidget } from '@antv/dipper';
 registerWidget('controlPosition', ControlPosition);
 ```
 
-注册完成,即可在在配置项中使用组件了,组件我们可以放置任意的布局组件中
+注册完成,即可在在配置项中使用组件了，组件我们可以放置任意的布局组件中
 
 ```tsx
 import React, { useEffect, useState } from 'react';
@@ -408,15 +410,15 @@ const config = {
 
 dipper 提供了一系列 hooks 方便获取地图、图层的相关实例，或者对地图的更新
 
-- useConfigService
-- useSceneService
-- useLayerGroup
-- useWidget
-- useDipperContainer
+- `useConfigService`
+- `useSceneService`
+- `useLayerGroup`
+- `useWidget`
+- `useDipperContainer`
 
 ### 更新地图状态
 
-`useConfigService' 主要提供了更新 Dipper 配置的方法
+`useConfigService` 主要提供了更新 Dipper 配置的方法
 
 ```ts pure
 import { useSceneService,updateControl } '@antv/dipper'
