@@ -21,7 +21,7 @@ export default function RumbMap() {
   }, []);
 
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '400px' }}>
       <DipperContainer cfg={mapConfig!} />
     </div>
   );

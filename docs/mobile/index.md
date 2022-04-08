@@ -72,7 +72,7 @@ export default function RumbMap() {
   return (
     <div
       style={{
-        height: '100vh',
+        height: '400px',
         width: '100%',
       }}
     >
