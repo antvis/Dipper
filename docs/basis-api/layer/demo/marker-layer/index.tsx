@@ -21,7 +21,7 @@ export default function LayerDemo() {
   }, []);
 
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '400px' }}>
       <DipperContainer<IInitData> cfg={mapConfig!} />
     </div>
   );

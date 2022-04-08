@@ -1,5 +1,6 @@
 import type { IConfig } from '@antv/dipper';
 import { SingleSequentialColorScale } from '@antv/dipper';
+
 export const config: Partial<IConfig> = {
   viewData: {
     global: {
@@ -8,9 +9,11 @@ export const config: Partial<IConfig> = {
   },
   headerbar: {
     display: true,
-    title: {
-      value: '数据分析',
-      display: true,
+    options: {
+      title: {
+        value: '数据分析',
+        display: true,
+      },
     },
   },
   panel: {
@@ -21,10 +24,12 @@ export const config: Partial<IConfig> = {
       },
     ],
   },
-  toolbar: {
-    display: false,
-    children: [],
-  },
+  toolbar: [
+    {
+      display: false,
+      children: [],
+    },
+  ],
   map: {
     zoom: 2,
     center: [89.094725, 39.032152],
