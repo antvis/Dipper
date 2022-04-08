@@ -7,9 +7,29 @@ group:
   order: 4
 ---
 
-### 组件使用
+## 配置示例
 
-### 组件通用配置
+```ts
+{
+  display: true,
+  options: {
+    enableToggle: true,
+    defaultTitle: '所有网格',
+    opened: true,
+    width: 360,
+  },
+  position: 'right',
+  childrens: [
+    {
+      display: true,
+      type: 'meshName',
+      title: '网格名称',
+    },
+  ]
+}
+```
+
+## 组件通用配置
 
 #### type 必选
 
@@ -21,34 +41,29 @@ group:
 
 #### position 可选
 
-组件所在的区域不同位置可选不同。
-如果组件作为 Control 添加，支持 8 个方位
+组件所在的区域不同位置可选不同。如果组件作为 Control 添加，支持 8 个方位
 
-```ts
-'bottomleft' |
-  'bottomright' |
-  'topleft' |
-  'topright' |
-  'topcenter' |
-  'bottomcenter' |
-  'leftcenter' |
-  'rightcenter';
-```
+- 'bottomleft'
+- 'bottomright'
+- 'topleft'
+- 'topright'
+- 'topcenter'
+- 'bottomcenter'
+- 'leftcenter'
+- 'rightcenter'
 
 如果组件做为 headbar 添加支持 3 个方法
 
-```ts
-| "left"
-| "center"
-| "right"
-```
+- 'left'
+- 'center'
+- 'right'
 
 #### layout 可选
 
 设置同一 `position` 组件的排列方式，支持垂直和水平排列,只有组件配置为 Control 时生效
 
 - 'horizontal'
-- 'vertical';
+- 'vertical'
 
 #### options 可选
 
@@ -57,25 +72,3 @@ group:
 #### childrens 可选
 
 子组件 数据格式
-
-### 配置示例
-
-```ts
-   {
-    display: true,
-    options: {
-      enableToggle: true,
-      defaultTitle: '所有网格',
-      opened: true,
-      width: 360,
-    },
-    position: 'right',
-    childrens: [
-      {
-        display: true,
-        type: 'meshName',
-        title: '网格名称',
-      },
-    }
-
-```

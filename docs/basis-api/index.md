@@ -8,47 +8,40 @@ nav:
   order: 2
 ---
 
-TODO
+## registerWidget
 
-- 组件注册
-- 获取组件信息
+`registerWidget(type, components)` 将组件注册到 `Dipper` 框架中。
 
-## ConfigSerice
+```tsx pure
+import { registerWidget } from '@antv/dipper';
 
-配置管理服务
+const AComponents = () => {
+  return <div></div>;
+};
+registerWidget('AComponents', AComponents);
+```
 
-### 属性
-
-config
-
-### 方法
-
-#### setConfig
-
-### 注册 registerWidget
-
-开发完成一个组件需要注册到 Dipper 才能使用。
-
-registerWidget
-
-#### 参数
+### 参数
 
 - type 组件名称
 - components 组件实例
 
-```js
-registerWidget('name', A);
+## getWidget
+
+`getWidget(type)` 通过注册的组件名获取组件。
+
+```ts pure
+import { getWidget } from '@antv/dipper-core';
 ```
 
-### 获取 getWidget
-
-获取名称获取组件
-
-#### 参数
+### 参数
 
 - type 组件名称
 
-```ts
-import { getWidget } from '@antv/dipper-core';
-``;
+## getAllWidgets
+
+`getAllWidgets` 获取全部注册的组件。
+
+```ts pure
+import { getAllWidgets } from '@antv/dipper-core';
 ```
