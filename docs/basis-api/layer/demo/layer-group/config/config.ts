@@ -8,9 +8,11 @@ export const config: Partial<IConfig> = {
   },
   headerbar: {
     display: true,
-    title: {
-      value: '数据分析',
-      display: true,
+    options: {
+      title: {
+        value: '数据分析',
+        display: true,
+      },
     },
   },
   panel: {
