@@ -15,7 +15,7 @@ mobile: false
 
 ```ts pure
 import { useSceneService } from '@antv/dipper';
-const { sceneService, scene } = useConfigService();
+const { sceneService, scene } = useSceneService();
 ```
 
 ### 结果
