@@ -1,6 +1,6 @@
 import type { ILayerService, ILayerGroupOptions } from '@antv/dipper-core';
 import { LayerGroup, TYPES } from '@antv/dipper-core';
-import { cloneDeep, debounce } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { PolygonLayer } from '@antv/l7';
 import { isPressing } from '@antv/dipper-core';
 import { bbox, bboxPolygon, featureCollection, lineString } from '@turf/turf';
@@ -10,13 +10,15 @@ export interface IBoxSelectLayerGroupOptions extends ILayerGroupOptions {
   color: string;
   size: number;
   targets: string[];
+  keyCode: number | false;
 }
 
-export const defaultBoxSelectLayerGroupOptions = {
+export const defaultBoxSelectLayerGroupOptions: IBoxSelectLayerGroupOptions = {
   zIndex: 1,
   color: '#000',
   size: 2,
   targets: [],
+  keyCode: 16,
 };
 
 export interface IBoxPoint {
@@ -46,7 +48,9 @@ export class BoxSelectLayerGroup extends LayerGroup<IBoxSelectLayerGroupOptions>
 
   initLayerList() {
     this.layer = this.initBoxLayer();
-    this.enable();
+    if (this.options.keyCode !== false) {
+      this.enable();
+    }
   }
 
   initBoxLayer() {
@@ -73,18 +77,20 @@ export class BoxSelectLayerGroup extends LayerGroup<IBoxSelectLayerGroupOptions>
   }
 
   onMouseDown = (e: any) => {
-    if (isPressing(16)) {
-      this.isDrag = true;
-      this.scene?.setMapStatus({
-        dragEnable: false,
-      });
-      const { lng, lat } = e.lnglat;
-      this.startPoint = {
-        lng,
-        lat,
-        ...e.pixel,
-      };
+    if (this.options.keyCode !== false && !isPressing(this.options.keyCode)) {
+      return;
     }
+
+    this.isDrag = true;
+    this.scene?.setMapStatus({
+      dragEnable: false,
+    });
+    const { lng, lat } = e.lnglat;
+    this.startPoint = {
+      lng,
+      lat,
+      ...e.pixel,
+    };
   };
 
   onMouseMove = (e: any) => {
