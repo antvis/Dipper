@@ -421,7 +421,7 @@ dipper 提供了一系列 hooks 方便获取地图、图层的相关实例，或
 `useConfigService` 主要提供了更新 Dipper 配置的方法
 
 ```ts pure
-import { useSceneService,updateControl } '@antv/dipper'
+import { useConfigService } '@antv/dipper'
 const { setConfig } = useConfigService();
 setConfig('map.style','normal'); // 更新地图样式
 
@@ -434,11 +434,9 @@ setConfig('map.style','normal'); // 更新地图样式
 `updateControl` 方法可以用来更新地图 Control 状态
 
 ```tsx pure
-import { useSceneService,updateControl } '@antv/dipper'
+import { useConfigService } '@antv/dipper'
 const { updateControl } = useConfigService();
-updateControl('mapStyle', {
-          position: 'topleft',
-        }); // 更新地图样式
+updateControl('mapStyle', { position: 'topleft' }); // 更新地图样式
 ```
 
 ### 获取地图实例
@@ -447,7 +445,7 @@ updateControl('mapStyle', {
 
 ```tsx pure
 import { useSceneService } '@antv/dipper'
-const { scene} = useSceneService();
+const { scene } = useSceneService();
 
 ```
 
