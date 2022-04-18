@@ -32,15 +32,6 @@ export const config: Partial<IConfig> = {
           action: 'queryArea',
         },
       },
-      // {
-      //   display: false,
-      //   position: 'right',
-      //   type: 'publishbar',
-      //   event: {
-      //     actionType: 'map',
-      //     action: 'publish',
-      //   },
-      // },
     ],
   },
   panel: {
@@ -81,10 +72,10 @@ export const config: Partial<IConfig> = {
       },
     ],
   },
-  toolbar: {
+  toolbar: [{
     display: false,
     components: [],
-  },
+  }],
   map: {
     zoom: 10,
     center: [120.153576, 30.287459],
@@ -92,6 +83,16 @@ export const config: Partial<IConfig> = {
     style: 'normal',
   },
   controls: [
+    {
+      type: 'zoom',
+      position: 'bottomright',
+      display: true,
+    },
+    {
+      type: 'scale',
+      position: 'bottomleft',
+      display: true,
+    },
     {
       display: true,
       position: 'topleft',
@@ -127,25 +128,42 @@ export const config: Partial<IConfig> = {
       options: {},
     },
   ],
-  defaultcontrols: [
-    {
-      type: 'zoom',
-      position: 'bottomright',
-      display: true,
-    },
-    {
-      type: 'scale',
-      position: 'bottomleft',
-      display: true,
-    },
-  ],
   popup: {
     enable: false,
   },
   layers: [
     {
       type: 'gridLayer',
-      options: {},
+      options: {
+        text: {
+          field: 'name',
+        },
+        normal: {
+          fillColor: {
+            field: 'unit_price',
+            value: [
+              'rgb(247, 251, 255)',
+              'rgb(222, 235, 247)',
+              'rgb(198, 219, 239)',
+              'rgb(158, 202, 225)',
+              'rgb(107, 174, 214)',
+              'rgb(66, 146, 198)',
+              'rgb(33, 113, 181)',
+              'rgb(8, 81, 156)',
+              'rgb(8, 48, 107)',
+            ],
+          },
+          scale: {
+            unit_price: {
+              type: 'quantile',
+            },
+          },
+          borderWidth: 1,
+          borderColor: '#ffffff',
+          opacity: 1,
+        },
+        multipleSelect: true,
+      },
     },
   ],
   legends: [],

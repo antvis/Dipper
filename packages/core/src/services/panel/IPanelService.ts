@@ -3,10 +3,6 @@ import type { IWidgetProps } from '../widgets/IWidgetsService';
 
 export interface IPanel {
   display: boolean;
-  enableToggle: boolean;
-  defaultTitle?: string;
-  width?: number;
-  opened?: boolean;
   position?: 'left' | 'right' | 'top' | 'bottom';
   options: Partial<{
     enableToggle: boolean;

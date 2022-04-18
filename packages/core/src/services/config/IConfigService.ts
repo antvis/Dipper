@@ -76,10 +76,10 @@ export interface IConfig extends IBaseConfig {
   toolbar: IToolBar[];
   controls: IControlWidgetsProps[]; // 自定义组件配置
   legends: IWidgetProps[];
-  layers: {
+  layers: Array<{
     type: string;
     options: any;
-  }[];
+  }>;
   [key: string]: any;
 }
 
