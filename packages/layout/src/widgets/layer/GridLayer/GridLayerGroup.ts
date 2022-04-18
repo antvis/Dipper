@@ -9,11 +9,10 @@ import {
   getLayerFieldArgus,
   LayerGroupEventEnum,
   defaultGridTextOptions,
-  IFeature,
 } from '@antv/dipper-core';
 import { PolygonLayer } from '@antv/l7';
 import { cloneDeep, merge } from 'lodash';
-import { BBox, featureCollection } from '@turf/turf';
+import { featureCollection } from '@turf/turf';
 
 export interface IGridLayerGroupStyle {
   borderColor: ILayerFieldProperties<string>;

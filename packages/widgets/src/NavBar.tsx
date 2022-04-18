@@ -27,7 +27,7 @@ export function NavBar({ headerBar, viewData }: NavBarProps) {
       mode="horizontal"
       defaultSelectedKeys={[viewData?.global?.view || '']}
       style={{ width: '400px' }}
-      onClick={(e) => {
+      onClick={() => {
         // console.info('您点击了', e);
       }}
     >

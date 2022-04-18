@@ -13,7 +13,7 @@ export interface IMultiClassLegendProps {
   values: (number | [number, number])[];
 }
 
-export function MultiClassifyColor({ options, id, type }: IWidgetProps) {
+export function MultiClassifyColor({ options }: IWidgetProps) {
   const { values, items, title } = options as IMultiClassLegendProps;
   return (
     <div className={styles.legendClassifyControl}>

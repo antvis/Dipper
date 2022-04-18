@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.less';
-import { useConfigService, LayoutContent } from '@antv/dipper-layout';
+import { LayoutContent } from '@antv/dipper-layout';
 import type { IWidgetProps, IToolBar } from '@antv/dipper-core';
 import { getWidgetChildren, isDisplay } from '@antv/dipper-core';
 

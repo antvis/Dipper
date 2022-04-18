@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { Layout } from 'antd';
 import styles from './index.less';
 import type { IHeaderProps } from '../Header';

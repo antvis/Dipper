@@ -3,7 +3,7 @@ import { AMapScene, AMapSceneV2, Popup, MapboxScene, MapScene } from '@antv/l7-r
 import type {} from '@antv/l7-react';
 import styles from './index.less';
 import type { IMapProps } from '@antv/dipper-core';
-import { useSceneService, useConfigService } from '../../hooks';
+import { useSceneService } from '../../hooks';
 
 export default function AppMap({ map, mapType, popup, scene, children }: IMapProps) {
   const { sceneService } = useSceneService();

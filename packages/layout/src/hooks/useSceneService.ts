@@ -14,9 +14,9 @@ export function useSceneService() {
   useEffect(() => {
     sceneService.on(
       'sceneChange',
-      ({ scene, position }: { scene: Scene; position: [number, number] }) => {
-        setScene(scene);
-        setPosition(position);
+      ({ scene:s, position:p }: { scene: Scene; position: [number, number] }) => {
+        setScene(s);
+        setPosition(p);
       },
     );
   }, [sceneService]);

@@ -1,5 +1,4 @@
 import React from 'react';
-import classnames from 'classnames';
 import type { IWidgetProps } from '@antv/dipper-core';
 import styles from './index.less';
 
@@ -21,7 +20,7 @@ export function ClassifyColor({ options }: IWidgetProps) {
       <div className={styles.colorBar}>
         {items.map((item, colorIndex) => (
           <span
-            key={colorIndex}
+            key={`${colorIndex}`}
             className={styles.color}
             style={{ backgroundColor: item.color }}
           />
@@ -29,7 +28,7 @@ export function ClassifyColor({ options }: IWidgetProps) {
       </div>
       <div className={styles.valueBar}>
         {items.map((item, colorIndex) => (
-          <span key={colorIndex} className={styles.value}>
+          <span key={`${colorIndex}`} className={styles.value}>
             {Array.isArray(item.value) ? item.value[0] : item.value}
           </span>
         ))}
