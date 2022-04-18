@@ -75,11 +75,11 @@ export interface IConfig extends IBaseConfig {
   panel: Partial<IPanel>;
   toolbar: IToolBar[];
   controls: IControlWidgetsProps[]; // 自定义组件配置
-  layers: Array<{
-    id?:string;
+  layers: {
+    id?: string;
     type: string;
     options: any;
-  }>;
+  }[];
   [key: string]: any;
 }
 
@@ -89,8 +89,8 @@ export interface IConfigService extends EventEmitter {
   init: (config: Partial<IBaseConfig & any> | undefined) => void;
   setConfig: (field: string, value: any) => void;
   getConfig: (key: string) => any;
-  addControl:(value:any)=>void;
-  removeControl:(id:string)=>void;
+  addControl: (value: any) => void;
+  removeControl: (id: string) => void;
   updateLegend: (id: string, value: any) => void;
   updateControl: (type: string, value: any) => void;
   setWidgetInitOptions: (key: string, options: Record<string, any>) => void;

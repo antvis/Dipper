@@ -45,7 +45,7 @@ export default class ConfigService extends EventEmitter implements IConfigServic
     });
   }
   // 移除地图控件
-  removeControl(id:string) {
+  removeControl(id: string) {
     const index = this.findWidgetsById(id,'controls')
     if(index!==-1) {
       this.setConfig('controls',this.config.controls?.splice(0,index));
@@ -118,10 +118,10 @@ export default class ConfigService extends EventEmitter implements IConfigServic
     this.emit(ConfigEventEnum.GLOBAL_CHANGE, this.config);
   }
 
-  private findWidgetsById(id:string,type:string) {
-    let index = this.config[type]?.findIndex((k:any) => k.id === id);
+  private findWidgetsById(id: string,type: string) {
+    let index = this.config[type]?.findIndex((k: any) => k.id === id);
     if(index === -1 ) {
-      index = this.config[type]?.findIndex((k:any) => k.type === id);
+      index = this.config[type]?.findIndex((k: any) => k.type === id);
     }
     return index
 
