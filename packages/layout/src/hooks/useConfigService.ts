@@ -18,7 +18,8 @@ export function useConfigService() {
   };
 
   const updateLegend = (id: string, value: any) => {
-    return configService.updateLegend(id, value);
+    console.warn('请将 updateLegend 方法替换 updateControl 使用');
+    return configService.updateControl(id, value);
   };
 
   const updateControl = (type: string, value: any) => {

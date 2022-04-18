@@ -35,9 +35,10 @@ export default class ConfigService extends EventEmitter implements IConfigServic
   }
 
   updateLegend(id: string, value: any) {
-    this.updateControlConfig('legends', id, value);
+    console.warn('请将 updateLegend 方法替换 updateControl 使用');
+    this.updateControl(id, value);
   }
-  
+
   // 添加地图控件s
   addControl(value: any) {
     this.setConfig(`controls.${this.config.controls?.length}`, {
@@ -46,14 +47,14 @@ export default class ConfigService extends EventEmitter implements IConfigServic
   }
   // 移除地图控件
   removeControl(id: string) {
-    const index = this.findWidgetsById(id,'controls')
-    if(index!==-1) {
-      this.setConfig('controls',this.config.controls?.splice(0,index));
+    const index = this.findWidgetsById(id, 'controls');
+    if (index !== -1) {
+      this.setConfig('controls', this.config.controls?.splice(0, index));
     }
-
   }
-  updateControl(type: string, value: any) {
-    const index = this.findWidgetsById(type,'controls')
+
+  updateControl(id: string, value: any) {
+    const index = this.findWidgetsById(id, 'controls');
     if (index !== -1) {
       this.setConfig(`controls.${index}`, {
         ...this.getConfig(`controls.${index}`),
@@ -61,20 +62,8 @@ export default class ConfigService extends EventEmitter implements IConfigServic
       });
     } else {
       // 组件未添加,
-      this.addControl(value)
+      this.addControl(value);
       console.warn('组件未添加');
-    }
-  }
-  // legends;
-  updateControlConfig(type: keyof IConfig, id: string, value: any) {
-    const index = this.config.legends?.findIndex((k) => k.id === id);
-    if (index !== -1) {
-      this.setConfig(`${type}.${index}`, value);
-    } else {
-      this.setConfig(`${type}.${0}`, {
-        id,
-        ...value,
-      });
     }
   }
 
@@ -118,13 +107,11 @@ export default class ConfigService extends EventEmitter implements IConfigServic
     this.emit(ConfigEventEnum.GLOBAL_CHANGE, this.config);
   }
 
-  private findWidgetsById(id: string,type: string) {
+  private findWidgetsById(id: string, type: string) {
     let index = this.config[type]?.findIndex((k: any) => k.id === id);
-    if(index === -1 ) {
+    if (index === -1) {
       index = this.config[type]?.findIndex((k: any) => k.type === id);
     }
-    return index
-
+    return index;
   }
-
 }
