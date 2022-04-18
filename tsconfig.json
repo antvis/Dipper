@@ -7,10 +7,11 @@
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "strict": true,
     "paths": {
-      "@/*": ["packages/*"],
+      "@antv/dipper": ["packages/dipper/src"],
+      "@antv/dipper-*": ["packages/*/src"],
       "@@/*": ["src/.umi/*"]
     },
     "allowSyntheticDefaultImports": true,
