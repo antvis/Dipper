@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLayerService, MarkerLayerGroup } from '@antv/dipper';
-import type { IMarkerItemProps } from '@antv/dipper-widgets/src';
+import type { IMarkerItemProps } from '@antv/dipper';
 import { useLayerGroup } from '@antv/dipper-layout';
 
 interface IDataItem {

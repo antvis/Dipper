@@ -15,7 +15,7 @@ mobile: false
 
 ```ts pure
 import { useLayerGroup } from '@antv/dipper';
-const { selectFeatures, selectFeatures } = useLayerGroup('grid');
+const { selectFeatures } = useLayerGroup('grid');
 ```
 
 ### 参数
