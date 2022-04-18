@@ -1,4 +1,3 @@
-import { useConfigService } from '../../hooks';
 import React from 'react';
 import { LayoutContent } from '../../BaseLayout';
 

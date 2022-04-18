@@ -17,7 +17,6 @@ export interface IContainerProps<T = any> {
 
 export function DipperContainerContext<T = any>({ cfg, children, onLoad }: IContainerProps<T>) {
   const { sceneContainer } = useDipperContainer<T>(cfg);
-  const [isLoaded, setLoaded] = useState(false);
   useUnmount(() => {
     if (sceneContainer) {
       sceneContainer.destroy();

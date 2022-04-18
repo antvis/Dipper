@@ -3,7 +3,6 @@ import {
   useConfigService,
   LayoutContent,
   useSceneService,
-  BaseControl,
   CustomBaseWidgets,
 } from '@antv/dipper-layout';
 import type { Scene } from '@antv/l7';
@@ -39,8 +38,8 @@ export function MapPanel() {
   }, [controls]);
 
   useEffect(() => {
-    const panel = document.querySelector('#panel-control');
-    setTop(panel?.clientHeight ?? 0);
+    const panelDom = document.querySelector('#panel-control');
+    setTop(panelDom?.clientHeight ?? 0);
   }, []);
 
   const onHeightChange = useCallback(

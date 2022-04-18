@@ -1,18 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useConfigService, BaseControl, CustomBaseWidgets } from '@antv/dipper-layout';
-import { Control, CustomControl } from '@antv/l7-react';
-import type { IControlOption, PositionName, Scene } from '@antv/l7';
+import React, { useMemo } from 'react';
+import { useConfigService, BaseControl } from '@antv/dipper-layout';
 import { groupBy } from 'lodash';
-import { getWidgetChildren, isDisplay } from '@antv/dipper-core';
-import { FloatingPanel } from 'antd-mobile';
-import styles from './index.less';
-
-const anchors = [100, window.innerHeight * 0.4, window.innerHeight * 0.8];
-const THRESHOLD = window.innerHeight * 0.7;
+import { isDisplay } from '@antv/dipper-core';
 
 export default function MapControl() {
   const { globalConfig } = useConfigService();
-  const { controls, legends = [], defaultcontrols, panel } = globalConfig;
+  const { controls, panel } = globalConfig;
   const controlGroupBy = useMemo(() => {
     if (panel && panel.display) {
       //底部sidebar 存在时

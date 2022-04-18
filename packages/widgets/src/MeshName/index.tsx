@@ -3,13 +3,11 @@ import React, {
   useState,
   useMemo,
   useCallback,
-  useEffect,
 } from 'react';
 import { CheckOutlined, CloseOutlined, EditOutlined } from '@ant-design/icons';
 import styles from './index.less';
 import { Input } from 'antd';
 import { useLayerGroup } from '@antv/dipper-layout';
-import { Amaps } from '../service/amaps';
 
 export function MeshName() {
   const { selectFeatures } = useLayerGroup('grid');

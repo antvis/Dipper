@@ -1,8 +1,7 @@
 import type { Container } from 'inversify';
 import createContainer from './inversify.config';
-import type { IConfig, IConfigService, IBaseConfig } from './services/config/IConfigService';
+import type { IConfigService, IBaseConfig } from './services/config/IConfigService';
 import type { ISceneService } from './services/scene/ISceneService';
-import type { IPanelService } from './services/panel/IPanelService';
 import { TYPES } from './types';
 import type { Scene } from '@antv/l7';
 

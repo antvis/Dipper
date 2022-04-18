@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import React from 'react';
 import styles from './index.less';
-import { useConfigService, CustomBaseLayout } from '@antv/dipper-layout';
+import { CustomBaseLayout } from '@antv/dipper-layout';
 import type { IWidgetProps} from '@antv/dipper-core';
 import { getWidgetChildren, isDisplay } from '@antv/dipper-core';
 

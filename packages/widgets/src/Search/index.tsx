@@ -4,7 +4,6 @@ import styles from './index.less';
 import { debounce } from 'lodash';
 import type { AmapService } from '../service/amaps';
 import { Amaps } from '../service/amaps';
-import { useConfigService } from '@antv/dipper-layout';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import type { IWidgetProps } from '@antv/dipper-core';
 

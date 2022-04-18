@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './index.less';
 import { RightOutlined } from '@ant-design/icons';
 import classNames from 'classnames';

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './index.less';
 import ToolBar from './Toolbar';
 import DipperHeader from './Header';
