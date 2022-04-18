@@ -1,5 +1,5 @@
 ---
-title: 配置
+title: 布局
 order: 1
 toc: content
 mobile: false
@@ -8,30 +8,48 @@ nav:
   order: 5
 ---
 
-TODO:
+### 布局
 
-- config 内容
+Dipper 目前 PC 端规范了一套默认的布局模式，组织和规范各个组件的交互联动
 
-<!-- ## Widget
+![Dipper 应用布局](https://gw.alipayobjects.com/mdn/rms_08cc33/afts/img/A*coZJR4sZs9gAAAAAAAAAAAAAARQnAQ)
 
-dipper 配置项围绕 Widget,每个 Widgets 是个组件，同时也可以包含子组件。
+```tsx
+/**
+ *
+ * defaultShowCode: true
+ */
+import React, { useEffect, useState } from 'react';
+import {
+  DipperContainer,
+  registerWidget,
+  useConfigService,
+} from '@antv/dipper';
 
-Widget 属性定义
-
-```ts
-export interface IWidgetProps {
-  type: string;
-  title?: string;
-  position?: T | string;
-  display?: boolean;
-  options?: any;
-  childrens?: IWidgetProps[];
-  [key: string]: any;
+export default function DipperMap() {
+  return (
+    <div style={{ height: '300px' }}>
+      <DipperContainer
+        cfg={{
+          map:{
+            style:'light'
+          },
+          controls: [
+            {
+              display: true,
+              position: 'topleft',
+              type: 'mapStyle',
+              title: '地图样式',
+            },
+          ],
+        }}
+      />
+    </div>
+  );
 }
 ```
 
-- options
-  扩展可选配置项，主要是组件内部自身的配置 -->
+<API hideTitle src='@antv/dipper-pc/src/layout/Container/index.tsx'></API>
 
 ## headerbar
 
@@ -133,9 +151,9 @@ controls 配置示例
 
 ```
 
-<code src='./demo/control.tsx'>
+<!-- <code src='../demo/control.tsx'> -->
 
-## defaultcontrols
+## 地图默认组件
 
 L7 地图基础控件
 
@@ -162,22 +180,3 @@ L7 地图基础控件
   ];
 }
 ```
-
-## legends
-
-## panel
-
-```ts
- {
-  display: boolean; // 是否关闭
-  enableToggle: boolean; // 是否允许打开关闭
-  defaultTitle?: string;
-  width?: number; // 宽度
-  opened?: boolean; // 是否打开
-  position?: 'left' | 'right' | 'top' | 'bottom'; // 位置
-  style?: React.CSSProperties; // 样式
-  childrens?: IWidgetProps[]; // 子组件
- }
-```
-
-## layer

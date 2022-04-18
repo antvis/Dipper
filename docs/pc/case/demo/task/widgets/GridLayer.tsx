@@ -24,7 +24,7 @@ const formatLegend = (data: any[]) => {
 export function GridLayer() {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const { globalConfig, updateLegend } = useConfigService();
+  const { globalConfig, updateControl } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const { widgetsValue: cityValue } = useWidget('citySelect');
@@ -34,23 +34,10 @@ export function GridLayer() {
     return layers?.find((item: any) => item.type === 'gridLayer');
   }, [layers]);
 
-  const testData = {
-    title: '图例',
-    items: [
-      {
-        colors: ['#fef0d9', '#fdcc8a', '#fc8d59', '#e34a33', '#b30000'],
-        title: '已分配',
-      },
-      {
-        colors: ['#f1eef6', '#bdc9e1', '#74a9cf', '#2b8cbe', '#045a8d'],
-        title: '未分配',
-      },
-    ],
-  };
-
   const updateLayerLegend = (items: any[]) => {
-    updateLegend('gridLayerLegend', {
+    updateControl('gridLayerLegend', {
       type: 'multiClassifyColor',
+      id:'gridLayerLegend',
       display: true,
       position: 'bottomleft',
       options: {
@@ -123,26 +110,25 @@ export function GridLayer() {
     });
 
     layerService.addLayerGroup(layer);
-    //
-    // layer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
-    //   // layer.getLegendItem().map((item) => {
-    //   //   if (Array.isArray(item.value)) {
-    //   //     return {
-    //   //       ...item,
-    //   //       value: item.value.map((v) => v.toFixed(2)),
-    //   //     };
-    //   //   } else {
-    //   //     return {
-    //   //       ...item,
-    //   //       value: item.value.toFixed(2),
-    //   //     };
-    //   //   }
-    //   // });
-    //   // updateLayerLegend(formatLegend(layer.getLegendItem()));
-    // });
 
+    layer.on(LayerGroupEventEnum.DATA_UPDATE, () => {
+      layer.getLegendItem().map((item) => {
+        if (Array.isArray(item.value)) {
+          return {
+            ...item,
+            value: item.value.map((v) => v.toFixed(2)),
+          };
+        } else {
+          return {
+            ...item,
+            value: item.value.toFixed(2),
+          };
+        }
+      });
+      updateLayerLegend(formatLegend(layer.getLegendItem()));
+    });
     // 更新图例
-    // updateLayerLegend(formatLegend(layer.getLegendItem()));
+    updateLayerLegend(formatLegend(layer.getLegendItem()));
 
     setGridLayer(layer);
   }, [geoData, cityValue]);

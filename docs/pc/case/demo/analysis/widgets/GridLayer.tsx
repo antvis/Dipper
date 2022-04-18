@@ -28,7 +28,7 @@ const formatLegend = (data: any[]) => {
 export function GridLayer({ options }: any) {
   const { layerService } = useLayerService();
   const { sceneService } = useSceneService();
-  const { globalConfig, updateLegend, setConfig } = useConfigService();
+  const { globalConfig, updateControl, setConfig } = useConfigService();
   const { layers } = globalConfig;
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const { widgetValue: cityValue } = useWidget('citySelect');
@@ -36,33 +36,25 @@ export function GridLayer({ options }: any) {
   const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 
-  // const gridLayerProps = useMemo(() => {
-  //   return layers.find((item: any) => item.type === 'gridLayer');
-  // }, [layers]);
-
-  // const pointLayerProps = useMemo(() => {
-  //   return layers.find((item: any) => item.type === 'pointLayer');
-  // }, [layers]);
-  //
-  // const updateLayerLegend = (items: any[]) => {
-  //   updateLegend('gridLayerLegend', {
-  //     type: 'classifyColor',
-  //     display: true,
-  //     position: 'bottomleft',
-  //     options: {
-  //       title: '充电宝投放数量',
-  //       unkownName: gridLayerProps.options.unkownName,
-  //       items: items.map((item) => {
-  //         return {
-  //           color: item.color,
-  //           value: item.value.map((v) => {
-  //             return (v / 10000).toFixed(2);
-  //           }),
-  //         };
-  //       }),
-  //     },
-  //   });
-  // };
+  const updateLayerLegend = (items: any[]) => {
+    updateControl('gridLayerLegend', {
+      type: 'classifyColor',
+      display: true,
+      position: 'bottomleft',
+      options: {
+        title: '充电宝投放数量',
+        unkownName: options.unkownName,
+        items: items.map((item) => {
+          return {
+            color: item.color,
+            value: item.value.map((v) => {
+              return (v / 10000).toFixed(2);
+            }),
+          };
+        }),
+      },
+    });
+  };
 
   // 根据筛选器条件请求数据
   useEffect(() => {
@@ -116,39 +108,11 @@ export function GridLayer({ options }: any) {
     const newGridLayer = new GridLayerGroup({
       name: 'grid',
       data: geoData,
-      options: {
-        text: {
-          field: 'name',
-        },
-        normal: {
-          fillColor: {
-            field: 'unit_price',
-            value: [
-              'rgb(247, 251, 255)',
-              'rgb(222, 235, 247)',
-              'rgb(198, 219, 239)',
-              'rgb(158, 202, 225)',
-              'rgb(107, 174, 214)',
-              'rgb(66, 146, 198)',
-              'rgb(33, 113, 181)',
-              'rgb(8, 81, 156)',
-              'rgb(8, 48, 107)',
-            ],
-          },
-          scale: {
-            unit_price: {
-              type: 'quantile',
-            },
-          },
-          borderWidth: 1,
-          borderColor: '#ffffff',
-          opacity: 1,
-        },
-        multipleSelect: true,
-      },
+      options,
     });
 
     layerService.addLayerGroup(newGridLayer);
+    updateLayerLegend(formatLegend(newGridLayer.getLegendItem()));
 
     setGridLayer(newGridLayer);
   }, [geoData]);
