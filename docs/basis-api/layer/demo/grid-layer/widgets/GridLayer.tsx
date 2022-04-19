@@ -30,6 +30,7 @@ export default function GridLayer({
     const gridLayerGroup = new GridLayerGroup({
       name: 'grid',
       options: {
+        uniqueKey: 'id',
         text: {
           field: 'name',
         },

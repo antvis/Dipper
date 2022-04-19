@@ -12,6 +12,7 @@ import { TYPES } from '../../types';
 import type { ISceneService } from '../scene/ISceneService';
 import type { DeepPartial } from '../../utils';
 import type { IScale, IScaleOptions } from '@antv/l7-core/es/services/layer/IStyleAttributeService';
+import { centerOfMass, coordAll } from '@turf/turf';
 
 export enum LayerGroupEventEnum {
   VISIBLE_CHANGE = 'visibleChange',
@@ -40,6 +41,7 @@ export interface ILayerGroupOptions {
   hover?: false | any;
   select?: false | any;
   multipleSelect?: boolean;
+  uniqueKey?: string;
 }
 
 export interface ILayerGroupText {
@@ -233,6 +235,40 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
         this.data.features[targetIndex] = targetFeature;
         this.setData(this.data, false);
       }
+    }
+  }
+
+  public getIFeatureList(features: Feature[]) {
+    const uniqueKey = this.options.uniqueKey;
+    if (!uniqueKey) {
+      throw new Error('请在LayerGroup实例化的options参数中传入uniqueKey');
+    }
+    if (!features.length) {
+      return [] as IFeature[];
+    }
+    if (this.mainLayer) {
+      const source = this.mainLayer.getSource();
+      const featureIdList = features.map((feature) => {
+        // @ts-ignore
+        return source.getFeatureId(uniqueKey, feature.properties[uniqueKey]);
+      });
+
+      // @ts-ignore
+      return features.map((feature, index) => {
+        const [lng, lat] = coordAll(centerOfMass(feature))[0];
+        const iFeature: IFeature = {
+          // @ts-ignore
+          feature,
+          featureId: featureIdList[index] ?? 0,
+          lngLat: {
+            lng,
+            lat,
+          },
+        };
+        return iFeature;
+      });
+    } else {
+      throw new Error('当期LayerGroup内实现的mainLayer有误');
     }
   }
 

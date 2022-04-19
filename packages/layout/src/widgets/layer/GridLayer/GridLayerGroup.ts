@@ -12,8 +12,8 @@ import {
   IFeature,
 } from '@antv/dipper-core';
 import { PolygonLayer } from '@antv/l7';
-import { cloneDeep, merge } from 'lodash';
-import { BBox, featureCollection } from '@turf/turf';
+import { cloneDeep, isEqual, merge } from 'lodash';
+import { BBox, Feature, featureCollection } from '@turf/turf';
 
 export interface IGridLayerGroupStyle {
   borderColor: ILayerFieldProperties<string>;
@@ -205,5 +205,26 @@ export class GridLayerGroup extends LayerGroup<IGridLayerGroupOptions> {
   public getLegendItem() {
     // 先取默认图例
     return this.getLayer('fill')?.getLegendItems('color') || [];
+  }
+
+  boxSelect(bbox: BBox) {
+    if (!this.options.multipleSelect) {
+      return;
+    }
+    const fillLayer = this.layers.find((layer) => layer.name === 'fill');
+    if (fillLayer) {
+      // @ts-ignore
+      fillLayer.boxSelect(bbox, (featureList: Feature[]) => {
+        const newIFeatureList = this.getIFeatureList(featureList);
+        if (
+          !isEqual(
+            this.selectFeatures.map((item) => item.featureId),
+            newIFeatureList.map((item) => item.featureId),
+          )
+        ) {
+          this.setSelectFeatures(newIFeatureList);
+        }
+      });
+    }
   }
 }

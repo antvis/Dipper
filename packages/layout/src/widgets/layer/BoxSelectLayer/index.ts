@@ -1,6 +1,6 @@
 import type { ILayerService, ILayerGroupOptions } from '@antv/dipper-core';
 import { LayerGroup, TYPES } from '@antv/dipper-core';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, debounce } from 'lodash';
 import { PolygonLayer } from '@antv/l7';
 import { isPressing } from '@antv/dipper-core';
 import { bbox, bboxPolygon, featureCollection, lineString } from '@turf/turf';
@@ -93,33 +93,39 @@ export class BoxSelectLayerGroup extends LayerGroup<IBoxSelectLayerGroupOptions>
     };
   };
 
-  onMouseMove = (e: any) => {
-    if (this.isDrag) {
-      const { lng, lat } = e.lnglat;
-      this.endPoint = {
-        lng,
-        lat,
-        ...e.pixel,
-      };
-      this.updateBoxFeature();
-      const layerService = this.container?.get(TYPES.LAYER_SYMBOL) as ILayerService | undefined;
+  onMouseMove = debounce(
+    (e: any) => {
+      if (this.isDrag) {
+        const { lng, lat } = e.lnglat;
+        this.endPoint = {
+          lng,
+          lat,
+          ...e.pixel,
+        };
+        this.updateBoxFeature();
+        const layerService = this.container?.get(TYPES.LAYER_SYMBOL) as ILayerService | undefined;
 
-      if (layerService) {
-        const { x: startX, y: startY } = this.startPoint;
-        const { x: endX, y: endY } = this.endPoint;
-        this.options.targets.forEach((layerGroupName) => {
-          layerService.getLayer(layerGroupName)?.boxSelect(
-            bbox(
-              lineString([
-                [startX, startY],
-                [endX, endY],
-              ]),
-            ),
-          );
-        });
+        if (layerService) {
+          const { x: startX, y: startY } = this.startPoint;
+          const { x: endX, y: endY } = this.endPoint;
+          this.options.targets.forEach((layerGroupName) => {
+            layerService.getLayer(layerGroupName)?.boxSelect(
+              bbox(
+                lineString([
+                  [startX, startY],
+                  [endX, endY],
+                ]),
+              ),
+            );
+          });
+        }
       }
-    }
-  };
+    },
+    16,
+    {
+      maxWait: 16,
+    },
+  );
 
   onMouseUp = (e: any) => {
     if (this.isDrag) {
