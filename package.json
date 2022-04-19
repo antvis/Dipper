@@ -18,11 +18,11 @@
     "docs:deploy": "gh-pages -d docs-dist",
     "deploy": "yarn run docs:build && yarn run docs:deploy",
     "build": "lerna run build",
-    "version": "lerna version --force-publish --conventional-commits --exact --no-changelog",
-    "version-pre": "lerna version --force-publish --conventional-prerelease",
-    "prerelease": "yarn build",
-    "release": "lerna publish from-package --force-publish",
-    "release-beta": "yarn run prerelease && lerna publish --dist-tag beta from-package --force-publish"
+    "package-version": "lerna version --force-publish --conventional-commits",
+    "package-preversion": "lerna version --force-publish --conventional-prerelease",
+    "prepublishOnly": "yarn build",
+    "package-publish": "lerna publish from-package --force-publish",
+    "package-betapublish": "lerna publish from-package --force-publish --dist-tag beta"
   },
   "dependencies": {
     "@antv/g2plot": "^2.3.39",
