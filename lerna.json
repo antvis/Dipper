@@ -4,11 +4,14 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
-    "publish": {
-      "ignoreChanges": ["*.md"],
-      "allowBranch": ["master", "docs"],
+    "version": {
       "message": "chore: publish %s",
+      "changelog": false,
+      "exact": false
+    },
+    "publish": {
       "registry": "https://registry.npmjs.org"
     }
-  }
+  },
+  "ignoreChanges": ["*.md"]
 }
