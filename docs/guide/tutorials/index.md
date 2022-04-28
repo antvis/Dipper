@@ -14,7 +14,7 @@ nav:
 ### 安装依赖
 
 ```bash
-npm i @antv/dipper
+npm i @antv/l7 @antv/l7-react @antv/dipper
 ```
 
 ### 初始化地图
