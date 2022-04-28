@@ -9,7 +9,7 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
+  "typings": "dist/dipper/src/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
     "prettier": "prettier --write \"src/*.{tsx,ts,less,md,json}\"",
