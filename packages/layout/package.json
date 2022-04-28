@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper-layout",
-  "version": "0.3.0-beta.9",
+  "version": "0.3.0-beta.10",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/layout/src/index.d.ts",
@@ -19,7 +19,7 @@
     "watch": "yarn clean && father-build --watch"
   },
   "dependencies": {
-    "@antv/dipper-core": "^0.3.0-beta.9",
+    "@antv/dipper-core": "^0.3.0-beta.10",
     "ahooks": "^3.1.5"
   },
   "peerDependencies": {
