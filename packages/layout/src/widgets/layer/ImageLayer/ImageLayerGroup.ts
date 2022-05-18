@@ -16,7 +16,7 @@ export interface IImageLayerStyle extends IImageLayerImageStyle {
   text?: string;
   textColor?: ILayerFieldProperties<string>;
   textSize?: number;
-  textStyle?: Record<string, any>;
+  textStyle?: any;
 }
 
 export interface IImageLayerGroupOptions extends ILayerGroupOptions {
