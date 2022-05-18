@@ -24,7 +24,6 @@ group:
 
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| name | layerGroup 的唯一 id，必填 | string | - |
 | normal | 正常展示状态下的样式 | [IPointLayerStyle](#IPointLayerStyle) | { size: 10, color: '#ff0000', shape: 'circle' } |
 | hover | 是否开启悬停，以及开启时悬停状态下的样式 | false \| [IPointLayerStyle](#IPointLayerStyle) | false |
 | select | 是否开启选中，以及开启时选中状态下的样式 | false \| [IPointLayerStyle](#IPointLayerStyle) | false |
@@ -58,6 +57,7 @@ const pointLayerGroup = new PointLayerGroup({
   name: 'point',
   options: {
     normal: {
+      // 以下为 ILayerFieldProperties 属性的几种使用方式
       color: '#ffffff', // 单值模式
       shape: ['circle', 'triangle'], // 多值模式
       size: { // 字段映射模式

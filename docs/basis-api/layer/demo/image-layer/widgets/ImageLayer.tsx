@@ -140,7 +140,6 @@ const ImageLayer: React.FC = () => {
           海南: 'https://gw.alipayobjects.com/zos/basement_prod/604b5e7f-309e-40db-b95b-4fac746c5153.svg',
           广东: 'https://gw.alipayobjects.com/zos/basement_prod/30580bc9-506f-4438-8c1a-744e082054ec.svg',
         },
-        uniqueKey: 'id',
       },
     });
     layerService.addLayerGroup(imageLayerGroup);
