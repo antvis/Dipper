@@ -1,9 +1,9 @@
-import type { ILayer, Scene } from '@antv/l7';
+import type { ILayer,ISourceCFG ,Scene} from '@antv/l7';
 import EventEmitter from 'eventemitter3';
+import { Source, MarkerLayer} from '@antv/l7';
 import type { Container } from 'inversify';
 import { injectable } from 'inversify';
 import type { ILayerGroup, IFeature } from './ILayerService';
-import { Source, MarkerLayer } from '@antv/l7';
 import type { BBox, Feature, FeatureCollection } from '@turf/turf';
 import { featureCollection } from '@turf/turf';
 import { isEqual, merge } from 'lodash';
@@ -40,6 +40,7 @@ export interface ILayerGroupOptions {
   hover?: false | any;
   select?: false | any;
   multipleSelect?: boolean;
+  sourceOption?: ISourceCFG
 }
 
 export interface ILayerGroupText {
@@ -94,7 +95,7 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
     this.name = name;
     this.data = data;
     this.options = merge({}, this.getDefaultOptions(), options);
-    this.source = new Source(featureCollection([]));
+    this.source = new Source(featureCollection([]),this.options.sourceOption || {});
   }
 
   // 会被LayerService调用
@@ -202,15 +203,20 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
     this.scene?.removeLayer(layer);
   }
 
-  public setData(data: any, clear = true) {
+  public setData(data: any, sourceOption: ISourceCFG | undefined = undefined, clear = true) {
     this.data = data;
-    this.source.setData(data);
+    if( sourceOption !== undefined) {
+      this.source.setData(data);
+    } else {
+      this.source.setData(data,sourceOption)
+    }
 
+  
     if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
       this.mainLayer.setData(this.data);
     }
 
-    if (clear) {
+    if (clear && sourceOption !== false ) {// 兼容展业银行
       this.setSelectFeatures([]);
       this.setHoverFeature(null);
     }
@@ -231,7 +237,9 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
       if (targetFeature && targetIndex > -1) {
         Object.assign(targetFeature.properties, newProperties);
         this.data.features[targetIndex] = targetFeature;
-        this.setData(this.data, false);
+        this.setData(this.data,undefined, false); // 展业银行业务
+        
+
       }
     }
   }
