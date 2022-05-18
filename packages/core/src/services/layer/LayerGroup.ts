@@ -205,13 +205,13 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
 
   public setData(data: any, sourceOption:ISourceCFG | undefined = undefined, clear = true) {
     this.data = data;
-    sourceOption ? this.source.setData(data,sourceOption) : this.source.setData(data);
+    sourceOption === undefined ? this.source.setData(data,sourceOption) : this.source.setData(data);
   
     if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
       this.mainLayer.setData(this.data);
     }
 
-    if (clear) {
+    if (clear && sourceOption !== false ) {// 兼容展业银行
       this.setSelectFeatures([]);
       this.setHoverFeature(null);
     }
