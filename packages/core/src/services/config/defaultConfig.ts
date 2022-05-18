@@ -40,7 +40,7 @@ export const defaultConfig: Partial<IConfig> = {
       type: 'mapStyle',
     },
     {
-      display: true,
+      display: false,
       position: 'bottomright',
       type: 'location',
     },
