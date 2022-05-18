@@ -9,7 +9,7 @@ import {
 } from '@antv/dipper-core';
 import type { Feature} from '@turf/turf';
 import { featureCollection } from '@turf/turf';
-import type { ILayerConfig } from '@antv/l7';
+import type { ILayerConfig,ISourceCFG } from '@antv/l7';
 import { PointLayer } from '@antv/l7';
 import { merge } from 'lodash';
 
@@ -110,8 +110,8 @@ export class PointLayerGroup extends LayerGroup<IPointLayerGroupOptions> {
     return layer;
   }
 
-  setData(data: any) {
-    super.setData(data);
+  setData(data: any, options?:ISourceCFG ) {
+    super.setData(data,options);
     if (this.options.autoFit) {
       this.mainLayer?.fitBounds();
     }
