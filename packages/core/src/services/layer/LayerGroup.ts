@@ -1,6 +1,6 @@
-import type { ILayer,ISourceCFG } from '@antv/l7';
+import type { ILayer,ISourceCFG ,Scene} from '@antv/l7';
 import EventEmitter from 'eventemitter3';
-import { Source,Scene, MarkerLayer} from '@antv/l7';
+import { Source, MarkerLayer} from '@antv/l7';
 import type { Container } from 'inversify';
 import { injectable } from 'inversify';
 import type { ILayerGroup, IFeature } from './ILayerService';
@@ -40,7 +40,7 @@ export interface ILayerGroupOptions {
   hover?: false | any;
   select?: false | any;
   multipleSelect?: boolean;
-  sourceOption?:ISourceCFG
+  sourceOption?: ISourceCFG
 }
 
 export interface ILayerGroupText {
@@ -203,9 +203,14 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
     this.scene?.removeLayer(layer);
   }
 
-  public setData(data: any, sourceOption:ISourceCFG | undefined = undefined, clear = true) {
+  public setData(data: any, sourceOption: ISourceCFG | undefined = undefined, clear = true) {
     this.data = data;
-    sourceOption === undefined ? this.source.setData(data,sourceOption) : this.source.setData(data);
+    if( sourceOption !== undefined) {
+      this.source.setData(data);
+    } else {
+      this.source.setData(data,sourceOption)
+    }
+
   
     if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
       this.mainLayer.setData(this.data);

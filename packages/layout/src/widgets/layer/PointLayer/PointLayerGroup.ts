@@ -110,7 +110,7 @@ export class PointLayerGroup extends LayerGroup<IPointLayerGroupOptions> {
     return layer;
   }
 
-  setData(data: any, options?:ISourceCFG ) {
+  setData(data: any, options?: ISourceCFG ) {
     super.setData(data,options);
     if (this.options.autoFit) {
       this.mainLayer?.fitBounds();
