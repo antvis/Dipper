@@ -16,6 +16,7 @@
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
     "build": "yarn clean && father-build",
+    "sync": "tnpm sync",
     "watch": "yarn clean && father-build --watch"
   },
   "dependencies": {
