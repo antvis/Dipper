@@ -15,6 +15,7 @@
     "prettier": "prettier --write \"src/*.{tsx,ts,less,md,json}\"",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
+    "sync": "tnpm sync",
     "build": "yarn clean && father-build",
     "watch": "yarn clean && father-build --watch"
   },

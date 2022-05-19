@@ -16,7 +16,8 @@
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
     "build": "yarn clean && father-build",
-    "watch": "yarn clean && father-build --watch"
+    "watch": "yarn clean && father-build --watch",
+    "sync": "tnpm sync"
   },
   "dependencies": {
     "@turf/turf": "^6.5.0",

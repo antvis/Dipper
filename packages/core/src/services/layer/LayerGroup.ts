@@ -205,7 +205,7 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
 
   public setData(data: any, sourceOption: ISourceCFG | undefined = undefined, clear = true) {
     this.data = data;
-    if( sourceOption !== undefined) {
+    if( sourceOption === undefined) {
       this.source.setData(data);
     } else {
       this.source.setData(data,sourceOption)

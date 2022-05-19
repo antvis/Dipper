@@ -21,8 +21,9 @@
     "package-version": "lerna version --force-publish --conventional-commits",
     "package-preversion": "lerna version --force-publish --conventional-prerelease",
     "prepublishOnly": "yarn build",
-    "package-publish": "lerna publish from-package --force-publish",
-    "package-betapublish": "lerna publish from-package --force-publish --dist-tag beta"
+    "package-publish": "lerna publish from-package --force-publish && lerna run sync",
+    "package-betapublish": "lerna publish from-package --force-publish --dist-tag beta && lerna run sync",
+    "sync": "lerna run sync"
   },
   "dependencies": {
     "@antv/g2plot": "^2.3.39",
