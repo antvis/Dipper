@@ -93,14 +93,14 @@ export class PointLayerGroup extends LayerGroup<IPointLayerGroupOptions> {
     // @ts-ignore
     const layer = new PointLayer(props);
     layer
-      .source(featureCollection([]))
+      .source(this.source)
       // @ts-ignore
       .color(...getLayerFieldArgus(color))
       // @ts-ignore
       .size(...getLayerFieldArgus(size))
       // @ts-ignore
       .shape(...getLayerFieldArgus(shape));
-
+    this.source = layer.getSource();
     if (style) {
       layer.style(style);
     }

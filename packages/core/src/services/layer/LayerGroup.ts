@@ -95,7 +95,7 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
     this.name = name;
     this.data = data;
     this.options = merge({}, this.getDefaultOptions(), options);
-    this.source = new Source(featureCollection([]),this.options.sourceOption || {});
+    this.source = new Source(this.data || featureCollection([]),this.options.sourceOption || {});
   }
 
   // 会被LayerService调用
@@ -205,12 +205,13 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
 
   public setData(data: any, sourceOption: ISourceCFG | undefined = undefined, clear = true) {
     this.data = data;
+    
     if( sourceOption === undefined) {
       this.source.setData(data);
     } else {
       this.source.setData(data,sourceOption)
     }
-
+    
   
     if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
       this.mainLayer.setData(this.data);
