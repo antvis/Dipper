@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "prepare": "husky install",
     "start": "dumi dev",
     "watch": "lerna run watch",
     "lint": "yarn run lint:ts && yarn run lint:style",
