@@ -1,6 +1,6 @@
 {
   "name": "@antv/dipper",
-  "version": "0.3.0-beta.12",
+  "version": "0.3.0-beta.13",
   "files": [
     "dist",
     "lib",
@@ -34,9 +34,9 @@
     "url": "https://github.com/antvis/Dipper/issues"
   },
   "dependencies": {
-    "@antv/dipper-core": "^0.3.0-beta.12",
-    "@antv/dipper-pc": "^0.3.0-beta.12",
-    "@antv/dipper-widgets": "^0.3.0-beta.12"
+    "@antv/dipper-core": "^0.3.0-beta.13",
+    "@antv/dipper-pc": "^0.3.0-beta.13",
+    "@antv/dipper-widgets": "^0.3.0-beta.13"
   },
   "peerDependencies": {
     "@ant-design/icons": "^4.7.0",
