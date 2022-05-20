@@ -69,7 +69,7 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
 
       // 更新选中图层
       this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
-        let selectData:any = featureCollection([]);
+        let selectData: any = featureCollection([]);
        // 判断数据类型
         if(this.options.sourceOption && this.options.sourceOption.parser?.type ==='json' || this.options.sourceOption.parser?.type ==='csv') {
           selectData =this.selectFeatures.map((item) => item.feature);
