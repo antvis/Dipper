@@ -210,11 +210,12 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
       this.source.setData(data);
     } else {
       this.source.setData(data,sourceOption)
+      this.options.sourceOption = sourceOption;
     }
     
   
     if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
-      this.mainLayer.setData(this.data);
+      this.mainLayer.setData(this.data,sourceOption);
     }
 
     if (clear && sourceOption !== false ) {// 兼容展业银行

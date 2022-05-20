@@ -9,7 +9,7 @@ import {
 } from '@antv/dipper-core';
 import type { Feature} from '@turf/turf';
 import { featureCollection } from '@turf/turf';
-import type { ILayerConfig,ISourceCFG } from '@antv/l7';
+import type { ILayerConfig,ISourceCFG,IPointLayerStyleOptions} from '@antv/l7';
 import { PointLayer } from '@antv/l7';
 import { merge } from 'lodash';
 
@@ -17,7 +17,7 @@ export interface IPointLayerStyle {
   size: ILayerFieldProperties<number>;
   color: ILayerFieldProperties<string>;
   shape: ILayerFieldProperties<string>;
-  style?: any;
+  style?: Partial<IPointLayerStyleOptions>;
 }
 
 export interface IPointLayerGroupOptions extends ILayerGroupOptions {
