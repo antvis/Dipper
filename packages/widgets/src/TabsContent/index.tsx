@@ -40,7 +40,7 @@ export function AppTabsContent({ items, onChange }: ContentProps) {
     >
       {displayItems.map((tab: IWidgetProps) => {
         return (
-          <TabPane tab={tab?.options?.title} key={tab.type} className={style.tabPanel}>
+          <TabPane tab={tab?.options?.title} key={tab.type} disabled={tab?.options?.disabled || false} className={style.tabPanel}>
             <CustomBaseLayout type={tab.type} components={getWidgetChildren(tab)} />
           </TabPane>
         );
