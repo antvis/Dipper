@@ -3,7 +3,7 @@ import { getLayerFieldArgus, LayerGroup, LayerGroupEventEnum } from '@antv/dippe
 import { cloneDeep, isEqual, merge } from 'lodash';
 import type { FeatureCollection } from '@turf/turf';
 import { BBox, featureCollection } from '@turf/turf';
-import type { ILayer } from '@antv/l7';
+import type { ILayer,ISourceCFG } from '@antv/l7';
 import { PointLayer } from '@antv/l7';
 
 export interface IImageLayerImageStyle {
@@ -67,9 +67,18 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
         selectLayers.push(this.initTextLayer('selectText', selectOptions));
       }
 
+      // 更新选中图层
       this.on(LayerGroupEventEnum.SELECT_FEATURE_CHANGE, () => {
-        const selectData = featureCollection(this.selectFeatures.map((item) => item.feature));
-        selectLayers.forEach((layer) => layer.setData(selectData));
+        let selectData: any = featureCollection([]);
+       // 判断数据类型
+        if(this.options.sourceOption && this.options.sourceOption.parser?.type ==='json' || this.options.sourceOption.parser?.type ==='csv') {
+          selectData =this.selectFeatures.map((item) => item.feature);
+        } else {
+          selectData = featureCollection(this.selectFeatures.map((item) => item.feature));
+        }
+        selectLayers.forEach((layer) => layer.setData(selectData,this.options.sourceOption));        
+ 
+  
       });
       [...unselectLayers, ...selectLayers].forEach((layer) => {
         this.onLayerSelect(layer);
@@ -78,7 +87,7 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     }
 
     this.on(LayerGroupEventEnum.DATA_UPDATE, () => {
-      unselectLayers.forEach((layer) => layer.setData(this.data));
+      unselectLayers.forEach((layer) => layer.setData(this.data,this.options.sourceOption));
       selectLayers.forEach((layer) => layer.setData(featureCollection([])));
     });
   }
@@ -103,7 +112,7 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
       layerType: 'fillImage',
     });
     imageLayer
-      .source(data)
+      .source(data,this.options.sourceOption)
       // @ts-ignore
       .size(imgSize)
       // @ts-ignore
@@ -124,7 +133,7 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     const textLayer = new PointLayer({
       name,
     })
-      .source(data)
+      .source(data,this.options.sourceOption)
       .shape(text ?? '', 'text')
       // @ts-ignore
       .size(textSize)
@@ -146,8 +155,8 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     return cloneDeep(defaultImageLayerOptions);
   }
 
-  setData(data: any) {
-    super.setData(data);
+  setData(data: any, options?: ISourceCFG ) {
+    super.setData(data,options);
     if (this.options.autoFit) {
       this.layers[0].fitBounds();
     }
