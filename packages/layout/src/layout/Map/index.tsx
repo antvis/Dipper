@@ -3,6 +3,8 @@ import { AMapScene, AMapSceneV2, Popup, MapboxScene, MapScene } from '@antv/l7-r
 import type {} from '@antv/l7-react';
 import styles from './index.less';
 import type { IMapProps } from '@antv/dipper-core';
+import { CustomBaseWidgets } from '../../BaseWidget';
+import { DipperPopup } from '../../widgets/popup';
 import { useSceneService } from '../../hooks';
 
 export default function AppMap({ map, mapType, popup, scene, children }: IMapProps) {
@@ -14,11 +16,13 @@ export default function AppMap({ map, mapType, popup, scene, children }: IMapPro
     const content = () => {
       return (
         <>
-          {popup?.display && popup.lngLat && (
-            <Popup lnglat={popup.lngLat} option={popup.options}>
-              {popup.children}
-            </Popup>
-          )}
+          <CustomBaseWidgets
+            {...{
+              ...popup,
+              type: 'popup',
+            }}
+          />
+
           {isLoaded && children}
         </>
       );

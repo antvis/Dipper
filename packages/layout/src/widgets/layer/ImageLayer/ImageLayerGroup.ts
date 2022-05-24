@@ -7,6 +7,8 @@ import type { ILayer, ISourceCFG } from '@antv/l7';
 import { PointLayer } from '@antv/l7';
 
 export interface IImageLayerImageStyle {
+  minZoom: number;
+  maxZoom: number;
   img: ILayerFieldProperties<string>;
   imgSize?: number;
   imgStyle?: Record<string, any>;
@@ -27,6 +29,8 @@ export interface IImageLayerGroupOptions extends ILayerGroupOptions {
 }
 
 export const defaultImageLayerStyle: IImageLayerStyle = {
+  minZoom: 0,
+  maxZoom: 25,
   img: 'img',
   imgSize: 20,
   imgStyle: {},
@@ -39,6 +43,8 @@ export const defaultImageLayerStyle: IImageLayerStyle = {
 };
 
 export const defaultImageLayerOptions: IImageLayerGroupOptions = {
+  minZoom: 0,
+  maxZoom: 25,
   image: {},
   normal: defaultImageLayerStyle,
   select: false,
@@ -107,9 +113,11 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
     style: IImageLayerStyle,
     data: FeatureCollection = featureCollection([]),
   ) {
-    const { img, imgSize, imgStyle } = style;
+    const { img, imgSize, imgStyle, minZoom, maxZoom } = style;
     const imageLayer = new PointLayer({
       name,
+      minZoom,
+      maxZoom,
       layerType: 'fillImage',
     });
     imageLayer
