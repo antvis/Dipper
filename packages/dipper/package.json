@@ -7,11 +7,11 @@
     "es",
     "README.md"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/dipper/src/index.d.ts",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf lib es",
     "prettier": "prettier --write \"src/*.{tsx,ts,less,md,json}\"",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",

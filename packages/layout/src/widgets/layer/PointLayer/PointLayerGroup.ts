@@ -1,16 +1,9 @@
-import type {
-  ILayerFieldProperties,
-  ILayerGroupOptions} from '@antv/dipper-core';
-import {
-  getLayerFieldArgus,
-  IFeature,
-  LayerGroup,
-  LayerGroupEventEnum,
-} from '@antv/dipper-core';
-import type { Feature} from '@turf/turf';
-import { featureCollection } from '@turf/turf';
-import type { ILayerConfig,ISourceCFG,IPointLayerStyleOptions} from '@antv/l7';
+import type { ILayerFieldProperties, ILayerGroupOptions } from '@antv/dipper-core';
+import { getLayerFieldArgus, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
+import type { ILayerConfig, IPointLayerStyleOptions, ISourceCFG } from '@antv/l7';
 import { PointLayer } from '@antv/l7';
+import type { Feature } from '@turf/turf';
+import { featureCollection } from '@turf/turf';
 import { merge } from 'lodash';
 
 export interface IPointLayerStyle {
@@ -102,6 +95,7 @@ export class PointLayerGroup extends LayerGroup<IPointLayerGroupOptions> {
       .shape(...getLayerFieldArgus(shape));
     this.source = layer.getSource();
     if (style) {
+      // @ts-ignore
       layer.style(style);
     }
 
@@ -110,8 +104,8 @@ export class PointLayerGroup extends LayerGroup<IPointLayerGroupOptions> {
     return layer;
   }
 
-  setData(data: any, options?: ISourceCFG ) {
-    super.setData(data,options);
+  setData(data: any, options?: ISourceCFG) {
+    super.setData(data, options);
     if (this.options.autoFit) {
       this.mainLayer?.fitBounds();
     }
