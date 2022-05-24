@@ -1,7 +1,7 @@
 export default {
-  esm: 'rollup',
-  cjs: 'rollup',
-  // umd: {
-  //   sourcemap: true,
-  // },
+  esm: 'babel',
+  cjs: 'babel',
+  autoprefixer: {
+    browsers: ['IE 11', 'last 2 versions'],
+  },
 };
