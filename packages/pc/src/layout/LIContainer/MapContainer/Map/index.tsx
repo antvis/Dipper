@@ -24,8 +24,15 @@ export default function Map({ map, mapType, popup, scene, children }: IMapProps)
     sceneService.setScene(newScene);
   };
 
+  const formatMapType = mapType === 'MapBox' ? 'Mapbox' : mapType;
+
   return (
-    <LarkMap className={styles.map} mapType={mapType} mapOptions={map!} onSceneLoaded={mapLoaded}>
+    <LarkMap
+      className={styles.map}
+      mapType={formatMapType}
+      mapOptions={map!}
+      onSceneLoaded={mapLoaded}
+    >
       {content()}
     </LarkMap>
   );

@@ -1,10 +1,10 @@
 import { registerWidget } from '@antv/dipper-core';
 import { LIContainer } from '@antv/dipper-pc';
-import { CitySelect } from '@antv/dipper-widgets';
+import { ChoroplethLayer } from '@antv/larkmap';
 import React from 'react';
 import { config } from './configs/config';
 
-registerWidget('citySelect', CitySelect);
+registerWidget('ChoroplethLayer', ChoroplethLayer);
 
 export default function AppMap() {
   return (

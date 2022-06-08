@@ -1,4 +1,5 @@
 import type { IConfig } from '@antv/dipper';
+import hangezhouGeoJSON from './xihu-district.json';
 
 export const config: Partial<IConfig> = {
   panel: {
@@ -38,10 +39,22 @@ export const config: Partial<IConfig> = {
       title: '地图样式',
     },
   ],
+  mapType: 'GaodeV1',
   map: {
     zoom: 10,
     center: [120.153576, 30.287459],
     pitch: 0,
     style: 'normal',
   },
+  layers: [
+    {
+      type: 'ChoroplethLayer',
+      options: {},
+      source: { data: hangezhouGeoJSON, parser: { type: 'geojson' } },
+      fillColor: 'rgb(239,243,255)',
+      opacity: 0.3,
+      lineOpacity: 1,
+      strokeColor: 'blue',
+    },
+  ],
 };
