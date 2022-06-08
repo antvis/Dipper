@@ -1,17 +1,17 @@
-import type { ILayer,ISourceCFG ,Scene} from '@antv/l7';
-import EventEmitter from 'eventemitter3';
-import { Source, MarkerLayer} from '@antv/l7';
-import type { Container } from 'inversify';
-import { injectable } from 'inversify';
-import type { ILayerGroup, IFeature } from './ILayerService';
+import type { ILayer, ISourceCFG, Scene } from '@antv/l7';
+import { MarkerLayer, Source } from '@antv/l7';
+import type { IScale, IScaleOptions } from '@antv/l7-core/es/services/layer/IStyleAttributeService';
 import type { BBox, Feature, FeatureCollection } from '@turf/turf';
 import { featureCollection } from '@turf/turf';
+import EventEmitter from 'eventemitter3';
+import type { Container } from 'inversify';
+import { injectable } from 'inversify';
 import { isEqual, merge } from 'lodash';
-import { isPressing } from '../../utils/keyboard';
 import { TYPES } from '../../types';
-import type { ISceneService } from '../scene/ISceneService';
 import type { DeepPartial } from '../../utils';
-import type { IScale, IScaleOptions } from '@antv/l7-core/es/services/layer/IStyleAttributeService';
+import { isPressing } from '../../utils/keyboard';
+import type { ISceneService } from '../scene/ISceneService';
+import type { IFeature, ILayerGroup } from './ILayerService';
 
 export enum LayerGroupEventEnum {
   VISIBLE_CHANGE = 'visibleChange',
@@ -40,7 +40,7 @@ export interface ILayerGroupOptions {
   hover?: false | any;
   select?: false | any;
   multipleSelect?: boolean;
-  sourceOption?: ISourceCFG
+  sourceOption?: ISourceCFG;
 }
 
 export interface ILayerGroupText {
@@ -95,7 +95,7 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
     this.name = name;
     this.data = data;
     this.options = merge({}, this.getDefaultOptions(), options);
-    this.source = new Source(this.data || featureCollection([]),this.options.sourceOption || {});
+    this.source = new Source(this.data || featureCollection([]), this.options.sourceOption || {});
   }
 
   // 会被LayerService调用
@@ -205,20 +205,20 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
 
   public setData(data: any, sourceOption: ISourceCFG | undefined = undefined, clear = true) {
     this.data = data;
-    
-    if( sourceOption === undefined) {
+
+    if (sourceOption === undefined) {
       this.source.setData(data);
     } else {
-      this.source.setData(data,sourceOption)
+      this.source.setData(data, sourceOption);
       this.options.sourceOption = sourceOption;
     }
-    
-  
+
     if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
-      this.mainLayer.setData(this.data,sourceOption);
+      this.mainLayer.setData(this.data, sourceOption);
     }
 
-    if (clear && sourceOption !== false ) {// 兼容展业银行
+    if (clear && sourceOption !== false) {
+      // 兼容展业银行
       this.setSelectFeatures([]);
       this.setHoverFeature(null);
     }
@@ -237,11 +237,10 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
           : isEqual(item, targetFeature);
       });
       if (targetFeature && targetIndex > -1) {
+        //@ts-ignore
         Object.assign(targetFeature.properties, newProperties);
         this.data.features[targetIndex] = targetFeature;
-        this.setData(this.data,undefined, false); // 展业银行业务
-        
-
+        this.setData(this.data, undefined, false); // 展业银行业务
       }
     }
   }
