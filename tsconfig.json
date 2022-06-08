@@ -17,7 +17,8 @@
     "skipLibCheck": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "lib", "es", "dist"]
 }
