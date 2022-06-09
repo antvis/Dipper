@@ -41,8 +41,8 @@ export interface ILayerGroupOptions {
   select?: false | any;
   multipleSelect?: boolean;
   sourceOption?: ISourceCFG;
-  minZoom: number;
-  maxZoom: number;
+  minZoom?: number;
+  maxZoom?: number;
 }
 
 export interface ILayerGroupText {

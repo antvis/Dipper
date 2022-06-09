@@ -12,6 +12,7 @@ export default function AppMap({ map, mapType, popup, scene, children }: IMapPro
     const content = () => {
       return (
         <>
+          {/* //@ts-ignore */}
           <CustomBaseWidgets
             {...{
               ...popup,
