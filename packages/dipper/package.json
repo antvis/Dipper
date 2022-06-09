@@ -1,17 +1,17 @@
 {
   "name": "@antv/dipper",
-  "version": "0.3.0-beta.14",
+  "version": "0.3.0-beta.16",
   "files": [
     "dist",
     "lib",
     "es",
     "README.md"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/dipper/src/index.d.ts",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf lib es",
     "prettier": "prettier --write \"src/*.{tsx,ts,less,md,json}\"",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
@@ -34,9 +34,9 @@
     "url": "https://github.com/antvis/Dipper/issues"
   },
   "dependencies": {
-    "@antv/dipper-core": "^0.3.0-beta.14",
-    "@antv/dipper-pc": "^0.3.0-beta.14",
-    "@antv/dipper-widgets": "^0.3.0-beta.14"
+    "@antv/dipper-core": "^0.3.0-beta.16",
+    "@antv/dipper-pc": "^0.3.0-beta.16",
+    "@antv/dipper-widgets": "^0.3.0-beta.16"
   },
   "peerDependencies": {
     "@ant-design/icons": "^4.7.0",

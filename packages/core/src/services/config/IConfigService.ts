@@ -1,7 +1,7 @@
-import type EventEmitter from 'eventemitter3';
 import type { IMapConfig, IPopupOption, ISceneConfig } from '@antv/l7';
-import type { IWidgetProps, IControlWidgetsProps } from '../widgets/IWidgetsService';
+import type EventEmitter from 'eventemitter3';
 import type { IPanel } from '../panel/IPanelService';
+import type { IControlWidgetsProps, IWidgetProps } from '../widgets/IWidgetsService';
 
 export interface IToolBar {
   display?: boolean;
@@ -79,6 +79,7 @@ export interface IConfig extends IBaseConfig {
     id?: string;
     type: string;
     options: any;
+    [key: string]: any;
   }[];
   [key: string]: any;
 }

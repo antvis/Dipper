@@ -1,10 +1,10 @@
 import type { IFeature, ILayerFieldProperties, ILayerGroupOptions } from '@antv/dipper-core';
 import { getLayerFieldArgus, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
-import { cloneDeep, isEqual, merge } from 'lodash';
-import type { FeatureCollection } from '@turf/turf';
-import { BBox, featureCollection } from '@turf/turf';
 import type { ILayer, ISourceCFG } from '@antv/l7';
 import { PointLayer } from '@antv/l7';
+import type { FeatureCollection } from '@turf/turf';
+import { featureCollection } from '@turf/turf';
+import { cloneDeep, isEqual, merge } from 'lodash';
 
 export interface IImageLayerImageStyle {
   minZoom?: number;
@@ -71,9 +71,9 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
 
     if (select) {
       const selectOptions = merge({}, defaultImageLayerStyle, select);
-      selectLayers.push(this.initImageLayer('selectImg', selectOptions));
+      selectLayers.push(this.initImageLayer('selectImg', selectOptions, rest));
       if (select.text) {
-        selectLayers.push(this.initTextLayer('selectText', selectOptions));
+        selectLayers.push(this.initTextLayer('selectText', selectOptions, rest));
       }
 
       // 更新选中图层
@@ -81,8 +81,9 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
         let selectData: any = featureCollection([]);
         // 判断数据类型
         if (
-          (this.options?.sourceOption && this.options.sourceOption?.parser?.type === 'json') ||
-          this.options?.sourceOption?.parser?.type === 'csv'
+          this.options.sourceOption &&
+          (this.options.sourceOption.parser?.type === 'json' ||
+            this.options.sourceOption.parser?.type === 'csv')
         ) {
           selectData = this.selectFeatures.map((item) => item.feature);
         } else {
