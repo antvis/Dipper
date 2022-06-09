@@ -1,17 +1,17 @@
 import type { ILayer, ISourceCFG, Scene } from '@antv/l7';
-import EventEmitter from 'eventemitter3';
-import { Source, MarkerLayer } from '@antv/l7';
-import type { Container } from 'inversify';
-import { injectable } from 'inversify';
-import type { ILayerGroup, IFeature } from './ILayerService';
+import { MarkerLayer, Source } from '@antv/l7';
+import type { IScale, IScaleOptions } from '@antv/l7-core/es/services/layer/IStyleAttributeService';
 import type { BBox, Feature, FeatureCollection } from '@turf/turf';
 import { featureCollection } from '@turf/turf';
+import EventEmitter from 'eventemitter3';
+import type { Container } from 'inversify';
+import { injectable } from 'inversify';
 import { isEqual, merge } from 'lodash';
-import { isPressing } from '../../utils/keyboard';
 import { TYPES } from '../../types';
-import type { ISceneService } from '../scene/ISceneService';
 import type { DeepPartial } from '../../utils';
-import type { IScale, IScaleOptions } from '@antv/l7-core/es/services/layer/IStyleAttributeService';
+import { isPressing } from '../../utils/keyboard';
+import type { ISceneService } from '../scene/ISceneService';
+import type { IFeature, ILayerGroup } from './ILayerService';
 
 export enum LayerGroupEventEnum {
   VISIBLE_CHANGE = 'visibleChange',
@@ -41,8 +41,8 @@ export interface ILayerGroupOptions {
   select?: false | any;
   multipleSelect?: boolean;
   sourceOption?: ISourceCFG;
-  minZoom: number;
-  maxZoom: number;
+  minZoom?: number;
+  maxZoom?: number;
 }
 
 export interface ILayerGroupText {
@@ -239,6 +239,7 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
           : isEqual(item, targetFeature);
       });
       if (targetFeature && targetIndex > -1) {
+        //@ts-ignore
         Object.assign(targetFeature.properties, newProperties);
         this.data.features[targetIndex] = targetFeature;
         this.setData(this.data, undefined, false); // 展业银行业务
