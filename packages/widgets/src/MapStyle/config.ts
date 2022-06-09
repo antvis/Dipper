@@ -7,6 +7,11 @@ export const Config = {
       value: 'normal',
       img: 'https://gw.alipayobjects.com/mdn/rms_58ab56/afts/img/A*vky9QKrWjlwAAAAAAAAAAAAAARQnAQ',
     },
+    // {
+    //   label: '卫星图',
+    //   value: 'satellite',
+    //   img: 'https://gw.alipayobjects.com/mdn/rms_08cc33/afts/img/A*Cym2SLcpCMgAAAAAAAAAAAAAARQnAQ',
+    // },
     {
       label: '浅色',
       value: 'light',

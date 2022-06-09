@@ -8,12 +8,11 @@ import { Popup } from '@antv/l7-react';
 export function DipperPopup(props: IWidgetProps<IPopupOption>) {
   const { widgetOptions } = useWidget('popup');
   const options = widgetOptions?.options as any;
-  return (
-    widgetOptions?.display &&
-    options.lngLat && (
-      <Popup lnglat={options.lngLat} option={options}>
-        {options.children}
-      </Popup>
-    )
+  return widgetOptions?.display && options.lngLat ? (
+    <Popup lnglat={options.lngLat} option={options}>
+      {options.children}
+    </Popup>
+  ) : (
+    <></>
   );
 }

@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { AMapScene, AMapSceneV2, Popup, MapboxScene, MapScene } from '@antv/l7-react';
-import type {} from '@antv/l7-react';
 import styles from './index.less';
 import type { IMapProps } from '@antv/dipper-core';
 import { CustomBaseWidgets } from '../../BaseWidget';
-import { DipperPopup } from '../../widgets/popup';
 import { useSceneService } from '../../hooks';
 
 export default function AppMap({ map, mapType, popup, scene, children }: IMapProps) {
   const { sceneService } = useSceneService();
-  // const { globalConfig } = useConfigService();
   const [isLoaded, setLoaded] = useState(false);
-  // const { map, mapType, popup, scene } = globalConfig;
   const getMap = (type = 'GaodeV1') => {
     const content = () => {
       return (
@@ -21,8 +17,7 @@ export default function AppMap({ map, mapType, popup, scene, children }: IMapPro
               ...popup,
               type: 'popup',
             }}
-          />
-
+           />
           {isLoaded && children}
         </>
       );
