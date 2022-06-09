@@ -1,6 +1,6 @@
-import type { ILayer,ISourceCFG ,Scene} from '@antv/l7';
+import type { ILayer, ISourceCFG, Scene } from '@antv/l7';
 import EventEmitter from 'eventemitter3';
-import { Source, MarkerLayer} from '@antv/l7';
+import { Source, MarkerLayer } from '@antv/l7';
 import type { Container } from 'inversify';
 import { injectable } from 'inversify';
 import type { ILayerGroup, IFeature } from './ILayerService';
@@ -40,7 +40,9 @@ export interface ILayerGroupOptions {
   hover?: false | any;
   select?: false | any;
   multipleSelect?: boolean;
-  sourceOption?: ISourceCFG
+  sourceOption?: ISourceCFG;
+  minZoom: number;
+  maxZoom: number;
 }
 
 export interface ILayerGroupText {
@@ -95,7 +97,7 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
     this.name = name;
     this.data = data;
     this.options = merge({}, this.getDefaultOptions(), options);
-    this.source = new Source(this.data || featureCollection([]),this.options.sourceOption || {});
+    this.source = new Source(this.data || featureCollection([]), this.options.sourceOption || {});
   }
 
   // 会被LayerService调用
@@ -205,20 +207,20 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
 
   public setData(data: any, sourceOption: ISourceCFG | undefined = undefined, clear = true) {
     this.data = data;
-    
-    if( sourceOption === undefined) {
+
+    if (sourceOption === undefined) {
       this.source.setData(data);
     } else {
-      this.source.setData(data,sourceOption)
+      this.source.setData(data, sourceOption);
       this.options.sourceOption = sourceOption;
     }
-    
-  
+
     if (this.mainLayer && this.source !== this.mainLayer.getSource()) {
-      this.mainLayer.setData(this.data,sourceOption);
+      this.mainLayer.setData(this.data, sourceOption);
     }
 
-    if (clear && sourceOption !== false ) {// 兼容展业银行
+    if (clear && sourceOption !== false) {
+      // 兼容展业银行
       this.setSelectFeatures([]);
       this.setHoverFeature(null);
     }
@@ -239,9 +241,7 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
       if (targetFeature && targetIndex > -1) {
         Object.assign(targetFeature.properties, newProperties);
         this.data.features[targetIndex] = targetFeature;
-        this.setData(this.data,undefined, false); // 展业银行业务
-        
-
+        this.setData(this.data, undefined, false); // 展业银行业务
       }
     }
   }

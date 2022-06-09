@@ -17,6 +17,7 @@ import {
   DipperCollapse,
   DipperSelect,
 } from '@antv/dipper-widgets';
+import { DipperPopup } from '@antv/dipper-layout';
 registerWidget('cityselect', CitySelect);
 registerWidget('select', DipperSelect);
 registerWidget('panelTabContent', PanelTabcontent);

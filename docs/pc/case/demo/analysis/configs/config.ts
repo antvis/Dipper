@@ -72,10 +72,12 @@ export const config: Partial<IConfig> = {
       },
     ],
   },
-  toolbar: [{
-    display: false,
-    components: [],
-  }],
+  toolbar: [
+    {
+      display: false,
+      components: [],
+    },
+  ],
   map: {
     zoom: 10,
     center: [120.153576, 30.287459],
@@ -129,7 +131,7 @@ export const config: Partial<IConfig> = {
     },
   ],
   popup: {
-    enable: false,
+    enable: true,
   },
   layers: [
     {

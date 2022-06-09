@@ -1,6 +1,6 @@
 import type { ILayerFieldProperties, ILayerGroupOptions } from '@antv/dipper-core';
 import { getLayerFieldArgus, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
-import type { ILayerConfig, IPointLayerStyleOptions, ISourceCFG } from '@antv/l7';
+import type { ILayerConfig, ISourceCFG } from '@antv/l7';
 import { PointLayer } from '@antv/l7';
 import type { Feature } from '@turf/turf';
 import { featureCollection } from '@turf/turf';
@@ -10,7 +10,7 @@ export interface IPointLayerStyle {
   size: ILayerFieldProperties<number>;
   color: ILayerFieldProperties<string>;
   shape: ILayerFieldProperties<string>;
-  style?: Partial<IPointLayerStyleOptions>;
+  style?: Partial<{}>;
 }
 
 export interface IPointLayerGroupOptions extends ILayerGroupOptions {

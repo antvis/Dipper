@@ -33,6 +33,7 @@ export function GridLayer({ options }: any) {
   const [gridLayer, setGridLayer] = useState<GridLayerGroup>();
   const { widgetValue: cityValue } = useWidget('citySelect');
   const { widgetValue: brandValue } = useWidget('brand');
+  const { setOption: setPopupOption } = useWidget('popup');
   const [geoData, setGeoData] = useState<FeatureCollection | undefined>();
   const { selectFeatures } = useLayerGroup('grid');
 
@@ -113,7 +114,15 @@ export function GridLayer({ options }: any) {
 
     layerService.addLayerGroup(newGridLayer);
     updateLayerLegend(formatLegend(newGridLayer.getLegendItem()));
-
+    newGridLayer.getLayer('fill')?.on('mousemove', (ev) => {
+      setPopupOption({
+        display: true,
+        options: {
+          lngLat: ev.lngLat,
+          children: <>{ev.feature.properties.name}</>,
+        },
+      });
+    });
     setGridLayer(newGridLayer);
   }, [geoData]);
 
