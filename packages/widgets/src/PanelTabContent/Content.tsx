@@ -3,11 +3,13 @@ import classnames from 'classnames';
 import styles from './index.less';
 import { AppTabsContent } from '../TabsContent';
 import type { IWidgetProps } from '@antv/dipper-core';
+import { useWidget } from '@antv/dipper-layout';
 import { isEqual } from 'lodash';
 
 function PanelTabContent(props: IWidgetProps) {
-  const { components = [], widget } = props;
-
+  const { widget, id, type } = props;
+  const { widgetOptions = {} } = useWidget(id || type);
+  const { components = [] } = widgetOptions as IWidgetProps;
   return (
     <div
       className={classnames({

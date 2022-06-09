@@ -32,8 +32,9 @@ export function ClassifyColor({ options }: IWidgetProps) {
             {Array.isArray(item.value) ? item.value[0] : item.value}
           </span>
         ))}
-        {Array.isArray(items[items.length - 1].value) && (
-          <span>{(items[items.length - 1].value as number[])[1]}</span>
+        {/* 分组类型 */}
+        {items.length > 1 && Array.isArray(items[items.length - 1]?.value) && (
+          <span>{(items[items.length - 1]?.value as number[])[1]}</span>
         )}
       </div>
     </div>

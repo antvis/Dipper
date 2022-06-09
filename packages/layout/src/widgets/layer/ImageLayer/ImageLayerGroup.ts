@@ -1,14 +1,16 @@
 import type { IFeature, ILayerFieldProperties, ILayerGroupOptions } from '@antv/dipper-core';
 import { getLayerFieldArgus, LayerGroup, LayerGroupEventEnum } from '@antv/dipper-core';
-import { cloneDeep, isEqual, merge } from 'lodash';
-import type { FeatureCollection } from '@turf/turf';
-import { BBox, featureCollection } from '@turf/turf';
 import type { ILayer, ISourceCFG } from '@antv/l7';
 import { PointLayer } from '@antv/l7';
+import type { FeatureCollection } from '@turf/turf';
+import { featureCollection } from '@turf/turf';
+import { cloneDeep, isEqual, merge } from 'lodash';
 
 export interface IImageLayerImageStyle {
-  minZoom: number;
-  maxZoom: number;
+  minZoom?: number;
+  maxZoom?: number;
+  zIndex?: number;
+  blend?: string;
   img: ILayerFieldProperties<string>;
   imgSize?: number;
   imgStyle?: Record<string, any>;
@@ -31,6 +33,7 @@ export interface IImageLayerGroupOptions extends ILayerGroupOptions {
 export const defaultImageLayerStyle: IImageLayerStyle = {
   minZoom: 0,
   maxZoom: 25,
+  zIndex: 1,
   img: 'img',
   imgSize: 20,
   imgStyle: {},
@@ -53,24 +56,24 @@ export const defaultImageLayerOptions: IImageLayerGroupOptions = {
 
 export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
   initLayerList() {
-    const { normal, select } = this.options;
+    const { normal, select, ...rest } = this.options;
     this.initImage();
 
     const unselectLayers: ILayer[] = [];
     const selectLayers: ILayer[] = [];
 
     if (normal.img) {
-      unselectLayers.push(this.initImageLayer('img', normal, this.data));
+      unselectLayers.push(this.initImageLayer('img', normal, rest, this.data));
     }
     if (normal.text) {
-      unselectLayers.push(this.initTextLayer('text', normal, this.data));
+      unselectLayers.push(this.initTextLayer('text', normal, rest, this.data));
     }
 
     if (select) {
       const selectOptions = merge({}, defaultImageLayerStyle, select);
-      selectLayers.push(this.initImageLayer('selectImg', selectOptions));
+      selectLayers.push(this.initImageLayer('selectImg', selectOptions, rest));
       if (select.text) {
-        selectLayers.push(this.initTextLayer('selectText', selectOptions));
+        selectLayers.push(this.initTextLayer('selectText', selectOptions, rest));
       }
 
       // 更新选中图层
@@ -78,8 +81,9 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
         let selectData: any = featureCollection([]);
         // 判断数据类型
         if (
-          (this.options?.sourceOption && this.options.sourceOption?.parser?.type === 'json') ||
-          this.options?.sourceOption?.parser?.type === 'csv'
+          this.options.sourceOption &&
+          (this.options.sourceOption.parser?.type === 'json' ||
+            this.options.sourceOption.parser?.type === 'csv')
         ) {
           selectData = this.selectFeatures.map((item) => item.feature);
         } else {
@@ -111,13 +115,13 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
   initImageLayer(
     name: string,
     style: IImageLayerStyle,
+    rest: any,
     data: FeatureCollection = featureCollection([]),
   ) {
     const { img, imgSize, imgStyle, minZoom, maxZoom } = style;
     const imageLayer = new PointLayer({
       name,
-      minZoom,
-      maxZoom,
+      ...rest,
       layerType: 'fillImage',
     });
     imageLayer
@@ -135,12 +139,14 @@ export class ImageLayerGroup extends LayerGroup<IImageLayerGroupOptions> {
   initTextLayer(
     name: string,
     style: IImageLayerStyle,
+    rest: any,
     data: FeatureCollection = featureCollection([]),
   ) {
     const { text, textSize = 0, textColor, textStyle } = style;
 
     const textLayer = new PointLayer({
       name,
+      ...rest,
     })
       .source(data, this.options.sourceOption)
       .shape(text ?? '', 'text')

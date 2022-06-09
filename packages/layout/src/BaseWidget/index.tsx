@@ -1,23 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
-import type { IWidgetProps, IWidget } from '@antv/dipper-core';
-import { getWidget, BaseWidget } from '@antv/dipper-core';
-
+import type { IWidget, IWidgetProps } from '@antv/dipper-core';
+import { BaseWidget, getWidget } from '@antv/dipper-core';
+import React, { useEffect, useRef } from 'react';
 import { useWidgetsService } from '../hooks';
 
 export const CustomBaseWidgets = (props: IWidgetProps) => {
   const { widgetsService } = useWidgetsService();
   const widget = useRef<IWidget>();
+
   if (!widget.current) {
     widget.current = new BaseWidget(props);
     widgetsService.addWidget(widget.current);
   }
+
   useEffect(() => {
     return () => {
       widgetsService.removeWidget(widget.current!.id);
     };
   }, []);
 
-  // TODO 状态更新
+  const Components = getWidget(props.type);
+  const componentsProps = widget.current.getOptions();
 
-  return <>{getWidget(props.type)({ ...widget.current.getOptions(), widget: widget.current })}</>;
+  return <Components {...componentsProps} widget={widget.current} />;
 };

@@ -14,16 +14,18 @@ export const config: Partial<IConfig> = {
       },
     },
   },
-  toolbar: {
-    display: true,
-    children: [
-      {
-        display: true,
-        position: 'left',
-        type: 'citySelect',
-      },
-    ],
-  },
+  toolbar: [
+    {
+      display: true,
+      children: [
+        {
+          display: true,
+          position: 'left',
+          type: 'citySelect',
+        },
+      ],
+    },
+  ],
   panel: {
     display: true,
     options: {
@@ -33,11 +35,11 @@ export const config: Partial<IConfig> = {
       width: 426,
     },
     position: 'right',
-    children: [
+    components: [
       {
         display: true,
         type: 'panelTabContent',
-        children: [
+        components: [
           {
             display: true,
             type: 'mesh_indicator',
@@ -50,6 +52,7 @@ export const config: Partial<IConfig> = {
             display: true,
             options: {
               title: '数据分析',
+              disabled: true,
             },
           },
         ],
@@ -74,32 +77,69 @@ export const config: Partial<IConfig> = {
   ],
   headerbar: {
     display: true,
-    title: {
-      value: '布局测试',
-      display: true,
+    options: {
+      title: {
+        value: '布局测试',
+        display: true,
+      },
     },
-    children: [
-      {
-        display: true,
-        position: 'left',
-        type: 'citySelect',
-      },
-      {
-        display: true,
-        position: 'center',
-        type: 'mapStyle',
-      },
-      {
-        display: true,
-        position: 'right',
-        type: 'mapStyle',
-      },
-    ],
   },
+  layers: [
+    {
+      type: 'poi',
+      id: 'poilayer',
+      options: {
+        autoFit: false,
+        zIndex: 10,
+        normal: {
+          img: {
+            field: 'value',
+            value: () => {
+              return 'poimarker';
+            },
+          },
+          imgSize: 20,
+          text: 'name',
+          textColor: '#000',
+          textSize: 12,
+          textStyle: {
+            textOffset: [0, -40],
+            textAnchor: 'bottom',
+            stroke: '#ffffff',
+            strokeWidth: 2, // 描边宽度
+          },
+        },
+        image: {
+          poimarker:
+            'https://gw.alipayobjects.com/mdn/rms_08cc33/afts/img/A*tn2PQahomMIAAAAAAAAAAAAAARQnAQ',
+        },
+      },
+    },
+    {
+      type: 'aoi',
+      id: 'aoilayer',
+      options: {
+        autoFit: true,
+        text: false,
+        select: false,
+        hover: false,
+        multipleSelect: false,
+        normal: {
+          fillColor: '#1677FF',
+          style: {
+            opacity: 0.8,
+          },
+          borderWidth: 2,
+          borderColor: '#1677FF',
+        },
+      },
+    },
+  ],
   map: {
     zoom: 10,
     center: [120.153576, 30.287459],
     pitch: 0,
+    mapType: 'GaodeV2',
     style: 'normal',
   },
 };

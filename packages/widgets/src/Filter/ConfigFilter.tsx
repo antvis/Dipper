@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect } from 'react';
+import type { IWidget } from '@antv/dipper-core';
 import { Button, Checkbox, DatePicker, Form, Input, InputNumber, Radio, Select } from 'antd';
 import type { FormLayout } from 'antd/es/form/Form';
+import React, { useCallback, useEffect } from 'react';
 import styles from './index.less';
-import type { IWidget } from '@antv/dipper-core';
 
 const { RangePicker } = DatePicker;
 
@@ -107,10 +107,12 @@ export function FilterUI({
             </Form.Item>
           ) : filter.type === RelationFieldType.DATE ? (
             <Form.Item name={filter.name} label={filter.label} key={filter.name}>
+              {/* @ts-ignore */}
               <DatePicker />
             </Form.Item>
           ) : filter.type === RelationFieldType.RANGE_DATE ? (
             <Form.Item name={filter.name} label={filter.label} key={filter.name}>
+              {/* @ts-ignore */}
               <RangePicker />
             </Form.Item>
           ) : filter.type === RelationFieldType.CHECK_BOX ? (
