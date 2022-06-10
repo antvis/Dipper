@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { AMapScene, AMapSceneV2, Popup, MapboxScene, MapScene } from '@antv/l7-react';
-import styles from './index.less';
 import type { IMapProps } from '@antv/dipper-core';
+import { AMapScene, AMapSceneV2, MapboxScene, MapScene } from '@antv/l7-react';
+import React, { useState } from 'react';
 import { CustomBaseWidgets } from '../../BaseWidget';
 import { useSceneService } from '../../hooks';
+import styles from './index.less';
 
 export default function AppMap({ map, mapType, popup, scene, children }: IMapProps) {
   const { sceneService } = useSceneService();
@@ -12,12 +12,8 @@ export default function AppMap({ map, mapType, popup, scene, children }: IMapPro
     const content = () => {
       return (
         <>
-          <CustomBaseWidgets
-            {...{
-              ...popup,
-              type: 'popup',
-            }}
-          />
+          {/* @ts-ignore */}
+          {popup && <CustomBaseWidgets type="popup" {...popup} />}
           {isLoaded && children}
         </>
       );
