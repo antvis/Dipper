@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import type { IFeature } from '@antv/dipper';
-import { useWidget, useLayerGroup } from '@antv/dipper';
+import { useGlobalModel, useLayerGroup, useWidget } from '@antv/dipper';
+import React, { useEffect } from 'react';
 const poidata = {
   type: 'FeatureCollection',
   features: [
@@ -56,7 +56,7 @@ export default function AppMap() {
   const { setValue: setPoiValue } = useWidget('poilayer');
   const { layerGroup: aoilayer } = useLayerGroup('aoilayer');
   const { widgetOptions: popupOption, setOption: setPopupOption } = useWidget('popup');
-
+  const [globaldata, setGlobalData] = useGlobalModel<any>();
   useEffect(() => {
     setPoiValue(poidata);
     setAoiValue(aoidata);
@@ -90,6 +90,11 @@ export default function AppMap() {
     if (aoilayer) {
       aoilayer.mainLayer.on('mousemove', popupHander);
       aoilayer.mainLayer.on('mouseout', popupOffHander);
+      aoilayer.mainLayer.on('click', (ev: IFeature) => {
+        setGlobalData({
+          d: Math.random(),
+        });
+      });
     }
   }, [aoilayer]);
   return <></>;

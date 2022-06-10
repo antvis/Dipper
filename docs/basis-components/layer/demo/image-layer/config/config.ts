@@ -1,5 +1,4 @@
 import type { IConfig } from '@antv/dipper';
-import { SingleSequentialColorScale } from '@antv/dipper';
 export const config: Partial<IConfig> = {
   viewData: {
     global: {

@@ -1,7 +1,7 @@
-import { useInjection } from 'inversify-react';
-import { useEffect, useState, useCallback } from 'react';
-import type { IConfigService, GlobalModel } from '@antv/dipper-core';
+import type { GlobalModel, IConfigService } from '@antv/dipper-core';
 import { ConfigEventEnum, TYPES } from '@antv/dipper-core';
+import { useInjection } from 'inversify-react';
+import { useCallback, useEffect, useState } from 'react';
 
 export function useGlobalModel<T = GlobalModel>() {
   const configService = useInjection<IConfigService>(TYPES.CONFIG_SYMBOL);
@@ -14,7 +14,7 @@ export function useGlobalModel<T = GlobalModel>() {
   }, []);
 
   const setGlobalData = useCallback(
-    (value: Record<string, any> | ((prevState: Record<string, any>) => Record<string, any>)) => {
+    (value: GlobalModel | ((prevState: GlobalModel) => GlobalModel)) => {
       if (value instanceof Function) {
         const data = value(globalData);
         if (typeof data !== 'object') {
@@ -22,7 +22,10 @@ export function useGlobalModel<T = GlobalModel>() {
         }
         configService.setGlobalData(data);
       } else {
-        configService.setGlobalData(value);
+        configService.setGlobalData({
+          ...globalData,
+          ...value,
+        });
       }
     },
     [globalData],

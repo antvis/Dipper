@@ -1,30 +1,11 @@
-import React, { useState } from 'react';
-import { useMount } from 'ahooks';
-import type { IGridLayerGroupOptions } from '@antv/dipper';
-import {
-  BoxSelectLayerGroup,
-  GridLayerGroup,
-  useLayerGroup,
-  useLayerService,
-  useSceneService,
-} from '@antv/dipper';
+import { BoxSelectLayerGroup, GridLayerGroup, useLayerService } from '@antv/dipper';
 import type { FeatureCollection } from '@turf/turf';
+import { useMount } from 'ahooks';
+import React, { useState } from 'react';
 
-export default function GridLayer({
-  options,
-}: {
-  type: 'gridLayer';
-  options: IGridLayerGroupOptions;
-}) {
+export default function GridLayer() {
   const { layerService } = useLayerService();
-  const { sceneService } = useSceneService();
-  const [layerGroup, setLayerGroup] = useState<GridLayerGroup | null>(null);
-
-  const { selectFeatures } = useLayerGroup('grid');
-
-  // useEffect(() => {
-  //   console.log(selectFeatures);
-  // }, [selectFeatures]);
+  const [, setLayerGroup] = useState<GridLayerGroup | null>(null);
 
   useMount(() => {
     const gridLayerGroup = new GridLayerGroup({

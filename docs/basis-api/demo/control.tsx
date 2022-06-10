@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import {
-  DipperContainer,
-  registerWidget,
-  useConfigService,
-} from '@antv/dipper';
+import { DipperContainer, registerWidget, useConfigService } from '@antv/dipper';
 import { Select } from 'antd';
+import React from 'react';
 const { Option } = Select;
 
 const ControlPosition = () => {
