@@ -22,7 +22,10 @@ export function useGlobalModel<T = GlobalModel>() {
         }
         configService.setGlobalData(data);
       } else {
-        configService.setGlobalData(value);
+        configService.setGlobalData({
+          ...globalData,
+          ...value,
+        });
       }
     },
     [globalData],

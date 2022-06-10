@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import type { IImageLayerGroupOptions } from '@antv/dipper';
-import { ImageLayerGroup, useWidget, useLayerService } from '@antv/dipper';
+import {
+  ImageLayerGroup,
+  useWidget,
+  useLayerService,
+  useGlobalModel,
+  useConfigService,
+} from '@antv/dipper';
 
 export interface IPOILayerProps {
   id: string;
@@ -11,7 +17,8 @@ export interface IPOILayerProps {
 const POILayer: React.FC<IPOILayerProps> = ({ id, options }) => {
   const [imageLayerGroup, setImageLayerGroup] = useState<ImageLayerGroup | null>(null);
   const { layerService } = useLayerService();
-
+  const { globalConfig } = useConfigService();
+  const [globaldata, setGlobalData] = useGlobalModel<any>();
   const { widgetValue } = useWidget(id);
 
   useEffect(() => {

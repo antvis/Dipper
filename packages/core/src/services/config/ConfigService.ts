@@ -101,10 +101,7 @@ export default class ConfigService extends EventEmitter implements IConfigServic
 
   // 设置全局数据
   setGlobalData(data: GlobalModel) {
-    const global = this.config?.global || {};
-
-    this.config = updateConfigsField(this.config, `global`, mergeWith(global, data));
-    this.emit(ConfigEventEnum.GLOBAL_CHANGE, this.config);
+    this.setConfig('global', data);
   }
 
   private findWidgetsById(id: string, type: string) {
