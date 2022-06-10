@@ -17,6 +17,9 @@ export const config: Partial<IConfig> = {
   toolbar: [
     {
       display: true,
+      options: {
+        height: 48,
+      },
       children: [
         {
           display: true,
