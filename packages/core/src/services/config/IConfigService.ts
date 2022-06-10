@@ -7,6 +7,9 @@ export interface IToolBar {
   display?: boolean;
   components?: IWidgetProps[];
   children?: React.ReactNode;
+  options?: {
+    height?: number;
+  };
 }
 export interface IPopupProps {
   display?: boolean; // 是否显示

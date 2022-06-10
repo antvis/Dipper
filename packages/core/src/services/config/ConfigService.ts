@@ -1,9 +1,9 @@
-import { injectable } from 'inversify';
 import EventEmitter from 'eventemitter3';
-import type { IConfigService, IConfig, GlobalModel } from './IConfigService';
+import { injectable } from 'inversify';
 import { get, mergeWith } from 'lodash';
 import { updateConfigsField } from '../../utils/';
 import { defaultConfig } from './defaultConfig';
+import type { GlobalModel, IConfig, IConfigService } from './IConfigService';
 
 function customizer(obj: any, src: any) {
   if (Array.isArray(src)) {
@@ -23,7 +23,7 @@ export default class ConfigService extends EventEmitter implements IConfigServic
   private isInited: boolean = false;
   init(config: Partial<IConfig> | undefined) {
     if (!this.isInited) {
-      this.config = mergeWith({}, defaultConfig, config);
+      this.config = mergeWith({}, defaultConfig, config, customizer);
       this.emit(ConfigEventEnum.CONFIG_CHANGE, this.config);
     }
     this.isInited = true;
@@ -103,7 +103,7 @@ export default class ConfigService extends EventEmitter implements IConfigServic
   setGlobalData(data: GlobalModel) {
     const global = this.config?.global || {};
 
-    this.config = updateConfigsField(this.config, `global`, mergeWith(global, data));
+    this.config = updateConfigsField(this.config, 'global', Object.assign({}, global, data));
     this.emit(ConfigEventEnum.GLOBAL_CHANGE, this.config);
   }
 

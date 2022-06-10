@@ -15,7 +15,7 @@ export interface IWidgetProps<P = any> {
   placeholder?: string;
   showSearch?: boolean;
   options?: Partial<P>; // 不同组件的配置不同
-  children?: JSX.Element | JSX.Element[] | (JSX.Element | undefined)[] | React.FC;
+  children?: JSX.Element | JSX.Element[] | (JSX.Element | undefined)[] | React.FC | React.ReactNode;
   components?: IWidgetProps<P>[];
   event?: {
     actionType: string;
