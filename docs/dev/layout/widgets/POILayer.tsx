@@ -1,5 +1,6 @@
 import type { IImageLayerGroupOptions } from '@antv/dipper';
 import {
+  CustomBaseWidgets,
   ImageLayerGroup,
   useConfigService,
   useGlobalModel,
@@ -20,6 +21,7 @@ const POILayer: React.FC<IPOILayerProps> = ({ id, options }) => {
   const { globalConfig } = useConfigService();
   const [globaldata, setGlobalData] = useGlobalModel<any>();
   const { widgetValue } = useWidget(id);
+  const [position, setPositions] = useState(1);
 
   useEffect(() => {
     const imageLayer = new ImageLayerGroup({
@@ -37,9 +39,12 @@ const POILayer: React.FC<IPOILayerProps> = ({ id, options }) => {
     if (widgetValue && imageLayerGroup) {
       imageLayerGroup.setData(widgetValue);
       imageLayerGroup?.mainLayer.fitBounds();
+      imageLayerGroup?.mainLayer.on('click', () => {
+        setPositions(Math.random());
+      });
     }
   }, [widgetValue]);
 
-  return <></>;
+  return <CustomBaseWidgets id="test1" type="test" options={{ position }} />;
 };
 export default POILayer;

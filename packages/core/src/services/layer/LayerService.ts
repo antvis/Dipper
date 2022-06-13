@@ -1,20 +1,15 @@
-import type { ILayerService } from './ILayerService';
-import type { Container } from 'inversify';
-import { injectable, inject } from 'inversify';
 import EventEmitter from 'eventemitter3';
-import type { LayerType } from './ILayerService';
-import type { ISceneService } from '../scene/ISceneService';
+import { inject, injectable } from 'inversify';
 import { TYPES } from '../../types';
+import type { ISceneService } from '../scene/ISceneService';
+import type { ILayerService, LayerType } from './ILayerService';
 
 export enum LayerEventEnum {
   LAYERCHANGE = 'layerchange',
 }
 
 @injectable()
-export default class LayerService
-  extends EventEmitter
-  implements ILayerService
-{
+export default class LayerService extends EventEmitter implements ILayerService {
   protected layerStore: LayerType[] = [];
 
   @inject(TYPES.SCENE_SYMBOL)
@@ -29,9 +24,7 @@ export default class LayerService
   }
 
   getLayerSource(name: string) {
-    const layerProerty = this.layerStore.find(
-      (layer) => layer.name === name,
-    ) as LayerType;
+    const layerProerty = this.layerStore.find((layer) => layer.name === name) as LayerType;
     return layerProerty?.data;
   }
 
@@ -48,10 +41,11 @@ export default class LayerService
   removeLayer(name: string) {
     const layerIndex = this.layerStore.findIndex((l) => l.name === name);
     const removeed = this.layerStore.splice(layerIndex, 1)[0];
-    removeed?.destroy();
     this.emit(LayerEventEnum.LAYERCHANGE, {
       type: 'remove',
+      name: removeed.name,
     });
+    removeed?.destroy();
   }
 
   addLayerGroup(layer: LayerType) {
