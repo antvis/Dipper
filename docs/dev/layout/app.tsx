@@ -56,7 +56,7 @@ export default function AppMap() {
   const { setValue: setPoiValue } = useWidget('poilayer');
   const { layerGroup: aoilayer } = useLayerGroup('aoilayer');
   const { widgetOptions: popupOption, setOption: setPopupOption } = useWidget('popup');
-  const [globaldata, setGlobalData] = useGlobalModel<any>();
+  const [globaldata, setGlobalData] = useGlobalModel<{ d: number }>();
   useEffect(() => {
     setPoiValue(poidata);
     setAoiValue(aoidata);
