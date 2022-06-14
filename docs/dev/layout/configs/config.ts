@@ -138,7 +138,7 @@ export const config: Partial<IConfig> = {
       },
     },
   ],
-  mapType: 'GaodeV2',
+  mapType: 'GaodeV1',
   map: {
     zoom: 10,
     center: [120.153576, 30.287459],
