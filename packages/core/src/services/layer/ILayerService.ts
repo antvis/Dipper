@@ -1,4 +1,4 @@
-import type { ILayer, ISource,ISourceCFG } from '@antv/l7';
+import type { ILayer, ISource, ISourceCFG } from '@antv/l7';
 import type { BBox, Feature } from '@turf/turf';
 import type EventEmitter from 'eventemitter3';
 import type { Container } from 'inversify';
@@ -15,7 +15,7 @@ export interface IFeature {
 
 export interface ILayerEventTarget {
   type: 'add' | 'remove';
-  target?: LayerType;
+  target?: ILayerGroup;
 }
 
 export interface ILayerGroup extends EventEmitter {

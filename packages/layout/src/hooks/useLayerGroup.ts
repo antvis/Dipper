@@ -1,44 +1,42 @@
-import { useInjection } from 'inversify-react';
-import { useEffect, useState, useCallback } from 'react';
-import type { IFeature, LayerGroup, ILayerService } from '@antv/dipper-core';
-import { LayerGroupEventEnum, LayerEventEnum, TYPES } from '@antv/dipper-core';
+import type { IFeature, ILayerService, LayerGroup , ILayerEventTarget} from '@antv/dipper-core';
+import { LayerEventEnum, LayerGroupEventEnum, TYPES } from '@antv/dipper-core';
 import type { Feature } from '@turf/turf';
 import { centerOfMass, coordAll, featureCollection } from '@turf/turf';
+import { useInjection } from 'inversify-react';
 import { isEqual } from 'lodash';
+import { useCallback, useEffect, useState } from 'react';
 
-export const useLayerGroup = (targetLayer?: LayerGroup | string | null) => {
+export const useLayerGroup = (targetLayerName: string) => {
   const layerService = useInjection<ILayerService>(TYPES.LAYER_SYMBOL);
-  const [layerGroup, setLayerGroup] = useState<LayerGroup | null>(null);
-
+  const [layerGroup, setLayerGroup] = useState<LayerGroup>();
   const [layerData, setLayerData] = useState(featureCollection([]));
   const [hoverFeature, setHoverFeature] = useState<IFeature | null>(null);
   const [selectFeatures, setSelectFeatures] = useState<IFeature[]>([]);
 
-  const getLayerGroup = useCallback(() => {
-    if (typeof targetLayer === 'string') {
-      const targetLayerGroup = layerService.getLayer(targetLayer) as LayerGroup;
-      if (targetLayerGroup) {
-        setLayerGroup(targetLayerGroup);
+  useEffect(() => {
+    const layerRemove = (e: any) => {
+      if (e.type === 'remove' && e.name === targetLayerName) {
+        setLayerGroup(undefined);
       }
-    } else if (targetLayer instanceof Object) {
-      setLayerGroup(targetLayer as LayerGroup);
-    } else if (targetLayer) {
-      console.warn('未找到指定LayerGroup');
-    }
-  }, [targetLayer, layerService]);
-
-  useEffect(() => {
-    layerService.on(LayerEventEnum.LAYERCHANGE, () => getLayerGroup());
-    return () => {
-      layerService.off(LayerEventEnum.LAYERCHANGE, () => getLayerGroup());
     };
-  }, [getLayerGroup]);
-
-  useEffect(() => {
-    if (targetLayer) {
-      getLayerGroup();
+    const layerAdd = (e: ILayerEventTarget) => {
+      if (e.type === 'add' && e.target?.name === targetLayerName) {
+        if (!layerGroup) {
+          setLayerGroup(e.target as LayerGroup);
+        }
+      }
+    };
+    const currentGroup = layerService.getLayer(targetLayerName) as LayerGroup;
+    if (currentGroup) {
+      setLayerGroup(currentGroup);
+    } else {
+      layerService.on(LayerEventEnum.LAYERCHANGE, layerAdd);
     }
-  }, [targetLayer, getLayerGroup]);
+    return () => {
+      layerService.off(LayerEventEnum.LAYERCHANGE, layerAdd);
+      layerService.off(LayerEventEnum.LAYERCHANGE, layerRemove);
+    };
+  }, [targetLayerName]);
 
   useEffect(() => {
     if (layerGroup) {
