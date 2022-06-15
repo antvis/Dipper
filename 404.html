@@ -77,12 +77,12 @@
       60="s"
       61="s"
     />
-    <link rel="stylesheet" href="/umi.d6d2d443.css" />
+    <link rel="stylesheet" href="/umi.f5592fd3.css" />
     <script>
       window.routerBase = "/";
     </script>
     <script>
-      //! umi version: 3.5.23
+      //! umi version: 3.5.26
     </script>
     <script>
       !(function () {
@@ -95,6 +95,24 @@
         );
       })();
     </script>
+    <script>
+      (function () {
+        if (!location.port) {
+          var gtagScript = document.createElement("script");
+          gtagScript.async = true;
+          gtagScript.src =
+            "https://www.googletagmanager.com/gtag/js?id=G-CBX7JL1Q57";
+          var scr = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(gtagScript, scr);
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag("js", new Date());
+          gtag("config", "G-CBX7JL1Q57");
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
@@ -103,33 +121,6 @@
     <script src="https://gw.alipayobjects.com/os/lib/react-dom/17.0.1/umd/react-dom.development.js"></script>
     <script src="https://gw.alipayobjects.com/os/lib/antd/4.19.4/dist/antd.js"></script>
     <script src="https://gw.alipayobjects.com/os/lib/lodash/4.17.20/lodash.min.js"></script>
-    <script>
-      (function () {
-        if (!location.port) {
-          (function (i, s, o, g, r, a, m) {
-            i["GoogleAnalyticsObject"] = r;
-            (i[r] =
-              i[r] ||
-              function () {
-                (i[r].q = i[r].q || []).push(arguments);
-              }),
-              (i[r].l = 1 * new Date());
-            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m);
-          })(
-            window,
-            document,
-            "script",
-            "//www.google-analytics.com/analytics.js",
-            "ga"
-          );
-          ga("create", "G-CBX7JL1Q57", "auto");
-          ga("send", "pageview");
-        }
-      })();
-    </script>
-    <script src="/umi.b7e852cb.js"></script>
+    <script src="/umi.14fb2b96.js"></script>
   </body>
 </html>
