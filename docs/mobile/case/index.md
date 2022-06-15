@@ -1,6 +1,7 @@
 ---
 title: 数据查询
 mobile: true
+toc: content
 group:
   title: 案例
 nav:

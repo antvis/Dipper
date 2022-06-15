@@ -14,7 +14,7 @@ nav:
 ### 安装依赖
 
 ```bash
-npm i @antv/l7 @antv/l7-react @antv/dipper
+npm i @antv/l7 @antv/l7-react @antv/larkmap @antv/dipper
 ```
 
 ### 初始化地图
@@ -26,8 +26,7 @@ npm i @antv/l7 @antv/l7-react @antv/dipper
  *
  * defaultShowCode: true
  */
-import React, { useEffect, useState } from 'react';
-import { DipperContainer, IConfig } from '@antv/dipper';
+import { DipperContainer } from '@antv/dipper';
 
 export default function Map() {
   return (
@@ -139,8 +138,7 @@ Dipper 会将自定义配置与默认配置会进行合并,通过配置文件修
  *
  * defaultShowCode: true
  */
-import React, { useEffect, useState } from 'react';
-import { DipperContainer, IConfig } from '@antv/dipper';
+import { DipperContainer } from '@antv/dipper';
 
 export default function Map() {
   return (
@@ -171,7 +169,6 @@ Dipper 通过配置的渲染组件，如何自定义一个组件。新增组件�
 在地图右上角增加一个地图控件
 
 ```tsx
-import React, { useEffect, useState } from 'react';
 import { Select } from 'antd';
 const { Option } = Select;
 const ControlPosition = () => {
@@ -211,8 +208,7 @@ registerWidget('controlPosition', ControlPosition);
 注册完成,即可在在配置项中使用组件了，组件我们可以放置任意的布局组件中
 
 ```tsx
-import React, { useEffect, useState } from 'react';
-import { DipperContainer, IConfig, registerWidget } from '@antv/dipper';
+import { DipperContainer, registerWidget } from '@antv/dipper';
 import { Select } from 'antd';
 const { Option } = Select;
 const ControlPosition = () => {
@@ -434,7 +430,7 @@ setConfig('map.style','normal'); // 更新地图样式
 `updateControl` 方法可以用来更新地图 Control 状态
 
 ```tsx pure
-import { useConfigService } '@antv/dipper'
+import { useConfigService } from '@antv/dipper';
 const { updateControl } = useConfigService();
 updateControl('mapStyle', { position: 'topleft' }); // 更新地图样式
 ```
@@ -444,9 +440,8 @@ updateControl('mapStyle', { position: 'topleft' }); // 更新地图样式
 通过 Scene 实例我们可以灵活的控制地图，如设置中心点、平移等等
 
 ```tsx pure
-import { useSceneService } '@antv/dipper'
+import { useSceneService } from '@antv/dipper';
 const { scene } = useSceneService();
-
 ```
 
 ### 获取组件内部数据
@@ -458,9 +453,8 @@ const { scene } = useSceneService();
 useWidget 方法可以根据传入的组件`id`或者`type`获取对应组件值
 
 ```tsx pure
- import { useWidget } '@antv/dipper'
- const { widgetValue } = useWidget('citySelect');
-
+import { useWidget } from '@antv/dipper';
+const { widgetValue } = useWidget('citySelect');
 ```
 
 ### 更新组件数据
@@ -468,7 +462,7 @@ useWidget 方法可以根据传入的组件`id`或者`type`获取对应组件值
 如果一个组件内部的状态外部需要使用，组件数据发生变化时就需要对数据更新，这样外部才能取到数据。比如城市选择器组件，城市更新需要调用 'widget.setValue' 方法更新数据。
 
 ```tsx pure
-import { IWidget, IWidgetProps } from '@antv/dipper';
+import { IWidgetProps } from '@antv/dipper';
 const CitySelect = ({ widget }: IWidgetProps) => {
   return (
     <Select
@@ -547,9 +541,8 @@ const [globalData, setGlobalData] = useGlobalModel();
 dipper 在加载 Widget 时会将 Widget 的实例和属性传递给 widgets
 
 ```tsx pure
-import { Cascader } from 'antd';
-import React from 'react';
 import { IWidget, IWidgetProps } from '@antv/dipper';
+import { Cascader } from 'antd';
 
 export function CitySelect({
   widget,
@@ -602,8 +595,8 @@ export default function DipperContainer({ cfg, children, onLoad }: IContainerPro
 其实布局很简单，Dipper 会提供了 `DipperContainerContext`组件，实例化的空容器，容器内部组件可添加任意组件。
 
 ```tsx pure
-import React from 'react';
 import { DipperContainerContext, MapContainer } from '@antv/dipper';
+import React from 'react';
 
 const Content: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { globalConfig } = useConfigService();

@@ -5,6 +5,10 @@ toc: content
 mobile: false
 ---
 
-TODO
+DipperMobileContainer 支持 hooks
 
-PC 端 DipperContainer 支持 hooks
+- `useConfigService`
+- `useSceneService`
+- `useWidget`
+- `useLayerGroup`
+- `useGlobalModel`

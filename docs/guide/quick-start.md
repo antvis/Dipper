@@ -11,9 +11,7 @@ nav:
 ## 安装
 
 ```bash
-npm i @antv/l7 @antv/l7-react @antv/dipper
-# or
-yarn add @antv/l7 @antv/l7-react @antv/dipper
+npm i @antv/l7 @antv/l7-react @antv/larkmap @antv/dipper
 ```
 
 ## 容器组件

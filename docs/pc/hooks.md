@@ -8,6 +8,10 @@ nav:
   order: 5
 ---
 
-TODO
-
 PC 端 DipperContainer 支持 hooks
+
+- `useConfigService`
+- `useSceneService`
+- `useWidget`
+- `useLayerGroup`
+- `useGlobalModel`
