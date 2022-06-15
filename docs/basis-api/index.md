@@ -31,7 +31,7 @@ registerWidget('AComponents', AComponents);
 `getWidget(type)` 通过注册的组件名获取组件。
 
 ```ts pure
-import { getWidget } from '@antv/dipper-core';
+import { getWidget } from '@antv/dipper';
 ```
 
 ### 参数
@@ -43,5 +43,5 @@ import { getWidget } from '@antv/dipper-core';
 `getAllWidgets` 获取全部注册的组件。
 
 ```ts pure
-import { getAllWidgets } from '@antv/dipper-core';
+import { getAllWidgets } from '@antv/dipper';
 ```

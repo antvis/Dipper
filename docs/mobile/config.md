@@ -5,6 +5,8 @@ toc: content
 mobile: true
 ---
 
-TODO
+## 简介
 
-Config 各配置项
+Dipper 提供了移动端端的主题模板，用于快速初始化 PC 端地图分析应用。
+
+<API hideTitle src='@antv/dipper-mobile/src/layout/index.tsx'></API>

@@ -2,19 +2,23 @@
 title: 布局
 mobile: true
 order: 0
+toc: content
 nav:
   title: 移动端
   order: 0
 ---
+
+### 布局
+
+Dipper 移动端规范了一套默认的布局模式
 
 ```tsx
 /**
  *
  * defaultShowCode: true
  */
-import React from 'react';
-import { registerWidget, DipperMobileContainer } from '@antv/dipper-mobile';
-import { SearchBar, Tabs, Dropdown } from 'antd-mobile';
+import { DipperMobileContainer, registerWidget } from '@antv/dipper-mobile';
+import { Dropdown, SearchBar, Tabs } from 'antd-mobile';
 const searchBar = () => {
   return <SearchBar placeholder="请输入内容" />;
 };
