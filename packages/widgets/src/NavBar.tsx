@@ -1,7 +1,6 @@
+import type { IConfig } from '@antv/dipper-core';
 import { Menu } from 'antd';
 import React, { useMemo } from 'react';
-import 'antd/dist/antd.css';
-import type { IConfig } from '@antv/dipper-core';
 import { findItem } from './util/ui';
 
 interface NavBarProps {
