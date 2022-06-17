@@ -1,7 +1,6 @@
+import type { IWidget, IWidgetProps } from '@antv/dipper-core';
 import { Cascader } from 'antd';
 import React from 'react';
-import 'antd/dist/antd.css';
-import type { IWidget, IWidgetProps } from '@antv/dipper-core';
 
 export function CitySelect({
   widget,
