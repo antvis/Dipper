@@ -2,7 +2,7 @@ import type { Dipper, IBaseConfig } from '@antv/dipper-core';
 import { useUnmount } from 'ahooks';
 import type { Container } from 'inversify';
 import { Provider } from 'inversify-react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDipperContainer } from '../../hooks';
 
 export interface IContainerProps<T = any> {
@@ -15,6 +15,7 @@ export interface IContainerProps<T = any> {
 }
 
 export function DipperContainerContext<T = any>({ cfg, children, onLoad }: IContainerProps<T>) {
+  const [providerKey] = useState(Math.random());
   const { sceneContainer } = useDipperContainer<T>(cfg);
   useUnmount(() => {
     if (sceneContainer) {
@@ -29,7 +30,7 @@ export function DipperContainerContext<T = any>({ cfg, children, onLoad }: ICont
 
   return sceneContainer ? (
     // key for rendering: https://github.com/Kukkimonsuta/inversify-react/blob/master/src/provider.tsx#L50
-    <Provider key={Math.random()} container={sceneContainer?.getContainer() as Container}>
+    <Provider key={providerKey} container={sceneContainer?.getContainer() as Container}>
       {children}
     </Provider>
   ) : (
