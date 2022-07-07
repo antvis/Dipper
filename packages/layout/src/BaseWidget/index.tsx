@@ -10,6 +10,8 @@ export const CustomBaseWidgets = (props: IWidgetProps) => {
   if (!widget.current) {
     widget.current = new BaseWidget(props);
     widgetsService.addWidget(widget.current);
+  } else {
+    widget.current.setOptions(props);
   }
 
   useEffect(() => {
