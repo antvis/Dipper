@@ -21,7 +21,7 @@ export function MapContainer(mapContainerProps: MapContainerProps) {
 
   return (
     <Layout.Content
-      className={styles.antLayoutContentMap}
+      className={styles['map-container']}
       style={{
         flexDirection: panel?.position === 'bottom' || panel?.position === 'top' ? 'column' : 'row',
       }}

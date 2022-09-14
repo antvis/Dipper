@@ -10,7 +10,7 @@ const Content: React.FC = ({ children }) => {
   const { globalConfig } = useConfigService();
   const { panel, layers, controls, scene, mapType, map, popup, components = [] } = globalConfig;
   return (
-    <Layout className={styles.LIContainer}>
+    <Layout className={styles['li-container']}>
       <MapContainer {...{ panel, layers, controls, scene, mapType, map, popup }}>
         <LayoutContent items={components} />
         {children}

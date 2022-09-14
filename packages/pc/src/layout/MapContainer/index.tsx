@@ -1,9 +1,9 @@
-import React from 'react';
+import type { IControlWidgetsProps, IMapProps, IPanel } from '@antv/dipper-core';
+import { Layer, Map } from '@antv/dipper-layout';
 import { Layout } from 'antd';
+import React from 'react';
 import MapControl from '../MapControls';
 import Panel from '../Panel';
-import type { IPanel, IControlWidgetsProps, IMapProps } from '@antv/dipper-core';
-import { Map, Layer } from '@antv/dipper-layout';
 import styles from './index.less';
 
 const { Content } = Layout;
