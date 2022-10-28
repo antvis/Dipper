@@ -32,6 +32,7 @@ export function AppTabsContent({ items, onChange }: ContentProps) {
       key="tab"
       activeKey={currentOperate}
       onChange={setCurrentOperate}
+      destroyInactiveTabPane
       type="card"
       className={classNames({
         [style.titleTop]: true,
