@@ -219,7 +219,7 @@ export default abstract class LayerGroup<T extends ILayerGroupOptions = ILayerGr
       this.mainLayer.setData(this.data, sourceOption);
     }
 
-    if (clear && sourceOption !== false) {
+    if (clear && sourceOption !== undefined) {
       // 兼容展业银行
       this.setSelectFeatures([]);
       this.setHoverFeature(null);
