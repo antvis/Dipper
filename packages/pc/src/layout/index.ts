@@ -1,6 +1,5 @@
 export { default as DipperContainer } from './Container';
 export { default as DipperHeader, LogoDom, TitleDom } from './Header';
-export { default as LIContainer } from './LIContainer';
 export { MapContainer } from './MapContainer';
 export { default as MapControl } from './MapControls';
 export { default as Panel } from './Panel';
